@@ -1,0 +1,318 @@
+<p-breadcrumb [model]="itemsBreadcrumb" [tittle]="'preCheckOut.titlePurchaseOrder'"
+[imgShopping]="true" [description]="'preCheckOut.lblDescription'"></p-breadcrumb>
+
+<div class="col-12 col-xl-12 grid-margin stretch-card">
+    <div class="w-100">
+      <div class="row" [formGroup]="checkoutForm" #ngForm="ngForm">
+        <div class="col-12 pl-0">
+          <div class="w-100" id="accordion2">
+            <div class="card w-100">
+              <div class="card-header" id="headingOne">
+                <button class="ttile-page w-100" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+                  aria-controls="collapseTwo">
+                  {{'product-brand.lblShippingInformation'| translate}}
+                </button>
+              </div>
+
+              <div id="collapseTwo" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion2">
+                <div class="card-body row">
+                  <div class="col-md-3 col-sm-3 mt-16">
+                    <label class="form-label label-required" for="txtCarrier">{{'preCheckOut.lblCarrier' |
+                      translate}}</label>
+                    <p-dropdown [options]="carriers" optionValue="carrierId" optionLabel="carrierName"
+                      formControlName="Carrier" [ngClass]="{'is-invalid': submitted && !IsValid('Carrier')}"
+                      placeholder="{{('formsGeneral.selSelectOpcion' | translate) || ' '}}">
+                    </p-dropdown>
+                    <div class="invalid-feedback mb-2">
+                      {{'formsGeneral.lblMandatoryField' | translate}}
+                    </div>
+                  </div>
+                  <div class="col-md-9 col-sm-9 mt-16 p-0">
+
+                    <label class="form-label label-required" for="ddlShipping">{{'preCheckOut.lblShippingAddress' |
+                      translate}}</label>
+                    <div class="w-100">
+                      <p-dropdown [options]="address" optionValue="addressId" optionLabel="finalClient"
+                        formControlName="Address" class="w-100"
+                        [ngClass]="{'is-invalid': submitted && !IsValid('Address')}"
+                        placeholder="{{('formsGeneral.selSelectOpcion' | translate) || ' '}}">
+                      </p-dropdown>
+
+                      <div class="invalid-feedback mb-2">
+                        {{'formsGeneral.lblMandatoryField' | translate}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-3 mt-16">
+                    <label class="form-label" for="txtPoNumber">{{'preCheckOut.lblPoNumber' |
+                      translate}}</label>
+                    <div class="form-group">
+                      <input id="txtPoNumber" placeholder="{{'preCheckOut.lblPlaceNumberhere' | translate}}"
+                        formControlName="PoNumber" type="text" pInputText class="form-control"
+                        [ngClass]="{'is-invalid': submitted && !IsValid('PoNumber')}" />
+                      <div class="invalid-feedback mb-2">
+                        {{'formsGeneral.lblMandatoryField' | translate}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-9 col-sm-9 mt-16">
+                    <label class="form-label label-required" for="txtComments">{{'preCheckOut.lblComments' |
+                      translate}}</label>
+                    <div class="form-group">
+                      <textarea id="txtComments" formControlName="Comments"
+                        placeholder="{{'preCheckOut.lblCommentsAll' | translate}}" pInputText class="form-control"
+                        [ngClass]="{'is-invalid': submitted && !IsValid('Comments')}">
+                                            </textarea>
+                      <div class="invalid-feedback mb-2">
+                        {{'formsGeneral.lblMandatoryField' | translate}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row ">
+        <div class="col-12 mt-3  pl-0">
+          <div class="w-100" id="accordion">
+            <div class="card w-100">
+              <div class="card-header" id="headingOne">
+                <button class="ttile-page w-100 pl-0" data-toggle="collapse" data-target="#collapseOne"
+                  aria-expanded="true" aria-controls="collapseOne">
+                  {{'preCheckOut.Ordersummary' | translate}}
+                </button>
+              </div>
+
+              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body row">
+                  <div class="col-12 pl-0">
+                    <p-table #table [data]="this.shoppingCart">
+                      <tr theaderRecords>
+                        <th scope="col">
+                          {{ 'product-brand.lblBranCustomer' | translate }}
+                        </th>
+                        <th scope="col">{{'preCheckOut.lblTblReferenceProducCode' | translate}}
+                        </th>
+                        <th scope="col">{{'preCheckOut.lblTblSize' | translate}}</th>
+                        <th scope="col">{{'preCheckOut.lblTblColorVariation' | translate}} </th>
+                        <th scope="col">{{ 'product-brand.lblDescription' | translate }}</th>
+                        <th scope="col">{{'preCheckOut.lblTblQuantity' | translate}}</th>
+                        <th scope="col">{{'preCheckOut.lblTblRequiredDate' | translate}} </th>
+                        <th scope="col">{{'preCheckOut.lblTblPrice' | translate}}</th>
+                        <th scope="col">{{'preCheckOut.lblTblSubTotal' | translate}}</th>
+                        <th scope="col">{{'product-brand.lblActions' | translate }}</th>
+                      </tr>
+                      <tr tbodyRecords *ngFor="let product of shoppingCart ">
+                        <td>
+                          {{ product.brandCustomerName }}
+                        </td>
+                        <td>{{ product.brandCatalogCode }}</td>
+                        <td>{{ product.size}}</td>
+                        <td>{{ product.color }}</td>
+                        <td>{{ product.brandCatalogName }}</td>
+                        <td>{{ product.quantity}}</td>
+                        <td>{{ product.requiredDate }}</td>
+                        <td>{{ product.price | currency:'CAD':'symbol-narrow'}}</td>
+                        <td>{{ product.price * product.quantity |
+                          currency:'CAD':'symbol-narrow'}}</td>
+                        <td scope="col">
+                          <button pButton pRipple type="button"
+                            pTooltip="<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Zumba.png' />"
+                            icon="far fa-image" class="p-button-rounded p-button-text"></button>
+                          <button pButton pRipple type="button" icon="fas fa-edit"
+                            pTooltip="{{'product-brand-purchase.lblEdit' | translate}}"
+                            class="p-button-rounded p-button-text" (click)="loadItemForEdit(product)"></button>
+                          <button pButton pRipple type="button"
+                            pTooltip="{{'product-brand-purchase.lblDelete' | translate}}"
+                            (click)="removeItemFromShoppingCart(product.brandCatalogId)" icon="fas fa-trash-alt"
+                            class="p-button-rounded p-button-text"></button>
+                        </td>
+                      </tr>
+                    </p-table>
+                    <div class="row mb-16 totalOrder">
+                      <div class="col-md-12">
+                        <div class="tittle-shopping-bold text-right">
+                          {{'shoppingCart.lblTotal' | translate}} {{subtotal |
+                          currency:'CAD':'symbol-narrow'}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  <div class="row">
+    <div class="form-group col-md-12 mt-16">
+      <div class="text-right">
+        <button pButton type="button" label="{{'product-brand.btnCancelOrder' | translate}}" class="button button-secundary filter mr-2"
+          (click)="openModalCancel()"></button>
+        <button pButton type="button" label="{{'product-brand.btnGoBack' | translate}}" class="button button-secundary filter mr-2"
+          routerLink="/home/brandProducts">
+        </button>
+        <button pButton type="button" [disabled]="!checkoutForm.valid" label="{{'product-brand.btnPlaceOrder' | translate}}" class="button button-primary filter"
+          (click)="createOrder()"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<p-dialog [(visible)]="displayConfirmCancel" [contentStyleClass]="'border-top'" [modal]="true" [baseZIndex]="10000"
+  [draggable]="false" [showHeader]="false" [resizable]="false" [style]="{width: '500px'}">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <em class="far fa-check-circle font50"></em>
+    </div>
+    <div class="col-md-12 text-center mt-24">
+      {{'checkOut.msgTittleCancel' | translate}}
+    </div>
+    <div class="col-md-12 text-center mt-16 description-page">
+      <p>{{'checkOut.msgCancel1' | translate}}</p>
+      <p>{{'checkOut.msgCancel2' | translate}}</p>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button (click)="displayConfirmCancel = false" label="{{'checkOut.btnCancel' | translate}}"
+        styleClass="button button-secundary text-center"></p-button>
+      <p-button (click)="cancelOrder()" label="{{'checkOut.btnCancelRed' | translate}}"
+        styleClass="button button-primary text-center"></p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="displaysuccess" [contentStyleClass]="'border-top'" [modal]="true" [baseZIndex]="10000"
+  [draggable]="false" [showHeader]="false" [resizable]="false" [style]="{ width: '500px' }">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <em class="far fa-check-circle font50"></em>
+    </div>
+    <div class="col-md-12 text-center mt-24 font16">
+      {{'checkOut.msgOrderSuccessfully' | translate}}
+    </div>
+    <div class="col-md-12 text-center mt-16 description-page">
+      <p>{{'checkOut.msgCheck1' | translate}} {{this.orderId}}</p>
+      <p>{{'checkOut.msgCheck2' | translate}}</p>
+    </div>
+
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button label="{{'checkOut.btnOk' | translate}}" (click)="goToProductBrandList()"
+        styleClass="button button-primary text-center"></p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+
+<!-- Variaciones -->
+
+<p-dialog [formGroup]="form" #ngForm="ngForm" header="{{ 'product-brand.titleEditVariation' | translate }}"
+  [(visible)]="display" [modal]="true" [baseZIndex]="10000" [draggable]="false" [resizable]="false"
+  [style]="{ width: '1140px', height: '318px' }">
+  <div class="row">
+    <div class="col-12 col-xl-12 p-dialog-desc">
+      {{ 'product-brand.msgEditVariation' | translate }}
+    </div>
+  </div>
+  <input type="hidden" formControlName="productId" />
+  <div class="row">
+    <div class="col-12 mt-2">
+      <div class="row">
+        <div class="col mt-2">
+          <label for="validationDefault01">
+            {{ 'product-brand.lblSize' | translate }}
+          </label>
+          <p-dropdown appendTo="body" [disabled]="productsDetail?.length == 0" (onChange)="getColorsBySize($event)"
+            [options]="productsSizes" formControlName="size" optionValue="size" optionLabel="size" placeholder="{{
+            ('formsGeneral.selSelectOpcion' | translate) || ' '
+          }}"></p-dropdown>
+        </div>
+        <div class="col mt-2">
+          <label for="validationDefault01">
+            {{ 'product-brand.lblColorVariation' | translate }}
+          </label>
+          <p-dropdown appendTo="body" [options]="productsColor" (onChange)="getSizesByColor($event)"
+            formControlName="colorVariation" optionValue="color" optionLabel="color" placeholder="{{
+            ('formsGeneral.selSelectOpcion' | translate) || ' '
+          }}"></p-dropdown>
+        </div>
+        <div class="col mt-2">
+          <label class="label-required" for="validationDefault01">
+            {{ 'product-brand.lblQuantity' | translate }} 
+          </label>
+          <input type="number" formControlName="quantity" (change)="onChangeQuantityEvent($event)" pInputText class="form-control" />
+        </div>
+        <div class="col mt-2">
+          <app-datepicker [config]="settingsDates" [submitted]="submitted" [form]="form" [formDirective]="ngForm"
+            appendTo="body"></app-datepicker>
+        </div>
+        <div class="col mt-2">
+          <label class="label-required" for="validationDefault01">
+            {{ 'product-brand.lblUser1strequireddate' | translate }}
+          </label>
+          <p-checkbox id="firstRequiredDate" name="firstRequiredDate" formControlName="firstRequiredDate" value="1"
+            label="Yes" [disabled]="!shoppingCart || shoppingCart?.length == 0" (onChange)="setFirstRequiredDate()">
+          </p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button (click)="display = false" label="{{ 'general.btnCancel' | translate }}"
+      styleClass="button button-secundary filter ml-2"></p-button>
+    <p-button (click)="clearShoppingCartForm(productsDetail)" label="{{ 'general.btnClear' | translate }}"
+      styleClass="button button-secundary filter ml-2"></p-button>
+    <p-button (click)="addOrEditItem()" label="{{ 'product-brand.btnEditItem' | translate }}"
+      styleClass="button button-primary filter ml-2"></p-button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="displayInvalidItem" [contentStyleClass]="'border-top'" [modal]="true" [baseZIndex]="10000"
+  [draggable]="false" [showHeader]="false" [resizable]="false" [style]="{ width: '500px' }">
+  <div class="row">
+    <div class="col-md-12 text-center font50">
+      <img _ngcontent-amv-c221="" width="60px" height="60px" src="../../../assets/images/icono cancelar.svg"
+        alt="shopping cart" appImage class="simple-img" />
+    </div>
+    <div class="col-md-12 text-center mt-24 font16">
+      {{ 'product-brand.lblMsgInvalidItemShoppingCart' | translate }}
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button (click)="displayInvalidItem = false" label="{{ 'checkOut.btnOk' | translate }}"
+        styleClass="button button-primary text-center"></p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="displayNoContentSizeAndColor" [contentStyleClass]="'border-top'" [modal]="true"
+  [baseZIndex]="10000" [draggable]="false" [showHeader]="false" [resizable]="false" [style]="{ width: '500px' }">
+  <div class="row">
+    <div class="col-md-12 text-center font50">
+      <img _ngcontent-amv-c221="" width="60px" height="60px" src="../../../assets/images/icono cancelar.svg"
+        alt="shopping cart" appImage class="simple-img" />
+    </div>
+    <div class="col-md-12 text-center mt-24 font16">
+      {{ 'product-brand.lblMsgNoContentSizeAndColor' | translate }}
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button (click)="displayNoContentSizeAndColor = false" label="{{ 'checkOut.btnOk' | translate }}"
+        styleClass="button button-primary text-center"></p-button>
+    </div>
+  </ng-template>
+</p-dialog>

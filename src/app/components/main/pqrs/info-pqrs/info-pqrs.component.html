@@ -1,0 +1,111 @@
+<div class="conten-main">
+    <p-breadcrumb 
+        [model]="itemsBreadcrumb"
+        [tittle]="'main.menu-pqrs'"
+        [description]="'main.info-pqrs-description'">
+    </p-breadcrumb>
+
+    <div class="row">        
+        <h1 class="col-12 mt-2 pqrs-options">{{ "main.info-pqrs-options" | translate }}</h1>
+
+        <div class="row w-100 col-12">
+            <div class="col-12 col-lg-6 box-order-2 mt-4">
+
+                <div class="d-flex align-self-center card-info card-info-top border-bottom-shadow">
+
+                    <div class="circle-image align-self-center ml-4">
+                        <img
+                            class="companyLogo simple-img m-1"
+                            data-tenant-branding-logo="true"
+                            src="../../../assets/images/Dislike red.svg"
+                            alt="Company Logo"/>    
+                    </div>
+
+                    <div class="d-flex flex-column align-self-center ml-4 mr-4">
+                        <span class="title-info">{{ "main.info-pqrs-complain-title" | translate }}</span>
+                        <span class="description-info">{{ "main.info-pqrs-complain-description" | translate }}</span>
+                    </div>
+                </div>
+
+                <div class="d-flex align-self-center card-info border-bottom-shadow">
+
+                    <div class="circle-image align-self-center ml-4">
+                        <img
+                            class="companyLogo simple-img m-1"
+                            data-tenant-branding-logo="true"
+                            src="../../../assets/images/Chat red.svg"
+                            alt="Company Logo"/>    
+                    </div>
+
+                    <div class="d-flex flex-column align-self-center ml-4 mr-4">
+                        <span class="title-info">{{ "main.info-pqrs-claim-title" | translate }}</span>
+                        <span class="description-info">{{ "main.info-pqrs-claim-description" | translate }}</span>
+                    </div>
+                </div>
+
+                <div class="d-flex align-self-center card-info border-bottom-shadow">
+
+                    <div class="circle-image align-self-center ml-4">
+                        <img
+                            class="companyLogo simple-img m-1"
+                            data-tenant-branding-logo="true"
+                            src="../../../assets/images/Box red.svg"
+                            alt="Company Logo"/>    
+                    </div>
+
+                    <div class="d-flex flex-column align-self-center ml-4 mr-4">
+                        <span class="title-info">{{ "main.info-pqrs-return-title" | translate }}</span>
+                        <span class="description-info">{{ "main.info-pqrs-return-description" | translate }}</span>
+                    </div>
+                </div>
+
+                <div class="d-flex align-self-center card-info card-info-bottom">
+
+                    <div class="circle-image align-self-center ml-4">
+                        <img
+                            class="companyLogo simple-img m-1"
+                            data-tenant-branding-logo="true"
+                            src="../../../assets/images/Hearth red.svg"
+                            alt="Company Logo"/>    
+                    </div>
+
+                    <div class="d-flex flex-column align-self-center ml-4 mr-4">
+                        <span class="title-info">{{ "main.info-pqrs-congratulation-title" | translate }}</span>
+                        <span class="description-info">{{ "main.info-pqrs-congratulation-description" | translate }}</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-12 col-lg-6 box-order-1 mt-4 list-btn">
+                <div class="row finotex-container_section finotex-container_section--shadow card-btn p-0">
+                    <div class="w-100 card-button" (click)="openGenerateRequest()">  
+                        <img
+                            class="companyLogo simple-img m-3"
+                            data-tenant-branding-logo="true"
+                            src="../../../assets/images/Nueva solicitud.svg"
+                            alt="Company Logo"/>                            
+
+                        <label class="btn-title text-center">{{ "main.info-pqrs-btn-generate" | translate }}</label>
+                    </div>
+                </div>
+                
+                <div class="row finotex-container_section finotex-container_section--shadow card-btn p-0">
+                    <div class="w-100 card-button" (click)="openConsultRequest()">                            
+                        <img
+                            class="companyLogo simple-img m-3"
+                            data-tenant-branding-logo="true"
+                            src="../../../assets/images/Consultar Pqrs.svg"
+                            alt="Company Logo"/>                            
+
+                        <label class="btn-title text-center">{{ "main.info-pqrs-btn-consult" | translate }}</label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+

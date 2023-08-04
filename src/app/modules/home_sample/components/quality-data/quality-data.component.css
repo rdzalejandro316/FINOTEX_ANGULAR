@@ -1,0 +1,16 @@
+.labelText label {
+  white-space: nowrap;
+  width: -webkit-fill-available;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.labelText label:hover {
+  white-space: normal;
+  cursor: pointer
+}
+
+.tooltipLabel {
+  position: absolute;
+  right: 1em;
+}

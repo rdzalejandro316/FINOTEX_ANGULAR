@@ -1,0 +1,357 @@
+<div [ngClass]="isInternal ? '' : 'conten-main'">
+    <p-breadcrumb 
+        [model]="itemsBreadcrumb"
+        [tittle]="'main.info-pqrs-btn-generate'"
+        [description]="'main.generate-pqrs-description'">
+    </p-breadcrumb>
+
+
+    <form [formGroup]="registerFormPqrs">
+        <p-accordion>
+            <p-accordionTab
+                header="{{ 'pqrs.management-new-request' | translate }}"
+                [selected]="true"
+                [formStatus]="true"
+                [imagenIcon]="formOneIconStatusOne"
+                statusFormText="{{ formOneStatusTextOne }}">
+
+                <ng-template pTemplate="content">
+                    <div class="row">
+
+                        <div *ngIf="!isInternal" class="col-12 col-lg-3 mt-2">
+                            <label class="label-required">{{ 'main.generate-pqrs-name-cliente' | translate }}</label>
+                            <input
+                                formControlName="name_customer"
+                                type="text"
+                                pInputText
+                                placeholder="{{ 'main.generate-pqrs-name-cliente' | translate }}"
+                                class="form-control"/>
+                        </div>
+
+                        <div *ngIf="!isInternal" class="col-12 col-lg-3 mt-2">
+                            <label class="label-required">{{ 'main.generate-pqrs-id-cliente' | translate }}</label>
+                            <input
+                                formControlName="thirdPartyId"
+                                type="text"
+                                pInputText
+                                placeholder="{{ 'main.generate-pqrs-id-cliente' | translate }}"
+                                class="form-control"/>
+                        </div>
+                             
+                        <div *ngIf="isInternal" class="col-12 col-lg-3 mt-2">
+                            <label class="label-required">{{ 'main.generate-pqrs-name-cliente' | translate }}</label>
+                            <p-dropdown                 
+                                [filter]="true" 
+                                [options]="customer" 
+                                optionValue="customerId"
+                                optionLabel="customerName" 
+                                class="w-100" 
+                                placeholder="{{('main.generate-pqrs-name-cliente' | translate) || ' '}}"
+                                formControlName="thirdPartyId"
+                                (onChange)="changeCustomer($event.value)">
+                            </p-dropdown>                             
+                        </div>
+
+                        <div *ngIf="!isInternal" class="col-12 col-lg-3 mt-2">
+                            <label class="label-required">{{ 'main.generate-pqrs-country' | translate }}</label>
+                            <p-dropdown                 
+                                [filter]="true" 
+                                [options]="countries" 
+                                optionValue="countryId"
+                                optionLabel="countryName" 
+                                class="w-100" 
+                                placeholder="{{('main.generate-pqrs-country' | translate) || ' '}}"
+                                formControlName="countryId">
+                            </p-dropdown>                             
+                        </div>
+
+                        <div *ngIf="isInternal" class="col-12 col-lg-3 mt-2">
+                            <label class="label-required">{{ 'main.generate-pqrs-country' | translate }}</label>
+                            <input
+                                [readonly]="true"
+                                formControlName="countryName"
+                                type="text"
+                                pInputText
+                                placeholder="{{('main.generate-pqrs-country' | translate) || ' '}}"
+                                class="form-control"/>
+                        </div>
+
+                        <div *ngIf="!isInternal" class="col-12 col-lg-3 mt-2">
+                            <label class="label-required">{{ 'main.generate-pqrs-plant' | translate }}</label>
+                            <p-dropdown                 
+                                [filter]="false" 
+                                [options]="plants" 
+                                optionValue="businessId"
+                                optionLabel="companyPublicName" 
+                                class="w-100" 
+                                placeholder="{{('main.generate-pqrs-plant' | translate) || ' '}}"
+                                formControlName="plant"
+                                (onChange)="changePlant($event.value)">
+                            </p-dropdown>      
+                        </div>            
+
+                        <div class="col-12 col-lg-6 mt-2">
+                            <label>{{ 'main.generate-pqrs-address' | translate }}</label>
+                            <input
+                                formControlName="address"
+                                type="text"
+                                pInputText
+                                placeholder="{{ 'main.generate-pqrs-address' | translate }}"
+                                class="form-control"/>
+                        </div>
+
+                        <div class="col-12 col-lg-3 mt-2">
+                            <label class="label-required">{{ 'main.generate-pqrs-mail' | translate }}</label>
+                            <input
+                                formControlName="mail"
+                                type="email"
+                                pInputText
+                                placeholder="{{ 'main.generate-pqrs-mail' | translate }}"
+                                class="form-control"/>
+                        </div>
+
+                        <div class="col-12 col-lg-3 mt-2">
+                            <label>{{ 'main.generate-pqrs-main-phone' | translate }}</label>
+                            <input
+                                formControlName="phone_main"
+                                type="text"
+                                pInputText
+                                placeholder="{{ 'main.generate-pqrs-main-phone' | translate }}"
+                                class="form-control"/>
+                        </div>
+
+                        <div class="col-12 col-lg-3 mt-2">
+                            <label>{{ 'main.generate-pqrs-optional-phone' | translate }}</label>
+                            <input
+                                formControlName="phone_optional"
+                                type="text"
+                                pInputText
+                                placeholder="{{ 'main.generate-pqrs-optional-phone' | translate }}"
+                                class="form-control"/>
+                        </div>
+
+                        <div class="col-12 col-lg-3 mt-2">
+                            <label class="label-required">{{ 'main.generate-pqrs-requirement-type' | translate }}</label>
+                            <p-dropdown                 
+                                [filter]="false" 
+                                [options]="requestType" 
+                                optionValue="requestTypeId"
+                                optionLabel="requestTypeName" 
+                                class="w-100" 
+                                placeholder="{{('main.generate-pqrs-requirement-type' | translate) || ' '}}"
+                                formControlName="requestTypeId"
+                                (onChange)="changeTypeRequirement($event.value)">
+                            </p-dropdown>
+                        </div>
+
+                        <div class="col-12 col-lg-3 mt-2">
+                            <label [ngClass]="isRequiredInvoice && !isComplain ? 'label-required' : ''">{{ 'main.generate-pqrs-order' | translate }}</label>
+                            <input
+                                [readonly]="!isRequiredInvoice"
+                                formControlName="order"
+                                type="text"
+                                pInputText
+                                placeholder="{{ 'main.generate-pqrs-order' | translate }}"
+                                class="form-control"/>
+                        </div>
+
+                        <div class="col-12 col-lg-3 mt-2">
+                            <label [ngClass]="isRequiredInvoice && !isComplain ? 'label-required' : ''">{{ 'main.generate-pqrs-invoice' | translate }}</label>
+                            <input
+                                (keypress)="onKeyPressNumber($event)"
+                                [readonly]="!isRequiredInvoice"
+                                formControlName="invoice"
+                                type="text"
+                                pInputText
+                                placeholder="{{ 'main.generate-pqrs-invoice' | translate }}"
+                                class="form-control"/>
+                        </div>
+
+                        <div class="col-12 col-lg-12 mt-2">
+                            <label class="label-required">{{ 'main.generate-pqrs-description-request' | translate }}</label>
+                            <textarea
+                                formControlName="description"
+                                type="text"
+                                pInputText
+                                placeholder="{{ 'main.generate-pqrs-description-request' | translate }}"
+                                class="form-control description-input">
+                            </textarea>
+                        </div>
+
+                        <div class="col-12 col-lg-12 mt-2">
+                            <label>{{ 'main.generate-pqrs-evidence' | translate }}</label>
+                            <em class="fas fa-info-circle" pTooltip="{{ 'main.generate-pqrs-evidence-toltip' | translate }}"></em>
+                            <textarea
+                                type="text"
+                                id="txtUploadAditional"
+                                pInputText
+                                class="form-control input-select-image"
+                                formControlName="uploadEvidence"                                
+                                readonly>  
+                            </textarea>
+                            <div class="text-right mt-1">
+                                <button
+                                    pButton
+                                    type="button"
+                                    (click)="resetFiles()"
+                                    label="{{ 'artWork.btnReset' | translate }}"
+                                    class="button-select-image-reset mr-1">
+                                </button>
+                                
+                                <span class="btn btn-primary btn-file">
+                                    {{ 'artWork.btnUpload' | translate }}
+                                    <input #inputFile (change)="fileChanged($event,inputFile)" type="file"/>
+                                </span>                                    
+                            </div>                        
+                        </div>
+
+                    </div>                                     
+                </ng-template>
+
+            </p-accordionTab>
+        </p-accordion>
+
+        <div class="w-100 row mt-5">
+            <app-button-finotex                            
+                label="{{ 'mallasForm.btnBack' | translate  }}"
+                type="button"
+                typeButton="secondary"
+                [typeSize]="false"
+                class="mr-2 col align-self-start"                            
+                classButton="w-100"
+                (click)="back()">
+            </app-button-finotex>
+                            
+            <app-button-icon-finotex     
+                [disabled]="registerFormPqrs.invalid || validateInvoice()"                       
+                label="{{ 'main.info-pqrs-btn-generate' | translate  }}"
+                type="button"                                            
+                typeButton="primary"
+                [typeSize]="false"
+                class="mr-2 col btnright"
+                (click)="generatePqrs()">
+            </app-button-icon-finotex>          
+        </div>
+    </form>
+    
+    <!-- add susessfull -->
+    <p-dialog 
+        [(visible)]="showAddPqrsSuccessfull" 
+        [contentStyleClass]="'border-top'" 
+        [modal]="true" 
+        [baseZIndex]="10000"
+        [draggable]="false" 
+        [showHeader]="false" 
+        [resizable]="false" 
+        [style]="{ width: '500px' }">
+  
+        <div class="row">
+            <div class="col-md-12 text-center font50">
+            <img _ngcontent-amv-c221="" width="60px" height="60px" src="../../../assets/images/success.svg"
+                alt="shopping cart" class="simple-img" appImage />
+            </div>
+        
+            <div class="col-md-12 text-center mt-24">
+                <p class="font-weight-bold title-susessful">{{ "main.generate-pqrs-successful-title" | translate }}</p>
+            </div>
+
+            <div class="col-md-12 text-center mt-24 f-14">      
+                <p class="description-susessful">
+                    {{ "main.generate-pqrs-successful-description-1" | translate }}
+                    <b class="font-weight-bold">{{showNumberPqrs}}</b>
+                    {{ "main.generate-pqrs-successful-description-2" | translate }}
+                </p>
+            </div>
+        </div>
+
+        <ng-template pTemplate="footer">
+            <div class="col-md-12 text-center">
+            <p-button 
+                (click)="pqrsSuccessfull()" 
+                label="{{ 'artWork.lblOk' | translate }}"
+                styleClass="button button-primary text-center">
+            </p-button>
+            </div>
+        </ng-template>
+  
+    </p-dialog>
+
+    <!-- invalidate file message -->
+    <p-dialog
+        [(visible)]="displayInvalidateFileMessage"
+        [contentStyleClass]="'border-top'"
+        [modal]="true"
+        [baseZIndex]="10000"
+        [draggable]="false"
+        [showHeader]="false"
+        [resizable]="false"
+        [style]="{ width: '500px' }">
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <em class="fas fa-info-circle font50"></em>
+            </div>
+
+            <div class="col-md-12 text-center mt-24">
+                {{ 'artWork.unsupportedFileTitle' | translate }}
+            </div>
+
+            <div class="col-md-12">
+                <p  [hidden]="this.hideErrorType"
+                    class="text-muted tx-13 mb-3 mb-md-0 mt-3 text-center description-page">
+                    {{ 'artWork.unsupportedFile' | translate }}.
+                </p>
+                <p [hidden]="this.hideErrorSize"
+                    class="text-muted tx-13 mb-3 mb-md-0 mt-3 text-center description-page">
+                    {{ 'artWork.unsupportedFileLength' | translate }} {{ this.maxSize }}.
+                </p>
+            </div>
+        </div>
+
+        <ng-template pTemplate="footer">
+            <div class="col-md-12 text-center">
+                <p-button
+                    (click)="displayInvalidateFileMessage = false"
+                    label="{{ 'artWork.lblOk' | translate }}"
+                    styleClass="button button-primary text-center">
+                </p-button>
+            </div>
+        </ng-template>
+
+    </p-dialog>
+
+    <!-- fail -->
+    <p-dialog 
+        [(visible)]="displayOrderNotExistMessage" 
+        [contentStyleClass]="'border-top'" 
+        [modal]="true" 
+        [baseZIndex]="10000"
+        [draggable]="false" 
+        [showHeader]="false" 
+        [resizable]="false" 
+        [style]="{ width: '500px' }">
+
+        <div class="row">
+           <div class="col-md-12 text-center font50">
+               <img _ngcontent-amv-c221="" width="60px" height="60px" src="../../../assets/images/Alert.svg"
+                   alt="shopping cart" class="simple-img" appImage />
+           </div>                    
+
+           <div class="col-md-12 text-center mt-24 f-14">      
+               <p>{{ "main.generate-pqrs-order-not-exist" | translate }}</p>
+           </div>
+        </div>
+
+        <ng-template pTemplate="footer">
+            <div class="col-md-12 text-center">
+                <p-button 
+                       (click)="displayOrderNotExistMessage = false" 
+                       label="{{ 'artWork.lblOk' | translate }}"
+                       styleClass="button button-primary text-center"></p-button>
+            </div>
+        </ng-template>
+   </p-dialog>
+
+</div>
+
+<p-toast></p-toast>

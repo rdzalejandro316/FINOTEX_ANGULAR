@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="20" viewBox="0 0 25 20">
+  <defs>
+    <clipPath id="clip-Chat_x">
+      <rect width="25" height="20"/>
+    </clipPath>
+  </defs>
+  <g id="Chat_x" data-name="Chat x" clip-path="url(#clip-Chat_x)">
+    <g id="Group_13487" data-name="Group 13487" transform="translate(0 -3)">
+      <path id="Path_4768" data-name="Path 4768" d="M0,0H25V25H0Z" fill="none"/>
+      <path id="Path_4769" data-name="Path 4769" d="M6.678,19.821,2,23.5V4.051A1.051,1.051,0,0,1,3.05,3h18.9A1.051,1.051,0,0,1,23,4.051V18.769a1.051,1.051,0,0,1-1.05,1.051ZM4.1,19.174l1.851-1.456H20.9V5.1H4.1Zm9.885-7.764,2.6,2.6L15.1,15.5l-2.6-2.6L9.9,15.5,8.417,14.013l2.6-2.6-2.6-2.6L9.9,7.322l2.6,2.6,2.6-2.6,1.485,1.487Z" transform="translate(0)" fill="#d6001c"/>
+    </g>
+  </g>
+</svg>

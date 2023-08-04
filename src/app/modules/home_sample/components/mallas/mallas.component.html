@@ -1,0 +1,407 @@
+<p-dialog
+  header="{{ 'mallasForm.titleModal' | translate }}"
+  [(visible)]="showModalMallas"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [style]="resizeModal()"
+>
+  <div class="row">
+    <div class="col-md-12">
+      <form class="mt-16" #mydiv [formGroup]="mallasDataForm">
+        <div class="row">
+          <div class="col-12">
+            <div class="table-responsive">
+              <p-table-finotex
+                #tablaFinotex
+                class="f-table"
+                [value]="mallasFormCall.controls"
+                dataKey="id"
+                [expandedRowKeys]="expandedRows"
+              >
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th style="width: 3rem"></th>
+                    <th>
+                      <label>
+                        {{ "mallasForm.typeMaterial" | translate }}
+                      </label>
+                    </th>
+                    <th>
+                      <label>
+                        {{ "mallasForm.description" | translate }}
+                      </label>
+                    </th>
+                    <th>
+                      <label>
+                        {{ "mallasForm.meshId" | translate }}
+                      </label>
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template
+                  formArrayName="header"
+                  let-rowIndex="rowIndex"
+                  pTemplate="body"
+                  let-mallaDatas
+                  let-expanded="expanded"
+                >
+                  <tr [formGroupName]="rowIndex">
+                    <td>
+                      <span
+                        type="button"
+                        pButton
+                        pRipple
+                        (click)="onItemClick(mallaDatas.value, tablaFinotex)"
+                        class="p-button-text p-button-rounded p-button-plain"
+                        [icon]="
+                          expanded
+                            ? 'pi pi-chevron-down'
+                            : 'pi pi-chevron-right'
+                        "
+                      ></span>
+                    </td>
+                    <td>
+                      <p class="text-truncate">
+                        <label>{{ mallaDatas.value.typeMaterial }}</label>
+                      </p>
+                    </td>
+                    <td>
+                      <p class="text-truncate">
+                        <label>{{ mallaDatas.value.description }}</label>
+                      </p>
+                    </td>
+                    <td>
+                      <app-search-selector
+                        placeholder="mallasForm.meshId"
+                        formControlName="meshCode"
+                        (click)="selectMeshId(rowIndex)"
+                      ></app-search-selector>
+                    </td>
+                  </tr>
+                </ng-template>
+                <ng-template
+                  formArrayName="header"
+                  let-rowIndex="rowIndex"
+                  pTemplate="rowexpansion"
+                  let-materials
+                >
+                  <tr [formGroupName]="rowIndex">
+                    <td colspan="4">
+                      <div class="row">
+                        <div class="col-12 col-md-3 mt-2">
+                          <label>
+                            {{ "mallasForm.frameNumber" | translate }}
+                          </label>
+                          <input
+                            type="text"
+                            (keypress)="onKeyPressNumberDecimal($event)"
+                            formControlName="frameNumber"
+                            pInputText
+                            [maxlength]="4"
+                            class="form-control"
+                          />
+                        </div>
+                        <div class="col-12 col-md-3 mt-2">
+                          <label>
+                            {{ "mallasForm.pressure" | translate }}
+                          </label>
+                          <input
+                            type="text"
+                            (keypress)="onKeyPressNumberDecimal($event)"
+                            formControlName="pressure"
+                            pInputText
+                            [maxlength]="4"
+                            class="form-control"
+                          />
+                        </div>
+                        <div class="col-12 col-md-3 mt-2">
+                          <label>
+                            {{ "mallasForm.light" | translate }}
+                          </label>
+                          <input
+                            type="text"
+                            (keypress)="onKeyPressNumberDecimal($event)"
+                            formControlName="light"
+                            pInputText
+                            [maxlength]="4"
+                            class="form-control"
+                          />
+                        </div>
+                        <div class="col-12 col-md-3 mt-2">
+                          <label>
+                            {{ "mallasForm.squeegeeSpeed" | translate }}
+                          </label>
+                          <input
+                            type="text"
+                            (keypress)="onKeyPressNumberDecimal($event)"
+                            formControlName="squeegeeSpeed"
+                            pInputText
+                            [maxlength]="4"
+                            class="form-control"
+                          />
+                        </div>
+                        <div class="col-12 col-md-3 mt-2">
+                          <label>
+                            {{ "mallasForm.squeegeePressure" | translate }}
+                          </label>
+                          <input
+                            type="text"
+                            (keypress)="onKeyPressNumberDecimal($event)"
+                            formControlName="squeegeePressure"
+                            pInputText
+                            [maxlength]="4"
+                            class="form-control"
+                          />
+                        </div>
+                        <div class="col-12 col-md-3 mt-2">
+                          <label>
+                            {{ "mallasForm.squeegeAngle" | translate }}
+                          </label>
+                          <input
+                            type="text"
+                            formControlName="squeegeAngle"
+                            pInputText
+                            class="form-control"
+                            maxlength="10"
+                          />
+                        </div>
+                        <div class="col-12 col-md-3 mt-2">
+                          <label>
+                            {{ "mallasForm.floodBarPressure" | translate }}
+                          </label>
+                          <input
+                            type="text"
+                            (keypress)="onKeyPressNumberDecimal($event)"
+                            formControlName="floodBarPressure"
+                            pInputText
+                            [maxlength]="4"
+                            class="form-control"
+                          />
+                        </div>
+                        <div class="col-12 col-md-3 mt-2">
+                          <label>
+                            {{ "mallasForm.fpmSpeed" | translate }}
+                          </label>
+                          <input
+                            type="text"
+                            (keypress)="onKeyPressNumberDecimal($event)"
+                            formControlName="fpmSpeed"
+                            pInputText
+                            [maxlength]="4"
+                            class="form-control"
+                          />
+                        </div>
+                        <div
+                          class="col-12 col-md-3 mt-2"
+                          *ngIf="showOutletHeat"
+                        >
+                          <label>
+                            {{ "mallasForm.outletHeat" | translate }}
+                          </label>
+                          <input
+                            type="text"
+                            (keypress)="onKeyPressNumberDecimal($event)"
+                            formControlName="outletHeat"
+                            pInputText
+                            [maxlength]="4"
+                            class="form-control"
+                          />
+                        </div>
+                        <div
+                          class="col-12 col-md-3 mt-2"
+                          *ngIf="showMiddleHeat"
+                        >
+                          <label>
+                            {{ "mallasForm.middleHeat" | translate }}
+                          </label>
+                          <input
+                            type="text"
+                            (keypress)="onKeyPressNumberDecimal($event)"
+                            formControlName="middleHeat"
+                            pInputText
+                            [maxlength]="4"
+                            class="form-control"
+                          />
+                        </div>
+                        <div class="col-12 col-md-3 mt-2">
+                          <label>
+                            {{ "mallasForm.inletHeat" | translate }}
+                          </label>
+                          <input
+                            type="text"
+                            (keypress)="onKeyPressNumberDecimal($event)"
+                            formControlName="inletHeat"
+                            pInputText
+                            [maxlength]="4"
+                            class="form-control"
+                          />
+                        </div>
+                        <div class="col-12 col-md-9 mt-2">
+                          <label>
+                            {{ "mallasForm.commnets" | translate }}
+                          </label>
+                          <input
+                            type="text"
+                            formControlName="commnets"
+                            pInputText
+                            class="form-control"
+                            maxlength="60"
+                          />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table-finotex>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="row">
+      <div class="col-12 text-right">
+        <app-button-finotex
+          label="mallasForm.btnBack"
+          typeButton="primary"
+          [typeSize]="false"
+          (click)="showModalMallas = false"
+        ></app-button-finotex>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  header="{{ 'mesh.mesh_number' | translate }}"
+  [(visible)]="showNumberMesh"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{ width: '60vw' }"
+>
+  <div class="row">
+    <div class="col-12">
+      <label>{{ "mesh.select" | translate }}</label>
+      <div class="table-responsive">
+        <table id="allTable" class="table f-table" style="width: 100%">
+          <thead>
+            <tr>
+              <th>
+                <label>{{ "mesh.meshCode" | translate }}</label>
+              </th>
+              <th>
+                <label>{{ "mesh.meshType" | translate }}</label>
+              </th>
+              <th>
+                <label>{{ "mesh.productid" | translate }}</label>
+              </th>
+              <th>
+                <p class="text-truncate">
+                  <label>{{ "mesh.item_name" | translate }}</label>
+                </p>
+              </th>
+              <th>
+                <p class="text-truncate">
+                  <label>{{ "mesh.diameter" | translate }}</label>
+                </p>
+              </th>
+              <th>
+                <p class="text-truncate">
+                  <label>{{ "mesh.mesh_tension" | translate }}</label>
+                </p>
+              </th>
+              <th>
+                <p class="text-truncate">
+                  <label>{{ "mesh.emulsion_type" | translate }}</label>
+                </p>
+              </th>
+              <th>
+                <p class="text-truncate">
+                  <label>{{ "mesh.emulsion_front" | translate }}</label>
+                </p>
+              </th>
+              <th>
+                <p class="text-truncate">
+                  <label>{{ "mesh.reverse" | translate }}</label>
+                </p>
+              </th>
+              <th>
+                <p class="text-truncate">
+                  <label>{{ "mesh.average_mesh" | translate }}</label>
+                </p>
+              </th>
+              <th>
+                <p class="text-truncate">
+                  <label>{{ "mesh.average_emulsion" | translate }}</label>
+                </p>
+              </th>
+              <th>
+                <p class="text-truncate">
+                  <label>{{ "mesh.overMesh" | translate }}</label>
+                </p>
+              </th>
+              <th class="text-center" data-priority="3">
+                <label>{{ "mesh.selectItem" | translate }}</label>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let itemMesh of listMesh; let i = index">
+              <td>{{ itemMesh.meshCode }}</td>
+              <td>{{ itemMesh.meshType }}</td>
+              <td>{{ itemMesh.productid }}</td>
+              <td class="text-center">{{ "Nombre articulo" }}</td>
+              <td>{{ itemMesh.diameterOrNumberOfThreads }}</td>
+              <td>{{ itemMesh.meshTension }}</td>
+              <td>{{ itemMesh.emulsionType }}</td>
+              <td>{{ itemMesh.numberOfLayersFrontEmulsion }}</td>
+              <td>{{ itemMesh.numberOfLayersBackEmulsion }}</td>
+              <td>{{ itemMesh.averageMeshThickness }}</td>
+              <td>{{ itemMesh.averageEmulsionThickness }}</td>
+              <td>{{ itemMesh.thicknessOverMesh }}</td>
+              <td class="text-center">
+                <button
+                  pButton
+                  pRipple
+                  type="button"
+                  icon="fas fa-plus"
+                  class="p-button-rounded p-button-text"
+                  pTooltip="{{ 'mesh.add_mesh_number' | translate }}"
+                  (click)="selectMeshNumber(itemMesh.meshCode,itemMesh.meshId)"
+                ></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-12">
+      <p-paginator
+        [rows]="10"
+        [columnsSeparate]="false"
+        [rowsPerPageOptions]="[10, 20, 30]"
+        (onPageChange)="paginate($event)"
+        [totalRecords]="totalRecords"
+      >
+      </p-paginator>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="row">
+      <div class="col-12 text-rigth">
+        <app-button-finotex
+          label="general.btnreturn"
+          type="submit"
+          typeButton="primary"
+          [typeSize]="false"
+          (click)="showModalProductionLarge()"
+        ></app-button-finotex>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>

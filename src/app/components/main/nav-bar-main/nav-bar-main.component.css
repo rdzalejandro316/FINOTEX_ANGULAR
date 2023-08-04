@@ -1,0 +1,15 @@
+.navbarMain{
+    left: 0;
+    width: 100%;
+}
+
+.left-row-red{
+    display: none;    
+    transform: rotate(180deg);
+}
+
+@media (max-width: 991px) {
+    .navbar .navbar-content {
+      width: 100% !important;
+    }
+}

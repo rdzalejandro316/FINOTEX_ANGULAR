@@ -1,0 +1,80 @@
+.p-contextmenu {
+    position: absolute;
+    background: #F6F6F6 0% 0% no-repeat padding-box;
+    border-radius: 25px 25px 25px 25px;
+    visibility: hidden;
+    /* right: 240px;
+    top: 80px; */
+}
+
+.p-contextmenu ul li {
+    padding: 16px;
+    list-style-type: none;
+    list-style: none;
+    text-align: center;
+    background-color: #FFFFFF;
+}
+
+.p-contextmenu ul li:nth-of-type(odd) {
+    background: #54585a0d 0% 0% no-repeat padding-box;
+}
+
+.p-contextmenu ul {
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+}
+
+.p-contextmenu ul li:hover {
+    background-color: #2B2A2A;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.p-contextmenu ul li:last-child {
+    border-radius: 0px 0px 25px 25px;
+}
+
+.p-contextmenu ul li:first-child {
+    border-radius: 25px 25px 0px 0px;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .p-contextmenu {
+        right: 90px;
+        top: 80px;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .p-contextmenu {
+        right: 100px;
+        top: 80px;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .p-contextmenu {
+        right: 120px;
+        top: 80px;
+    }
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .p-contextmenu {
+        right: 125px;
+        top: 80px;
+    }
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+    .p-contextmenu {
+        right: 240px;
+        top: 80px;
+    }
+}

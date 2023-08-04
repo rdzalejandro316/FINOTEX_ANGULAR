@@ -1,0 +1,368 @@
+<form class="mt-16" [formGroup]="registerFormSesionthree">
+  <p-accordion>
+    <p-accordionTab
+      header="{{ 'technical-sheets.image_settings' | translate }}"
+      [selected]="false"
+      [formStatus]="true"
+      [imagenIcon]="details ? 1 :formThreeIconStatusThree"
+      statusFormText="{{ details ? 'technical-sheets.session_form_completed' : formThreeStatusTexThree }}"
+    >
+      <ng-template pTemplate="content">
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div class="row">
+              <div *ngIf="cut" class="col-12 col-md-12 col-lg-6 mt-2">
+                <label for="validationDefault01" class="label-required">
+                  {{ "image-settings.cut-label" | translate }}
+                </label>
+                <app-search-selector
+                  placeholder="artWork.lblCutType"
+                  formControlName="cut"
+                  (clickEvent)="openModalCutType()"
+                  [status]="details"
+                ></app-search-selector>
+                <div class="picture-frame-finotex mt-16">
+                  <span style="cursor: pointer"  (click)="openPreviewFileCut()">
+                    <img src="{{ urlCutImg }}" class="imgCut"/>
+                  </span>
+                </div>
+              </div>
+              <div *ngIf="winding_sense" class="col-12 col-md-12 col-lg-6 mt-2">
+                <label for="validationDefault01" class="label-required">
+                  {{ "image-settings.winding-label" | translate }}
+                </label>
+                <app-search-selector
+                  placeholder="artWork.lblCutType"
+                  formControlName="winding_sense"
+                  (clickEvent)="openModalRewinding()"
+                  [status]="details"
+                ></app-search-selector>
+                <div class="picture-frame-finotex mt-16">
+                  <span
+                    style="cursor: pointer"
+                    (click)="openPreviewFileRewind()"
+                  >
+                    <img src="{{ urlRewindingImg }}"  class="imgRewinding"/>
+                  </span>
+                </div>
+              </div>
+
+              <div *ngIf="graphicFile" class="col-12 mt-2">
+                <label>
+                  {{ "image-settings.graphic-art-archive-label" | translate }}
+                </label>
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="graphicFile"
+                  class="form-control input-select-image"
+                  placeholder="{{
+                    'artWork.plDropfilesheretoupload' | translate
+                  }}"
+                  readonly
+                />
+              </div>
+              <div *ngIf="graphicFile" class="col-12 col-md-12 col-xl-12 mt-2">
+                <div class="text-right mt-1">
+                  <button
+                    pButton
+                    type="button"
+                    [disabled]="details"
+                    (click)="resetFiles(false)"
+                    label="{{ 'artWork.btnReset' | translate }}"
+                    class="button button-secundary filter mr-3"
+                  ></button>
+
+                  <span class="btn btn-primary btn-file" *ngIf="!details">
+                    {{ "artWork.btnUpload" | translate }}
+                    <input (change)="fileChanged($event)" type="file" />
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="row">
+              <div *ngIf="drawing" class="col-12 col-md-12 col-lg-6 mt-2">
+                <label>
+                  {{ "image-settings.drawed-by-label" | translate }}
+                </label>
+                <p-dropdown
+                  [options]="designerList"
+                  formControlName="drawing"
+                  optionLabel="designerName"
+                  optionValue="designerId"
+                  placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+                ></p-dropdown>
+              </div>
+              <div *ngIf="drawingDate" class="col-12 col-md-12 col-lg-6 mt-2">
+                <app-datepicker
+                [config]="settingsDrawDate"
+                [submitted]="submitted"
+                [form]="registerFormSesionthree"
+                [right]="24"
+                [formDirective]="ngForm"
+              ></app-datepicker>
+
+              
+              </div>
+              <div *ngIf="designedby" class="col-12 col-md-12 col-lg-6 mt-2">
+                <label>
+                  {{ "image-settings.designed-by-label" | translate }}
+                </label>
+                <p-dropdown
+                  [options]="designerList"
+                  formControlName="designedby"
+                  optionLabel="designerName"
+                  optionValue="designerId"
+                  placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+                ></p-dropdown>
+              </div>
+              <div *ngIf="designDate" class="col-12 col-md-12 col-lg-6 mt-2">
+                <app-datepicker
+                [config]="settingsdesignDate"
+                [submitted]="submitted"
+                [form]="registerFormSesionthree"
+                [right]="24"
+                [formDirective]="ngForm"
+              ></app-datepicker>
+              </div>
+              <div *ngIf="equal_color" class="col-12 col-md-12 col-lg-6 mt-2">
+                <label>{{ "image-settings.color-label" | translate }}</label>
+                <p-dropdown
+                  [options]="palleteTypeList"
+                  formControlName="equal_color"
+                  optionLabel="palleteName"
+                  optionValue="palleteTypeId"
+                  placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+                ></p-dropdown>
+              </div>
+              <div
+                *ngIf="standar_production"
+                class="col-12 col-md-12 col-lg-6 mt-2"
+              >
+                <label>
+                  {{ "image-settings.standard-production-label" | translate }}
+                </label>
+                <input
+                  type="number"
+                  pInputText
+                  placeholder="produccion estandar "
+                  class="form-control"
+                  (keypress)="validateMaxLen($event, 5)"
+                  formControlName="standar_production"
+                />
+              </div>
+              <div
+                *ngIf="sample_location"
+                class="col-12 col-md-12 col-lg-6 mt-2"
+              >
+                <label>
+                  {{ "image-settings.sample-file-location-label" | translate }}
+                </label>
+                <p-dropdown
+                  [options]="locationDesign"
+                  formControlName="sample_location"
+                  optionLabel="locationDesignName"
+                  optionValue="locationDesignId"
+                  placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+                ></p-dropdown>
+              </div>
+              <div *ngIf="locationDate" class="col-12 col-md-12 col-lg-6 mt-2">
+                <app-datepicker
+                [config]="settingslocationDate"
+                [submitted]="submitted"
+                [form]="registerFormSesionthree"
+                [right]="24"
+                [formDirective]="ngForm"
+              ></app-datepicker>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-accordionTab>
+  </p-accordion>
+</form>
+
+<p-dialog
+  header="{{ 'artWork.lblCutype' | translate }}"
+  [(visible)]="displayCutType"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{ width: '70vw' }"
+>
+  <div class="row">
+    <div class="col-md-12">
+      <p class="text-muted tx-13 mb-3 mb-md-0 description-page">
+        {{ "artWork.decriptionModal" | translate }}
+      </p>
+      <div class="table-responsive mt-16">
+        <table
+          id="datatableCutType"
+          class="custom table table-striped table-borderless"
+          style="width: 100%"
+        >
+          <caption></caption>
+          <thead class="d-none">
+            <tr>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody class="row">
+            <tr class="col-12 col-md-4 col-lg-3" *ngFor="let item of cutTypes">
+              <td>
+                <section class="card-title">
+                  <input
+                    type="radio"
+                    value="{{ item.cutId }}"
+                    class="inp-checkbox"
+                    name="rdCutType"
+                  />
+                  <label class="text-bold mt-0" style="margin-left: 1.5em">
+                    {{ item.cutName }}
+                  </label>
+                </section>
+                <hr class="hr-car" />
+                <div class="card-body">
+                  <div>
+                    <img
+                      _ngcontent-syr-c209=""
+                      src="{{ item.absoluteImagePath }}"
+                      alt="cut type image"
+                      appImage
+                    />
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="mt-16">
+      <p-button
+        (click)="displayCutType = false"
+        label="{{ 'artWork.btnCancel' | translate }}"
+        styleClass="button button-secundary filter mr-2"
+      ></p-button>
+      <p-button
+        (click)="selectCutType()"
+        label="{{ 'artWork.btnSelectcut' | translate }}"
+        styleClass="button button-primary filter"
+      ></p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  header="{{ 'image-settings.winding-label' | translate }}"
+  [(visible)]="displayRewindings"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{ width: '70vw' }"
+>
+  <div class="row">
+    <div class="col-md-12">
+      <p class="text-muted tx-13 mb-3 mb-md-0 description-page">
+        {{ "artWork.decriptionModal" | translate }}
+      </p>
+      <div class="table-responsive mt-16">
+        <table
+          id="datatableCutType"
+          class="custom table table-striped table-borderless"
+          style="width: 100%"
+        >
+          <caption></caption>
+          <thead class="d-none">
+            <tr>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody class="row">
+            <tr
+              class="col-12 col-md-4 col-lg-3"
+              *ngFor="let item of rewindings"
+            >
+              <td>
+                <section class="card-title">
+                  <input
+                    type="radio"
+                    value="{{ item.rewindingId }}"
+                    class="inp-checkbox"
+                    name="rdRewinding"
+                  />
+                  <label class="text-bold mt-0" style="margin-left: 1.5em">
+                    {{ item.rewindingName }}
+                  </label>
+                </section>
+                <hr class="hr-car" />
+                <div class="card-body">
+                  <div>
+                    <img
+                      _ngcontent-syr-c209=""
+                      src="{{ item.rewindingUrl }}"
+                      alt="Rewinding image"
+                      appImage
+                    />
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="mt-16">
+      <p-button
+        (click)="displayRewindings = false"
+        label="{{ 'artWork.btnCancel' | translate }}"
+        styleClass="button button-secundary filter mr-2"
+      ></p-button>
+      <p-button
+        (click)="selectRewindings()"
+        label="{{ 'artWork.btnSelectcut' | translate }}"
+        styleClass="button button-primary filter"
+      ></p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-viewer
+  header="{{ 'products.preview_imagen' | translate }}"
+  [(visible)]="displayFileUrlRewindingImg"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <div class="image-viewer">
+    <img src="{{ urlRewindingImg }}" alt="" appFallbackSrc />
+  </div>
+  <ng-template pTemplate="footer"></ng-template>
+</p-viewer>
+
+<p-viewer
+  header="{{ 'products.preview_imagen' | translate }}"
+  [(visible)]="displayFileUrlCutImg"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <div class="image-viewer">
+    <img src="{{ urlCutImg }}" alt="" appFallbackSrc />
+  </div>
+  <ng-template pTemplate="footer"></ng-template>
+</p-viewer>

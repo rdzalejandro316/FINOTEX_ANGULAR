@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="28" height="29" viewBox="0 0 28 29">
+  <defs>
+    <clipPath id="clip-Mensaje_nuevo">
+      <rect width="28" height="29"/>
+    </clipPath>
+  </defs>
+  <g id="Mensaje_nuevo" data-name="Mensaje nuevo" clip-path="url(#clip-Mensaje_nuevo)">
+    <rect width="28" height="29" fill="#fff"/>
+    <g id="Componente_86_21" data-name="Componente 86 – 21" transform="translate(4 3)">
+      <path id="Trazado_5185" data-name="Trazado 5185" d="M14,3V5H4V18.385L5.763,17H20V10h2v8a1,1,0,0,1-1,1H6.455L2,22.5V4A1,1,0,0,1,3,3Zm5,0V0h2V3h3V5H21V8H19V5H16V3Z" transform="translate(-2)" fill="#2d8602" stroke="#2d8602" stroke-width="1"/>
+      <path id="Trazado_5186" data-name="Trazado 5186" d="M19,3V0h2V3h3V5H21V8H19V5H16V3Z" transform="translate(-2)" fill="#78d64b" stroke="#78d64b" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

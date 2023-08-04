@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="39" height="38" viewBox="0 0 39 38">
+  <defs>
+    <clipPath id="clip-Consultar">
+      <rect width="39" height="38"/>
+    </clipPath>
+  </defs>
+  <g id="Consultar" clip-path="url(#clip-Consultar)">
+    <g id="Group_13491" data-name="Group 13491" transform="translate(0 -1.846)">
+      <path id="Path_4740" data-name="Path 4740" d="M0,0H40V40H0Z" fill="none"/>
+      <path id="Path_4741" data-name="Path 4741" d="M25.571,23.492l6.3,6.3-2.081,2.081-6.3-6.3a13.236,13.236,0,1,1,2.079-2.079ZM22.621,22.4a10.288,10.288,0,1,0-.221.221l.221-.221ZM16.965,9.61A2.941,2.941,0,1,0,20.856,13.5,5.881,5.881,0,1,1,16.965,9.61Z" transform="translate(3.497 3.497)" fill="#54585a"/>
+    </g>
+  </g>
+</svg>

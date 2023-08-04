@@ -1,0 +1,91 @@
+#timeline-wrap {
+  margin-top: 30px;
+  margin-left: 25%;
+  margin-right: 25%;
+  top: 100;
+  position: relative;
+}
+
+#timeline {
+  height: 3px;
+  width: 100%;
+  background-color: #aabbc4;
+  position: relative;
+}
+
+.mt-accordion {
+  margin-top: 50px !important;
+}
+
+.marker {
+  z-index: 1000;
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 0.9em;
+  text-align: center;
+  position: absolute;
+  margin-left: -25px;
+  border-radius: 50%;
+  list-style-type: none;
+}
+
+.mfirst {
+  top: -13px;
+}
+
+.msecond {
+  top: -13px;
+  left: 50%;
+}
+
+.mthird {
+  top: -13px;
+  left: 100%;
+}
+
+.timeline-icon.one {
+  background-color: rgb(249, 23, 56) !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+.timeline-icon.two {
+  background-color: #f9fafb !important;
+  border-style: solid;
+  border-color: #aabbc4;
+  border-radius: 50%;
+  color: #aabbc4;
+  line-height: 27px;
+  border-width: 2px;
+}
+
+.marker:hover {
+  -moz-transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+
+  -webkit-transition: all 300ms ease;
+  -moz-transition: all 300ms ease;
+  -ms-transition: all 300ms ease;
+  -o-transition: all 300ms ease;
+  transition: all 300ms ease;
+}
+
+.markerText {
+  color: #d6001c;
+  font-size: 0.9em;
+  list-style-type: none;
+  text-align: center;
+}
+
+.texttwo {
+  background-color: #f9fafb !important;
+  color: #aabbc4;
+}
+
+
+
+

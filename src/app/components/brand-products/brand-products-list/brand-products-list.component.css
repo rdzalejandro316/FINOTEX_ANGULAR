@@ -1,0 +1,85 @@
+.addCart {
+  font-size: 12px;
+}
+
+.search {
+  border-radius: 0px 10px 10px 0px !important;
+  width: 90%;
+  box-shadow: none;
+}
+
+.select2-container {
+  width: 32% !important;
+}
+
+@media screen and (max-width: 767px) {
+  .search {
+    width: 88%;
+  }
+}
+
+button span {
+  display: inline-block;
+}
+
+button span:last-child {
+  margin-left: 8px;
+}
+
+select,
+.select,
+.select2,
+.filter {
+  width: 100% !important;
+}
+
+button.search {
+  width: 10%;
+  border: 1px solid #989a9b !important;
+  border-left: none !important;
+}
+
+input[placeholder^='Product Search'] {
+  border-radius: 10px 0px 0px 10px !important;
+}
+
+.table td img {
+  width: 16px;
+  height: 16px;
+}
+
+.table-center {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  border: 0px;
+}
+
+.table-center td {
+  padding-top: 10px;
+}
+
+.padding-box {
+  margin-top: 20px !important;
+}
+.padding-box > div {
+  display: inline;
+  margin-left: 0px !important;
+  margin-right: 18px !important;
+}
+
+.shopping-car-icon {
+  background-image: url("../../../../assets/images/shopping-cart-gris.svg");
+  background-repeat: no-repeat;
+  display: inline-block;
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+  vertical-align: text-top;
+  border-color: transparent;
+}
+
+.shopping-car-icon:hover {
+  border-color: transparent;
+}

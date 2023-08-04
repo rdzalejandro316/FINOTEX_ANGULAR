@@ -1,0 +1,127 @@
+<p-dialog
+  header="{{ lblNumberArticle }}{{ 'formula-colors.titleModal' | translate }}"
+  [(visible)]="showColorFormula"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [style]="resizeModal()"
+  [resizeLabel]="this.resizableLabel ? 'text-truncate' : ''"
+>
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive" *ngIf="dataNoFound == false">
+        <table
+          id="tableFormulaColors"
+          class="table f-table"
+          style="width: 100%"
+        >
+          <thead>
+            <tr>
+              <th>
+                <label>{{ "formula-colors.item" | translate }}</label>
+              </th>
+              <th>
+                <label>{{ "formula-colors.materialcode" | translate }}</label>
+              </th>
+              <th>
+                <label>{{ "formula-colors.material" | translate }}</label>
+              </th>
+              <th>
+                <label>{{ "formula-colors.quantityunit" | translate }}</label>
+              </th>
+              <th>
+                <label>{{ "formula-colors.inventoryunit" | translate }}</label>
+              </th>
+              <th *ngIf="percentageOverOrdered">
+                <label>{{ "formula-colors.order" | translate }}</label>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let itemFormulaColor of listFormulaColor; let i = index"
+            >
+              <td>{{ itemFormulaColor.materialPositionId }}</td>
+              <td>{{ itemFormulaColor.materialId }}</td>
+              <td>
+                {{
+                  !percentageOverOrdered
+                    ? itemFormulaColor.formulaDescription
+                    : itemFormulaColor.description
+                }}
+              </td>
+              <td>
+                {{
+                  !percentageOverOrdered
+                    ? itemFormulaColor.formulaQuantity
+                    : itemFormulaColor.realQuantity
+                }}
+              </td>
+              <td>{{ itemFormulaColor.unitMeasureId }}</td>
+              <td *ngIf="percentageOverOrdered">
+                {{ itemFormulaColor.percentageOverOrdered }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-responsive" *ngIf="dataNoFound == true">
+        <table *ngIf="dataNoFound" class="table f-table" style="width: 100%">
+          <thead>
+            <tr>
+              <th>
+                <label>{{ "formula-colors.item" | translate }}</label>
+              </th>
+              <th>
+                <label>{{ "formula-colors.materialcode" | translate }}</label>
+              </th>
+              <th>
+                <label>{{ "formula-colors.material" | translate }}</label>
+              </th>
+              <th>
+                <label>{{ "formula-colors.quantityunit" | translate }}</label>
+              </th>
+              <th>
+                <label>{{ "formula-colors.inventoryunit" | translate }}</label>
+              </th>
+              <th *ngIf="percentageOverOrdered">
+                <label>{{ "formula-colors.order" | translate }}</label>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="6" class="text-center bg-white p-0">
+                <img
+                  class="simple-img img-not-data"
+                  src="../../../../assets/images/folder-open.svg"
+                  alt="profile"
+                />
+                <div class="mb-16">
+                  <label class="text-no-data">{{
+                    "general.noData" | translate
+                  }}</label>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="row">
+      <div class="col-12 text-rigth">
+        <app-button-finotex
+          label="formula-colors.btnBack"
+          type="submit"
+          typeButton="primary"
+          [typeSize]="false"
+          (click)="showColorFormula = false"
+        >
+        </app-button-finotex>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>

@@ -1,0 +1,40 @@
+.btn-file {
+  position: relative;
+  overflow: hidden;
+  font: normal normal bold 14px/14px Montserrat;
+  border-radius: 30px;
+  padding: 12px 18px;
+  text-align: center;
+  -webkit-box-shadow: 0px 4px 4px 2px #00000016;
+  box-shadow: 0px 4px 4px 2px #00000016;
+}
+
+.btn-file:hover {
+  color: #ffffff;
+  background: #b70018 0% 0% no-repeat padding-box;
+}
+
+.btn-file input[type=file] {
+  position: absolute;
+  border-radius: 30px;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: center;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+  
+.evidence{
+  background-color: #ffffff!important;
+}
+
+.btnright {
+  text-align: end;
+}

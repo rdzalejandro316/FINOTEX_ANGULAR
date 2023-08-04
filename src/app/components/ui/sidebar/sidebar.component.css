@@ -1,0 +1,5 @@
+.wrap-item
+{
+    width: 180px !important;    
+    white-space: pre-wrap !important;
+}

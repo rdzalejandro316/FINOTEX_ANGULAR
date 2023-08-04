@@ -1,0 +1,377 @@
+<form class="mt-16" [formGroup]="registerFormSesionTwo">
+  <p-accordion>
+    <p-accordionTab
+      header="{{ 'technical-sheets.article_identification_data' | translate }}"
+      [selected]="false"
+      [formStatus]="true"
+      [imagenIcon]="details ? 1 : formOneIconStatusTwo"
+      statusFormText="{{
+        details
+          ? 'technical-sheets.session_form_completed'
+          : formOneStatusTextTwo
+      }}"
+    >
+      <ng-template pTemplate="content">
+        <div class="row">
+          <div class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ 'technical-sheets.product_code' | translate }}
+            </label>
+            <input
+              (keydown.enter)="onFocusOutEvent($event)"
+              (focusout)="onFocusOutEvent($event)"
+              formControlName="Item_code"
+              type="text"
+              [maxlength]="15"
+              pInputText
+              placeholder="{{ 'technical-sheets.product_code' | translate }}"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-12 col-md-3 col-lg-3 mt-2">
+            <label>{{ 'technical-sheets.source_product' | translate }}</label>
+            <input
+              formControlName="Origin_code"
+              type="text"
+              pInputText
+              placeholder="{{ 'technical-sheets.source_product' | translate }}"
+              class="form-control"
+            />
+          </div>
+
+          <div *ngIf="Technical_origin" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label>
+              {{ 'technical-sheets.technical_product_code' | translate }}
+            </label>
+            <input
+              formControlName="Technical_origin"
+              type="text"
+              pInputText
+              placeholder="{{
+                'technical-sheets.technical_product_code' | translate
+              }}"
+              class="form-control"
+            />
+          </div>
+
+          <div *ngIf="WMS_barcode" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ 'technical-sheets.product_barcode' | translate }}
+            </label>
+            <input
+              formControlName="WMS_barcode"
+              type="text"
+              pInputText
+              [maxlength]="15"
+              placeholder="{{ 'technical-sheets.product_barcode' | translate }}"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-6 mt-2">
+            <label class="label-required">
+              {{ 'technical-sheets.product_name' | translate }}
+            </label>
+            <input
+              formControlName="Item_name"
+              type="text"
+              pInputText
+              placeholder="{{ 'technical-sheets.product_name' | translate }}"
+              class="form-control"
+              [maxlength]="60"
+            />
+          </div>
+
+          <div class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ 'product-detail.lblLine' | translate }}
+            </label>
+            <p-dropdown
+              (onChange)="changeLine($event)"
+              [options]="ListLine"
+              [filter]="true"
+              formControlName="Line"
+              optionLabel="lineName"
+              optionValue="lineId"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+            ></p-dropdown>
+          </div>
+
+          <div class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ 'product-detail.lblSubline' | translate }}
+            </label>
+            <p-dropdown
+              [options]="ListSubline"
+              formControlName="Subline"
+              optionLabel="subLineName"
+              optionValue="subLineId"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+            ></p-dropdown>
+          </div>
+
+          <div *ngIf="Quality" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ 'product-detail.lblQuality' | translate }}
+            </label>
+            <p-dropdown
+              [options]="ListQuality"
+              formControlName="Quality"
+              optionLabel="qualityName"
+              optionValue="qualityId"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+            ></p-dropdown>
+          </div>
+
+          <div *ngIf="Urdimbre" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ 'technical-sheets.warpColor' | translate }}
+            </label>
+            <p-dropdown
+              [options]="ListUrdimbre"
+              formControlName="Urdimbre"
+              optionLabel="colourName"
+              optionValue="colourId"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+            ></p-dropdown>
+          </div>
+
+          <div *ngIf="Shape" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ 'technical-sheets.shape' | translate }}
+            </label>
+            <p-dropdown
+              [options]="ListShape"
+              formControlName="Shape"
+              optionLabel="shapeTypeName"
+              optionValue="shapeTypeId"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+            ></p-dropdown>
+          </div>
+
+          <div *ngIf="Broad" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ 'product-detail.lblWidth' | translate }}
+            </label>
+            <p-dropdown
+              [options]="ListBroad"
+              formControlName="Broad"
+              optionLabel="widthName"
+              optionValue="widthId"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+            ></p-dropdown>
+          </div>
+
+          <div *ngIf="Long_production" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ 'technical-sheets.productionlength' | translate }}
+            </label>
+            <input
+              #Longproduction
+              formControlName="Long_production"
+              type="number"
+              (keypress)="validateMaxLen($event, 5)"
+              pInputText
+              placeholder="{{
+                'technical-sheets.productionlength' | translate
+              }}"
+              class="form-control"
+              (keydown.enter)="onFocusOutEventLarge($event)"
+              (focusout)="onFocusOutEventLarge($event)"
+              (keypress)="onFocusOutEventLarge($event)"
+            />
+          </div>
+
+          <div *ngIf="Commercial_length" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ 'technical-sheets.commercial_length' | translate }}
+            </label>
+            <input
+              formControlName="Commercial_length"
+              type="number"
+              (keypress)="validateMaxLen($event, 5)"
+              pInputText
+              placeholder="{{
+                'technical-sheets.commercial_length' | translate
+              }}"
+              class="form-control"
+            />
+          </div>
+
+          <div *ngIf="Length_front" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ 'technical-sheets.long_fold' | translate }}
+            </label>
+            <input
+              formControlName="Length_front"
+              type="number"
+              (keypress)="validateMaxLen($event, 5)"
+              pInputText
+              placeholder="{{ 'technical-sheets.long_fold' | translate }}"
+              class="form-control"
+            />
+          </div>
+
+          <div *ngIf="Finish" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ 'technical-sheets.finish_code' | translate }}
+            </label>
+            <p-dropdown
+              [options]="ListFinish"
+              formControlName="Finish"
+              optionLabel="finishName"
+              optionValue="finishId"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+            ></p-dropdown>
+          </div>
+
+          <div *ngIf="Adhesive" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ 'technical-sheets.adhesive_code' | translate }}
+            </label>
+            <p-dropdown
+              [options]="ListAdhesive"
+              formControlName="Adhesive"
+              optionLabel="adhesiveName"
+              optionValue="adhesiveId"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+             
+            ></p-dropdown>
+          </div>
+
+          <div *ngIf="Size" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ 'product-detail.lblSize' | translate }}
+            </label>
+            <input
+              formControlName="Size"
+              type="text"
+              pInputText
+              placeholder="{{ 'product-detail.lblSize' | translate }}"
+              class="form-control"
+              [maxlength]="90"
+            />
+          </div>
+
+          <div *ngIf="Application" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ 'technical-sheets.application' | translate }}
+            </label>
+            <p-dropdown
+              [options]="ListApplication"
+              formControlName="Application"
+              optionLabel="applicationName"
+              optionValue="applicationId"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+            ></p-dropdown>
+          </div>
+
+          <div *ngIf="Number_colors" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ 'technical-sheets.number_of_colors' | translate }}
+            </label>
+            <p-dropdown
+              [options]="ListNumberColors"
+              formControlName="Number_colors"
+              optionLabel="name"
+              optionValue="code"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+             
+
+            ></p-dropdown>
+          </div>
+
+          <div *ngIf="Number_stickers" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ 'technical-sheets.number_of_adhesives' | translate }}
+            </label>
+            <p-dropdown
+              [options]="ListNumberStickers"
+              formControlName="Number_stickers"
+              optionLabel="name"
+              optionValue="code"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+             
+
+            ></p-dropdown>
+          </div>
+
+          <div *ngIf="Number_papers" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ 'technical-sheets.number_of_papers' | translate }}
+            </label>
+            <p-dropdown
+              [options]="ListNumberPapers"
+              formControlName="Number_papers"
+              optionLabel="name"
+              optionValue="code"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+             
+
+            ></p-dropdown>
+          </div>
+
+          <div *ngIf="Number_accessories" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ 'technical-sheets.number_of_accessories' | translate }}
+            </label>
+            <p-dropdown
+              [options]="ListNumberAccessories"
+              formControlName="Number_accessories"
+              optionLabel="name"
+              optionValue="code"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+             
+
+            ></p-dropdown>
+          </div>
+
+          <div *ngIf="Number_finishes" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ 'technical-sheets.number_of_colorants' | translate }}
+            </label>
+            <p-dropdown
+              [options]="ListNumberFinishes"
+              formControlName="Number_finishes"
+              optionLabel="name"
+              optionValue="code"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"x
+             
+
+            ></p-dropdown>
+          </div>
+
+          <div *ngIf="Auxiliary_numbers" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ 'technical-sheets.number_of_catalysts' | translate }}
+            </label>
+            <p-dropdown
+              [options]="ListAuxiliaryNumbers"
+              formControlName="Auxiliary_numbers"
+              optionLabel="name"
+              optionValue="code"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+            ></p-dropdown>
+          </div>
+
+          <div *ngIf="Reductive_numbers" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ 'technical-sheets.number_of_reducers' | translate }}
+            </label>
+            <p-dropdown
+              [options]="ListReductiveNumbers"
+              formControlName="Reductive_numbers"
+              optionLabel="name"
+              optionValue="code"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+            ></p-dropdown>
+          </div>
+          
+        </div>
+      </ng-template>
+    </p-accordionTab>
+  </p-accordion>
+</form>
+
+<p-toast></p-toast>

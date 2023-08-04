@@ -1,0 +1,691 @@
+<p-breadcrumb
+  [model]="itemsBreadcrumb"
+  [tittle]="'product-brand.lblProductsByBrand'"
+  [description]="'product-brand.decriptionMain'"
+></p-breadcrumb>
+
+<div class="row mt-16">
+  <div class="col-12 col-md-7">
+    <div class="row">
+      <div class="col-12 col-md-6 col-xl-4 pl-0">
+        <button
+          class="button button-secundary filter"
+          type="button"
+          (click)="showPanelFilter()"
+        >
+          {{ "productList.msgFilerSearch" | translate }}
+        </button>
+      </div>
+      <div class="col-12 col-md-6 col-xl-8 mts-16 mb-3">
+        <app-search-selector-principal
+          placeholder="formsGeneral.brandProduct"
+          icon="pi pi-search"
+          (clickEvent)="brandFilter($event)"
+        ></app-search-selector-principal>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-5 text-right">
+    <div class="row">
+      <div
+        class="col-12 col-md-6 {{
+          !showBrandCustomer && isCustomer ? 'offset-md-6' : ''
+        }}"
+      >
+        <app-button-icon-finotex
+          icon="fas fa-download"
+          label="product-brand.download"
+          type="button"
+          typeButton="secondary"
+          [typeSize]="true"
+          (click)="exportAsXLSX()"
+        ></app-button-icon-finotex>
+      </div>
+      <div class="col-12 col-md-6" *ngIf="!isCustomer">
+        <app-button-icon-finotex
+          icon="fas fa-plus"
+          label="product-brand.title_principal_new"
+          type="button"
+          typeButton="primary"
+          [typeSize]="true"
+          (click)="goToNewBrand()"
+        ></app-button-icon-finotex>
+      </div>
+      <div class="col-12 col-md-5 mt-2r" *ngIf="showBrandCustomer">
+        <button
+          [disabled]="shoppingCart?.length == 0"
+          routerLink="/home/brandProduct_puchase"
+          class="button button-primary w-100r"
+        >
+          <img
+            class="shopping-img"
+            src="../../../assets/images/shopping-cart-white.svg"
+            alt="shopping cart"
+            appImage
+          />
+          <span class="badge badge-light">{{ shoppingCart?.length }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Menu de busqueda -->
+<form [formGroup]="registerFormFilter" (ngSubmit)="onSubmitFilter()">
+  <div class="row mt-16" [hidden]="!showfilters">
+    <div class="col-md-12">
+      <div class="container-serach">
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="" class="title-search">
+              {{ "productList.lblFilters" | translate }}
+            </label>
+            <br />
+            <p class="description-page">
+              {{ "product-brand.msgFilters" | translate }}
+            </p>
+            <label for="" class="title-search mt-2">
+              {{ "product-brand.lblListbrandCustomer" | translate }}
+            </label>
+          </div>
+        </div>
+        <div class="row" *ngIf="showBrandCustomer || !isCustomer">
+          <div class="col-md-12">
+            <label for="ddlBrand">
+              {{ "product-brand.lblBranCustomer" | translate }}
+            </label>
+          </div>
+          <div class="col-12 col-md-6">
+            <p-dropdown
+              [options]="brandCustomers"
+              formControlName="masterCustomerId"
+              optionValue="masterCustomerId"
+              optionLabel="masterCustomerName"
+              class="w-100"
+              placeholder="{{
+                ('formsGeneral.selSelectOpcion' | translate) || ' '
+              }}"
+            ></p-dropdown>
+          </div>
+        </div>
+        <div class="row {{ showBrandCustomer || !isCustomer ? 'mt-16' : '' }}">
+          <div class="col-md-12">
+            <label for="">
+              {{ "product-brand.lblSearchByDetails" | translate }}
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-xl-3 col-12 mt-16">
+            <label for="txtCustCode1">
+              {{ "products.lblCustCode1" | translate }}
+            </label>
+            <ng-autocomplete
+              style="width: 80%"
+              [itemTemplate]="itemTemplateSearch"
+              formControlName="brandCatalogCode"
+              placeholder="{{ 'products.lblCustCode1' | translate }}"
+              [notFoundTemplate]="notFoundTemplate"
+            ></ng-autocomplete>
+            <ng-template #itemTemplateSearch let-item>
+              <a [innerHTML]="item"></a>
+            </ng-template>
+            <ng-template #notFoundTemplate let-notFound>
+              <div [innerHTML]="notFound"></div>
+            </ng-template>
+          </div>
+          <div class="col-md-8 col-xl-9 col-12 mt-16">
+            <label for="txtProductName">
+              {{ "products.lblProductName" | translate }}
+            </label>
+            <ng-autocomplete
+              style="width: 80%"
+              formControlName="brandCustomerName"
+              [itemTemplate]="itemTemplateSearch"
+              placeholder="{{ 'products.lblProductName' | translate }}"
+              [notFoundTemplate]="notFoundTemplate"
+            ></ng-autocomplete>
+            <ng-template #itemTemplateSearch let-item>
+              <a [innerHTML]="item"></a>
+            </ng-template>
+            <ng-template #notFoundTemplate let-notFound>
+              <div [innerHTML]="notFound"></div>
+            </ng-template>
+          </div>
+          <div class="col-md-4 col-12 mt-16">
+            <label for="txtSize">
+              {{ "product-brand.lblFinalDimentions" | translate }}
+            </label>
+            <ng-autocomplete
+              style="width: 80%"
+              [itemTemplate]="itemTemplateSearch"
+              formControlName="finalDimension"
+              placeholder="{{ 'product-brand.lblFinalDimentions' | translate }}"
+              [notFoundTemplate]="notFoundTemplate"
+            ></ng-autocomplete>
+            <ng-template #itemTemplateSearch let-item>
+              <a [innerHTML]="item"></a>
+            </ng-template>
+            <ng-template #notFoundTemplate let-notFound>
+              <div [innerHTML]="notFound"></div>
+            </ng-template>
+          </div>
+          <div class="col-md-4 col-12 mt-16">
+            <label for="ddlProductLine">
+              {{ "product-brand.lblProductLine" | translate }}
+            </label>
+            <p-dropdown
+              [options]="productLines"
+              formControlName="groupLineId"
+              optionValue="groupLineId"
+              optionLabel="groupLineName"
+              placeholder="{{
+                ('formsGeneral.selSelectOpcion' | translate) || ' '
+              }}"
+            ></p-dropdown>
+          </div>
+          <div class="col-md-4 col-12 mt-16">
+            <label for="ddlStatus">
+              {{ "product-brand.lblStatus" | translate }}
+            </label>
+            <p-dropdown
+              [options]="status"
+              optionValue="brandCatalogStatusId"
+              optionLabel="brandCatalogStatusName"
+              formControlName="statusId"
+              placeholder="{{
+                ('formsGeneral.selSelectOpcion' | translate) || ' '
+              }}"
+            ></p-dropdown>
+          </div>
+        </div>
+        <div class="row">
+          <div class="offset-md-8 col-md-2 mt-16">
+            <button
+              (click)="clearFilter()"
+              pButton
+              type="button"
+              label="{{ 'formsGeneral.btnResetFields' | translate }}"
+              class="button button-secundary w-100 mts-16"
+            ></button>
+          </div>
+          <div class="col-md-2 mt-16">
+            <button
+              pButton
+              type="submit"
+              label="{{ 'formsGeneral.btnSearch' | translate }}"
+              [disabled]="registerFormFilter.invalid || indicatorButton"
+              class="button button-primary all-width"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="row mt-16">
+  <div class="col-12">
+    <table id="allTable" class="table f-table" style="width: 100%;">
+      <thead>
+        <tr>
+          <th scope="col" *ngIf="showBrandCustomer || !isCustomer">
+            {{ "product-brand.lblBranCustomer" | translate }}
+          </th>
+          <th scope="col">
+            {{ "product-brand.lblCustomerIDCode" | translate }}
+          </th>
+          <th scope="col">{{ "product-brand.lblDescription" | translate }}</th>
+          <th scope="col">
+            {{ "product-brand.lblFinalDimensions" | translate }}
+          </th>
+          <th scope="col">{{ "product-brand.lblProductLine" | translate }}</th>
+          <th scope="col">{{ "product-brand.lblStatus" | translate }}</th>
+          <th scope="col" data-priority="3">{{ "product-brand.lblActions" | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of listBrandProducts">
+          <td *ngIf="showBrandCustomer || !isCustomer">
+            {{ product.brandCustomerName }}
+          </td>
+          <td>{{ product.brandCatalogCode }}</td>
+          <td>{{ product.brandCatalogName }}</td>
+          <td>{{ product.finalDimension }}</td>
+          <td>{{ product.productType }}</td>
+          <td>{{ product.status }}</td>
+          <td scope="col">
+            <button
+              *ngIf="product.adobeUrl != null && product.adobeUrl != ''"
+              (click)="downloadFile(product)"
+              pButton
+              pRipple
+              type="button"
+              icon="far fa-file"
+              class="p-button-rounded p-button-text ml-1 mr-2"
+              pTooltip="{{ 'product-brand.lblFilePreview' | translate }}"
+              tooltipPosition="top"
+            ></button>
+            <em
+              *ngIf="product.imageUrl != null && product.imageUrl != ''"
+              class="far fa-image mr-1 emr"
+              pTooltip="<img src='{{ product.imageUrlTmp }}' />"
+              [escape]="false"
+              tooltipPosition="top"
+              (click)="showGaleryImg(product)"
+            ></em>
+            <button
+              (click)="showDetails(product)"
+              pButton
+              pRipple
+              type="button"
+              icon="fas fa-eye"
+              class="p-button-rounded p-button-text ml-1 mr-1"
+              pTooltip="{{ 'product-brand.viewDetail' | translate }}"
+              tooltipPosition="top"
+            ></button>
+            <button
+              pButton
+              pRipple
+              type="button"
+              (click)="showCart(product)"
+              *ngIf="showBrandCustomer"
+              icon="fa fa-shopping-cart"
+              class="p-button-rounded p-button-text mr-2"
+              pTooltip="{{ 'product-brand.btnAddToCart' | translate }}"
+              tooltipPosition="top"
+            ></button>
+            <button
+              pButton
+              pRipple
+              type="button"
+              (click)="showEdit(product)"
+              *ngIf="!isCustomer"
+              icon="fa fa-edit"
+              class="p-button-rounded p-button-text mr-2"
+              pTooltip="{{ 'product-brand.btnEditItem' | translate }}"
+              tooltipPosition="top"
+            ></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-12">
+    <p-paginator
+      [rows]="10"
+      [columnsSeparate]="false"
+      [rowsPerPageOptions]="[10, 20, 30]"
+      (onPageChange)="paginate($event)"
+      [totalRecords]="totalRecords"
+    ></p-paginator>
+  </div>
+</div>
+
+<p-viewer
+  header="{{ 'products.preview_imagen' | translate }}"
+  [(visible)]="displayFilePreview"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <div class="image-viewer">
+    <img
+      src="{{ imageGaleryBrand }}"
+      alt=""
+      appFallbackSrc
+    />
+  </div>
+  <ng-template pTemplate="footer"></ng-template>
+</p-viewer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row mt-16">
+  <div class="offset-md-8 col-md-4 text-right">
+    <div class="text-right">
+      <a
+        routerLink="/home//all_product"
+        class="button button-primary"
+        style="margin-top: 30px"
+      >
+        {{ "product-brand-detail.btnBack" | translate }}
+      </a>
+    </div>
+  </div>
+</div>
+
+<p-dialog
+  [formGroup]="form"
+  #ngForm="ngForm"
+  header="{{ 'product-brand.titleAddVariation' | translate }}"
+  [(visible)]="display"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{ width: '1140px', height: '328px' }"
+>
+  <div class="row">
+    <div class="col-12 col-xl-12 pl-0 p-dialog-desc">
+      {{ "product-brand.msgNewVariation" | translate }}
+    </div>
+  </div>
+  <input type="hidden" formControlName="productId" />
+  <div class="row">
+    <div class="col-12 mt-2 pl-0">
+      <div class="row">
+        <div class="col-12 col-md-2 mt-2 pl-0">
+          <label for="validationDefault01">
+            {{ "product-brand.lblSize" | translate }}
+          </label>
+          <p-dropdown
+            appendTo="body"
+            [disabled]="disabledSelectSize && productsDetail?.length == 0"
+            (onChange)="getColorsBySize($event)"
+            [options]="productsSizes"
+            formControlName="size"
+            optionValue="size"
+            optionLabel="size"
+            placeholder="{{
+              ('formsGeneral.selSelectOpcion' | translate) || ' '
+            }}"
+          ></p-dropdown>
+        </div>
+        <div class="col-12 col-md-3 mt-2">
+          <label for="validationDefault01">
+            {{ "product-brand.lblColorVariation" | translate }}
+          </label>
+          <p-dropdown
+            appendTo="body"
+            [disabled]="disabledSelectColor"
+            [options]="productsColor"
+            (onChange)="getSizesByColor($event)"
+            formControlName="colorVariation"
+            optionValue="color"
+            optionLabel="color"
+            placeholder="{{
+              ('formsGeneral.selSelectOpcion' | translate) || ' '
+            }}"
+          ></p-dropdown>
+        </div>
+        <div class="col-12 col-md-2 mt-2">
+          <label class="label-required" for="validationDefault01">
+            {{ "product-brand.lblQuantity" | translate }}
+          </label>
+          <input
+            type="number"
+            formControlName="quantity"
+            pInputText
+            placeholder="{{ 'product-brand.lblQuantity' | translate }}"
+            class="form-control"
+          />
+        </div>
+        <div class="col-12 col-md-2 mt-2">
+          <app-datepicker
+            [config]="settingsDates"
+            [submitted]="submitted"
+            [form]="form"
+            [formDirective]="ngForm"
+            appendTo="body"
+          ></app-datepicker>
+        </div>
+        <div class="col-12 col-md-3 mt-2">
+          <label class="label-required w-100" for="validationDefault01">
+            {{ "product-brand.lblUser1strequireddate" | translate }}
+          </label>
+          <p-checkbox
+            id="firstRequiredDate"
+            name="firstRequiredDate"
+            formControlName="firstRequiredDate"
+            value="1"
+            label="Yes"
+            [disabled]="!shoppingCart || shoppingCart?.length == 0"
+            (onChange)="setFirstRequiredDate()"
+          ></p-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button
+      (click)="display = false"
+      label="{{ 'general.btnCancel' | translate }}"
+      styleClass="button button-secundary filter ml-2"
+    ></p-button>
+    <p-button
+      (click)="clearShoppingCartForm(productsDetail)"
+      label="{{ 'general.btnClear' | translate }}"
+      styleClass="button button-secundary filter ml-2"
+    ></p-button>
+    <p-button
+      (click)="addOrEditItem()"
+      label="{{ 'product-brand.btnAddItem' | translate }}"
+      styleClass="button button-primary filter ml-2"
+      [disabled]="!form.valid"
+    ></p-button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="notDownloadExcel"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '300px' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center font50">
+      <img
+        _ngcontent-amv-c221=""
+        width="60px"
+        height="60px"
+        src="../../../assets/images/icono cancelar.svg"
+        alt="shopping cart"
+        appImage
+        class="simple-img"
+      />
+    </div>
+    <div class="col-md-12 text-center mt-24">
+      <p>
+        {{ "artWork.titleSearchEmpty" | translate }}
+      </p>
+    </div>
+    <div class="col-md-12 text-center mt-16 description-page">
+      <p>
+        {{ "artWork.msgSearchEmpty" | translate }}
+      </p>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button
+        (click)="notDownloadExcel = false"
+        label="{{ 'artWork.lblOk' | translate }}"
+        styleClass="button button-primary text-center"
+      ></p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="displayInvalidItem"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '500px' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center font50">
+      <img
+        _ngcontent-amv-c221=""
+        width="60px"
+        height="60px"
+        src="../../../assets/images/icono cancelar.svg"
+        alt="shopping cart"
+        appImage
+        class="simple-img"
+      />
+    </div>
+    <div class="col-md-12 text-center mt-24 font16">
+      {{ "product-brand.lblMsgInvalidItemShoppingCart" | translate }}
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button
+        (click)="displayInvalidItem = false"
+        label="{{ 'checkOut.btnOk' | translate }}"
+        styleClass="button button-primary text-center"
+      ></p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="displaysuccess"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '870px' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center font50">
+      <img
+        _ngcontent-amv-c221=""
+        width="60px"
+        height="60px"
+        src="../../../assets/images/success.svg"
+        alt="shopping cart"
+        appImage
+        class="simple-img"
+      />
+    </div>
+    <div class="col-md-12 text-center mt-24 font16">
+      {{ "product-brand.lblMsgItemSuccessfullyAdded" | translate }}
+    </div>
+    <table class="table-center">
+      <tr>
+        <td class="mt-16 description-page">
+          {{ "product-brand.lblSize" | translate }}:
+        </td>
+        <td class="font16">{{ addedItem.size }}</td>
+      </tr>
+      <tr>
+        <td class="mt-16 description-page">
+          {{ "product-brand.lblColorVariation" | translate }}:
+        </td>
+        <td class="font16">{{ addedItem.color }}</td>
+      </tr>
+      <tr>
+        <td class="mt-16 description-page">
+          {{ "product-brand.lblQuantity" | translate }}:
+        </td>
+        <td class="font16">{{ addedItem.quantity }}</td>
+      </tr>
+      <tr>
+        <td class="mt-16 description-page">
+          {{ "product-brand.lblMsgRequiredDate" | translate }}:
+        </td>
+        <td class="font16">{{ addedItem.requiredDate }}</td>
+      </tr>
+    </table>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="padding-box col-md-12 text-center">
+      <div>
+        <p-button
+          (click)="goToProductByBrandList()"
+          label="{{
+            'product-brand.btnMsgGoBackToBroductsByBrand' | translate
+          }}"
+          styleClass="button button-secundary filter ml-2 margin-buttons"
+        ></p-button>
+      </div>
+      <div>
+        <p-button
+          (click)="goToAddVariation()"
+          label="{{ 'product-brand.btnMsgAddAnotherVariation' | translate }}"
+          styleClass="button button-secundary filter ml-2 margin-buttons"
+        ></p-button>
+      </div>
+      <div>
+        <p-button
+          (click)="goToCheckout()"
+          label="{{ 'product-brand.btnMsgGoToCheckout' | translate }}"
+          styleClass="button button-primary text-center margin-buttons"
+        ></p-button>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="displayNoContentSizeAndColor"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '500px' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center font50">
+      <img
+        _ngcontent-amv-c221=""
+        width="60px"
+        height="60px"
+        src="../../../assets/images/icono cancelar.svg"
+        alt="shopping cart"
+        appImage
+        class="simple-img"
+      />
+    </div>
+    <div class="col-md-12 text-center mt-24 font16">
+      {{ "product-brand.lblMsgNoContentSizeAndColor" | translate }}
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button
+        (click)="displayNoContentSizeAndColor = false"
+        label="{{ 'checkOut.btnOk' | translate }}"
+        styleClass="button button-primary text-center"
+      ></p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-toast></p-toast>

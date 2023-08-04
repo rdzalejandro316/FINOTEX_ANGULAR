@@ -1,0 +1,156 @@
+<p-accordion>
+    <p-accordionTab 
+        header="{{ 'pqrs.edit-pqrs-tab-action-plan' | translate }}"
+        [selected]="true"
+        [formStatus]="true"
+        [imagenIcon]="formOneIconStatusOne"
+        statusFormText="{{ formOneStatusTextOne }}">
+        <ng-template pTemplate="content">
+            <form [formGroup]="registerFormActionPlan">
+                <div class="row">
+                    <div class="col-12 col-lg-5 mt-2">                        
+                        <app-datepicker 
+                          right="25"
+                          [config]="settingsSendDate"                        
+                          [submitted]="submitted"
+                          [form]="registerFormActionPlan"
+                          [formDirective]="ngForm"
+                          >
+                        </app-datepicker>                                            
+                    </div>
+
+                    <div   class="col-12 col-sm-12 col-xl-12 mt-3">
+                        <label>{{ 'pqrs.plan-action-descripcion-action' | translate }}</label>
+                        <textarea 
+                        *ngIf="registerFormActionPlan.controls.description ? [readonly]  == false : [readonly] == true" 
+                            type="text"                              
+                            pInputText   
+                            placeholder="{{ 'pqrs.plan-action-descripcion-action' | translate  }}"                                                                    
+                            class="form-control description-input"  
+                            formControlName="description"
+                            >   
+                        </textarea> 
+                    </div>
+
+                    <div  class="col-12 col-sm-12 col-xl-12 mt-3">
+                        <label class="label-required">{{ 'pqrs.plan-action-evidence-action' | translate }}</label>
+                        <em class="fas fa-info-circle" pTooltip="{{ 'main.generate-pqrs-evidence-toltip' | translate }}"></em>
+                        <input
+                            type="text"
+                            required = "true"
+                            formControlName="uploadEvidence"
+                            pInputText
+                            class="form-control evidence"
+                            readonly/>
+                 
+                    <div class="text-right mt-1">
+                        <app-button-finotex   
+                            *ngIf="planAction != null ? true : false"
+                            label="{{ 'pqrs.edit-pqrs-tab-information-request-download' | translate  }}"
+                            type="button"
+                            typeButton="secondary"
+                            [typeSize]="false"                        
+                            classButton="w-100"
+                            (click)="dowload()">
+                        </app-button-finotex>      
+
+                        <button
+                            *ngIf="planAction != null ? false : true"
+                            pButton
+                            type="button"
+                            (click)="resetFiles()"
+                            label="{{ 'artWork.btnReset' | translate }}"
+                            class="button-select-image-reset mr-1">
+                        </button>
+                        
+                        <span  *ngIf="planAction != null ? false : true" class="btn btn-primary btn-file">
+                            {{ 'artWork.btnUpload' | translate }}
+                            <input #inputFile (change)="fileChanged($event,inputFile)" type="file"/>
+                        </span>                                    
+                    </div>  
+                </div>
+                </div>
+            </form>
+        </ng-template>
+    </p-accordionTab>
+</p-accordion>
+
+<p-dialog
+[(visible)]="displayInvalidateFileMessage"
+[contentStyleClass]="'border-top'"
+[modal]="true"
+[baseZIndex]="10000"
+[draggable]="false"
+[showHeader]="false"
+[resizable]="false"
+[style]="{ width: '500px' }">
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <em class="fas fa-info-circle font50"></em>
+    </div>
+
+    <div class="col-md-12 text-center mt-24">
+        {{ 'artWork.unsupportedFileTitle' | translate }}
+    </div>
+
+    <div class="col-md-12">
+        <p  [hidden]="this.hideErrorType"
+            class="text-muted tx-13 mb-3 mb-md-0 mt-3 text-center description-page">
+            {{ 'artWork.unsupportedFile' | translate }}.
+        </p>
+        <p [hidden]="this.hideErrorSize"
+            class="text-muted tx-13 mb-3 mb-md-0 mt-3 text-center description-page">
+            {{ 'artWork.unsupportedFileLength' | translate }} {{ this.maxSize }}.
+        </p>
+    </div>
+</div>
+
+<ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+        <p-button
+            (click)="displayInvalidateFileMessage = false"
+            label="{{ 'artWork.lblOk' | translate }}"
+            styleClass="button button-primary text-center">
+        </p-button>
+    </div>
+</ng-template>
+
+</p-dialog>
+
+<!-- not found file -->
+<p-dialog 
+   [(visible)]="showNotFoundFile" 
+   [contentStyleClass]="'border-top'" 
+   [modal]="true" 
+   [baseZIndex]="10000"
+   [draggable]="false" 
+   [showHeader]="false" 
+   [resizable]="false" 
+   [style]="{ width: '500px' }">
+    <div class="row">
+        <div class="col-md-12 text-center font50">
+            <img _ngcontent-amv-c221="" width="60px" height="60px" src="../../../assets/images/Alert.svg"
+              alt="shopping cart" class="simple-img" appImage />
+        </div>
+      
+        <div class="col-md-12 text-center mt-24">
+            <p class="title-not-fount-file">{{ "pqrs.file-not-found-title" | translate }}</p>
+        </div>
+    
+        <div class="col-md-12 text-center mt-24 f-14">      
+            <span class="description-not-fount-file">{{ "pqrs.file-not-found-description" | translate }}</span>            
+        </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="col-md-12 text-center">
+          <p-button 
+              (click)="showNotFoundFile = false" 
+              label="{{ 'artWork.lblOk' | translate }}"
+              styleClass="button button-primary text-center"></p-button>
+      </div>
+    </ng-template>
+</p-dialog>    
+
+<p-toast></p-toast>

@@ -1,0 +1,620 @@
+<p-breadcrumb
+  [model]="itemsBreadcrumb"
+  [tittle]="'menu.ArtworkDetails'"
+  [description]="'artWork.sub_title_principal_detail'"
+></p-breadcrumb>
+
+<div class="row mb-3">
+  <div class="col-12 text-right">
+    <button
+      pButton
+      type="submit"
+      (click)="showPanelDialog()"
+      icon="far fa-comment"
+      label="{{ 'artWork.AddComment' | translate }}"
+      class="button button-primary filter"
+    ></button>
+  </div>
+</div>
+
+<form [formGroup]="registerFormDetails">
+  <div class="row mt-3">
+    <div class="col-12">
+      <div class="container-serach">
+        <div class="row">
+          <div *ngIf="indicatorCustomer" class="col-12 col-md-3 mt-3">
+            <label>{{ "artWork.Customer" | translate }}</label>
+            <input
+              type="text"
+              formControlName="customer"
+              pInputText
+              placeholder="{{ 'artWork.Customer' | translate }}"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-12 {{ col_md }} mt-3">
+            <label>{{ "artWork.lblItemDescription" | translate }}</label>
+            <input
+              type="text"
+              formControlName="description"
+              pInputText
+              placeholder="{{ 'artWork.plDescription' | translate }}"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-12 col-md-6 col-xl-3 mt-3">
+            <label>{{ "artWork.lblProductType" | translate }}</label>
+            <input
+              type="text"
+              formControlName="product_type"
+              pInputText
+              placeholder="{{ 'artWork.lblProductType' | translate }}"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-12 col-md-6 col-xl-3 mt-3">
+            <label>{{ "artWork.creationDate" | translate }}</label>
+            <input
+              type="text"
+              formControlName="creationDate"
+              pInputText
+              placeholder="{{ 'artWork.creationDate' | translate }}"
+              class="form-control"
+            />
+          </div>
+          <div class="col-12 col-md-6 col-xl-3 mt-3">
+            <label>{{ "artWork.artworkStatus" | translate }}</label>
+            <input
+              type="text"
+              formControlName="artwork_status"
+              pInputText
+              placeholder="{{ 'artWork.artworkStatus' | translate }}"
+              class="form-control"
+            />
+          </div>
+          <div class="col-12 col-md-6 col-xl-3 mt-3">
+            <label>{{ "artWork.lblDimensions" | translate }}</label>
+            <input
+              type="text"
+              formControlName="dimensions"
+              pInputText
+              placeholder="{{ 'artWork.plDimentions' | translate }}"
+              class="form-control"
+            />
+          </div>
+          <div class="col-12 col-md-6 col-xl-3 mt-3">
+            <label>{{ "artWork.lblColors" | translate }}</label>
+            <textarea
+              formControlName="colors"
+              [rows]="6"
+              placeholder="{{ 'artWork.plColors' | translate }}"
+              class="inputs"
+              pInputTextarea
+              autoResize="true"
+            ></textarea>
+          </div>
+          <div class="col-12 col-md-6 col-xl-3 mt-3">
+            <label>{{ "artWork.lblCutType" | translate }}</label>
+            <em
+              class="fas fa-info-circle ml-2"
+              pTooltip="<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Zumba.png' />"
+              [escape]="false"
+              tooltipPosition="top"
+            ></em>
+            <input
+              formControlName="cut_type"
+              type="text"
+              pInputText
+              placeholder="{{ 'artWork.lblCutType' | translate }}"
+              class="form-control"
+            />
+          </div>
+          <div class="col-12 col-md-6 col-xl-3 mt-3">
+            <label>{{ "artWork.lblSubstrateType" | translate }}</label>
+            <input
+              type="text"
+              formControlName="substrate_type"
+              pInputText
+              placeholder="{{ 'artWork.lblSubstrateType' | translate }}"
+              class="form-control"
+            />
+          </div>
+          <div class="col-12 col-md-6 col-xl-3 mt-3">
+            <label>{{ "artWork.lblFabricType" | translate }}</label>
+            <input
+              type="text"
+              formControlName="fabric_type"
+              pInputText
+              placeholder="{{ 'artWork.plFabricType' | translate }}"
+              class="form-control"
+            />
+          </div>
+          <div class="col-12 col-md-6 mt-3">
+            <label>{{ "artWork.lblObservations" | translate }}</label>
+            <textarea
+              formControlName="observations"
+              [rows]="6"
+              class="inputs"
+              pInputTextarea
+              placeholder="{{ 'artWork.plObservations' | translate }}"
+              autoResize="true"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-12 col-md-6 col-xl-3 mt-3">
+            <label>{{ "artWork.artFile" | translate }}</label>
+            <div>
+              <input
+                class="inputs cut"
+                type="text"
+                formControlName="art_file"
+                pInputText
+                placeholder="{{ 'artWork.artFile' | translate }}"
+              />
+              <button
+                class="button button-primary cut-b cut-downloader"
+                (click)="downloadFileArtwork()"
+              >
+                {{ "artWork.download" | translate }}
+              </button>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-xl-3 mt-3">
+            <label>{{ "artWork.additionalDetailsFile" | translate }}</label>
+            <div>
+              <input
+                class="inputs cut"
+                type="text"
+                formControlName="additional_details_file"
+                pInputText
+                placeholder="{{ 'artWork.additionalDetailsFile' | translate }}"
+              />
+              <button
+                class="button button-primary cut-b cut-downloader"
+                (click)="downloadFileAditional()"
+              >
+                {{ "artWork.download" | translate }}
+              </button>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-xl-3 mt-3">
+            <label>{{ "artWork.designerFile" | translate }}</label>
+            <div>
+              <input
+                type="text"
+                formControlName="designer_file"
+                pInputText
+                placeholder="{{ 'artWork.designerFile' | translate }}"
+                class="inputs cut"
+              />
+              <button
+                class="button button-primary cut-b cut-downloader"
+                (click)="downloadFileDesigner()"
+              >
+                {{ "artWork.download" | translate }}
+              </button>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-xl-3 mt-3">
+            <label>{{ "artWork.designer" | translate }}</label>
+            <input
+              type="text"
+              formControlName="designer"
+              pInputText
+              placeholder="{{ 'artWork.designer' | translate }}"
+              class="form-control"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="text-right mt-3 mb-3 p-2">
+        <div class="row">
+          <div class="col-12 text-right">
+
+            <app-button-finotex
+              label="product-brand-detail.btnBack"
+              type="button"
+              routerLink="/home/artworks_history"
+              typeButton="secondary"
+              [typeSize]="false"
+              class="mr-2"
+            ></app-button-finotex>
+  
+            <app-button-finotex
+              label="artWork.lblBtnEditDetails"
+              type="submit"
+              typeButton="secondary"
+              [typeSize]="false"
+              (click)="showEdit()"
+              class="mr-2"
+            ></app-button-finotex>
+
+            <app-button-finotex
+            *ngIf="
+            artworkDetailImagen?.sketchStatusId != 9 &&
+            artworkDetailImagen?.sketchStatusId != 8
+          "
+              label="artWork.decline"
+              type="submit"
+              typeButton="secondary"
+              [typeSize]="false"
+              (click)="declineDialog()"
+            ></app-button-finotex>
+
+            <app-button-finotex
+            *ngIf="artworkDetailImagen?.sketchStatusId == 6"
+            label="artWork.approve"
+            type="button"
+            typeButton="secondary"
+            [typeSize]="false"
+            (click)="updateSkectchStatus('approved')"
+          ></app-button-finotex>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<p-accordion>
+  <p-accordionTab header="{{ 'artWork.processHistory' | translate }}">
+    <p-table #table [data]="historyArtwork">
+      <tr theaderRecords>
+        <th scope="col">{{ "artWork.observations" | translate }}</th>
+        <th scope="col">{{ "artWork.updateDate" | translate }}</th>
+        <th scope="col" class="text-center">
+          {{ "artWork.status" | translate }}
+        </th>
+        <th scope="col" class="text-right">
+          {{ "artWork.username" | translate }}
+        </th>
+      </tr>
+      <tr tbodyRecords *ngFor="let history of historyArtwork">
+        <td>{{ history.observation }}</td>
+        <td class="capitalize-finotex">
+          {{ setFormatDate(history.creationDate)  }}
+        </td>
+        <td class="text-center">{{ history.sketchStatusName }}</td>
+        <td class="text-right">{{ history.createdByUser }}</td>
+      </tr>
+    </p-table> 
+  </p-accordionTab>
+</p-accordion>
+
+<form [formGroup]="registerFormComment" (ngSubmit)="onSubmitCommet()">
+  <p-dialog
+    header="{{ 'artWork.AddComment' | translate }}"
+    [(visible)]="displayCommnet"
+    [modal]="true"
+    [draggable]="false"
+    [resizable]="false"
+    [style]="{ width: '60vw' }"
+  >
+    <div class="row mt-2">
+      <div class="col-12 col-xl-12">
+        {{ "artWork.AddCommentDescription" | translate }}
+      </div>
+
+      <div class="col-12 col-md-4 mb-3 mt-2">
+        <label for="validationDefault01">
+          {{ "artWork.requestNumber" | translate }}
+        </label>
+        <input
+          type="text"
+          formControlName="sketchId"
+          pInputText
+          class="form-control"
+        />
+      </div>
+
+      <div class="col-12 col-md-8 mb-3 mt-2">
+        <label for="validationDefault01">
+          {{ "artWork.Description" | translate }}
+        </label>
+        <input
+          type="text"
+          formControlName="description"
+          pInputText
+          class="form-control"
+        />
+      </div>
+
+      <div *ngIf="indicatorCommentPublic" class="col-12 col-md-6 mt-2">
+        <input
+          type="radio"
+          value="1"
+          class="inp-checkbox"
+          name="public"
+          formControlName="public"
+        />
+        <label for="validationDefault01" class="ml-4 mt-1">
+          {{ "artWork.lblPublicComment" | translate }}
+        </label>
+      </div>
+
+      <div *ngIf="indicatorCommentPublic" class="col-12 col-md-6 mt-2">
+        <input
+          type="radio"
+          value="2"
+          class="inp-checkbox"
+          name="public"
+          formControlName="public"
+        />
+        <label for="validationDefault01" class="ml-4 mt-1">
+          {{ "artWork.lblPrivateComment" | translate }}
+        </label>
+      </div>
+
+      <div class="col-12 col-xl-12">
+        <label for="validationDefault01">
+          {{ "artWork.Comment" | translate }}
+        </label>
+        <textarea
+          [rows]="6"
+          formControlName="observation"
+          class="inputs"
+          placeholder="{{ 'samples.lblComment' | translate }}"
+          pInputTextarea
+          autoResize="true"
+        ></textarea>
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="row">
+        <div class="col-12 text-right">
+          <app-button-finotex
+            label="artWork.btnCancel"
+            type="button"
+            (click)="displayCommnet = false"
+            typeButton="secondary"
+            [typeSize]="false"
+            class="mr-2"
+          ></app-button-finotex>
+
+          <app-button-finotex
+            label="artWork.submit"
+            type="submit"
+            typeButton="primary"
+            [typeSize]="false"
+            [disabled]="registerFormComment.invalid || indicatorButtonComment"
+          ></app-button-finotex>
+        </div>
+      </div>
+
+      
+    </ng-template>
+  </p-dialog>
+</form>
+
+<p-dialog
+  [(visible)]="displayConfirmComment"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '450px' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center font50">
+      <img
+        _ngcontent-amv-c221=""
+        width="60px"
+        height="60px"
+        src="../../../assets/images/success.svg"
+        alt="shopping cart"
+        class="simple-img"
+        appImage
+      />
+    </div>
+    <div class="col-md-12 text-center mt-24">
+      <p>{{ "artWork.commentSubmitted" | translate }}</p>
+    </div>
+    <div class="col-md-12 text-center mt-16 description-page">
+      <p>
+        {{ "artWork.requestNumberIs" | translate }}
+        <b>{{ commentSketchResponse.sketchId }}</b>
+        {{ "artWork.itemDescription" | translate }}
+        <b>{{ description }}</b>
+        {{ "artWork.msgCheck2" | translate }}
+      </p>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button
+        (click)="closeCommentConfirmation()"
+        label="{{ 'artWork.lblOk' | translate }}"
+        styleClass="button button-primary text-center"
+      ></p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<form [formGroup]="registerFormDecline">
+  <p-dialog
+    [(visible)]="displayDecline"
+    [contentStyleClass]="'border-top'"
+    [modal]="true"
+    [baseZIndex]="10000"
+    [draggable]="false"
+    [showHeader]="false"
+    [resizable]="true"
+    [style]="{ width: '600px' }"
+  >
+    <div class="row">
+      <div class="col-md-12 text-center font50">
+        <img
+          _ngcontent-amv-c221=""
+          width="60px"
+          height="60px"
+          src="../../../assets/images/Alert.svg"
+          alt="shopping cart"
+          class="simple-img"
+          appImage
+        />
+      </div>
+      <div class="col-md-12 text-center mt-24">
+        <p>{{ "artWork.lblDescriptionDecline" | translate }}</p>
+      </div>
+      <div class="col-md-12 text-center mt-16 description-page">
+        <p>
+          {{ "artWork.lblConfirmDecline" | translate }}
+        </p>
+      </div>
+
+      <div class="col-12 mt-16">
+        <label for="validationDefault01">
+          {{ "artWork.lblDecliningReason" | translate }}
+        </label>
+        <p-dropdown
+          appendTo="body"
+          [options]="decliningReasons"
+          formControlName="declining_reason"
+          optionLabel="sketchRejectionName"
+          optionValue="sketchRejectionId"
+          placeholder="{{ ('artWork.selSelectOpcion' | translate) || ' ' }}"
+        ></p-dropdown>
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="row">
+        <div class="col-12 text-right">
+          <app-button-finotex
+            label="artWork.lblGoToArtwork"
+            type="button"
+            (click)="displayDecline = false"
+            typeButton="secondary"
+            [typeSize]="false"
+            class="mr-2"
+          ></app-button-finotex>
+
+          <app-button-finotex
+            label="artWork.decline"
+            type="submit"
+            typeButton="primary"
+            [typeSize]="false"
+            (click)="updateSkectchStatus('decline')"
+            [disabled]="registerFormDecline.invalid"
+          ></app-button-finotex>
+        </div>
+      </div>
+
+    </ng-template>
+  </p-dialog>
+</form>
+
+<p-dialog
+  [(visible)]="displayApprove"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '450px' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center font50">
+      <img
+        _ngcontent-amv-c221=""
+        width="60px"
+        height="60px"
+        src="../../../assets/images/Eliminated.svg"
+        alt="shopping cart"
+        class="simple-img"
+        appImage
+      />
+    </div>
+    <div class="col-md-12 text-center mt-24">
+      <p>{{ "artWork.lblApproved" | translate }}</p>
+    </div>
+    <div class="col-md-12 text-center mt-16 description-page">
+      <p>
+        {{ "artWork.requestNumberIs" | translate }}
+        <b>{{ sketchSelect.sketchId }}</b>
+        <br />
+        {{ "artWork.itemDescription" | translate }}
+        <b>{{ sketchSelect.sketchName }}</b>
+        <br />
+        {{ "artWork.msgCheck2" | translate }}
+      </p>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <button
+        pButton
+        type="button"
+        (click)="confirmApproved()"
+        label="{{ 'artWork.lblOk' | translate }}"
+        class="button button-primary width-custom"
+      ></button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="displayDeclined"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '450px' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center font50">
+      <img
+        _ngcontent-amv-c221=""
+        width="60px"
+        height="60px"
+        src="../../../assets/images/Eliminated.svg"
+        alt="shopping cart"
+        class="simple-img"
+        appImage
+      />
+    </div>
+    <div class="col-md-12 text-center mt-24">
+      <p>{{ "artWork.lblDeclined" | translate }}</p>
+    </div>
+    <div class="col-md-12 text-center mt-16 description-page">
+      <p>
+        {{ "artWork.requestNumberIs" | translate }}
+        <b>{{ sketchSelect.sketchId }}</b>
+        <br />
+        {{ "artWork.itemDescription" | translate }}
+        <b>{{ sketchSelect.sketchName }}</b>
+        <br />
+        {{ "artWork.msgCheck2" | translate }}
+      </p>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <button
+        pButton
+        type="button"
+        (click)="confirmDeclined()"
+        label="{{ 'artWork.lblOk' | translate }}"
+        class="button button-primary width-custom"
+      ></button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-toast></p-toast>

@@ -1,0 +1,54 @@
+<p-breadcrumb
+  [model]="itemsBreadcrumb"
+  [tittle]="'customer.InfoClient' | translate"
+  [description]="customerName"
+></p-breadcrumb>
+
+<div class="row">
+  <div class="col-12 col-sm-6 col-md-4">
+    <div class="card ttile-page mt-16" (click)="routerLinkAction('01')">
+      <em class="fas fa-pencil-alt mr-3"></em>
+      <label class="label-card">{{ 'menu.ArtWorks' | translate }}</label>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-md-4">
+    <div class="card ttile-page mt-16" (click)="routerLinkAction('02')">
+      <em class="fas fa-pencil-ruler mr-3"></em>
+      <label class="label-card">{{ 'menu.Samples' | translate }}</label>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-md-4">
+    <div class="card ttile-page mt-16" (click)="routerLinkAction('03')">
+      <em class="fas fa-folder-open mr-3"></em>
+      <label class="label-card">{{ 'customer.orders' | translate }}</label>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-md-4">
+    <div class="card ttile-page mt-16" (click)="routerLinkAction('04')">
+      <em class="fas fa-tag mr-3"></em>
+      <label class="label-card">{{ 'customer.catalog' | translate }}</label>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-md-4 pr-75">
+    <div class="card ttile-page mt-16" (click)="routerLinkAction('05')">
+      <em class="far fa-address-card mr-3"></em>
+      <label class="label-card">
+        {{ 'customer.basicInformation' | translate }}
+      </label>
+    </div>
+  </div>
+</div>
+<div class="row mt-16">
+  <div class="offset-md-8 col-md-4 text-right">
+    <div class="text-right">
+      <a
+        routerLink="/home/customers_list"
+        class="button button-primary"
+        style="margin-top: 30px;"
+      >
+        {{ 'product-brand-detail.btnBack' | translate }}
+      </a>
+    </div>
+  </div>
+</div>
+<p-toast></p-toast>

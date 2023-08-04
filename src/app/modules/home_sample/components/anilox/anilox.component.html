@@ -1,0 +1,333 @@
+<p-dialog
+  header="{{ 'anilox.aniloxIr' | translate }}"
+  [(visible)]="showModalAnilox"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{ width: '105vw' }"
+>
+  <div class="row">
+    <div class="col-12">
+      <form [formGroup]="aniloxForm">
+        <p-accordion>
+          <p-accordionTab
+            header=""
+            [selected]="true"
+            [formStatus]="true"
+            [imagenIcon]="formMaterialsIconStatus"
+            statusFormText="{{ formStatusText }}"
+          >
+            <div class="row">
+              <div class="col-12" style="padding: 0">
+                <div class="table-responsive">
+                  <p-table-finotex
+                    #tablaFinotexAnilox
+                    class="f-table"
+                    [value]="getFormAniloxHeader.controls"
+                    dataKey="id"
+                    [expandedRowKeys]="expandedRows"
+                  >
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th style="width: 1rem"></th>
+                        <th class="label-required">
+                          {{ "anilox.Station_Number" | translate }}
+                        </th>
+                        <th class="label-required">
+                          {{ "anilox.Material_PositionId" | translate }}
+                        </th>
+                        <th>
+                          {{ "anilox.Description" | translate }}
+                        </th>
+                        <th class="label-required">
+                          {{ "anilox.Square_Millimeter_Area" | translate }}
+                        </th>
+                      </tr>
+                    </ng-template>
+
+                    <ng-template
+                      formArrayName="header"
+                      pTemplate="body"
+                      let-rowIndex="rowIndex"
+                      let-anilox
+                      let-expanded="expanded"
+                    >
+                      <tr [formGroupName]="rowIndex">
+                        <td>
+                          <span
+                            type="button"
+                            pButton
+                            pRipple
+                            (click)="
+                              onItemClick(anilox.value, tablaFinotexAnilox)
+                            "
+                            class="p-button-text p-button-rounded p-button-plain"
+                            [icon]="
+                              expanded
+                                ? 'pi pi-chevron-down'
+                                : 'pi pi-chevron-right'
+                            "
+                          ></span>
+                        </td>
+                        <td>
+                          <p-dropdown
+                            appendTo="body"
+                            formControlName="Station_Number"
+                            [options]="listStationDrop"
+                            optionLabel="stationName"
+                            optionValue="stationId"
+                            placeholder="{{
+                              ('artWork.selSelectOpcion' | translate) || ' '
+                            }}"
+                          ></p-dropdown>
+                        </td>
+                        <td>
+                          <p-dropdown
+                            appendTo="body"
+                            formControlName="Material_PositionId"
+                            [options]="listMaterialPosition"
+                            optionLabel="name"
+                            optionValue="value"
+                            placeholder="{{
+                              ('artWork.selSelectOpcion' | translate) || ' '
+                            }}"
+                          ></p-dropdown>
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            formControlName="Description"
+                            pInputText
+                            class="form-control"
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            (keypress)="onKeyPressNumber($event)"
+                            formControlName="Square_Millimeter_Area"
+                            pInputText
+                            class="form-control"
+                            [maxlength]="4"
+                          />
+                        </td>
+                      </tr>
+                    </ng-template>
+
+                    <ng-template
+                      formArrayName="header"
+                      let-rowIndex="rowIndex"
+                      pTemplate="rowexpansion"
+                      let-anilox
+                    >
+                      <tr [formGroupName]="rowIndex">
+                        <td colspan="5">
+                          <div class="row">
+                            <div class="col-12 col-md-6 col-sm-6 col-lg-3 mt-2">
+                              <label class="label-required">
+                                {{ "anilox.Anilox" | translate }}
+                              </label>
+                              <br />
+                              <p-dropdown
+                                appendTo="body"
+                                formControlName="Anilox"
+                                [options]="listAniloxDrop"
+                                optionLabel="aniloxRollName"
+                                optionValue="aniloxRollId"
+                                placeholder="{{
+                                  ('artWork.selSelectOpcion' | translate) || ' '
+                                }}"
+                              ></p-dropdown>
+                            </div>
+
+                            <!--
+                            <div class="col-12 col-md-6 col-sm-6 col-lg-3 mt-2" *ngIf="UvView">
+                              <label class="label-required">
+                                {{ 'anilox.Uv' | translate }}
+                              </label>
+                              <br />
+                              <p-checkbox
+                                formControlName="Uv"
+                                value="val1"
+                                label="Si"
+                              ></p-checkbox>
+                            </div>
+
+                            <div class="col-12 col-md-6  col-sm-6 col-lg-3 mt-2" *ngIf="WaterView">
+                              <label class="label-required">
+                                {{ 'anilox.Water' | translate }}
+                              </label>
+                              <br />
+                              <p-checkbox
+                                formControlName="Water"
+                                value="val1"
+                                label="Si"
+                              ></p-checkbox>
+                            </div>      -->
+
+                            <div class="col-12 col-md-6  col-sm-6 col-lg-3 mt-2" *ngIf="BCMView">
+                              <label class="label-required">
+                                {{ "anilox.BCM" | translate }}
+                              </label>
+                              <input
+                                type="text"
+                                (keypress)="onKeyPressNumberDecimal($event)"
+                                formControlName="BCM"
+                                pInputText
+                                [maxlength]="4"
+                                class="form-control"
+                              />
+                            </div>
+
+                            <div
+                              class="col-12 col-md-6 col-sm-6 col-lg-3 mt-2"
+                              *ngIf="StickyBackView"
+                            >
+                              <label class="label-required">
+                                {{ "anilox.StickyBack" | translate }}
+                              </label>
+                              <input
+                                type="text"
+                                (keypress)="onKeyPressNumber($event)"
+                                formControlName="StickyBack"
+                                pInputText
+                                [maxlength]="4"
+                                class="form-control"
+                              />
+                            </div>
+
+                            <div
+                              class="col-12 col-md-6 col-sm-6 col-lg-3 mt-2"
+                              *ngIf="Delta_EView"
+                            >
+                              <label class="label-required">
+                                {{ "anilox.Delta_E" | translate }}
+                              </label>
+                              <input
+                                type="text"
+                                (keypress)="onKeyPressNumber($event)"
+                                formControlName="Delta_E"
+                                pInputText
+                                [maxlength]="4"
+                                class="form-control"
+                              />
+                            </div>
+
+                            <div
+                              class="col-12 col-md-6 col-sm-6 col-lg-3 mt-2"
+                              *ngIf="Minimum_DensityView"
+                            >
+                              <label class="label-required">
+                                {{ "anilox.Minimum_Density" | translate }}
+                              </label>
+                              <input
+                                type="text"
+                                (keypress)="onKeyPressNumber($event)"
+                                formControlName="Minimum_Density"
+                                pInputText
+                                [maxlength]="4"
+                                class="form-control"
+                              />
+                            </div>
+
+                            <div
+                              class="col-12 col-md-6 col-sm-6 col-lg-3 mt-2"
+                              *ngIf="Maximum_DensityVeiw"
+                            >
+                              <label class="label-required">
+                                {{ "anilox.Maximum_Density" | translate }}
+                              </label>
+                              <input
+                                type="text"
+                                (keypress)="onKeyPressNumber($event)"
+                                formControlName="Maximum_Density"
+                                pInputText
+                                [maxlength]="4"
+                                class="form-control"
+                              />
+                            </div>
+                            <div class="col-12 col-md-6 col-sm-6 col-lg-3 mt-2" *ngIf="Photopolymeter">
+                              <label class="label">
+                                {{ "anilox.Photopolymeter" | translate }}
+                              </label>
+                              <input
+                                type="text"
+                                (keypress)="onKeyPressNumber($event)"
+                                formControlName="Photopolymeter"
+                                pInputText
+                                [maxlength]="4"
+                                class="form-control"
+                              />
+                            </div>
+
+                            <div class="col-12 col-md-6 col-sm-6 col-lg-3 mt-2" *ngIf="Polymer_Type">
+                              <label>
+                                {{ "anilox.Polymer_Type" | translate }}
+                              </label>
+                              <br />
+                              <p-dropdown
+                                appendTo="body"
+                                formControlName="Polymer_Type"
+                                [options]="listAniloxType"
+                                optionLabel="polymerName"
+                                optionValue="polymerId"
+                                placeholder="{{
+                                  ('anilox.Select_an_option' | translate) || ' '
+                                }}"
+                              ></p-dropdown>
+                            </div>
+                            <div *ngIf="Photopolymer_Change_Date" class="col-12 col-md-6 col-sm-6 col-lg-3 mt-2">
+                              <label class="label">
+                                {{ "anilox.Photopolymer_Change_Date" | translate }}
+                              </label><br />
+                              <p-calendar
+                                [readonlyInput]="true"
+                                [showIcon]="true"
+                                formControlName="Photopolymer_Change_Date"
+                                dateFormat="M/dd/yy"
+                                [locale]="lang"
+                                appendTo="body"
+                              ></p-calendar>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-sm-6 col-lg-3 mt-2" *ngIf="Consumption_Grams">
+                              <label class="label ">
+                                {{ "anilox.Consumption_Grams" | translate }}
+                              </label>
+                              <input
+                                type="text"
+                                (keypress)="onKeyPressNumberDecimal($event)"
+                                formControlName="Photopolymeter"
+                                pInputText
+                                [maxlength]="4"
+                                class="form-control"
+                              />
+                            </div>
+                            
+                          </div>
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table-finotex>
+                </div>
+              </div>
+            </div>
+          </p-accordionTab>
+        </p-accordion>
+      </form>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="row">
+      <div class="col-12 text-right">
+        <app-button-finotex
+          label="mallasForm.btnBack"
+          typeButton="primary"
+          [typeSize]="false"
+          (click)="showModalAnilox = false"
+          [disabled]="false"
+        ></app-button-finotex>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>

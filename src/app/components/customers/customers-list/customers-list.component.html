@@ -1,0 +1,256 @@
+<p-breadcrumb
+  [model]="itemsBreadcrumb"
+  [tittle]="'menu.CustomersHistory'"
+  [description]="'customer.description' | translate"
+></p-breadcrumb>
+
+<div class="row mt-16 mbs-16">
+  <div class="col-12 col-md-9 col-xl-8 pr-0">
+    <div class="row">
+      <div class="col-12 col-md-5 col-xl-4 pl-0">
+        <button
+          class="button button-secundary filter"
+          type="button"
+          (click)="showPanelFilter()"
+        >
+          {{ "productList.msgFilerSearch" | translate }}
+        </button>
+      </div>
+      <div class="col-12 col-md-7 col-xl-8 mts-16">
+        <div class="input-group mb-3">
+          <ng-autocomplete
+            [itemTemplate]="itemTemplateSearch"
+            [notFoundTemplate]="notFoundTemplate"
+            placeholder="{{ 'formsGeneral.CustomersSearch' | translate }}"
+            [(ngModel)]="filterName"
+            class="search"
+            id="search"
+            aria-describedby="basic-addon1"
+          ></ng-autocomplete>
+          <ng-template #itemTemplateSearch let-item>
+            <a [innerHTML]="item"></a>
+          </ng-template>
+          <ng-template #notFoundTemplate let-notFound></ng-template>
+          <button
+            pButton
+            type="button"
+            icon="fa fa-search"
+            label=""
+            class="button button-secundary search"
+            (click)="customerFilter()"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-3 offset-xl-2 col-xl-2 text-right pr-75s">
+    <button
+      pButton
+      type="button"
+      icon="fas fa-download"
+      label="{{ 'product-brand.download' | translate }}"
+      class="button button-secundary filter w-100r"
+      (click)="exportAsXLSX()"
+    ></button>
+  </div>
+</div>
+
+<!-- Menu de busqueda -->
+<form [formGroup]="registerFormFilter" (ngSubmit)="onSubmitFilter()">
+  <div class="row" [hidden]="!showfilters">
+    <div class="col-md-12">
+      <div class="container-serach">
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="" class="title-search">
+              {{ "productList.lblFilters" | translate }}
+            </label>
+            <br />
+            <p class="description-page">
+              {{ "product-brand.msgFilters" | translate }}
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <label for="" class="mb-0">
+              {{ "product-brand.lblSearchByDetails" | translate }}
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-3 col-sm-4 col-12 mt-16">
+            <label for="status">
+              {{ "artWork.status" | translate }}
+            </label>
+
+            <p-dropdown
+              [options]="customerStatusList"
+              id="status"
+              optionValue="customerStatusId"
+              optionLabel="customerStatusName"
+              formControlName="customerStatusId"
+              placeholder="{{ ('artWork.selSelectOpcion' | translate) || ' ' }}"
+            ></p-dropdown>
+          </div>
+
+          <div class="col-lg-6 col-sm-8 col-12 mt-16">
+            <label for="status">
+              {{ "artWork.Customer" | translate }}
+            </label>
+            <p-dropdown
+              [options]="customerListFilter"
+              id="status"
+              optionValue="customerId"
+              optionLabel="customerName"
+              formControlName="customerId"
+              placeholder="{{ ('artWork.selSelectOpcion' | translate) || ' ' }}"
+            ></p-dropdown>
+          </div>
+
+          <div class="col-lg-3 col-sm-4 col-12 mt-16">
+            <label for="zona">
+              {{ "artWork.Zone" | translate }}
+            </label>
+            <p-dropdown
+              [options]="zoneList"
+              id="status"
+              optionValue="zoneId"
+              optionLabel="zoneName"
+              formControlName="zoneId"
+              placeholder="{{ ('artWork.selSelectOpcion' | translate) || ' ' }}"
+            ></p-dropdown>
+          </div>
+
+          <div class="col-lg-3 col-sm-4 col-12 mt-16">
+            <label for="status">
+              {{ "artWork.Salesexecutive" | translate }}
+            </label>
+            <p-dropdown
+              [options]="salesExecutivesList"
+              id="status"
+              optionValue="salesExecutiveId"
+              optionLabel="salesExecutiveName"
+              formControlName="salesExecutiveId"
+              placeholder="{{ ('artWork.selSelectOpcion' | translate) || ' ' }}"
+            ></p-dropdown>
+          </div>
+          <div class="col-lg-3 col-sm-4 col-12 mt-16">
+            <label for="cliente">
+              {{ "artWork.Customercode" | translate }}
+            </label>
+            <input
+              type="text"
+              id="cliente"
+              formControlName="customerCode"
+              pInputText
+              placeholder="{{ 'artWork.Customercode' | translate }}"
+              class="form-control"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="offset-md-8 col-md-2 mt-16">
+            <button
+              (click)="clearFilter()"
+              pButton
+              type="button"
+              label="{{ 'formsGeneral.btnResetFields' | translate }}"
+              class="button button-secundary w-100 mts-16"
+            ></button>
+          </div>
+          <div class="col-md-2 mt-16">
+            <button
+              pButton
+              type="submit"
+              label="{{ 'formsGeneral.btnSearch' | translate }}"
+              [disabled]="registerFormFilter.invalid || indicatorButton"
+              class="button button-primary all-width"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="row {{ showfilters ? 'mt-16' : '' }} ">
+  <div class="col-md-12">
+    <p-table
+      #table
+      [data]="customersListTable"
+      [totalRecords]="totalRecords"
+      [paginator]="true"
+      (onPageChange)="paginate($event)"
+    >
+      <tr theaderRecords>
+        <th scope="col">{{ "artWork.status" | translate }}</th>
+        <th scope="col">{{ "artWork.Customer" | translate }}</th>
+        <th scope="col">{{ "artWork.Zone" | translate }}</th>
+        <th scope="col">{{ "artWork.Salesexecutive" | translate }}</th>
+        <th scope="col">{{ "artWork.Customercode" | translate }}</th>
+        <th scope="col">{{ "artWork.Actions" | translate }}</th>
+      </tr>
+      <tr tbodyRecords *ngFor="let customer of table.data">
+        <td>
+          <img
+            src="assets/images/clientStatus{{ getSemaphore(customer) }}.svg"
+            class="img-24"
+            alt="status image"
+            appImage
+            pTooltip="{{ customer.customerStatusName }}"
+          />
+        </td>
+        <td>{{ customer.customerName }}</td>
+        <td>{{ customer.zoneName }}</td>
+        <td>{{ customer.salesExecutiveName }}</td>
+        <td>{{ customer.customerCode }}</td>
+        <td>
+          <div class="dropdown">
+            <button
+              pButton
+              pRipple
+              type="button"
+              icon="fas fa-plus"
+              class="p-button-rounded p-button-text ml-1 mr-1 btnContextMenu"
+              (click)="popUpContextMenu(customer.customerId)"
+              #infoButton
+            ></button>
+            <div id="{{ customer.customerId }}" class="dropdown-content">
+              <a
+                routerLink="/home/artworks_new/add/{{ customer.customerId }}"
+                *ngIf="artworks"
+              >
+                {{ "customer.new_Sketch" | translate }}
+              </a>
+              <a
+                routerLink="/home/home_samples/create/{{ customer.customerId }}"
+                *ngIf="sample"
+              >
+                {{ "customer.new_Sample" | translate }}
+              </a>
+              <a
+                routerLink="/home/pendiente/{{ customer.customerId }}"
+                *ngIf="order"
+              >
+                {{ "customer.new_Order" | translate }}
+              </a>
+            </div>
+          </div>
+          <button
+            pButton
+            pRipple
+            type="button"
+            routerLink="/home/customers_cards/{{ customer.customerId }}/{{
+              customer.customerName
+            }}"
+            icon="fas fa-info"
+            class="p-button-rounded p-button-text ml-1 mr-1"
+            pTooltip="{{ 'artWork.infocliente' | translate }}"
+          ></button>
+        </td>
+      </tr>
+    </p-table>
+  </div>
+</div>
+<p-toast></p-toast>

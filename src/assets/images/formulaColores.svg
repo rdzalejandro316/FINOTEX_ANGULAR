@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21" height="24" viewBox="0 0 21 24">
+  <defs>
+    <clipPath id="clip-Formula_Colores">
+      <rect width="21" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="Formula_Colores" data-name="Formula Colores" clip-path="url(#clip-Formula_Colores)">
+    <path id="flask-solid" d="M15.624,14.412,11.438,7.679V2.286h.286a.855.855,0,0,0,.857-.857V.857A.855.855,0,0,0,11.724,0H4.3a.855.855,0,0,0-.857.857v.571a.855.855,0,0,0,.857.857h.286V7.679L.395,14.412a2.537,2.537,0,0,0,2.147,3.875H13.478A2.536,2.536,0,0,0,15.624,14.412ZM4.934,11.429,6.656,8.658A1.132,1.132,0,0,0,6.863,8V2.286H9.149V8a1.149,1.149,0,0,0,.207.657l1.722,2.772Z" transform="translate(2.977 2.855)" fill="#2b2a2a"/>
+  </g>
+</svg>

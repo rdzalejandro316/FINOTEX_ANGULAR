@@ -1,0 +1,1928 @@
+{
+    "FOPS_ADMINISTRADORTECNICO": [
+        {
+            "identification-data": [
+              {
+                "components": "Item_code",
+                "status": false
+              },
+              {
+                "components": "Origin_code",
+                "status": false
+              },
+              {
+                "components": "Technical_origin",
+                "status": false
+              },
+              {
+                "components": "WMS_barcode",
+                "status": false
+              },
+              {
+                "components": "Item_name",
+                "status": false
+              },
+              {
+                "components": "Line",
+                "status": false
+              },
+              {
+                "components": "Subline",
+                "status": false
+              },
+              {
+                "components": "Quality",
+                "status": false
+              },
+              {
+                "components": "Urdimbre",
+                "status": false
+              },
+              {
+                "components": "Shape",
+                "status": false
+              },
+              {
+                "components": "Broad",
+                "status": false
+              },
+              {
+                "components": "Long_production",
+                "status": false
+              },
+              {
+                "components": "Commercial_length",
+                "status": false
+              },
+              {
+                "components": "Length_front",
+                "status": false
+              },
+              {
+                "components": "Finish",
+                "status": false
+              },
+              {
+                "components": "Size",
+                "status": false
+              },
+              {
+                "components": "Application",
+                "status": false
+              },
+              {
+                "components": "Number_colors",
+                "status": false
+              },
+              {
+                "components": "Number_stickers",
+                "status": false
+              },
+              {
+                "components": "Number_papers",
+                "status": false
+              },
+              {
+                "components": "Number_accessories",
+                "status": false
+              },
+              {
+                "components": "Number_finishes",
+                "status": false
+              },
+              {
+                "components": "Auxiliary_numbers",
+                "status": false
+              },
+              {
+                "components": "Reductive_numbers",
+                "status": false
+              }
+            ]
+          },
+          {
+            "image-settings": [
+              {
+                "components": "cut",
+                "status": false
+              },
+              {
+                "components": "cutId",
+                "status": false
+              },
+              {
+                "components": "winding_sense",
+                "status": false
+              },
+              {
+                "components": "drawing",
+                "status": false
+              },
+              {
+                "components": "drawingDate",
+                "status": false
+              },
+              {
+                "components": "designedby",
+                "status": false
+              },
+              {
+                "components": "designDate",
+                "status": false
+              },
+              {
+                "components": "equal_color",
+                "status": false
+              },
+              {
+                "components": "standar_production",
+                "status": false
+              },
+              {
+                "components": "sample_location",
+                "status": false
+              },
+              {
+                "components": "graphicFile",
+                "status": false
+              },
+              {
+                "components": "graphicFileType",
+                "status": false
+              },
+              {
+                "components": "locationDate",
+                "status": false
+              }
+            ]
+          },
+          {
+            "inventory-tweaks": [
+              {
+                "components": "Accounting_interface",
+                "status": false
+              },
+              {
+                "components": "Zone",
+                "status": false
+              },
+              {
+                "components": "Inventory_unit",
+                "status": false
+              },
+              {
+                "components": "Linear_unit",
+                "status": false
+              },
+              {
+                "components": "Sales_unit",
+                "status": false
+              },
+              {
+                "components": "Purchase_unit",
+                "status": false
+              },
+              {
+                "components": "Storage_unit",
+                "status": false
+              },
+              {
+                "components": "Packing_unit",
+                "status": false
+              },
+              {
+                "components": "Packaging_quantity",
+                "status": false
+              },
+              {
+                "components": "Packaging_reference",
+                "status": false
+              },
+              {
+                "components": "Quantity_base_weight",
+                "status": false
+              },
+              {
+                "components": "Item_weight",
+                "status": false
+              },
+              {
+                "components": "Weight_unit",
+                "status": false
+              },
+              {
+                "components": "Template",
+                "status": false
+              },
+              {
+                "components": "Active",
+                "status": false
+              },
+              {
+                "components": "Service",
+                "status": false
+              },
+              {
+                "components": "Kit",
+                "status": false
+              },
+              {
+                "components": "Stock",
+                "status": false
+              },
+              {
+                "components": "Internal_use",
+                "status": false
+              },
+              {
+                "components": "Source",
+                "status": false
+              },
+              {
+                "components": "ABC_method",
+                "status": false
+              },
+              {
+                "components": "State_design",
+                "status": false
+              },
+              {
+                "components": "Batch_control",
+                "status": false
+              },
+              {
+                "components": "Inspection_method",
+                "status": false
+              },
+              {
+                "components": "Inspection_quantity",
+                "status": false
+              },
+              {
+                "components": "InventoryStatus",
+                "status": false
+              },
+              {
+                "components": "Sample_quantity",
+                "status": false
+              }
+            ]
+          },
+          {
+            "management-request":[
+              {
+                "components": "areaId",
+                "status": false
+              },
+              {
+                "components": "responsibleId",
+                "status": false
+              }
+            ]
+          }
+    ],
+    "FOPS_CUSTOMER_B2C": [
+        {
+            "identification-data": [
+              {
+                "components": "Item_code",
+                "status": false
+              },
+              {
+                "components": "Origin_code",
+                "status": false
+              },
+              {
+                "components": "Technical_origin",
+                "status": false
+              },
+              {
+                "components": "WMS_barcode",
+                "status": false
+              },
+              {
+                "components": "Item_name",
+                "status": false
+              },
+              {
+                "components": "Line",
+                "status": false
+              },
+              {
+                "components": "Subline",
+                "status": false
+              },
+              {
+                "components": "Quality",
+                "status": false
+              },
+              {
+                "components": "Urdimbre",
+                "status": false
+              },
+              {
+                "components": "Shape",
+                "status": false
+              },
+              {
+                "components": "Broad",
+                "status": false
+              },
+              {
+                "components": "Long_production",
+                "status": false
+              },
+              {
+                "components": "Commercial_length",
+                "status": false
+              },
+              {
+                "components": "Length_front",
+                "status": false
+              },
+              {
+                "components": "Finish",
+                "status": false
+              },
+              {
+                "components": "Size",
+                "status": false
+              },
+              {
+                "components": "Application",
+                "status": false
+              },
+              {
+                "components": "Number_colors",
+                "status": false
+              },
+              {
+                "components": "Number_stickers",
+                "status": false
+              },
+              {
+                "components": "Number_papers",
+                "status": false
+              },
+              {
+                "components": "Number_accessories",
+                "status": false
+              },
+              {
+                "components": "Number_finishes",
+                "status": false
+              },
+              {
+                "components": "Auxiliary_numbers",
+                "status": false
+              },
+              {
+                "components": "Reductive_numbers",
+                "status": false
+              }
+            ]
+          },
+          {
+            "image-settings": [
+              {
+                "components": "cut",
+                "status": false
+              },
+              {
+                "components": "cutId",
+                "status": false
+              },
+              {
+                "components": "winding_sense",
+                "status": false
+              },
+              {
+                "components": "drawing",
+                "status": false
+              },
+              {
+                "components": "drawingDate",
+                "status": false
+              },
+              {
+                "components": "designedby",
+                "status": false
+              },
+              {
+                "components": "designDate",
+                "status": false
+              },
+              {
+                "components": "equal_color",
+                "status": false
+              },
+              {
+                "components": "standar_production",
+                "status": false
+              },
+              {
+                "components": "sample_location",
+                "status": false
+              },
+              {
+                "components": "graphicFile",
+                "status": false
+              },
+              {
+                "components": "graphicFileType",
+                "status": false
+              },
+              {
+                "components": "locationDate",
+                "status": false
+              }
+            ]
+          },
+          {
+            "inventory-tweaks": [
+              {
+                "components": "Accounting_interface",
+                "status": false
+              },
+              {
+                "components": "Zone",
+                "status": false
+              },
+              {
+                "components": "Inventory_unit",
+                "status": false
+              },
+              {
+                "components": "Linear_unit",
+                "status": false
+              },
+              {
+                "components": "Sales_unit",
+                "status": false
+              },
+              {
+                "components": "Purchase_unit",
+                "status": false
+              },
+              {
+                "components": "Storage_unit",
+                "status": false
+              },
+              {
+                "components": "Packing_unit",
+                "status": false
+              },
+              {
+                "components": "Packaging_quantity",
+                "status": false
+              },
+              {
+                "components": "Packaging_reference",
+                "status": false
+              },
+              {
+                "components": "Quantity_base_weight",
+                "status": false
+              },
+              {
+                "components": "Item_weight",
+                "status": false
+              },
+              {
+                "components": "Weight_unit",
+                "status": false
+              },
+              {
+                "components": "Template",
+                "status": false
+              },
+              {
+                "components": "Active",
+                "status": false
+              },
+              {
+                "components": "Service",
+                "status": false
+              },
+              {
+                "components": "Kit",
+                "status": false
+              },
+              {
+                "components": "Stock",
+                "status": false
+              },
+              {
+                "components": "Internal_use",
+                "status": false
+              },
+              {
+                "components": "Source",
+                "status": false
+              },
+              {
+                "components": "ABC_method",
+                "status": false
+              },
+              {
+                "components": "State_design",
+                "status": false
+              },
+              {
+                "components": "Batch_control",
+                "status": false
+              },
+              {
+                "components": "Inspection_method",
+                "status": false
+              },
+              {
+                "components": "Inspection_quantity",
+                "status": false
+              },
+              {
+                "components": "InventoryStatus",
+                "status": false
+              },
+              {
+                "components": "Sample_quantity",
+                "status": false
+              }
+            ]
+          }
+    ],
+    "FOPS_EJECUTIVODEVENTAS": [
+      {
+        "identification-data": [
+          {
+            "components": "Item_code",
+            "status": false
+          },
+          {
+            "components": "Origin_code",
+            "status": false
+          },
+          {
+            "components": "Technical_origin",
+            "status": false
+          },
+          {
+            "components": "WMS_barcode",
+            "status": false
+          },
+          {
+            "components": "Item_name",
+            "status": false
+          },
+          {
+            "components": "Line",
+            "status": false
+          },
+          {
+            "components": "Subline",
+            "status": false
+          },
+          {
+            "components": "Quality",
+            "status": false
+          },
+          {
+            "components": "Urdimbre",
+            "status": false
+          },
+          {
+            "components": "Shape",
+            "status": false
+          },
+          {
+            "components": "Broad",
+            "status": false
+          },
+          {
+            "components": "Long_production",
+            "status": false
+          },
+          {
+            "components": "Commercial_length",
+            "status": false
+          },
+          {
+            "components": "Length_front",
+            "status": false
+          },
+          {
+            "components": "Finish",
+            "status": false
+          },
+          {
+            "components": "Size",
+            "status": false
+          },
+          {
+            "components": "Application",
+            "status": false
+          },
+          {
+            "components": "Number_colors",
+            "status": false
+          },
+          {
+            "components": "Number_stickers",
+            "status": false
+          },
+          {
+            "components": "Number_papers",
+            "status": false
+          },
+          {
+            "components": "Number_accessories",
+            "status": false
+          },
+          {
+            "components": "Number_finishes",
+            "status": false
+          },
+          {
+            "components": "Auxiliary_numbers",
+            "status": false
+          },
+          {
+            "components": "Reductive_numbers",
+            "status": false
+          }
+        ]
+      },
+      {
+        "image-settings": [
+          {
+            "components": "cut",
+            "status": false
+          },
+          {
+            "components": "cutId",
+            "status": false
+          },
+          {
+            "components": "winding_sense",
+            "status": false
+          },
+          {
+            "components": "drawing",
+            "status": false
+          },
+          {
+            "components": "drawingDate",
+            "status": false
+          },
+          {
+            "components": "designedby",
+            "status": false
+          },
+          {
+            "components": "designDate",
+            "status": false
+          },
+          {
+            "components": "equal_color",
+            "status": false
+          },
+          {
+            "components": "standar_production",
+            "status": false
+          },
+          {
+            "components": "sample_location",
+            "status": false
+          },
+          {
+            "components": "graphicFile",
+            "status": false
+          },
+          {
+            "components": "graphicFileType",
+            "status": false
+          },
+          {
+            "components": "locationDate",
+            "status": false
+          }
+        ]
+      },
+      {
+        "inventory-tweaks": [
+          {
+            "components": "Accounting_interface",
+            "status": false
+          },
+          {
+            "components": "Zone",
+            "status": false
+          },
+          {
+            "components": "Inventory_unit",
+            "status": false
+          },
+          {
+            "components": "Linear_unit",
+            "status": false
+          },
+          {
+            "components": "Sales_unit",
+            "status": false
+          },
+          {
+            "components": "Purchase_unit",
+            "status": false
+          },
+          {
+            "components": "Storage_unit",
+            "status": false
+          },
+          {
+            "components": "Packing_unit",
+            "status": false
+          },
+          {
+            "components": "Packaging_quantity",
+            "status": false
+          },
+          {
+            "components": "Packaging_reference",
+            "status": false
+          },
+          {
+            "components": "Quantity_base_weight",
+            "status": false
+          },
+          {
+            "components": "Item_weight",
+            "status": false
+          },
+          {
+            "components": "Weight_unit",
+            "status": false
+          },
+          {
+            "components": "Template",
+            "status": false
+          },
+          {
+            "components": "Active",
+            "status": false
+          },
+          {
+            "components": "Service",
+            "status": false
+          },
+          {
+            "components": "Kit",
+            "status": false
+          },
+          {
+            "components": "Stock",
+            "status": false
+          },
+          {
+            "components": "Internal_use",
+            "status": false
+          },
+          {
+            "components": "Source",
+            "status": false
+          },
+          {
+            "components": "ABC_method",
+            "status": false
+          },
+          {
+            "components": "State_design",
+            "status": false
+          },
+          {
+            "components": "Batch_control",
+            "status": false
+          },
+          {
+            "components": "Inspection_method",
+            "status": false
+          },
+          {
+            "components": "Inspection_quantity",
+            "status": false
+          },
+          {
+            "components": "InventoryStatus",
+            "status": false
+          },
+          {
+            "components": "Sample_quantity",
+            "status": false
+          }
+        ]
+      }
+    ],
+    "FOPS_COORDINADOR": [
+        {
+          "identification-data": [
+            {
+              "components": "Item_code",
+              "status": false
+            },
+            {
+              "components": "Origin_code",
+              "status": false
+            },
+            {
+              "components": "Technical_origin",
+              "status": false
+            },
+            {
+              "components": "WMS_barcode",
+              "status": false
+            },
+            {
+              "components": "Item_name",
+              "status": false
+            },
+            {
+              "components": "Line",
+              "status": false
+            },
+            {
+              "components": "Subline",
+              "status": false
+            },
+            {
+              "components": "Quality",
+              "status": false
+            },
+            {
+              "components": "Urdimbre",
+              "status": false
+            },
+            {
+              "components": "Shape",
+              "status": false
+            },
+            {
+              "components": "Broad",
+              "status": false
+            },
+            {
+              "components": "Long_production",
+              "status": false
+            },
+            {
+              "components": "Commercial_length",
+              "status": false
+            },
+            {
+              "components": "Length_front",
+              "status": false
+            },
+            {
+              "components": "Finish",
+              "status": false
+            },
+            {
+              "components": "Size",
+              "status": false
+            },
+            {
+              "components": "Application",
+              "status": false
+            },
+            {
+              "components": "Number_colors",
+              "status": false
+            },
+            {
+              "components": "Number_stickers",
+              "status": false
+            },
+            {
+              "components": "Number_papers",
+              "status": false
+            },
+            {
+              "components": "Number_accessories",
+              "status": false
+            },
+            {
+              "components": "Number_finishes",
+              "status": false
+            },
+            {
+              "components": "Auxiliary_numbers",
+              "status": false
+            },
+            {
+              "components": "Reductive_numbers",
+              "status": false
+            }
+          ]
+        },
+        {
+          "image-settings": [
+            {
+              "components": "cut",
+              "status": false
+            },
+            {
+              "components": "cutId",
+              "status": false
+            },
+            {
+              "components": "winding_sense",
+              "status": false
+            },
+            {
+              "components": "drawing",
+              "status": false
+            },
+            {
+              "components": "drawingDate",
+              "status": false
+            },
+            {
+              "components": "designedby",
+              "status": false
+            },
+            {
+              "components": "designDate",
+              "status": false
+            },
+            {
+              "components": "equal_color",
+              "status": false
+            },
+            {
+              "components": "standar_production",
+              "status": false
+            },
+            {
+              "components": "sample_location",
+              "status": false
+            },
+            {
+              "components": "graphicFile",
+              "status": false
+            },
+            {
+              "components": "graphicFileType",
+              "status": false
+            },
+            {
+              "components": "locationDate",
+              "status": false
+            }
+          ]
+        },
+        {
+          "inventory-tweaks": [
+            {
+              "components": "Accounting_interface",
+              "status": false
+            },
+            {
+              "components": "Zone",
+              "status": false
+            },
+            {
+              "components": "Inventory_unit",
+              "status": false
+            },
+            {
+              "components": "Linear_unit",
+              "status": false
+            },
+            {
+              "components": "Sales_unit",
+              "status": false
+            },
+            {
+              "components": "Purchase_unit",
+              "status": false
+            },
+            {
+              "components": "Storage_unit",
+              "status": false
+            },
+            {
+              "components": "Packing_unit",
+              "status": false
+            },
+            {
+              "components": "Packaging_quantity",
+              "status": false
+            },
+            {
+              "components": "Packaging_reference",
+              "status": false
+            },
+            {
+              "components": "Quantity_base_weight",
+              "status": false
+            },
+            {
+              "components": "Item_weight",
+              "status": false
+            },
+            {
+              "components": "Weight_unit",
+              "status": false
+            },
+            {
+              "components": "Template",
+              "status": false
+            },
+            {
+              "components": "Active",
+              "status": false
+            },
+            {
+              "components": "Service",
+              "status": false
+            },
+            {
+              "components": "Kit",
+              "status": false
+            },
+            {
+              "components": "Stock",
+              "status": false
+            },
+            {
+              "components": "Internal_use",
+              "status": false
+            },
+            {
+              "components": "Source",
+              "status": false
+            },
+            {
+              "components": "ABC_method",
+              "status": false
+            },
+            {
+              "components": "State_design",
+              "status": false
+            },
+            {
+              "components": "Batch_control",
+              "status": false
+            },
+            {
+              "components": "Inspection_method",
+              "status": false
+            },
+            {
+              "components": "Inspection_quantity",
+              "status": false
+            },
+            {
+              "components": "InventoryStatus",
+              "status": false
+            },
+            {
+              "components": "Sample_quantity",
+              "status": false
+            }
+          ]
+        }
+    ],
+    "FOPS_DISENADOR": [
+        {
+          "identification-data": [
+            {
+              "components": "Item_code",
+              "status": false
+            },
+            {
+              "components": "Origin_code",
+              "status": false
+            },
+            {
+              "components": "Technical_origin",
+              "status": false
+            },
+            {
+              "components": "WMS_barcode",
+              "status": false
+            },
+            {
+              "components": "Item_name",
+              "status": false
+            },
+            {
+              "components": "Line",
+              "status": false
+            },
+            {
+              "components": "Subline",
+              "status": false
+            },
+            {
+              "components": "Quality",
+              "status": false
+            },
+            {
+              "components": "Urdimbre",
+              "status": true
+            },
+            {
+              "components": "Shape",
+              "status": true
+            },
+            {
+              "components": "Broad",
+              "status": true
+            },
+            {
+              "components": "Long_production",
+              "status": true
+            },
+            {
+              "components": "Commercial_length",
+              "status": true
+            },
+            {
+              "components": "Length_front",
+              "status": true
+            },
+            {
+              "components": "Finish",
+              "status": true
+            },
+            {
+              "components": "Adhesive",
+              "status": true
+            },
+            {
+              "components": "Size",
+              "status": true
+            },
+            {
+              "components": "Application",
+              "status": true
+            },
+            {
+              "components": "Number_colors",
+              "status": true
+            },
+            {
+              "components": "Number_stickers",
+              "status": true
+            },
+            {
+              "components": "Number_papers",
+              "status": true
+            },
+            {
+              "components": "Number_accessories",
+              "status": false
+            },
+            {
+              "components": "Number_finishes",
+              "status": false
+            },
+            {
+              "components": "Auxiliary_numbers",
+              "status": false
+            },
+            {
+              "components": "Reductive_numbers",
+              "status": false
+            }
+          ]
+        },
+        {
+          "image-settings": [
+            {
+              "components": "cut",
+              "status": false
+            },
+            {
+              "components": "cutId",
+              "status": false
+            },
+            {
+              "components": "winding_sense",
+              "status": false
+            },
+            {
+              "components": "drawing",
+              "status": false
+            },
+            {
+              "components": "drawingDate",
+              "status": false
+            },
+            {
+              "components": "designedby",
+              "status": true
+            },
+            {
+              "components": "designDate",
+              "status": false
+            },
+            {
+              "components": "equal_color",
+              "status": false
+            },
+            {
+              "components": "standar_production",
+              "status": true
+            },
+            {
+              "components": "sample_location",
+              "status": false
+            },
+            {
+              "components": "graphicFile",
+              "status": true
+            },
+            {
+              "components": "graphicFileType",
+              "status": false
+            },
+            {
+              "components": "locationDate",
+              "status": false
+            }
+          ]
+        },
+        {
+          "inventory-tweaks": [
+            {
+              "components": "Accounting_interface",
+              "status": false
+            },
+            {
+              "components": "Zone",
+              "status": false
+            },
+            {
+              "components": "Inventory_unit",
+              "status": false
+            },
+            {
+              "components": "Linear_unit",
+              "status": false
+            },
+            {
+              "components": "Sales_unit",
+              "status": false
+            },
+            {
+              "components": "Purchase_unit",
+              "status": false
+            },
+            {
+              "components": "Storage_unit",
+              "status": false
+            },
+            {
+              "components": "Packing_unit",
+              "status": true
+            },
+            {
+              "components": "Packaging_quantity",
+              "status": true
+            },
+            {
+              "components": "Packaging_reference",
+              "status": true
+            },
+            {
+              "components": "Quantity_base_weight",
+              "status": false
+            },
+            {
+              "components": "Item_weight",
+              "status": false
+            },
+            {
+              "components": "Weight_unit",
+              "status": false
+            },
+            {
+              "components": "Template",
+              "status": false
+            },
+            {
+              "components": "Active",
+              "status": false
+            },
+            {
+              "components": "Service",
+              "status": false
+            },
+            {
+              "components": "Kit",
+              "status": false
+            },
+            {
+              "components": "Stock",
+              "status": false
+            },
+            {
+              "components": "Internal_use",
+              "status": false
+            },
+            {
+              "components": "Source",
+              "status": false
+            },
+            {
+              "components": "ABC_method",
+              "status": false
+            },
+            {
+              "components": "State_design",
+              "status": false
+            },
+            {
+              "components": "Batch_control",
+              "status": false
+            },
+            {
+              "components": "Inspection_method",
+              "status": false
+            },
+            {
+              "components": "Inspection_quantity",
+              "status": false
+            },
+            {
+              "components": "InventoryStatus",
+              "status": false
+            },
+            {
+              "components": "Sample_quantity",
+              "status": false
+            }
+          ]
+        },
+        {
+          "management-request":[
+            {
+              "components": "areaId",
+              "status": true
+            },
+            {
+              "components": "responsibleId",
+              "status": true
+            }
+          ]
+        }
+    ],
+    "FOPS_OPERADORDEPISO": [
+      {
+        "identification-data": [
+          {
+            "components": "Item_code",
+            "status": false
+          },
+          {
+            "components": "Origin_code",
+            "status": false
+          },
+          {
+            "components": "Technical_origin",
+            "status": false
+          },
+          {
+            "components": "WMS_barcode",
+            "status": false
+          },
+          {
+            "components": "Item_name",
+            "status": false
+          },
+          {
+            "components": "Line",
+            "status": false
+          },
+          {
+            "components": "Subline",
+            "status": false
+          },
+          {
+            "components": "Quality",
+            "status": false
+          },
+          {
+            "components": "Urdimbre",
+            "status": true
+          },
+          {
+            "components": "Shape",
+            "status": true
+          },
+          {
+            "components": "Broad",
+            "status": true
+          },
+          {
+            "components": "Long_production",
+            "status": true
+          },
+          {
+            "components": "Commercial_length",
+            "status": true
+          },
+          {
+            "components": "Length_front",
+            "status": true
+          },
+          {
+            "components": "Finish",
+            "status": true
+          },
+          {
+            "components": "Adhesive",
+            "status": true
+          },
+          {
+            "components": "Size",
+            "status": true
+          },
+          {
+            "components": "Application",
+            "status": true
+          },
+          {
+            "components": "Number_colors",
+            "status": true
+          },
+          {
+            "components": "Number_stickers",
+            "status": true
+          },
+          {
+            "components": "Number_papers",
+            "status": true
+          },
+          {
+            "components": "Number_accessories",
+            "status": false
+          },
+          {
+            "components": "Number_finishes",
+            "status": false
+          },
+          {
+            "components": "Auxiliary_numbers",
+            "status": false
+          },
+          {
+            "components": "Reductive_numbers",
+            "status": false
+          }
+        ]
+      },
+      {
+        "image-settings": [
+          {
+            "components": "cut",
+            "status": false
+          },
+          {
+            "components": "cutId",
+            "status": false
+          },
+          {
+            "components": "winding_sense",
+            "status": false
+          },
+          {
+            "components": "drawing",
+            "status": false
+          },
+          {
+            "components": "drawingDate",
+            "status": false
+          },
+          {
+            "components": "designedby",
+            "status": true
+          },
+          {
+            "components": "designDate",
+            "status": false
+          },
+          {
+            "components": "equal_color",
+            "status": false
+          },
+          {
+            "components": "standar_production",
+            "status": true
+          },
+          {
+            "components": "sample_location",
+            "status": false
+          },
+          {
+            "components": "graphicFile",
+            "status": true
+          },
+          {
+            "components": "graphicFileType",
+            "status": false
+          },
+          {
+            "components": "locationDate",
+            "status": false
+          }
+        ]
+      },
+      {
+        "inventory-tweaks": [
+          {
+            "components": "Accounting_interface",
+            "status": false
+          },
+          {
+            "components": "Zone",
+            "status": false
+          },
+          {
+            "components": "Inventory_unit",
+            "status": false
+          },
+          {
+            "components": "Linear_unit",
+            "status": false
+          },
+          {
+            "components": "Sales_unit",
+            "status": false
+          },
+          {
+            "components": "Purchase_unit",
+            "status": false
+          },
+          {
+            "components": "Storage_unit",
+            "status": false
+          },
+          {
+            "components": "Packing_unit",
+            "status": true
+          },
+          {
+            "components": "Packaging_quantity",
+            "status": true
+          },
+          {
+            "components": "Packaging_reference",
+            "status": true
+          },
+          {
+            "components": "Quantity_base_weight",
+            "status": false
+          },
+          {
+            "components": "Item_weight",
+            "status": false
+          },
+          {
+            "components": "Weight_unit",
+            "status": false
+          },
+          {
+            "components": "Template",
+            "status": false
+          },
+          {
+            "components": "Active",
+            "status": false
+          },
+          {
+            "components": "Service",
+            "status": false
+          },
+          {
+            "components": "Kit",
+            "status": false
+          },
+          {
+            "components": "Stock",
+            "status": false
+          },
+          {
+            "components": "Internal_use",
+            "status": false
+          },
+          {
+            "components": "Source",
+            "status": false
+          },
+          {
+            "components": "ABC_method",
+            "status": false
+          },
+          {
+            "components": "State_design",
+            "status": false
+          },
+          {
+            "components": "Batch_control",
+            "status": false
+          },
+          {
+            "components": "Inspection_method",
+            "status": false
+          },
+          {
+            "components": "Inspection_quantity",
+            "status": false
+          },
+          {
+            "components": "InventoryStatus",
+            "status": false
+          },
+          {
+            "components": "Sample_quantity",
+            "status": false
+          }
+        ]
+      }
+    ],
+    "FOPS_BOCETISTA": [
+      {
+        "identification-data": [
+          {
+            "components": "Item_code",
+            "status": false
+          },
+          {
+            "components": "Origin_code",
+            "status": false
+          },
+          {
+            "components": "Technical_origin",
+            "status": false
+          },
+          {
+            "components": "WMS_barcode",
+            "status": false
+          },
+          {
+            "components": "Item_name",
+            "status": false
+          },
+          {
+            "components": "Line",
+            "status": false
+          },
+          {
+            "components": "Subline",
+            "status": false
+          },
+          {
+            "components": "Quality",
+            "status": false
+          },
+          {
+            "components": "Urdimbre",
+            "status": true
+          },
+          {
+            "components": "Shape",
+            "status": true
+          },
+          {
+            "components": "Broad",
+            "status": true
+          },
+          {
+            "components": "Long_production",
+            "status": true
+          },
+          {
+            "components": "Commercial_length",
+            "status": true
+          },
+          {
+            "components": "Length_front",
+            "status": true
+          },
+          {
+            "components": "Finish",
+            "status": true
+          },
+          {
+            "components": "Adhesive",
+            "status": true
+          },
+          {
+            "components": "Size",
+            "status": true
+          },
+          {
+            "components": "Application",
+            "status": true
+          },
+          {
+            "components": "Number_colors",
+            "status": true
+          },
+          {
+            "components": "Number_stickers",
+            "status": true
+          },
+          {
+            "components": "Number_papers",
+            "status": true
+          },
+          {
+            "components": "Number_accessories",
+            "status": false
+          },
+          {
+            "components": "Number_finishes",
+            "status": false
+          },
+          {
+            "components": "Auxiliary_numbers",
+            "status": false
+          },
+          {
+            "components": "Reductive_numbers",
+            "status": false
+          }
+        ]
+      },
+      {
+        "image-settings": [
+          {
+            "components": "cut",
+            "status": false
+          },
+          {
+            "components": "cutId",
+            "status": false
+          },
+          {
+            "components": "winding_sense",
+            "status": false
+          },
+          {
+            "components": "drawing",
+            "status": false
+          },
+          {
+            "components": "drawingDate",
+            "status": false
+          },
+          {
+            "components": "designedby",
+            "status": true
+          },
+          {
+            "components": "designDate",
+            "status": false
+          },
+          {
+            "components": "equal_color",
+            "status": false
+          },
+          {
+            "components": "standar_production",
+            "status": true
+          },
+          {
+            "components": "sample_location",
+            "status": false
+          },
+          {
+            "components": "graphicFile",
+            "status": true
+          },
+          {
+            "components": "graphicFileType",
+            "status": false
+          },
+          {
+            "components": "locationDate",
+            "status": false
+          }
+        ]
+      },
+      {
+        "inventory-tweaks": [
+          {
+            "components": "Accounting_interface",
+            "status": false
+          },
+          {
+            "components": "Zone",
+            "status": false
+          },
+          {
+            "components": "Inventory_unit",
+            "status": false
+          },
+          {
+            "components": "Linear_unit",
+            "status": false
+          },
+          {
+            "components": "Sales_unit",
+            "status": false
+          },
+          {
+            "components": "Purchase_unit",
+            "status": false
+          },
+          {
+            "components": "Storage_unit",
+            "status": false
+          },
+          {
+            "components": "Packing_unit",
+            "status": true
+          },
+          {
+            "components": "Packaging_quantity",
+            "status": true
+          },
+          {
+            "components": "Packaging_reference",
+            "status": true
+          },
+          {
+            "components": "Quantity_base_weight",
+            "status": false
+          },
+          {
+            "components": "Item_weight",
+            "status": false
+          },
+          {
+            "components": "Weight_unit",
+            "status": false
+          },
+          {
+            "components": "Template",
+            "status": false
+          },
+          {
+            "components": "Active",
+            "status": false
+          },
+          {
+            "components": "Service",
+            "status": false
+          },
+          {
+            "components": "Kit",
+            "status": false
+          },
+          {
+            "components": "Stock",
+            "status": false
+          },
+          {
+            "components": "Internal_use",
+            "status": false
+          },
+          {
+            "components": "Source",
+            "status": false
+          },
+          {
+            "components": "ABC_method",
+            "status": false
+          },
+          {
+            "components": "State_design",
+            "status": false
+          },
+          {
+            "components": "Batch_control",
+            "status": false
+          },
+          {
+            "components": "Inspection_method",
+            "status": false
+          },
+          {
+            "components": "Inspection_quantity",
+            "status": false
+          },
+          {
+            "components": "InventoryStatus",
+            "status": false
+          },
+          {
+            "components": "Sample_quantity",
+            "status": false
+          }
+        ]
+      }
+    ]
+  }

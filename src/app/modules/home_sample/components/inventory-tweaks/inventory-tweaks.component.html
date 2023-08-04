@@ -1,0 +1,370 @@
+<form class="mt-16" [formGroup]="registerFormSesionFour">
+  <p-accordion>
+    <p-accordionTab
+      header="{{ 'technical-sheets.inventoryTweaks' | translate }}"
+      [selected]="false"
+      [formStatus]="true"
+      [imagenIcon]="details ? 1 :formFourIconStatusFour"
+      statusFormText="{{ details ? 'technical-sheets.session_form_completed' : formFourStatusTextFour }}"
+    >
+      <ng-template pTemplate="content">
+        <div class="row">
+          <div
+            *ngIf="Accounting_interface"
+            class="col-12 col-md-3 col-lg-3 mt-2"
+          >
+            <label>
+              {{ "technical-sheets.accountingInterface" | translate }}
+            </label>
+
+            <p-dropdown
+              formControlName="Accounting_interface"
+              [options]="ListAccountingInterface"
+              optionLabel="detailedConceptApname"
+              optionValue="detailedConceptApId"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+              [filter]="true"
+              placeholder=""
+            >
+            </p-dropdown>
+          </div>
+          <div *ngIf="Zone" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label>{{ "technical-sheets.zone" | translate }}</label>
+            <input
+              formControlName="Zone"
+              type="text"
+              class="form-control"
+              pInputText
+            />
+          </div>
+          <div *ngIf="Inventory_unit" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label>
+              {{ "technical-sheets.inventoryUnit" | translate }}
+            </label>
+            <p-dropdown
+              formControlName="Inventory_unit"
+              [options]="ListUnitMeasure"
+              [filter]="true"
+              optionLabel="unitMeasureName"
+              optionValue="unitMeasureId"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+            ></p-dropdown>
+          </div>
+          <div *ngIf="Linear_unit" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label>
+              {{ "technical-sheets.linearUnit" | translate }}
+            </label>
+            <p-dropdown
+              formControlName="Linear_unit"
+              [options]="ListUnitMeasure"
+              [filter]="true"
+              optionLabel="unitMeasureName"
+              optionValue="unitMeasureId"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+            ></p-dropdown>
+          </div>
+
+          <div *ngIf="Sales_unit" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label>
+              {{ "technical-sheets.salesUnit" | translate }}
+            </label>
+            <p-dropdown
+              formControlName="Sales_unit"
+              [options]="ListUnitMeasure"
+              [filter]="true"
+              optionLabel="unitMeasureName"
+              optionValue="unitMeasureId"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+            ></p-dropdown>
+          </div>
+          <div *ngIf="Purchase_unit" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label>
+              {{ "technical-sheets.purchaseUnit" | translate }}
+            </label>
+            <p-dropdown
+              formControlName="Purchase_unit"
+              [options]="ListUnitMeasure"
+              [filter]="true"
+              optionLabel="unitMeasureName"
+              optionValue="unitMeasureId"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+            ></p-dropdown>
+          </div>
+          <div *ngIf="Storage_unit" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ "technical-sheets.storageUnit" | translate }}
+            </label>
+            <p-dropdown
+              formControlName="Storage_unit"
+              [options]="ListUnitMeasure"
+              [filter]="true"
+              optionLabel="unitMeasureName"
+              optionValue="unitMeasureId"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+            ></p-dropdown>
+          </div>
+          <div *ngIf="Packing_unit" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ "technical-sheets.packingUnit" | translate }}
+            </label>
+            <p-dropdown
+              formControlName="Packing_unit"
+              [options]="ListUnitMeasure"
+              [filter]="true"
+              optionLabel="unitMeasureName"
+              optionValue="unitMeasureId"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+            ></p-dropdown>
+          </div>
+
+          <div *ngIf="Packaging_quantity" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ "technical-sheets.packagingQuantity" | translate }}
+            </label>
+            <input
+              formControlName="Packaging_quantity"
+              type="number"
+              (keypress)="validateMaxLen($event, 5)"
+              pInputText
+              placeholder="{{
+                'technical-sheets.packagingQuantity' | translate
+              }}"
+              class="form-control"
+            />
+          </div>
+          <div
+            *ngIf="Packaging_reference"
+            class="col-12 col-md-3 col-lg-3 mt-2"
+          >
+            <label class="label-required">
+              {{ "technical-sheets.packagingReference" | translate }}
+            </label>
+            <p-dropdown
+              formControlName="Packaging_reference"
+              [options]="ListPackagingReference"
+              [filter]="true"
+              optionLabel="packagingReferenceName"
+              optionValue="packagingReferenceId"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+            ></p-dropdown>
+          </div>
+          <div
+            *ngIf="Quantity_base_weight"
+            class="col-12 col-md-3 col-lg-3 mt-2"
+          >
+            <label class="label-required">
+              {{ "technical-sheets.quantityBaseWeight" | translate }}
+            </label>
+            <input
+              formControlName="Quantity_base_weight"
+              pInputText
+              type="number"
+              (keypress)="validateMaxLen($event, 5)"
+              placeholder="{{
+                'technical-sheets.quantityBaseWeight' | translate
+              }}"
+              class="form-control"
+            />
+          </div>
+          <div *ngIf="Item_weight" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ "technical-sheets.itemWeight" | translate }}
+            </label>
+            <input
+              formControlName="Item_weight"
+              pInputText
+              type="number"
+              (keypress)="validateMaxLen($event, 5)"
+              placeholder="{{ 'technical-sheets.itemWeight' | translate }}"
+              class="form-control"
+            />
+          </div>
+
+          <div *ngIf="Weight_unit" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ "technical-sheets.weightUnit" | translate }}
+            </label>
+            <p-dropdown
+              formControlName="Weight_unit"
+              [options]="ListUnitMeasure"
+              [filter]="true"
+              optionLabel="unitMeasureName"
+              optionValue="unitMeasureId"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+            ></p-dropdown>
+          </div>
+
+          <div *ngIf="Template" class="col-12 col-md-4 col-lg-3 mt-2">
+            <label>{{ "technical-sheets.template" | translate }}</label>
+            <div class="p-field-checkbox">
+              <p-checkbox
+                formControlName="Template"
+                value="false"
+                [binary]="true"
+                label="Si"
+              ></p-checkbox>
+            </div>
+          </div>
+          <div *ngIf="Active" class="col-12 col-md-4 col-lg-3 mt-2">
+            <label>{{ "technical-sheets.active" | translate }}</label>
+            <div class="p-field-checkbox">
+              <p-checkbox
+                formControlName="Active"
+                value="false"
+                [binary]="true"
+                label="Si"
+              ></p-checkbox>
+            </div>
+          </div>
+          <div *ngIf="Service" class="col-12 col-md-4 col-lg-3 mt-2">
+            <label>{{ "technical-sheets.service" | translate }}</label>
+            <div class="p-field-checkbox">
+              <p-checkbox
+                formControlName="Service"
+                value="false"
+                [binary]="true"
+                label="Si"
+              ></p-checkbox>
+            </div>
+          </div>
+
+          <div *ngIf="Kit" class="col-12 col-md-4 col-lg-3 mt-2">
+            <label>{{ "technical-sheets.kit" | translate }}</label>
+            <div class="p-field-checkbox">
+              <p-checkbox
+                formControlName="Kit"
+                value="false"
+                [binary]="true"
+                label="Si"
+              ></p-checkbox>
+            </div>
+          </div>
+          <div *ngIf="Stock" class="col-12 col-md-4 col-lg-3 mt-2">
+            <label>{{ "technical-sheets.stock" | translate }}</label>
+            <div class="p-field-checkbox">
+              <p-checkbox
+                formControlName="Stock"
+                value="false"
+                [binary]="true"
+                label="Si"
+              ></p-checkbox>
+            </div>
+          </div>
+          <div *ngIf="Internal_use" class="col-12 col-md-4 col-lg-3 mt-2">
+            <label>{{ "technical-sheets.internalUse" | translate }}</label>
+            <div class="p-field-checkbox">
+              <p-checkbox
+                formControlName="Internal_use"
+                value="false"
+                [binary]="true"
+                label="Si"
+              ></p-checkbox>
+            </div>
+          </div>
+          <div *ngIf="Source" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label>
+              {{ "technical-sheets.source" | translate }}
+            </label>
+            <p-dropdown
+              formControlName="Source"
+              [options]="ListSource"
+              [filter]="true"
+              optionLabel="name"
+              optionValue="code"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+            >
+            </p-dropdown>
+          </div>
+
+          <div *ngIf="ABC_method" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label>
+              {{ "technical-sheets.abcMethod" | translate }}
+            </label>
+            <p-dropdown
+              formControlName="ABC_method"
+              [options]="ListAbc_method"
+              optionLabel="name"
+              optionValue="code"
+              placeholder="{{
+                ('formsGeneral.selSelectOpcion' | translate) || ' '
+              }}"
+            >
+            </p-dropdown>
+          </div>
+          <div *ngIf="State_design" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label>
+              {{ "technical-sheets.stateDesign" | translate }}
+            </label>
+            <p-dropdown
+              formControlName="State_design"
+              [options]="ListStateDesign"
+              [filter]="true"
+              optionLabel="productStatusName"
+              optionValue="productStatusId"
+              placeholder="{{ 'formsGeneral.selSelectOpcion' | translate }}"
+            ></p-dropdown>
+          </div>
+          <div *ngIf="Batch_control" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label>
+              {{ "technical-sheets.batchControl" | translate }}
+            </label>
+            <input
+              type="text"
+              formControlName="Batch_control"
+              pInputText
+              class="form-control"
+            />
+          </div>
+          <div *ngIf="Inspection_method" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label>
+              {{ "technical-sheets.inspectionMethod" | translate }}
+            </label>
+            <input
+              type="text"
+              formControlName="Inspection_method"
+              pInputText
+              class="form-control"
+            />
+          </div>
+
+          <div
+            *ngIf="Inspection_quantity"
+            class="col-12 col-md-3 col-lg-3 mt-2"
+          >
+            <label>
+              {{ "technical-sheets.inspectionQuantity" | translate }}
+            </label>
+            <input
+              formControlName="Inspection_quantity"
+              pInputText
+              class="form-control"
+            />
+          </div>
+          <div *ngIf="InventoryStatus" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label>
+              {{ "technical-sheets.inventoryStatus" | translate }}
+            </label>
+            <input
+              formControlName="InventoryStatus"
+              pInputText
+              class="form-control"
+            />
+          </div>
+          <div *ngIf="Sample_quantity" class="col-12 col-md-3 col-lg-3 mt-2">
+            <label class="label-required">
+              {{ "technical-sheets.sampleQuantity" | translate }}
+            </label>
+            <input
+              formControlName="Sample_quantity"
+              pInputText
+              type="number"
+              (keypress)="validateMaxLen($event, 5)"
+              placeholder="{{ 'technical-sheets.sampleQuantity' | translate }}"
+              class="form-control"
+            />
+          </div>
+        </div>
+      </ng-template>
+    </p-accordionTab>
+  </p-accordion>
+</form>

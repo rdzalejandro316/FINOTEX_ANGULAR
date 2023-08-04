@@ -1,0 +1,393 @@
+<p-breadcrumb
+  [model]="itemsBreadcrumb"
+  [tittle]="'checkOut.titleCheckOut'"
+  [description]="'checkOut.lblDescription'"
+></p-breadcrumb>
+<div
+  class="pt-3 pl-3 pr-3"
+  style="display: {{ validateRepeatedRequiredDate() ? 'inherit' : 'none' }}"
+>
+  <div class="alert alert-danger" role="alert">
+    <div class="row">
+      <div class="col-12">
+        <em class="fas fa-exclamation-circle alertIcon"></em>
+        <p class="alertText">
+          <b
+            >{{ validateItem }} {{ "shoppingCart.lblBoldAlert" | translate }}</b
+          >
+          <br />
+          {{ "shoppingCart.lblLigthAlert" | translate }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<p-accordion>
+  <p-accordionTab
+    header="{{ 'checkOut.Ordersummary' | translate }}"
+    [selected]="false"
+    [formStatus]="false"
+  >
+    <ng-template pTemplate="content">
+      <div class="row">
+        <div class="col-12">
+          <p-table #table [totalRecords]="0" [data]="listProductsCheckout">
+            <tr theaderRecords>
+              <th class="text-left">
+                {{ "products.lblCustCode1" | translate }}
+              </th>
+              <th class="text-left">
+                {{ "shoppingCart.lblSize" | translate }}
+              </th>
+              <th class="text-left">{{ "products.lblColor" | translate }}</th>
+              <th class="text-left">
+                {{ "product-detail.lblDescription" | translate }}
+              </th>
+              <th class="text-right">
+                {{ "shoppingCart.lblQuantity" | translate }}
+              </th>
+              <th class="text-left">
+                {{ "shoppingCart.require_date" | translate }}
+              </th>
+              <th class="text-right" *ngIf="showPrice">
+                {{ "shoppingCart.lblPricingper1000pcs" | translate }}
+              </th>
+              <th class="text-right" *ngIf="showPrice">
+                {{ "shoppingCart.lblSubtotal" | translate }}
+              </th>
+              <th class="text-left">{{ "artWork.Actions" | translate }}</th>
+            </tr>
+            <tr tbodyRecords *ngFor="let product of table.data; let i = index">
+              <td class="text-left">{{ product.customerProductCode }}</td>
+              <td class="text-left" *ngIf="product.sizes != ''; else default">
+                {{ product.sizes }}
+              </td>
+              <ng-template #default>
+                <td>{{ "products.default" | translate }}</td>
+              </ng-template>
+              <td
+                class="text-left"
+                *ngIf="product.referenceColor != ''; else default"
+              >
+                {{ product.referenceColor }}
+              </td>
+              <ng-template #default>
+                <td>{{ "products.default" | translate }}</td>
+              </ng-template>
+              <td class="text-left">{{ product.productName }}</td>
+              <td class="text-right">
+                {{ product.quantity |number}} {{ product.unitMeasure }}
+              </td>
+              <td class="text-left">{{ product.locationDate }}</td>
+              <td class="text-right" *ngIf="showPrice">
+                {{ product.currencyName }} {{ product.price | currency }}
+              </td>
+              <td class="text-right" *ngIf="showPrice">
+                {{ product.currencyName }} {{ product.subtotal | currency }}
+              </td>
+              <td class="text-left" *ngIf="listProductsCheckout">
+                <em
+                  class="far fa-image mr-2"
+                  pTooltip="<img src='https://upload.wikimedia.org/wikipedia/commons/b/b0/Zumba.png'/>"
+                  [escape]="false"
+                  tooltipPosition="top"
+                  style="font-size: 21px"
+                ></em>
+                <button
+                  pButton
+                  pRipple
+                  type="button"
+                  icon="fas fa-edit"
+                  class="p-button-rounded p-button-text"
+                  pTooltip="{{ 'artWork.edit' | translate }}"
+                  (click)="OpenModalEdit(product, i)"
+                  style="font-size: 19px"
+                ></button>
+                <button
+                  pButton
+                  pRipple
+                  type="button"
+                  icon="far fa-trash-alt"
+                  class="p-button-rounded p-button-text"
+                  pTooltip="{{
+                    'product-brand-purchase.lblDelete' | translate
+                  }}"
+                  (click)="removeItemEdit(product, i)"
+                  style="font-size: 19px"
+                ></button>
+              </td>
+            </tr>
+          </p-table>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-12">
+          <div class="row footer-total mb-3" *ngIf="showPrice">
+            <div class="col-12 text-right">
+              <div class="total-shopping-title">
+                {{ "shoppingCart.lblTotal" | translate }}
+                {{ total | currency: "CAD":"symbol-narrow":".2-2" }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-accordionTab>
+</p-accordion>
+
+<br />
+<form [formGroup]="registerFormcheckout" (ngSubmit)="onSubmitcheckout()">
+  <p-accordion>
+    <p-accordionTab
+      header="{{ 'products.lblShippingInformation' | translate }}"
+      [selected]="true"
+      [formStatus]="false"
+    >
+      <ng-template pTemplate="content">
+        <div class="row">
+          <div class="col-12 col-md-4 mt-2">
+            <label class="label-required">
+              {{ "checkOut.lblCarrier" | translate }}
+            </label>
+            <p-dropdown
+              [options]="carriers"
+              optionValue="carrierId"
+              optionLabel="carrierName"
+              formControlName="Carrier"
+              placeholder="{{
+                ('formsGeneral.selSelectOpcion' | translate) || ' '
+              }}"
+            ></p-dropdown>
+          </div>
+
+          <div class="col-12 col-md-8 mt-2">
+            <label class="label-required">
+              {{ "checkOut.lblShippingAddress" | translate }}
+            </label>
+            <p-dropdown
+              [options]="address"
+              optionValue="addressId"
+              optionLabel="finalClient"
+              formControlName="Shipping"
+              placeholder="{{
+                ('formsGeneral.selSelectOpcion' | translate) || ' '
+              }}"
+            ></p-dropdown>
+          </div>
+
+          <div class="col-12 col-md-4 mt-2">
+            <label class="label-required">
+              {{ "checkOut.lblPoNumber" | translate }}
+            </label>
+            <input
+              placeholder="{{ 'checkOut.lblPlaceNumberhere' | translate }}"
+              formControlName="PoNumber"
+              type="text"
+              class="form-control"
+              pInputText
+            />
+          </div>
+
+          <div class="col-12 col-md-8 mt-2">
+            <label class="label-required">
+              {{ "checkOut.lblComments" | translate }}
+            </label>
+            <textarea
+              [rows]="6"
+              formControlName="Comments"
+              placeholder="{{ 'checkOut.lblCommentsAll' | translate }}"
+              class="inputs"
+              pInputTextarea
+              autoResize="true"
+            ></textarea>
+          </div>
+        </div>
+      </ng-template>
+    </p-accordionTab>
+  </p-accordion>
+
+  <div class="row">
+    <div class="col-12 mt-16 text-right">
+      <app-button-finotex
+        label="checkOut.lblCancel"
+        type="button"
+        typeButton="secondary"
+        [typeSize]="false"
+        class="mr-3"
+        (click)="openModalCancel()"
+      ></app-button-finotex>
+
+      <app-button-finotex
+        label="checkOut.lblEdit"
+        type="button"
+        typeButton="secondary"
+        [typeSize]="false"
+        class="mr-3"
+        (click)="editOrder()"
+      ></app-button-finotex>
+
+      <app-button-finotex
+        label="checkOut.lblPlace"
+        type="submit"
+        typeButton="primary"
+        [typeSize]="false"
+        [disabled]="
+          registerFormcheckout.invalid ||
+          buttonState ||
+          validateDetailCartProduct() ||
+          validateRepeatedRequiredDate()
+        "
+      ></app-button-finotex>
+    </div>
+  </div>
+</form>
+
+<p-dialog
+  [(visible)]="displayCancelOrder"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '40vw' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center font50">
+      <img
+        class="simple-img"
+        width="60px"
+        height="60px"
+        src="../../../assets/images/icono cancelar.svg"
+        alt="shopping cart"
+        appImage
+      />
+    </div>
+
+    <div class="col-md-12 text-center mt-16">
+      {{ "checkOut.msgTittleCancel" | translate }}
+    </div>
+
+    <div class="col-md-12 text-center mt-16 description-page">
+      <p>{{ "checkOut.msgCancel1" | translate }}</p>
+      <p>{{ "checkOut.msgCancel2" | translate }}</p>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="row mt-16">
+      <div class="col-12 text-center">
+        <app-button-finotex
+          label="checkOut.btnCancelRed"
+          type="button"
+          typeButton="secondary"
+          [typeSize]="false"
+          class="mr-3"
+          (click)="cancelOrder()"
+        ></app-button-finotex>
+        <app-button-finotex
+          label="checkOut.btnCancel"
+          type="button"
+          typeButton="primary"
+          [typeSize]="false"
+          class="mr-3"
+          (click)="displayCancelOrder = false"
+        ></app-button-finotex>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="displayConfirmation"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '40vw' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <em class="far fa-check-circle font50"></em>
+    </div>
+    <div class="col-md-12 text-center mt-24 font16">
+      {{ "checkOut.msgOrderSuccessfully" | translate }}
+    </div>
+    <div class="col-md-12 text-center mt-16 description-page">
+      <p>{{ "checkOut.msgCheck1" | translate }} {{ orderId }}</p>
+      <p>{{ "checkOut.msgCheck2" | translate }}</p>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button
+        (click)="confirmPlaceYourOrder()"
+        label="{{ 'checkOut.btnOk' | translate }}"
+        styleClass="button button-primary text-center"
+      ></p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<form [formGroup]="registerEditOrderSummary" (ngSubmit)="onSubmitSaveChanges()">
+  <p-dialog
+    #mydiv
+    header="{{ 'checkOut.editElement' | translate }} {{ ProductCode }} "
+    [(visible)]="displayEditOrdenSummary"
+    [modal]="true"
+    [baseZIndex]="4000"
+    [draggable]="false"
+    [resizable]="false"
+    [style]="{ width: '40vw' }"
+  >
+    <div class="row mt-2">
+      <div class="col-12 col-md-6 col-lg-6 mt-2">
+        <label>
+          {{ "shoppingCart.lblQuantity" | translate }}
+        </label>
+        <p-inputNumber
+          placeholder="{{ 'shoppingCart.lblQuantity' | translate }}"
+          formControlName="quantity"
+        ></p-inputNumber>
+
+      </div>
+      <div class="col-12 col-md-6 col-lg-6 mt-2">
+        <label>
+          {{ "product-brand.lblMsgRequiredDate" | translate }}
+        </label>
+        <p-calendar
+          [readonlyInput]="true"
+          [showIcon]="true"
+          [appendTo]="mydiv"
+          formControlName="locationDate"
+          dateFormat="M/dd/yy"
+          [lang]="lang"
+        ></p-calendar>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <div class="col-12 text-right">
+        <app-button-finotex
+          class="mr-2"
+          label="product-brand-detail.btnSave"
+          type="submit"
+          typeButton="secondary"
+          [typeSize]="false"
+          [disabled]="registerEditOrderSummary.invalid"
+        ></app-button-finotex>
+        <app-button-finotex
+          label="checkOut.btnCancel"
+          type="button"
+          typeButton="primary"
+          [typeSize]="false"
+          (click)="Cancel()"
+        ></app-button-finotex>
+      </div>
+    </ng-template>
+  </p-dialog>
+</form>
+
+<p-toast></p-toast>

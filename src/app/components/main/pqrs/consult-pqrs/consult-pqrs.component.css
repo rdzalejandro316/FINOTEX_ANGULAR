@@ -1,0 +1,35 @@
+.conten-main{
+    padding: 25px;
+}
+
+.rowtable{
+    display: contents;
+}
+
+.notes{
+    height: 80px !important;    
+}
+
+.dropdown-plant{
+    width: 250px !important;
+}
+
+.evidence-box
+{
+    background: #e9ecef;
+    border: 1px solid #cacaca !important;
+    border-radius: 10px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.fail-title
+{
+    font: normal normal bold 16px/28px Montserrat;
+}
+
+.fail-description
+{
+    font: normal normal normal 16px/28px Montserrat;
+}

@@ -1,0 +1,78 @@
+<p-breadcrumb [model]="itemsBreadcrumb" [tittle]="'customer.basicInformation' | translate" [description]="customerName">
+</p-breadcrumb>
+
+<div class="container-serach mt-2">
+    <div *ngFor="let item of basicInformationList" class="row">
+        <div class="col-12 col-lg-12 col-xl-12 mt-2">
+            <label class="title-search">{{ 'customer.billing' | translate }}</label>
+        </div>
+        <div class="col-12 col-lg-8 col-xl-6 mt-2">
+            <label>{{ 'customer.billingAddress' | translate }}</label>
+            <input pInputText type="text" value="{{ item.correspondenceAddress }}" class="form-control" disabled />
+        </div>
+        <div class="col-12 col-lg-4 col-xl-3 mt-2">
+            <label>{{ 'customer.billingPostalCode' | translate }}</label>
+            <input pInputText type="text" value="{{ item.correspondencePostalCode }}" class="form-control" disabled />
+        </div>
+        <div class="col-12 col-lg-4 col-xl-3 mt-2">
+            <label>{{ 'customer.billingTelephone' | translate }}</label>
+            <input pInputText type="text" value="{{ item.correspondencePhone }}" class="form-control" disabled />
+        </div>
+
+        <div class="col-12 col-lg-12 col-xl-12 mt-2">
+            <hr>
+            <label class="title-search">{{ 'customer.shipping' | translate }}</label>
+        </div>
+
+        <div class="col-12 col-lg-8 col-xl-6 mt-2">
+            <label>{{ 'customer.shippingAddress' | translate }}</label>
+            <input pInputText type="text" value="{{ item.officeAddress }}" class="form-control" disabled />
+        </div>
+
+        <div class="col-12 col-lg-4 col-xl-3 mt-2">
+            <label>{{ 'customer.shippingPostalCode' | translate }}</label>
+            <input pInputText type="text" value="{{ item.officePostalCode }}" class="form-control" disabled />
+        </div>
+        <div class="col-12 col-lg-4 col-xl-3 mt-2">
+            <label>{{ 'customer.shippingTelephone' | translate }}</label>
+            <input pInputText type="text" value="{{ item.officePhone }}" class="form-control" disabled />
+        </div>
+
+        <div class="col-12 col-lg-12 col-xl-12 mt-2">
+            <hr>
+        </div>
+
+        <div class="col-12 col-lg-3 col-xl-3 mt-2">
+            <label>{{ 'customer.shippingContact' | translate }}</label>
+            <input pInputText type="text" value="{{ item.contactName }}" class="form-control" disabled />
+        </div>
+
+        <div class="col-12 col-lg-3 col-xl-3 mt-2">
+            <label>{{ 'customer.shippingEmail' | translate }}</label>
+            <input pInputText type="text" value="{{ item.email }}" class="form-control" disabled />
+        </div>
+        <div class="col-12 col-lg-3 col-xl-3 mt-2">
+            <label>{{ 'customer.shippingMinShippment' | translate }}</label>
+            <input pInputText type="text" value="{{ item.minimumPercentageAllowed }}" class="form-control" disabled />
+        </div>
+        <div class="col-12 col-lg-3 col-xl-3 mt-2">
+            <label>{{ 'customer.shippingMaxShippment' | translate }}</label>
+            <input pInputText type="text" value="{{ item.maximumPercentageAllowed }}" class="form-control" disabled />
+        </div>
+
+        <div class="col-12 col-lg-3 col-xl-3 mt-2">
+            <label>{{ 'customer.limitDayToInvoice' | translate }}</label>
+            <input pInputText type="text" value="{{ item.lastInvoiceDate | date: 'mediumDate' }}" class="form-control" disabled />
+        </div>
+    </div>
+    <div class="row mt-16">
+        <div class="offset-md-8 col-md-4 text-right">
+            <div class="text-right">
+                <a routerLink="/home//customers_cards/{{ paramCustomerId }}/{{ redirectLinkCustomerName }}" class="button button-primary" style="margin-top: 30px;">
+                    {{ 'general.btnreturn' | translate }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<p-toast></p-toast>

@@ -1,0 +1,136 @@
+<div class="row h-modal" #modalShoppingCart>
+    <div class="col-md-12">
+        <div class="row justify-content-end product-cart">
+            <app-button-finotex class="mr-2 mb-3 text-right" label="shoppingCart.lblStandardizeRequiredDates"
+                type="submit" typeButton="secondary" [typeSize]="false" (click)="showPanelDialog()">
+            </app-button-finotex>
+        </div>
+
+        <div class="row product-cart" *ngFor="let product of productsCart">
+            <div class="col-12 col-md-2 pl-0">
+                <div class="img">
+                    <img _ngcontent-syr-c209="" src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Zumba.png"
+                        alt="Card image cap" appImage>
+                </div>
+            </div>
+            <div class="col-12 col-md-2">
+                <div class="row tittle-shopping-bold mt-2">
+                    <div class="col-12">
+                        <label for="lblIPC">{{'shoppingCart.lblIPC' | translate}}</label>
+                        <em class="fas fa-info-circle ml-2" pTooltip="{{'shoppingCart.ttIPC' | translate}}"></em>
+                    </div>
+
+                </div>
+                <div class="row row-shopping">
+                    <div class="col-12">
+                        {{product.customerProductCode}}
+                    </div>
+                </div>
+                <div class="row row-shopping tittle-shopping-bold mt-16">
+                    <div class="col-12">
+                        <label for="lblIPC">{{'shoppingCart.lblCPC' | translate}}</label>
+                        <em class="fas fa-info-circle ml-2" pTooltip="{{'shoppingCart.ttCPC' | translate}}"
+                            appendTo="body"></em>
+                    </div>
+                </div>
+                <div class="row row-shopping">
+                    <div class="col-12">
+                        {{product.customerProductCode}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="row tittle-shopping-bold mt-2">
+                    <div class="col-12">
+                        <label for="lblSize">{{'shoppingCart.lblSize' | translate}} </label>
+                    </div>
+                </div>
+                <div class="row row-shopping">
+                    <div class="col-12">
+                        {{product.sizes}}
+                    </div>
+                </div>
+                <div class="row row-shopping tittle-shopping-bold mt-16">
+                    <div class="col-12">
+                        <label for="lblDescription">{{'product-detail.lblDescription' | translate}} </label>
+                    </div>
+                </div>
+                <div class="row row-shopping">
+                    <div class="col-12">
+                        {{product.productName}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-2">
+                <div class="row middle mt-2">
+                    <div class="col-12">
+                        <div class="tittle-shopping-bold label-required">
+                            <label for="lblQuantity">{{'shoppingCart.lblQuantity' | translate}} </label>
+                        </div>
+                        <div class="input-group row-shopping">
+                            <input id="txtQuantity{{ product.productId }}" appendTo="body"
+                                placeholder="{{'product-detail.plQuantiy' | translate}}"
+                                (change)="updateQuantity(product.productId)" type="number"
+                                value="{{ product.quantity }}" (keypress)="onKeyPressNumber($event)"
+                                class="form-control inputs" />
+                            <div class="input-group-append">
+                                <span class="input-group-text">Mts</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-2">
+                <div class="row tittle-shopping-bold mt-2">
+                    <div class="col-12" *ngIf="showPrice">
+                        <label for="lblIPC">{{'shoppingCart.lblPricingper1000pcs' | translate}}</label>
+                    </div>
+                </div>
+                <div class="row row-shopping" *ngIf="showPrice">
+                    <div class="col-12">
+                        {{'10000' | currency}}
+                    </div>
+                </div>
+                <div class="row row-shopping tittle-shopping-bold mt-16" *ngIf="showPrice">
+                    <div class="col-12">
+                        <label for="lblIPC">{{'shoppingCart.lblSubtotal' | translate}} </label>
+                    </div>
+                </div>
+                <div class="row row-shopping" *ngIf="showPrice">
+                    <div class="col-12">
+                        {{10000 * product.quantity | currency}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-1 text-center">
+                <button (click)="removeProductCart(product.productId)" class="close trash"><img
+                        class="shopping-img trash-d" src="../../../assets/images/trash-alt-solid.svg" alt="Eliminated"
+                        appImage></button>
+            </div>    
+        </div>
+    </div>
+</div> <!-- row -->
+
+<form [formGroup]="requiredDatesForm">
+    <p-dialog header="{{ 'shoppingCart.lblStandardizeRequiredDates' | translate }}" [(visible)]="displayComment"
+        [modal]="true" [baseZIndex]="4000" [draggable]="false" [resizable]="false" [style]="{ width: '35vw' }">
+        <div class="row mt-2">
+            <div class="col-12 col-md-6 col-lg-6 mt-2">
+                <app-datepicker [config]="settingsDates" [form]="requiredDatesForm"
+                    [formDirective]="ngForm"></app-datepicker>
+            </div>
+        </div>
+        <div class="row mt-16">
+            <div class="col-12 text-right">
+                <app-button-finotex class="mr-2" label="checkOut.btnCancelRed" type="submit" typeButton="secondary"
+                    [typeSize]="false"></app-button-finotex>
+
+                <app-button-finotex label="shoppingCart.lblSetDate" type="submit" typeButton="primary"
+                    [typeSize]="false"></app-button-finotex>
+            </div>
+        </div>
+        <ng-template pTemplate="footer">         
+          </ng-template>
+    </p-dialog>
+</form>

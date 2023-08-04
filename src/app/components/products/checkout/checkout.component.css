@@ -1,0 +1,11 @@
+.alertIcon{
+  font-size: 35px;
+  color: #d6001c;
+  float: left;
+  margin-right: 0.5rem;
+}
+
+.alertText{
+  font: normal normal bold 13px Montserrat;
+  color: black !important;
+}

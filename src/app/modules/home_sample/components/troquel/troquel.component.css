@@ -1,0 +1,37 @@
+.lblBlock {
+  display: block;
+}
+
+.lblWithBreak {
+  white-space: initial;
+  word-break: break;
+}
+
+.thead-width {
+  width: 100%;
+}
+
+input[type='checkbox']:checked:after {
+  content: '\e909';
+  padding-left: 5px;
+}
+
+input.pi.p-checkbox {
+  font-size: 14px;
+}
+
+.indent-space {
+  padding-left: 2.5em;
+}
+
+@media (max-width: 575.98px) {
+  .indent-space {
+    padding-left: 0px;
+  }
+}
+
+@media (max-width: 768.98px) {
+  .indent-space {
+    padding-left: 0px;
+  }
+}

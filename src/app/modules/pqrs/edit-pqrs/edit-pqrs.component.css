@@ -1,0 +1,27 @@
+.rowNoData {
+    border-top: solid 1px #d6001c;
+}
+
+.table-responsive {
+    overflow-x: clip !important;
+}
+
+.table_style {
+    table-layout: auto !important;
+}
+
+.rowtable {
+    display: contents;
+}
+
+.description {
+    height: 80px !important;
+}
+
+.title-validate{
+    font: normal normal bold 16px/28px Montserrat !important;
+}
+
+.description-validate{
+    font: normal normal normal 16px/28px Montserrat !important;
+}

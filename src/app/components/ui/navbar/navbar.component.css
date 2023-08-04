@@ -1,0 +1,83 @@
+.dropdown-header-notification {
+  padding-top: 24px;
+  padding-left: 33px;
+  padding-right: 33px;
+  font: normal normal normal 18px Montserrat;
+  width: 324px;
+  color: #707070;
+  opacity: 1;
+  letter-spacing: 0px;
+}
+
+.navbar
+  .navbar-content
+  .navbar-nav
+  .nav-item.nav-apps
+  .dropdown-menu
+  .dropdown-body,
+.navbar
+  .navbar-content
+  .navbar-nav
+  .nav-item.nav-notifications
+  .dropdown-menu
+  .dropdown-body-notification,
+.navbar
+  .navbar-content
+  .navbar-nav
+  .nav-item.nav-messages
+  .dropdown-menu
+  .dropdown-body-notification {
+  padding-left: 21px;
+  padding-right: 21px;
+}
+
+.notification-width{
+  width: 400px;
+  max-width: 400px !important;
+}
+.point-notifications
+{
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: #D6001C;
+  margin-left: -20px;
+  border-radius: 10px;
+  margin-top: 3px;
+}
+
+.title-number-notification
+{
+  font: normal normal bold 18px/22px Montserrat;  
+  color: #707070;
+}
+
+.title-notification{
+  font: normal normal bold 16px/19px Montserrat;
+  color: #D6001C;
+}
+
+.description-notification{
+  font: normal normal normal 16px/22px Montserrat;
+  color: var(--gray-light);  
+}
+
+.time-notification{
+  font: normal normal normal 14px/18px Montserrat !important;  
+  color: #D6001C !important;
+}
+
+.img-circle-notification{
+  background: #D6001C;
+  border-radius: 50px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-notification{
+  width: 30px;
+  height: 30px; 
+}

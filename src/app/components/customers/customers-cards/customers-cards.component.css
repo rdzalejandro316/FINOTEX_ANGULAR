@@ -1,0 +1,23 @@
+
+.card {
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    height: 150px;
+}
+
+.card em {
+    margin-top: 64px;
+}
+
+.card:hover {
+    background-color: #D6001C;
+    color: #fff;
+}
+
+.label-card {
+    max-width: 128px;
+    font: normal normal bold 20px/20px Montserrat;
+    text-align: left;
+    margin-top: 64px;
+}

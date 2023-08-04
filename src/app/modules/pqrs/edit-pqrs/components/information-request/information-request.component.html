@@ -1,0 +1,159 @@
+<p-accordion>
+    <p-accordionTab 
+        header="{{ 'pqrs.edit-pqrs-tab-information-request' | translate }}" 
+        [selected]="true">
+        <ng-template pTemplate="content">
+            <form [formGroup]="generalDataRequestFrom">
+                <div class="row">
+                    
+                    <div class="col-12 col-sm-6 col-xl-3 mt-3">
+                        <label>{{ 'pqrs.edit-pqrs-tab-information-request-identification-number' | translate }}</label>
+                        <input
+                          type="text"
+                          formControlName="documentId"
+                          pInputText
+                          placeholder="{{ 'pqrs.edit-pqrs-tab-information-request-identification-number' | translate }}"
+                          class="form-control"
+                          readonly/>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-xl-3 mt-3">
+                        <label>{{ 'pqrs.edit-pqrs-tab-information-request-email' | translate }}</label>
+                        <input
+                          type="text"
+                          formControlName="email"
+                          pInputText
+                          placeholder="{{ 'pqrs.edit-pqrs-tab-information-request-email' | translate }}"
+                          class="form-control"
+                          readonly/>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-xl-3 mt-3">
+                        <label>{{ 'pqrs.edit-pqrs-tab-information-request-country' | translate }}</label>
+                        <input
+                          type="text"
+                          formControlName="countryName"
+                          pInputText
+                          placeholder="{{ 'pqrs.edit-pqrs-tab-information-request-country' | translate }}"
+                          class="form-control"
+                          readonly/>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-xl-3 mt-3">
+                        <label>{{ 'pqrs.edit-pqrs-tab-information-request-plant' | translate }}</label>
+                        <input
+                          type="text"
+                          formControlName="businessName"
+                          pInputText
+                          placeholder="{{ 'pqrs.edit-pqrs-tab-information-request-plant' | translate }}"
+                          class="form-control"
+                          readonly/>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-xl-3 mt-3">
+                        <label>{{ 'pqrs.edit-pqrs-tab-information-request-address' | translate }}</label>
+                        <input
+                          type="text"
+                          formControlName="address"
+                          pInputText
+                          placeholder="{{ 'pqrs.edit-pqrs-tab-information-request-address' | translate }}"
+                          class="form-control"
+                          readonly/>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-xl-3 mt-3">
+                        <label>{{ 'pqrs.edit-pqrs-tab-information-request-phone' | translate }}</label>
+                        <input
+                          type="text"
+                          formControlName="phone1"
+                          pInputText
+                          placeholder="{{ 'pqrs.edit-pqrs-tab-information-request-phone' | translate }}"
+                          class="form-control"
+                          readonly/>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-xl-3 mt-3">
+                        <label>{{ 'pqrs.edit-pqrs-tab-information-request-optional-phone' | translate }}</label>
+                        <input
+                          type="text"
+                          formControlName="phone2"
+                          pInputText
+                          placeholder="{{ 'pqrs.edit-pqrs-tab-information-request-optional-phone' | translate }}"
+                          class="form-control"
+                          readonly/>
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-xl-12 mt-3">
+                        <label>{{ 'pqrs.edit-pqrs-tab-information-request-description' | translate }}</label>
+                        <textarea 
+                            [readonly]="true"
+                            type="text"                              
+                            pInputText                                                 
+                            placeholder="{{ 'pqrs.edit-pqrs-tab-information-request-description' | translate  }}"                                                                    
+                            class="form-control description"  
+                            formControlName="notes">   
+                        </textarea> 
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-xl-12 mt-3">
+                        <label>{{ 'pqrs.edit-pqrs-tab-information-request-evidence' | translate }}</label>
+                        <input
+                          type="text"
+                          formControlName="fileName"
+                          pInputText
+                          class="form-control evidence"
+                          readonly/>
+                    </div>
+                </div>
+                              
+                <div class="row mt-2 download">                    
+                    <div>
+                        <app-button-finotex                            
+                        label="{{ 'pqrs.edit-pqrs-tab-information-request-download' | translate  }}"
+                        type="button"
+                        typeButton="secondary"
+                        [typeSize]="false"                        
+                        classButton="w-100"
+                        (click)="dowload()">
+                        </app-button-finotex>                     
+                    </div>
+                </div>
+            </form>
+        </ng-template>
+    </p-accordionTab>
+</p-accordion>
+
+<!-- not found file -->
+<p-dialog 
+   [(visible)]="showNotFoundFile" 
+   [contentStyleClass]="'border-top'" 
+   [modal]="true" 
+   [baseZIndex]="10000"
+   [draggable]="false" 
+   [showHeader]="false" 
+   [resizable]="false" 
+   [style]="{ width: '500px' }">
+    <div class="row">
+        <div class="col-md-12 text-center font50">
+            <img _ngcontent-amv-c221="" width="60px" height="60px" src="../../../assets/images/Alert.svg"
+              alt="shopping cart" class="simple-img" appImage />
+        </div>
+      
+        <div class="col-md-12 text-center mt-24">
+            <p class="title-not-fount-file">{{ "pqrs.file-not-found-title" | translate }}</p>
+        </div>
+    
+        <div class="col-md-12 text-center mt-24 f-14">      
+            <span class="description-not-fount-file">{{ "pqrs.file-not-found-description" | translate }}</span>            
+        </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="col-md-12 text-center">
+          <p-button 
+              (click)="showNotFoundFile = false" 
+              label="{{ 'artWork.lblOk' | translate }}"
+              styleClass="button button-primary text-center"></p-button>
+      </div>
+    </ng-template>
+</p-dialog>  

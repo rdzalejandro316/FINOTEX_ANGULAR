@@ -1,0 +1,462 @@
+<p-breadcrumb
+  [model]="itemsBreadcrumb"
+  [tittle]="'technicalDevelopments.title_principal'"
+  [description]="'technicalDevelopments.sub_title_principal'"
+></p-breadcrumb>
+
+<div class="row mb-2">
+  <div class="col-12 col-md-6 col-lg-3 mt-2">
+    <app-button-finotex
+      label="productList.msgFilerSearch"
+      type="button"
+      typeButton="secondary"
+      [typeSize]="true"
+      (click)="showPanelFilter()"
+    ></app-button-finotex>
+  </div>
+  <div class="col-12 col-md-6 col-lg-4 mt-2">
+    <app-search-selector-principal
+      placeholder="formsGeneral.technicalDevelopments-search"
+      icon="pi pi-search"
+      (clickEvent)="onSubmitFilterSearch($event)"
+    ></app-search-selector-principal>
+  </div>
+
+  <div class="col-12 col-md-12 col-lg-5 mt-2 text-right iphone-se">
+    <app-button-icon-finotex
+      icon="fas fa-download"
+      label="{{ 'artWork.download' | translate }}"
+      type="button"
+      typeButton="secondary"
+      [typeSize]="false"
+      class="mr-3"
+      (click)="dowloadFileXLSX()"
+    ></app-button-icon-finotex>
+  </div>
+</div>
+
+<form
+  [formGroup]="registerFormFilter"
+  (ngSubmit)="getSampleFilterService(false, null, true)"
+>
+  <div class="row {{ showfilters ? 'mb-2' : '' }}" [hidden]="!showfilters">
+    <div class="col-12">
+      <div class="container-serach">
+        <div class="row">
+          <div class="col-md-12">
+            <label class="title-search">
+              {{ 'technicalDevelopments.filter_title' | translate }}
+            </label>
+          </div>
+          <div class="col-md-12">
+            <label class="description-page">
+              {{ 'technicalDevelopments.filter_sub_title' | translate }}
+            </label>
+          </div>
+          <div class="col-md-12">
+            <label class="title-search">
+              {{ 'technicalDevelopments.lblSearchByDetails' | translate }}
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-6 col-xl-3 mt-3">
+            <label for="lblFilterProgressstatus">
+              {{ 'technicalDevelopments.lblFilterProgressstatus' | translate }}
+            </label>
+            <p-dropdown
+              formControlName="lblFilterProgressstatus"
+              [options]="progressStatus"
+              optionLabel="name"
+              placeholder="{{
+                ('formsGeneral.selSelectOpcion' | translate) || ' '
+              }}"
+            >
+              <ng-template pTemplate="selectedItem" let-progresStatus>
+                <div class="country-item country-item-value">
+                  <img
+                    alt=""
+                    appImage
+                    src="assets/images/progressStatus{{
+                      progresStatus.code
+                    }}1.svg"
+                    class="simple-img progressStatus{{ progresStatus.code }}"
+                    width="24px"
+                    height="24px"
+                  />
+                  <span class="item-img">{{ progresStatus.name }}</span>
+                </div>
+              </ng-template>
+              <ng-template let-progresStatus pTemplate="item">
+                <div class="progresStatus-item">
+                  <img
+                    alt=""
+                    appImage
+                    src="assets/images/progressStatus{{
+                      progresStatus.code
+                    }}1.svg"
+                    class="simple-img progressStatus{{ progresStatus.code }}"
+                    width="24px"
+                    height="24px"
+                  />
+                  <span class="item-img">{{ progresStatus.name }}</span>
+                </div>
+              </ng-template>
+            </p-dropdown>
+          </div>
+          <div class="col-12 col-sm-6 col-xl-3 mt-3">
+            <label for="lblFilterSamplenumber">
+              {{ 'technicalDevelopments.lblFilterSamplenumber' | translate }}
+            </label>
+            <input
+              type="text"
+              formControlName="lblFilterSamplenumber"
+              pInputText
+              placeholder="{{
+                'technicalDevelopments.lblFilterSamplenumber' | translate
+              }}"
+              class="form-control"
+              (keypress)="onKeyPressNumber($event)"
+            />
+          </div>
+          <div class="col-12 col-sm-6 col-xl-3 mt-3">
+            <label for="lblFilterInternalproductcode">
+              {{
+                'technicalDevelopments.lblFilterInternalproductcode' | translate
+              }}
+            </label>
+            <input
+              type="text"
+              formControlName="lblFilterInternalproductcode"
+              pInputText
+              placeholder="{{
+                'technicalDevelopments.lblFilterInternalproductcode' | translate
+              }}"
+              class="form-control"
+            />
+          </div>
+          <div class="col-12 col-sm-6 col-xl-3 mt-3">
+            <label for="lblFilterCustomer">
+              {{ 'technicalDevelopments.lblFilterCustomer' | translate }}
+            </label>
+            <p-dropdown
+              formControlName="lblFilterCustomer"
+              [filter]="true"
+              filterBy="customerName"
+              [options]="customers"
+              optionLabel="customerName"
+              optionValue="customerId"
+              placeholder="{{
+                ('formsGeneral.selSelectOpcion' | translate) || ' '
+              }}"
+            ></p-dropdown>
+          </div>
+          <div class="col-12 col-sm-6 col-xl-3 mt-3">
+            <label for="lblFilterCustomerproductcode">
+              {{
+                'technicalDevelopments.lblFilterCustomerproductcode' | translate
+              }}
+            </label>
+            <input
+              type="text"
+              formControlName="lblFilterCustomerproductcode"
+              pInputText
+              placeholder="{{
+                'technicalDevelopments.lblFilterCustomerproductcode' | translate
+              }}"
+              class="form-control"
+            />
+          </div>
+          <div class="col-12 col-sm-6 col-xl-6 mt-3">
+            <label for="lblFilterDescription">
+              {{ 'technicalDevelopments.lblFilterDescription' | translate }}
+            </label>
+            <input
+              type="text"
+              formControlName="lblFilterDescription"
+              pInputText
+              placeholder="{{
+                'technicalDevelopments.lblFilterDescription' | translate
+              }}"
+              class="form-control"
+            />
+          </div>
+          <div class="col-12 col-sm-6 col-xl-3 mt-3">
+            <label for="lblFilterLine">
+              {{ 'technicalDevelopments.lblFilterLine' | translate }}
+            </label>
+            <p-dropdown
+              formControlName="lblFilterLine"
+              [options]="productLines"
+              optionValue="groupLineId"
+              optionLabel="groupLineName"
+              placeholder="{{
+                ('formsGeneral.selSelectOpcion' | translate) || ' '
+              }}"
+            ></p-dropdown>
+          </div>
+          <div class="col-12 col-sm-6 col-xl-3 mt-3">
+            <label for="lblFilterWidth">
+              {{ 'technicalDevelopments.lblFilterWidth' | translate }}
+            </label>
+            <input
+              type="text"
+              formControlName="lblFilterWidth"
+              pInputText
+              placeholder="{{
+                'technicalDevelopments.lblFilterWidth' | translate
+              }}"
+              class="form-control"
+              (keypress)="onKeyPressNumber($event)"
+            />
+          </div>
+          <div class="col-12 col-sm-6 col-xl-3 mt-3">
+            <label for="lblFilterLength">
+              {{ 'technicalDevelopments.lblFilterLength' | translate }}
+            </label>
+            <input
+              type="text"
+              formControlName="lblFilterLength"
+              pInputText
+              placeholder="{{
+                'technicalDevelopments.lblFilterLength' | translate
+              }}"
+              class="form-control"
+              (keypress)="onKeyPressNumber($event)"
+            />
+          </div>
+          <div class="col-12 col-sm-6 col-xl-3 mt-3">
+            <label for="lblFilterSampledate">
+              {{ 'technicalDevelopments.lblFilterSampledate' | translate }}
+            </label>
+            <p-dropdown
+              formControlName="lblFilterSampledate"
+              [options]="typeOfDate"
+              optionValue="code"
+              optionLabel="name"
+              placeholder="{{
+                ('formsGeneral.selSelectOpcion' | translate) || ' '
+              }}"
+            ></p-dropdown>
+          </div>
+          <div class="col-12 col-sm-6 col-xl-3 mt-3">
+            <app-datepicker
+              [styleHTML]="'calendar2'"
+              [config]="settingsDates"
+              [submitted]="submitted"
+              [form]="registerFormFilter"
+              [formDirective]="ngForm"
+            ></app-datepicker>
+          </div>
+          <div class="col-12 col-sm-6 col-xl-3 mt-3">
+            <label for="lblFilterStatus">
+              {{ 'technicalDevelopments.lblFilterStatus' | translate }}
+            </label>
+            <p-dropdown
+              formControlName="lblFilterStatus"
+              [options]="status"
+              optionValue="sampleStatusId"
+              optionLabel="sampleStatusName"
+              placeholder="{{
+                ('formsGeneral.selSelectOpcion' | translate) || ' '
+              }}"
+            ></p-dropdown>
+          </div>
+        </div>
+        <div class="d-flex flex-row-reverse mt-3">
+          <div class="pl-2">
+            <button
+              pButton
+              type="submit"
+              label="{{ 'formsGeneral.btnSearch' | translate }}"
+              [disabled]="registerFormFilter.invalid || indicatorButton"
+              class="button button-primary filter"
+            ></button>
+          </div>
+
+          <div class="pl-2">
+            <button
+              (click)="clearFilter()"
+              pButton
+              type="button"
+              label="{{ 'formsGeneral.btnResetFields' | translate }}"
+              class="button button-secundary filter"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="row">
+  <div class="col-12">
+    <table
+      id="allTable"
+      class="table f-table table-bordered table-hover dt-responsive"
+      style="width: 100%;"
+    >
+      <thead class="f-table-header">
+        <tr>
+          <th data-priority="2">
+            {{ 'technicalDevelopments.lblFilterProgressstatus' | translate }}
+          </th>
+          <th>
+            {{ 'technicalDevelopments.lblFilterSamplenumber' | translate }}
+          </th>
+          <th>
+            {{
+              'technicalDevelopments.lblFilterInternalproductcode' | translate
+            }}
+          </th>
+          <th>{{ 'technicalDevelopments.lblFilterCustomer' | translate }}</th>
+          <th>{{ 'technicalDevelopments.lblFilterImage' | translate }}</th>
+          <th>
+            {{
+              'technicalDevelopments.lblFilterCustomerproductcode' | translate
+            }}
+          </th>
+          <th>
+            {{ 'technicalDevelopments.lblFilterDescription' | translate }}
+          </th>
+          <th>{{ 'technicalDevelopments.lblFilterLine' | translate }}</th>
+          <th>{{ 'technicalDevelopments.lblFilterWidth' | translate }}</th>
+          <th>{{ 'technicalDevelopments.lblFilterLength' | translate }}</th>
+          <th>{{ 'technicalDevelopments.lblTitleSampleDate' | translate }}</th>
+          <th>
+            {{ 'technicalDevelopments.lblTitleSampleRequestDate' | translate }}
+          </th>
+          <th>
+            {{ 'technicalDevelopments.lblTitlePromisedDate' | translate }}
+          </th>
+          <th>
+            {{ 'technicalDevelopments.lblTitleCompletedDate' | translate }}
+          </th>
+          <th>
+            {{ 'technicalDevelopments.lblTitleApprovedDate' | translate }}
+          </th>
+          <th>
+            {{ 'technicalDevelopments.lblFilterStatus' | translate }}
+          </th>
+          <th class="text-center" data-priority="3">
+            {{ 'technicalDevelopments.lblAccion' | translate }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sample of listSamples; let i = index">
+          <td>
+            <span *ngIf="sample.semaphoreId != 0">
+              <img
+                src="assets/images/progressStatus{{ sample.semaphoreId }}1.svg"
+                class="img-24"
+                pTooltip="{{
+                  'formsGeneral.progressStatus' + sample.semaphoreId | translate
+                }}"
+              />
+            </span>
+          </td>
+          <td>{{ sample.sampleNumber }}</td>
+          <td>{{ sample.internalProductCode }}</td>
+          <td>
+            <p class="text-truncate">
+              <label>{{ sample.customerName }}</label>
+            </p>
+          </td>
+          <td>
+            <span class="" (click)="clickImageEvent(sample?.imageUrl)">
+              <img
+                src="{{ sample?.imageUrl }}"
+                style="width: 60px; height: 60px; cursor: pointer;"
+                alt=""
+              />
+            </span>
+          </td>
+          <td>{{ sample.customerProductCode }}</td>
+          <td>{{ sample.description }}</td>
+          <td>{{ sample.groupLineName }}</td>
+          <td>{{ sample.width }}</td>
+          <td>{{ sample.lenght }}</td>
+          <td>{{ sample.sampleDate | date: 'MMM/dd/yyyy' }}</td>
+          <td>{{ sample.sampleRequestDate | date: 'MMM/dd/yyyy' }}</td>
+          <td>{{ sample.promisedDate | date: 'MMM/dd/yyyy' }}</td>
+          <td>{{ sample.completedDate | date: 'MMM/dd/yyyy' }}</td>
+          <td>{{ sample.approvedRequeredBy | date: 'MMM/dd/yyyy' }}</td>
+          <td>{{ sample.statusName }}</td>
+          <td class="text-center" style="position: relative;">
+            <div class="dropdown">
+              <i
+                id="contextMenu{{ i }}"
+                class="fas fa-ellipsis-h"
+                style="cursor: pointer;"
+                (click)="popUpContextMenu(i, sample)"
+              ></i>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-12">
+    <p-paginator
+      [rows]="10"
+      [columnsSeparate]="false"
+      [rowsPerPageOptions]="[10, 20, 30]"
+      (onPageChange)="paginate($event)"
+      [totalRecords]="totalRecords"
+    ></p-paginator>
+  </div>
+</div>
+
+<div id="contextMenuSelect" class="dropdown-content" style="position: absolute">
+  <a routerLink="/home/home_samples/detail/{{ customerId }}/{{ sampleId }}">
+    <span class="lblActionSelect">
+      <label style="margin: 0; font-weight: inherit;">
+        {{ 'technicalDevelopments.lblActionSelect' | translate }}
+      </label>
+    </span>
+  </a>
+  <a routerLink="/home/home_samples/edit/{{ customerId }}/{{ sampleId }}">
+    <span class="lblActionEdit">
+      <label style="margin: 0; font-weight: inherit;">
+        {{ 'technicalDevelopments.lblActionEdit' | translate }}
+      </label>
+    </span>
+  </a>
+  <a (click)="printPdfService({sampleId})" style="background-color: white;">
+    <span class="lblActionPdf">
+      <label style="margin: 0; font-weight: inherit;">
+        {{ 'technicalDevelopments.lblActionPdf' | translate }}
+      </label>
+    </span>
+  </a>
+  <a>
+    <span class="lblActionAvanzar">
+      <label style="margin: 0; font-weight: inherit;">
+        {{ 'technicalDevelopments.lblActionAvanzar' | translate }}
+      </label>
+    </span>
+  </a>
+  <a>
+    <span class="lblActionComment">
+      <label style="margin: 0; font-weight: inherit;">
+        {{ 'technicalDevelopments.lblActionComment' | translate }}
+      </label>
+    </span>
+  </a>
+</div>
+
+<p-viewer
+  header="{{ 'products.preview_imagen' | translate }}"
+  [(visible)]="displayFilePreview"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <div class="image-viewer">
+    <img src="{{ imageGaleryBrandDatail }}" alt="" appFallbackSrc />
+  </div>
+  <ng-template pTemplate="footer"></ng-template>
+</p-viewer>
+<p-toast></p-toast>

@@ -1,0 +1,9 @@
+input[type='checkbox']:checked:after {
+  content: '\e909';
+  padding-left: 5px;
+}
+
+input.pi.p-checkbox {
+  line-height: 0.7;
+  font-size: 14px;
+}

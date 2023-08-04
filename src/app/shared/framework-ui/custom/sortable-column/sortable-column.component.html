@@ -1,0 +1,12 @@
+<ng-content></ng-content>
+<span *ngIf="sortDirection === ''">
+    <i class="iorder li-link fa fa-sort " *ngIf="sortDirection === ''" ></i>
+</span>
+<span *ngIf="sortDirection === 'asc'" class="iorder">
+    <i class="iorder i-link fa fa-sort"></i>
+    <i class="iorder i-link asc fa fa-sort-asc"></i>
+ </span>
+<span *ngIf="sortDirection === 'desc'" class="iorder">
+    <i class="iorder i-link fa fa-sort"></i>
+    <i class="iorder i-link desc fa fa-sort-desc"></i>
+</span> 

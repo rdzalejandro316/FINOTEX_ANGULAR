@@ -1,0 +1,285 @@
+<p-breadcrumb [model]="itemsBreadcrumb" [tittle]="'samples.lblCreatePurchaseOrder'"
+[description]="'samples.lblAddItem'"></p-breadcrumb>
+
+  <div class="row justify-content-between  mb-1">  
+    <div class="col-12 col-md-5  mb-2">
+      <div class="row">
+        <div class="col-12 mb-2 col-md-6">
+          <button
+            pButton
+            type="button"
+            icon="fas fa-download"
+            label="{{ 'samples.btnUploadItem' | translate }}"
+            class="button button-secundary filter w-100"
+          disabled ></button>
+        </div>
+        <div class="col-12 mb-2 col-md-6">
+          <button
+            pButton
+            type="button"
+            icon="fas fa-plus"
+            label="{{ 'samples.btnAddItem' | translate }}"
+            (click)="showPanelDialog()"
+            class="button button-primary filter w-100"
+            cxvsamples_list_all
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row mb-3">
+    <div class="col-12">
+      <p-table #table [data]="itemsPaginate" [totalRecords]="totalRecords" [paginator]="true" (onPageChange)="paginate($event)">
+        <tr role="row" theaderRecords>
+          <th scope="col" role="columnheader">{{ 'samples.lblCustomerProductCode' | translate }}</th>
+          <th scope="col" role="columnheader">{{ 'samples.lblSize' | translate }}</th>
+          <th scope="col" role="columnheader">{{ 'samples.lblColorVariation' | translate }}</th>
+          <th scope="col" role="columnheader">{{ 'samples.lblColorObservation' | translate }}</th>
+          <th scope="col" role="columnheader">{{ 'samples.lblQuantity' | translate }}</th>
+          <th scope="col" role="columnheader">{{ 'samples.lblRequiredDate' | translate }}</th>
+          <th scope="col" role="columnheader">{{ 'samples.lblActions' | translate }}</th>
+        </tr>
+        <tr role="row" tbodyRecords *ngFor="let item of itemsPaginate">
+          <td role="cell">{{ item.customerProductCode }}</td>
+          <td role="cell">{{ item.size }}</td>
+          <td role="cell">{{ item.colorVariation }}</td>
+          <td role="cell">{{ item.colorObservation }}</td>
+          <td role="cell">{{ item.quantity }}</td>
+          <td role="cell">{{ item.requiredDate }}</td>
+          <td role="cell" class="text-right">
+            <button
+              pButton
+              pRipple
+              type="button"
+              (click)="showPanelDialogEdit(item)"
+              icon="fas fa-edit"
+              class="p-button-rounded p-button-text"
+            ></button>
+            <button
+              pButton
+              pRipple
+              type="button"
+              (click)="removeItem(item.sampleId)"
+              icon="fas fa-trash-alt"
+              class="p-button-rounded p-button-text"
+            ></button>
+          </td>
+        </tr>
+      </p-table>
+    </div>
+  </div>
+  <div class="row justify-content-between  mb-1">  
+    <div class="col-12 col-md-8">
+      <div class="row">
+        <div class="col-12 mb-2 col-md-3">
+        <button
+            pButton
+            type="button"
+            label="{{'product-brand-detail.btnBack' | translate}}"
+            class="button button-secundary filter w-100"
+            routerLink="/home/samples_list/all"
+           ></button>
+          </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-4 mb-2">
+      <div class="row">
+        <div class="col-12 mb-2 col-md-6">
+          <button
+            pButton
+            type="button"
+            label="{{'artWork.decline' | translate}}"
+            class="button button-secundary filter w-100"
+            (click)="showDecline()"
+           ></button>
+        </div>
+        <div class="col-12 mb-2 col-md-6">
+          <button
+            pButton
+            type="button"
+            [disabled]="!items || items?.length == 0"
+            label="{{'samples.btnGoCheckout' | translate}}"
+            class="button button-primary filter w-100"
+            routerLink="/home/sample_checkout"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <p-dialog
+    [formGroup]="form" #ngForm="ngForm"
+    header="{{!edit ? ('samples.lblAddNewItem' | translate) : ('samples.lblEditItem' | translate) }}"
+    [(visible)]="display"
+    [modal]="true"
+    [baseZIndex]="10000"
+    [draggable]="false" 
+    [resizable]="false"
+    [style]="{width: '1140px'}"
+  >
+    <div class="row">
+      <div class="col-12 col-xl-12 p-dialog-desc">
+        {{'samples.lblDescriptionModal' | translate}}
+      </div>
+    </div>
+    <input type="hidden" formControlName="sampleId" >
+    <div class="row mt-2 mb-2">
+        <div class="col-12 col-md-4">
+            <input type="radio" value="1" class="inp-checkbox"
+            name="items"  formControlName="items" (change)="showHideItems()"><label for="validationDefault01" class="ml-4 mt-1">{{'samples.lblSingleItem' | translate}}</label>
+        </div>
+        <div class="col-12 col-md-4">
+            <input type="radio" value="2" class="inp-checkbox"
+            name="items" formControlName="items"  (change)="showHideItems()"><label for="validationDefault01"  class="ml-4 mt-1">{{'samples.lblPersonalizedItem' | translate}}</label>
+        </div>
+    </div>
+    <div class="row" *ngIf="showItems" >
+        <div class="col-12 col-md-8 mt-2">
+            <div class="row">
+                <div class="col-12 col-md-4 mt-2">
+                    <label for="validationDefault01" class="h-45">{{'samples.lblSize' | translate}}</label>
+                    <input type="text" formControlName="size" placeholder="Size" pInputText class="form-control" />
+                  </div>
+              
+                  <div class="col-12 col-md-4 mt-2">
+                    <label class="label-required" for="validationDefault01">{{'samples.lblQuestionModal' | translate}}</label>
+                    <p-dropdown appendTo="body" [options]="requireColor" optionValue="code" formControlName="requireC" (onChange)="changeRequireColor()" optionLabel="name"  autoDisplayFirst="false"   placeholder="{{('formsGeneral.selSelectOpcion' | translate) || ' '}}"></p-dropdown>
+                  </div> 
+              
+                  <div class="col-12 col-md-4 mt-2">
+                    <label for="validationDefault01" class="h-45">{{'samples.lblColorVariation' | translate}}</label>
+                    <input type="text" [readOnly]="!requireC" formControlName="colorVariation" pInputText class="form-control" />
+                  </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4 mt-2">
+          <div class="row">
+            <div class="col-12">
+            <label for="validationDefault01" class="h-45">{{'samples.lblColorObservation' | translate}}</label>
+            <textarea [rows]="6" class="inputs" formControlName="colorObservation" pInputTextarea autoResize="true"></textarea>
+          </div>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 mt-2">
+            <div class="row">
+                <div class="col-12 col-md-4 mt-2" *ngIf="showItems">
+                    <label for="validationDefault01">{{'samples.lblCustomerProductCode' | translate}}</label>
+                    <input type="text" placeholder="Customer product code" formControlName="customerProductCode" pInputText class="form-control" />
+                </div>
+                <div class="col-12 col-md-3 mt-2">
+                    <label class="label-required" for="validationDefault01">{{'samples.lblQuantity' | translate}}</label>
+                    <input type="number" (change)="onChangeQuantityEvent($event)" placeholder="{{'samples.lblQuantity' | translate}}" formControlName="quantity" pInputText class="form-control" />
+                </div>
+                <div class="col-12 col-md-3 mt-2">
+                    <app-datepicker [config]="settingsDates"  [submitted]="submitted"   [form]="form" [formDirective]="ngForm"  appendTo="body" ></app-datepicker>
+                </div>
+              <div class="col mt-2">
+                <label class="label-required" for="validationDefault01">Use 1st required date</label>
+                <br />
+                <p-checkbox name="RepeatRequiredDate" value="1" [disabled]="!items || items?.length == 0" (onChange)="setFirstRequiredDate()"></p-checkbox>
+              </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4 mt-2">
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <p-button
+        (click)="display = false"
+        label="Cancel"
+        styleClass="button button-secundary filter mr-3"
+      ></p-button>
+      <p-button
+        (click)="addOrEditItem()"
+        label="{{!edit ? ('samples.lblAddItemModal' | translate) : ('samples.lblEditItem' | translate) }}"
+        styleClass="button button-primary filter"
+      ></p-button>
+    </ng-template>
+  </p-dialog>
+  <form [formGroup]="registerFormDecline">
+  <p-dialog
+  [(visible)]="displayDecline"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false" 
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{width: '800px'}"
+>
+<div class="row">
+  <div class="col-md-12 text-center font50">
+    <img _ngcontent-amv-c221="" width="60px" height="60px" src="../../../assets/images/icono cancelar.svg" alt="shopping cart" appImage class="simple-img">
+  </div>
+  <div class="col-md-12 text-center mt-24">
+    {{'samples.lblDescriptionDecline' | translate}}
+  </div>
+  <div class="col-md-12 text-center mt-16 description-page">
+      <p>{{'samples.lblConfirmDecline' | translate}}</p>
+  </div>
+  <div class="col-12 mt-2">
+    <label for="ddlSample">{{'samples.lblDecliningReason' | translate}}</label>
+  </div>
+  <div class="col-12">
+      <p-dropdown appendTo="body" 
+      formControlName="declining_reason" 
+      [options]="decliningReasons" optionLabel="sampleRejectionName" optionValue="sampleRejectionId"  autoDisplayFirst="false"   placeholder="{{('formsGeneral.selSelectOpcion' | translate) || ' '}}"></p-dropdown>
+  </div>
+</div>
+
+  <ng-template pTemplate="footer">
+    <div class="row">
+      <div class="col-12 col-md-4 offset-md-6 text-right mt-16">
+        <p-button
+          (click)="displayDecline = false"
+          label="{{'samples.lblGoBackSample' | translate}}"
+          styleClass="button button-secundary filter w-100"
+        ></p-button>
+      </div>
+      <div class="col-12 col-md-2 text-right mt-16">
+        <p-button
+          (click)="showConfirmDecline()"
+          label="{{'samples.lblDecline' | translate}}"
+          styleClass="button button-primary filter w-100"
+        ></p-button>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>
+</form>
+
+<p-dialog
+  [(visible)]="displayConfirmDecline"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false" 
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{width: '500px'}"
+>
+<div class="row">
+  <div class="col-md-12 text-center font50">
+    <img _ngcontent-amv-c221="" width="60px" height="60px" src="../../../assets/images/Eliminated.svg" alt="shopping cart" appImage class="simple-img">
+  </div>
+  <div class="col-md-12 text-center mt-24">
+    <p>{{'samples.lblSampleDeclined' | translate}}</p>
+  </div>
+  <div class="col-md-12 text-center mt-16 description-page">
+      <p>{{'samples.lblSampleDeclinedConfirm' | translate}}</p>
+  </div>
+</div>
+
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button
+        (click)="confirmDecline()"
+        label="{{'samples.lblOk' | translate}}"
+        styleClass="button button-primary text-center"
+      ></p-button>
+    </div>
+  </ng-template>
+</p-dialog>

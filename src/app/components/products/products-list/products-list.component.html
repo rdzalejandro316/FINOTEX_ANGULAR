@@ -1,0 +1,324 @@
+<p-breadcrumb
+  [model]="itemsBreadcrumb"
+  [tittle]="'menu.AllProducts'"
+  [description]="'productList.decriptionMain'"
+></p-breadcrumb>
+
+<div class="row mt-3">
+  <div class="col-12 col-md-6 col-lg-3 mt-2">
+    <app-button-finotex
+      label="productList.msgFilerSearch"
+      type="button"
+      typeButton="secondary"
+      [typeSize]="true"
+      (click)="showPanelFilter()"
+    ></app-button-finotex>
+  </div>
+
+  <div class="col-12 col-md-6 col-lg-4 mt-2">
+    <app-search-selector-principal
+      placeholder="general.Product_Search"
+      icon="pi pi-search"
+      (clickEvent)="onSubmitFilterSearch($event)"
+    ></app-search-selector-principal>
+  </div>
+
+  <div class="col-12 col-md-12 col-lg-5 mt-2 text-right iphone-se">
+    <app-button-finotex
+      label="products.btnAddMultipleToCart"
+      type="button"
+      typeButton="primary"
+      [typeSize]="false"
+      [disabled]="!enableMultiple"
+      class="mr-3"
+      (click)="openModalProductCartMultiple()"
+    ></app-button-finotex>
+
+    <app-button-icon-cart-finotex
+      label=""
+      [displayItem]="true"
+      [typeSize]="false"
+      icon="pi pi-shopping-cart"
+      itemsCart="{{ getListProductCartLocalStorage().length || 0 }}"
+      (click)="openModalProductCart()"
+    ></app-button-icon-cart-finotex>
+  </div>
+</div>
+
+<!-- Menu de busqueda -->
+<form #mydiv [formGroup]="SearchFormAllProduct" (ngSubmit)="onSubmitFilter()">
+  <div class="row mt-2 pr-0" [hidden]="!showfilters">
+    <div class="col-12">
+      <div class="container-serach">
+        <div class="row">
+          <div class="col-12 pl-0">
+            <label class="title-search">
+              {{ 'productList.lblFilters' | translate }}
+            </label>
+            <p class="description-page">
+              {{ 'productList.msgFilters' | translate }}
+            </p>
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-12 col-md-6 mt-2 pl-0">
+            <label>
+              {{ 'productList.lblSearchByProduct' | translate }}
+            </label>
+            <p-dropdown
+              [options]="productLinesFilter"
+              formControlName="productLines_list"
+              optionLabel="groupLineName"
+              optionValue="groupLineId"
+              placeholder="{{ ('artWork.selSelectOpcion' | translate) || ' ' }}"
+            ></p-dropdown>
+          </div>
+
+          <div class="col-12 col-md-2"></div>
+
+          <div class="col-12 col-md-4 mt-2 pl-0">
+            <label>
+              {{ 'products.lblFilterByBrand' | translate }}
+            </label>
+            <app-button-finotex
+              label="menu.BrandProducts"
+              type="button"
+              typeButton="secondary"
+              [typeSize]="true"
+              routerLink="/home/brandProducts"
+            ></app-button-finotex>
+          </div>
+        </div>
+
+        <div class="row mt-16">
+          <div class="col-12 pl-0">
+            <label>{{ 'products.lblFilterByDetails' | translate }}</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 mt-2 pl-0">
+            <label>
+              {{ 'products.lblProductName' | translate }}
+            </label>
+            <input
+              type="text"
+              formControlName="productName"
+              pInputText
+              placeholder="{{ 'products.lblProductName' | translate }}"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 mt-2 pl-0">
+            <label>
+              {{ 'products.lblCustCode1' | translate }}
+            </label>
+            <input
+              type="text"
+              formControlName="customerCode"
+              placeholder="{{ 'products.lblCustCode1' | translate }}"
+              pInputText
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 mt-2 pl-0">
+            <label>{{ 'products.lblSize' | translate }}</label>
+            <input
+              type="text"
+              placeholder="{{ 'products.lblSize' | translate }}"
+              formControlName="size"
+              placeholder="{{ 'products.lblCustCode1' | translate }}"
+              pInputText
+              class="form-control"
+            />
+          </div>
+
+          <div id class="col-12 col-sm-6 col-md-6 col-lg-3 mt-2 pl-0">
+            <label>{{ 'samples.lblDate' | translate }}</label>
+            <p-calendar
+              [placeholder]="lblSelectadate"
+              [readonlyInput]="true"
+              [showIcon]="true"
+              [appendTo]="mydiv"
+              [minDate]="minDate"
+              formControlName="date"
+              [locale]="lang"
+              dateFormat="M/dd/yy"
+            ></p-calendar>
+          </div>
+        </div>
+
+        <div class="row mt-16">
+          <div class="col-12 text-right">
+            <app-button-finotex
+              class="mr-2"
+              label="artWork.btnReset"
+              type="submit"
+              typeButton="secondary"
+              [typeSize]="false"
+              (click)="resetFields()"
+            ></app-button-finotex>
+
+            <app-button-finotex
+              label="formsGeneral.btnSearch"
+              type="submit"
+              typeButton="primary"
+              [typeSize]="false"
+              [disabled]="SearchFormAllProduct.invalid || indicatorButton"
+            ></app-button-finotex>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- Contenido -->
+<div class="row mt-16">
+  <div
+    class="col-12 col-md-6 col-lg-4 col-xl-4 col-xxl-3 mb-3 pr-3"
+    *ngFor="let product of productsListTable"
+  >
+    <app-shopping-cart-finotex
+      title="{{ product.productName }}"
+      product_code="{{ product.customerProductCode }}"
+      size="{{ product.sizes }}"
+      date="{{ product.date }}"
+      colour="{{ product.referenceColor }}"
+      [product]="product"
+      (clickEventDetail)="openModalProductDetail($event)"
+      (clickEventCart)="addProductToCartObjet(product)"
+      (clickEventcheckbox)="checkIfActive($event)"
+      (clickEventImagen)="openModalImagen($event)"
+    ></app-shopping-cart-finotex>
+  </div>
+
+  <div class="col-12">
+    <p-paginator
+      [rows]="10"
+      [columnsSeparate]="false"
+      [rowsPerPageOptions]="[10, 20, 30]"
+      (onPageChange)="paginate($event)"
+      [totalRecords]="totalRecords"
+    ></p-paginator>
+  </div>
+</div>
+
+<app-shopping-cart-item-dialog-finotex
+  [listProductCart]="productsCart"
+  header="shoppingCart.titleShoppingCart"
+></app-shopping-cart-item-dialog-finotex>
+
+<p-dialog
+  header="{{ product?.productName }}"
+  [(visible)]="displayDetail"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{ width: '90vw' }"
+>
+  <app-product-detail
+    [shoppingCart]="shoppingCart"
+    [product]="product"
+  ></app-product-detail>
+
+  <ng-template pTemplate="footer">
+    <app-button-finotex
+      label="products.lblCancelRepeatedItem"
+      type="button"
+      typeButton="secondary"
+      [typeSize]="false"
+      class="mr-2"
+      (click)="closeDetailWindow()"
+    ></app-button-finotex>
+
+    <app-button-finotex
+      label="product-detail.btnAddToCart"
+      type="button"
+      typeButton="primary"
+      [typeSize]="false"
+      data-dismiss="modal"
+      [disabled]="!productDetail.detailForm.valid"
+      (click)="addProductCart(product.productId)"
+    ></app-button-finotex>
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="showConfirmAddItemToCart"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '500px' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center font50">
+      <img
+        class="simple-img"
+        width="60px"
+        height="60px"
+        src="../../../assets/images/icono cancelar.svg"
+        alt="shopping cart"
+        appImage
+      />
+    </div>
+
+    <div class="col-md-12 text-center mt-16"></div>
+
+    <div class="col-md-12 text-center mt-16 description-page">
+      <p>{{ repeatedItemMessage }}</p>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="row mt-16">
+      <div class="col-12 col-md-6 mt-2">
+        <button
+          (click)="addProductItemToCart(product)"
+          rel="noopener noreferrer"
+          type="button"
+          class="button button-secundary button-save w-100"
+        >
+          {{ 'products.lblAcceptRepeatedItem' | translate }}
+        </button>
+      </div>
+      <div class="col-12 col-md-6 mt-2">
+        <button
+          type="button"
+          class="button button-primary continue mr-16 w-100"
+          data-dismiss="modal"
+          (click)="showConfirmAddItemToCart = false"
+        >
+          {{ 'products.lblCancelRepeatedItem' | translate }}
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-viewer
+  header="{{ 'products.preview_imagen' | translate }}"
+  [(visible)]="displayFilePreview"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <div class="image-viewer">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Zumba.png"
+      alt=""
+      appImage
+    />
+  </div>
+  <ng-template pTemplate="footer"></ng-template>
+</p-viewer>
+
+<p-toast></p-toast>

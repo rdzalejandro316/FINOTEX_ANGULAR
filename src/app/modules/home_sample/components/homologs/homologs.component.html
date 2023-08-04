@@ -1,0 +1,82 @@
+<p-dialog
+  header="{{ 'homologs.title' | translate }}"
+  [(visible)]="showHomologs"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="true"
+  [style]="resizeModal()"
+>
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table id="allTable" class="table f-table" style="width: 100%">
+          <thead>
+            <tr>
+              <th>
+                <label>{{ "homologs.productCode" | translate }}</label>
+              </th>
+              <th>
+                <label>{{ "mallasForm.description" | translate }}</label>
+              </th>
+              <th style="text-align: right">
+                <label>{{ "homologs.stock" | translate }}</label>
+              </th>
+            </tr>
+          </thead>
+          <tbody *ngIf="!dataNoFound">
+            <tr *ngFor="let item of listHomologs; let i = index">
+              <td>{{ item.productId }}</td>
+              <td>{{ item.productName }}</td>
+              <td style="text-align: right">
+                {{ item.quantityInStock | number: "1.2-2" }}
+              </td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="dataNoFound">
+            <tr>
+              <td colspan="6" class="text-center bg-white p-0">
+                <img
+                  class="simple-img img-not-data"
+                  src="../../../../assets/images/folder-open.svg"
+                  alt="profile"
+                />
+                <div class="mb-16">
+                  <label class="text-no-data">{{
+                    "general.noData" | translate
+                  }}</label>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-12">
+      <p-paginator
+        [rows]="10"
+        [columnsSeparate]="false"
+        [rowsPerPageOptions]="[10, 20, 30]"
+        (onPageChange)="paginate($event)"
+        [totalRecords]="totalRecords"
+        dropdownAppendTo="body"
+      >
+      </p-paginator>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="row">
+      <div class="col-12 text-rigth">
+        <app-button-finotex
+          label="mallasForm.btnBack"
+          type="submit"
+          typeButton="primary"
+          [typeSize]="false"
+          (click)="showModalHomologs()"
+        ></app-button-finotex>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-toast></p-toast>

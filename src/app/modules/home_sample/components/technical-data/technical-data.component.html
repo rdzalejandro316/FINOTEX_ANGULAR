@@ -1,0 +1,763 @@
+<div class="row">
+  <div class="col-12 text-right">
+    <button
+      pButton
+      type="button"
+      label="{{ 'technical-datas.lblAddItem' | translate }}"
+      class="button button-primary filter mr-1"
+      style="margin-top: 20px;"
+      *ngIf="btnDisplaying"
+      (click)="btnAddTechnical()"
+      [disabled]="details"
+    ></button>
+  </div>
+</div>
+<form class="mt-16" #mydiv [formGroup]="technicalDataForm">
+  <p-accordion>
+    <p-accordionTab
+      header="{{ 'technical-datas.title' | translate }}"
+      [selected]="false"
+      [formStatus]="true"
+      [(imagenIcon)]="formTechnicalIconStatus"
+      [(statusFormText)]="formStatusText"
+    >
+      <div class="row">
+        <div class="col-12">
+          <div class="table-responsive">
+            <p-table-finotex
+              #tablaFinotex
+              class="f-table"
+              [value]="technicalFormCall.controls"
+              dataKey="id"
+              [expandedRowKeys]="expandedRows"
+            >
+              <ng-template pTemplate="header">
+                <tr>
+                  <th style="width: 3rem;" class="thead-width"></th>
+                  <th
+                    *ngIf="listComponentsValidating[0].show"
+                    class="thead-width"
+                  >
+                    <label class="label-required">
+                      {{ 'technical-datas.resourceModel' | translate }}
+                    </label>
+                  </th>
+                  <th
+                    *ngIf="listComponentsValidating[1].show"
+                    class="thead-width"
+                  >
+                    <label class="lblWithBreak">
+                      {{ 'technical-datas.alternalResourceModel' | translate }}
+                    </label>
+                  </th>
+                  <th
+                    *ngIf="listComponentsValidating[2].show"
+                    class="thead-width"
+                  >
+                    <label class="label-required">
+                      {{ 'technical-datas.resourceId' | translate }}
+                    </label>
+                  </th>
+                  <th
+                    *ngIf="listComponentsValidating[3].show"
+                    class="thead-width"
+                  >
+                    <label class="label-required">
+                      {{ 'technical-datas.speed' | translate }}
+                    </label>
+                  </th>
+                  <th style="width: 90px;" *ngIf="showHideActions()">
+                    <label>
+                      {{ 'technical-datas.lblActions' | translate }}
+                    </label>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template
+                formArrayName="header"
+                let-rowIndex="rowIndex"
+                pTemplate="body"
+                let-technicalDatas
+                let-expanded="expanded"
+              >
+                <tr [formGroupName]="rowIndex">
+                  <td>
+                    <span
+                      type="button"
+                      pButton
+                      pRipple
+                      (click)="onItemClick(technicalDatas.value, tablaFinotex)"
+                      class="p-button-text p-button-rounded p-button-plain"
+                      [icon]="
+                        expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'
+                      "
+                    ></span>
+                  </td>
+                  <td *ngIf="listComponentsValidating[0].show">
+                    <p-dropdown
+                      [filter]="true"
+                      filterBy=""
+                      [appendTo]="mydiv"
+                      formControlName="resourceModel"
+                      [options]="resourceModelLineList"
+                      optionLabel="resourceModelCode"
+                      optionValue="resourceModelId"
+                      placeholder="{{
+                        ('technical-datas.inputPlaceHolder' | translate) || ' '
+                      }}"
+                    ></p-dropdown>
+                  </td>
+                  <td *ngIf="listComponentsValidating[1].show">
+                    <p-dropdown
+                      [filter]="true"
+                      filterBy=""
+                      [appendTo]="mydiv"
+                      formControlName="alternalResourceModel"
+                      [options]="resourceModelLineList"
+                      optionLabel="resourceModelCode"
+                      optionValue="resourceModelId"
+                      placeholder="{{
+                        ('technical-datas.inputPlaceHolder' | translate) || ' '
+                      }}"
+                    ></p-dropdown>
+                  </td>
+                  <td *ngIf="listComponentsValidating[2].show">
+                    <input
+                      type="text"
+                      (keypress)="onKeyPressNumber($event)"
+                      formControlName="resourceId"
+                      pInputText
+                      class="form-control"
+                      maxlength="5"
+                    />
+                  </td>
+                  <td *ngIf="listComponentsValidating[3].show">
+                    <input
+                      type="text"
+                      (keypress)="onKeyPressNumber($event)"
+                      formControlName="speed"
+                      pInputText
+                      class="form-control"
+                      maxlength="5"
+                    />
+                  </td>
+                  <td style="text-align: center;" *ngIf="showHideActions()">
+                    <app-button-icon-cart-finotex
+                      label=""
+                      icon="fas fa-trash-alt"
+                      type="button"
+                      typeButton="secondary"
+                      [typeSize]="false"
+                      pTooltip="{{
+                        'product-brand-purchase.lblDelete' | translate
+                      }}"
+                      (click)="removeItem(rowIndex)"
+                    ></app-button-icon-cart-finotex>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template
+                formArrayName="header"
+                let-rowIndex="rowIndex"
+                pTemplate="rowexpansion"
+                let-materials
+              >
+                <tr [formGroupName]="rowIndex">
+                  <td colspan="7">
+                    <div class="row">
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[4].show"
+                      >
+                        <label class="label-required">
+                          {{ 'technical-datas.standarTime' | translate }}
+                        </label>
+                        <input
+                          type="text"
+                          (keypress)="onKeyPressNumberDecimal($event)"
+                          formControlName="standarTime"
+                          pInputText
+                          class="form-control"
+                          maxlength="15"
+                        />
+                      </div>
+                      <div
+                        *ngIf="listComponentsValidating[5].show"
+                        class="col-12 col-md-3 mt-2"
+                      >
+                        <label class="label-required">
+                          {{ 'technical-datas.stationNumber' | translate }}
+                        </label>
+                        <input
+                          type="text"
+                          (keypress)="onKeyPressNumber($event)"
+                          formControlName="stationNumber"
+                          pInputText
+                          class="form-control"
+                          maxlength="5"
+                        />
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[6].show"
+                      >
+                        <label>
+                          {{ 'technical-datas.picks' | translate }}
+                        </label>
+                        <input
+                          type="text"
+                          (keypress)="onKeyPressNumber($event)"
+                          formControlName="picks"
+                          pInputText
+                          class="form-control"
+                          (keydown.enter)="clearcameraPicks($event, rowIndex)"
+                          (focusout)="clearcameraPicks($event, rowIndex)"
+                          maxlength="5"
+                        />
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[7].show"
+                      >
+                        <label>
+                          {{ 'technical-datas.totalPicks' | translate }}
+                        </label>
+                        <input
+                          type="text"
+                          (keypress)="onKeyPressNumber($event)"
+                          formControlName="totalPicks"
+                          pInputText
+                          class="form-control"
+                          (keydown.enter)="
+                            validatingTotalPicks($event, rowIndex)
+                          "
+                          (focusout)="validatingTotalPicks($event, rowIndex)"
+                          maxlength="5"
+                        />
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[8].show"
+                      >
+                        <label>
+                          {{ 'technical-datas.cameraPicks' | translate }}
+                        </label>
+                        <input
+                          type="text"
+                          (keypress)="onKeyPressNumberDecimal($event)"
+                          formControlName="cameraPicks"
+                          pInputText
+                          class="form-control"
+                          (keydown.enter)="
+                            onFocusOutEventPicks($event, rowIndex)
+                          "
+                          (focusout)="onFocusOutEventPicks($event, rowIndex)"
+                          maxlength="6"
+                        />
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[9].show"
+                      >
+                        <label>
+                          {{ 'technical-datas.machinePicks' | translate }}
+                        </label>
+                        <input
+                          type="text"
+                          (keypress)="onKeyPressNumberDecimal($event)"
+                          formControlName="machinePicks"
+                          pInputText
+                          class="form-control"
+                          maxlength="6"
+                        />
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[10].show"
+                      >
+                        <label class="lblBlock">
+                          {{ 'technical-datas.defaultModel' | translate }}
+                        </label>
+                        <input
+                          type="checkbox"
+                          class="pi p-checkbox"
+                          formControlName="defaultModel"
+                          name="defaultModel"
+                          id="defaultModel"
+                          (change)="handleChange($event, rowIndex)"
+                        />
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[11].show"
+                      >
+                        <label class="lblBlock label-required">
+                          {{ 'technical-datas.stampCylinderId' | translate }}
+                        </label>
+                        <p-dropdown
+                          [filter]="true"
+                          filterBy=""
+                          [appendTo]="mydiv"
+                          formControlName="stampCylinderId"
+                          [options]="stampCilinderList"
+                          optionLabel="stampCylinderName"
+                          optionValue="stampCylinderId"
+                          placeholder="{{
+                            ('technical-datas.stampCylinderId' | translate) ||
+                              ' '
+                          }}"
+                        ></p-dropdown>
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[12].show"
+                      >
+                        <label class="label-required">
+                          {{ 'technical-datas.repetitionNumber' | translate }}
+                        </label>
+                        <input
+                          type="text"
+                          (keypress)="onKeyPressNumberDecimal($event)"
+                          formControlName="repetitionNumber"
+                          pInputText
+                          class="form-control"
+                          maxlength="5"
+                        />
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[13].show"
+                      >
+                        <label class="lblBlock">
+                          {{ 'technical-datas.sheettype' | translate }}
+                        </label>
+                        <p-dropdown
+                          [filter]="true"
+                          filterBy=""
+                          [appendTo]="mydiv"
+                          formControlName="sheettype"
+                          [options]="[
+                            { sheetTypeId: 1, sheetTypeName: 'Pliego' },
+                            { sheetTypeId: 2, sheetTypeName: 'Rollo' }
+                          ]"
+                          optionLabel="sheetTypeName"
+                          optionValue="sheetTypeId"
+                          placeholder="{{
+                            ('technical-datas.sheettype' | translate) || ' '
+                          }}"
+                        ></p-dropdown>
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[14].show"
+                      >
+                        <label class="lblBlock label-required">
+                          {{ 'technical-datas.perforationType' | translate }}
+                        </label>
+                        <p-dropdown
+                          [filter]="true"
+                          filterBy=""
+                          [appendTo]="mydiv"
+                          formControlName="perforationType"
+                          [options]="perforationTypeList"
+                          optionLabel="name"
+                          optionValue="value"
+                          placeholder="{{
+                            ('technical-datas.perforationType' | translate) ||
+                              ' '
+                          }}"
+                        ></p-dropdown>
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[15].show"
+                      >
+                        <label class="label-required">
+                          {{
+                            'technical-datas.perforationDiameter' | translate
+                          }}
+                        </label>
+                        <input
+                          type="text"
+                          (keypress)="onKeyPressNumberDecimal($event)"
+                          formControlName="perforationDiameter"
+                          pInputText
+                          class="form-control"
+                          maxlength="5"
+                        />
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[16].show"
+                      >
+                        <label class="lblBlock label-required">
+                          {{ 'technical-datas.engravedType' | translate }}
+                        </label>
+                        <p-dropdown
+                          [filter]="true"
+                          filterBy=""
+                          [appendTo]="mydiv"
+                          formControlName="engravedType"
+                          [options]="engravedTypeList"
+                          optionLabel="name"
+                          optionValue="value"
+                          placeholder="{{
+                            ('technical-datas.engravedType' | translate) || ' '
+                          }}"
+                        ></p-dropdown>
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[17].show"
+                      >
+                        <label class="lblBlock label-required">
+                          {{ 'technical-datas.sheetTypeId' | translate }}
+                        </label>
+                        <p-dropdown
+                          [filter]="true"
+                          filterBy=""
+                          [appendTo]="mydiv"
+                          formControlName="sheetTypeId"
+                          [options]="sheetTypeList"
+                          optionLabel="sheetTypeName"
+                          optionValue="sheetTypeId"
+                          placeholder="{{
+                            ('technical-datas.sheetTypeId' | translate) || ' '
+                          }}"
+                        ></p-dropdown>
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[18].show"
+                      >
+                        <label class="label-required">
+                          {{ 'technical-datas.paperWidth' | translate }}
+                        </label>
+                        <input
+                          type="text"
+                          (keypress)="onKeyPressNumberDecimal($event)"
+                          formControlName="paperWidth"
+                          pInputText
+                          class="form-control"
+                          maxlength="5"
+                        />
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[19].show"
+                      >
+                        <label class="lblBlock label-required">
+                          {{ 'technical-datas.paperRealease' | translate }}
+                        </label>
+                        <p-dropdown
+                          [filter]="true"
+                          filterBy=""
+                          [appendTo]="mydiv"
+                          formControlName="paperRealease"
+                          [options]="[
+                            { progressStatusId: 1, name: 'N/A' },
+                            { progressStatusId: 2, name: 'Hot' },
+                            { progressStatusId: 3, name: 'Cold' },
+                            { progressStatusId: 4, name: 'Warm' }
+                          ]"
+                          optionLabel="name"
+                          optionValue="progressStatusId"
+                          placeholder="{{
+                            ('technical-datas.paperRealease' | translate) || ' '
+                          }}"
+                        ></p-dropdown>
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[20].show"
+                      >
+                        <label>
+                          {{ 'technical-datas.quantitySheet' | translate }}
+                        </label>
+                        <input
+                          type="text"
+                          (keypress)="onKeyPressNumberDecimal($event)"
+                          formControlName="quantitySheet"
+                          pInputText
+                          class="form-control"
+                          maxlength="15"
+                        />
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[21].show"
+                      >
+                        <label class="label-required">
+                          {{ 'technical-datas.advance' | translate }}
+                        </label>
+                        <input
+                          type="text"
+                          (keypress)="onKeyPressNumberDecimal($event)"
+                          formControlName="advance"
+                          pInputText
+                          class="form-control"
+                          maxlength="15"
+                        />
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[22].show"
+                      >
+                        <label>
+                          {{ 'technical-datas.squeegeeTravel' | translate }}
+                        </label>
+                        <input
+                          type="text"
+                          (keypress)="onKeyPressNumberDecimal($event)"
+                          formControlName="squeegeeTravel"
+                          pInputText
+                          class="form-control"
+                          maxlength="15"
+                        />
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[23].show"
+                      >
+                        <label>
+                          {{ 'technical-datas.screenPeelOff' | translate }}
+                        </label>
+                        <input
+                          type="text"
+                          (keypress)="onKeyPressNumberDecimal($event)"
+                          formControlName="screenPeelOff"
+                          pInputText
+                          class="form-control"
+                          maxlength="15"
+                        />
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[24].show"
+                      >
+                        <label>
+                          {{ 'technical-datas.offCont' | translate }}
+                        </label>
+                        <input
+                          type="text"
+                          (keypress)="onKeyPressNumberDecimal($event)"
+                          formControlName="offCont"
+                          pInputText
+                          class="form-control"
+                          maxlength="15"
+                        />
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[25].show"
+                      >
+                        <label>
+                          {{ 'technical-datas.numberOfOutputs' | translate }}
+                        </label>
+                        <input
+                          type="text"
+                          (keypress)="onKeyPressNumber($event)"
+                          formControlName="numberOfOutputs"
+                          pInputText
+                          class="form-control"
+                          maxlength="5"
+                        />
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[26].show"
+                      >
+                        <label class="lblBlock">
+                          {{ 'technical-datas.deweed' | translate }}
+                        </label>
+                        <p-dropdown
+                          [filter]="true"
+                          filterBy=""
+                          [appendTo]="mydiv"
+                          formControlName="deweed"
+                          [options]="[
+                            { deweedId: 'M', deweedName: 'Manual' },
+                            { deweedId: 'A', deweedName: 'Auto' }
+                          ]"
+                          optionLabel="deweedName"
+                          optionValue="deweedId"
+                          placeholder="{{
+                            ('technical-datas.deweed' | translate) || ' '
+                          }}"
+                        ></p-dropdown>
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[27].show"
+                      >
+                        <label>
+                          {{ 'technical-datas.buclecontrol' | translate }}
+                        </label>
+                        <input
+                          type="text"
+                          (keypress)="onKeyPressNumber($event)"
+                          formControlName="buclecontrol"
+                          pInputText
+                          class="form-control"
+                          maxlength="5"
+                        />
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[28].show"
+                      >
+                        <label>
+                          {{ 'technical-datas.power' | translate }}
+                        </label>
+                        <input
+                          type="text"
+                          (keypress)="onKeyPressNumber($event)"
+                          formControlName="power"
+                          pInputText
+                          class="form-control"
+                          maxlength="5"
+                        />
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[29].show"
+                      >
+                        <label>
+                          {{ 'technical-datas.frequency' | translate }}
+                        </label>
+                        <input
+                          type="text"
+                          (keypress)="onKeyPressNumber($event)"
+                          formControlName="frequency"
+                          pInputText
+                          class="form-control"
+                          maxlength="5"
+                        />
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[30].show"
+                      >
+                        <label class="lblBlock">
+                          {{ 'technical-datas.bladetype' | translate }}
+                        </label>
+                        <p-dropdown
+                          [filter]="true"
+                          filterBy=""
+                          [appendTo]="mydiv"
+                          formControlName="bladetype"
+                          [options]="bladeTypeList"
+                          optionLabel="bladeTypeName"
+                          optionValue="bladeTypeId"
+                          placeholder="{{
+                            ('technical-datas.bladetype' | translate) || ' '
+                          }}"
+                        ></p-dropdown>
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="listComponentsValidating[31].show"
+                      >
+                        <label class="label-required">
+                          {{ 'technical-datas.viscositystandard' | translate }}
+                        </label>
+                        <input
+                          type="text"
+                          (keypress)="onKeyPressNumberDecimal($event)"
+                          formControlName="viscositystandard"
+                          pInputText
+                          class="form-control"
+                          maxlength="5"
+                        />
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table-finotex>
+          </div>
+        </div>
+      </div>
+    </p-accordionTab>
+  </p-accordion>
+</form>
+
+<p-dialog
+  header="{{ 'technical-datas.lblTitleModal' | translate }}"
+  [(visible)]="showModalProductionLarge"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{ width: '40vw' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center mt-24 font16">
+      {{ 'technical-datas.lblBodyModalH2' | translate }}
+      {{ updateNumberLargeProduct }}
+    </div>
+    <div class="col-md-12 text-center mt-16 description-page">
+      <p>
+        {{ 'technical-datas.lblBodyModalH3' | translate }}
+      </p>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="row">
+      <div class="col-12 text-center">
+        <app-button-finotex
+          label="technical-datas.lblModalYes"
+          type="button"
+          typeButton="secondary"
+          [typeSize]="false"
+          class="mr-2"
+          (click)="btnSelectSi()"
+        ></app-button-finotex>
+
+        <app-button-finotex
+          label="technical-datas.lblModalNo"
+          type="submit"
+          typeButton="primary"
+          [typeSize]="false"
+          (click)="btnSelectNo()"
+        ></app-button-finotex>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="displayInvalidForm"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '40vw' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <em class="fas fa-info-circle font50"></em>
+    </div>
+    <div class="col-md-12 text-center mt-24 font16">
+      {{ 'technical-datas.lblAlertH1' | translate }}
+    </div>
+    <div class="col-md-12">
+      <p
+        class="text-muted tx-13 mb-3 mb-md-0 mt-3 text-center description-page"
+      >
+        {{ 'technical-datas.lblAlertDesc' | translate }}
+      </p>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button
+        (click)="displayInvalidForm = false"
+        label="{{ 'artWork.lblOk' | translate }}"
+        styleClass="button button-primary text-center"
+      ></p-button>
+    </div>
+  </ng-template>
+</p-dialog>

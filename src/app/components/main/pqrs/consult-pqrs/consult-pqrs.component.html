@@ -1,0 +1,285 @@
+<div class="conten-main">
+    <p-breadcrumb 
+        [model]="itemsBreadcrumb"
+        [tittle]="'main.info-pqrs-btn-consult'"
+        [description]="'main.consult-pqrs-description'">
+    </p-breadcrumb>
+
+    <form [formGroup]="parameterFormPqrs">
+        <div class="row w-100 mt-3 ml-2">        
+
+            <div class="col-12 col-md-3 col-lg-3 mt-2 p-0 pr-2">  
+                <p-dropdown                 
+                    [filter]="false" 
+                    [options]="plants" 
+                    optionValue="businessId"
+                    optionLabel="companyPublicName" 
+                    class="w-100 dropdown-plant" 
+                    placeholder="{{('main.consult-pqrs-plant' | translate) || ' '}}"
+                    formControlName="businessId">                
+                </p-dropdown>      
+            </div>
+
+            <div class="col-12 col-md-3 col-lg-2 mt-2 p-0 pr-2">                
+                <input
+                    formControlName="mail"
+                    type="email"
+                    pInputText                    
+                    placeholder="{{ 'main.generate-pqrs-mail' | translate }}"
+                    class="form-control"/>
+            </div>
+
+
+            <div class="col-12 col-md-3 col-lg-2 mt-2 p-0 pr-2">                
+                <app-search-selector-principal 
+                    placeholder="main.consult-pqrs-number-pqrs" 
+                    icon="pi pi-search"           
+                    inputId="searchRequest"
+                    (clickEvent)="onSubmitFilterSearch($event)">
+                </app-search-selector-principal>
+            </div>
+
+            <app-button-finotex                            
+                label="{{ 'formsGeneral.btnResetFields' | translate  }}"
+                type="button"
+                typeButton="secondary"
+                [typeSize]="false"
+                class="mr-2 mt-2 col align-self-start"                            
+                classButton="w-100"
+                (click)="clear()">
+            </app-button-finotex>        
+        </div>
+    </form>
+
+    <!-- table -->
+    <div class="row w-100 mt-4 ml-2">        
+        <p-table
+            class="w-100"
+            [data]="clistPqrs.controls"        
+            [columnsSeparate]="false"
+            [paginator]="false">
+                
+            <tr theaderRecords>
+                    <th style="width: 3rem"></th>
+                    <th>{{ "main.consult-pqrs-col-number-request" | translate }}</th>
+                    <th>{{ "main.consult-pqrs-col-state" | translate }}</th>
+                    <th>{{ "main.consult-pqrs-col-registration-date" | translate }}</th>
+                    <th>{{ "main.consult-pqrs-col-asnwer-date" | translate }}</th>
+                    <th>{{ "main.consult-pqrs-col-number-response" | translate }}</th>
+                    
+            </tr>
+                    
+            <div tbodyRecords *ngFor="let pqrs of clistPqrs.controls;let i = index" class="rowtable">
+                <div [formGroup]="pqrs" class="rowtable">                                            
+                    <tr>      
+                        <td>
+                            <span
+                                type="button"
+                                pButton
+                                pRipple        
+                                (click)="openDetail(pqrs)"                                              
+                                class="p-button-text p-button-rounded p-button-plain"
+                                [icon]="'pi pi-chevron-down'">
+                            </span>
+                        </td>                    
+                                            
+                        <td>{{ pqrs.controls.documentId.value}}</td>
+                        <td>{{ pqrs.controls.requestStatusName.value}}</td>
+                        <td>{{ pqrs.controls.requestDate.value}}</td>
+                        <td>{{ pqrs.controls.closedDate.value}}</td>
+                        <td>{{ pqrs.controls.answer.value}}</td>
+
+                    </tr>
+
+                    <tr id="rowDetail">
+                        <td colspan="6">
+
+                            <div class="row ml-4 mr-4">
+                                
+                                <div class="col-12 col-md-3 mt-2">
+                                    <label>{{ 'main.generate-pqrs-name-cliente' | translate }}</label>
+                                    <input 
+                                        [readonly]="true"
+                                        type="text"                              
+                                        pInputText                                                 
+                                        placeholder="{{ 'main.generate-pqrs-name-cliente' | translate  }}"                                                                    
+                                        class="form-control"  
+                                        formControlName="customerName"/>
+                                </div>
+
+                                <div class="col-12 col-md-3 mt-2">
+                                    <label>{{ 'main.generate-pqrs-id-cliente' | translate }}</label>
+                                    <input 
+                                        [readonly]="true"
+                                        type="text"                              
+                                        pInputText                                                 
+                                        placeholder="{{ 'main.generate-pqrs-id-cliente' | translate  }}"                                                                    
+                                        class="form-control"  
+                                        formControlName="thirdPartyId"/>
+                                </div>
+                                
+                                <div class="col-12 col-md-3 mt-2">
+                                    <label>{{ 'main.generate-pqrs-country' | translate }}</label>
+                                    <input 
+                                        [readonly]="true"
+                                        type="text"                              
+                                        pInputText                                                 
+                                        placeholder="{{ 'main.generate-pqrs-country' | translate  }}"                                                                    
+                                        class="form-control"  
+                                        formControlName="countryName"/>
+                                </div>
+
+                                <div class="col-12 col-md-3 mt-2">
+                                    <label>{{ 'main.generate-pqrs-address' | translate }}</label>
+                                    <input 
+                                        [readonly]="true"
+                                        type="text"                              
+                                        pInputText                                                 
+                                        placeholder="{{ 'main.generate-pqrs-address' | translate  }}"                                                                    
+                                        class="form-control"  
+                                        formControlName="address"/>
+                                </div>
+                            </div>
+
+                            <div class="row ml-4 mr-4">
+                                
+                                <div class="col-12 col-md-3 mt-2">
+                                    <label>{{ 'main.generate-pqrs-main-phone' | translate }}</label>
+                                    <input 
+                                        [readonly]="true"
+                                        type="text"                              
+                                        pInputText                                                 
+                                        placeholder="{{ 'main.generate-pqrs-main-phone' | translate  }}"                                                                    
+                                        class="form-control"  
+                                        formControlName="phone1"/>
+                                </div>
+
+                                <div class="col-12 col-md-3 mt-2">
+                                    <label>{{ 'main.generate-pqrs-optional-phone' | translate }}</label>
+                                    <input 
+                                        [readonly]="true"
+                                        type="text"                              
+                                        pInputText                                                 
+                                        placeholder="{{ 'main.generate-pqrs-optional-phone' | translate  }}"                                                                    
+                                        class="form-control"  
+                                        formControlName="phone2"/>
+                                </div>
+
+                                <div class="col-12 col-md-3 mt-2">
+                                    <label>{{ 'main.generate-pqrs-mail' | translate }}</label>
+                                    <input 
+                                        [readonly]="true"
+                                        type="text"                              
+                                        pInputText                                                 
+                                        placeholder="{{ 'main.generate-pqrs-mail' | translate  }}"                                                                    
+                                        class="form-control"  
+                                        formControlName="email"/>
+                                </div>
+
+                                <div class="col-12 col-md-3 mt-2">
+                                    <label>{{ 'main.generate-pqrs-requirement-type' | translate }}</label>
+                                    <input 
+                                        [readonly]="true"
+                                        type="text"                              
+                                        pInputText                                                 
+                                        placeholder="{{ 'main.generate-pqrs-requirement-type' | translate  }}"                                                                    
+                                        class="form-control"  
+                                        formControlName="requestTypeName"/>
+                                </div>
+                            </div>
+
+                            <div class="row ml-4 mr-4">
+                                
+                                <div class="col-12 col-md-3 mt-2">
+                                    <label>{{ 'main.generate-pqrs-order' | translate }}</label>
+                                    <input 
+                                        [readonly]="true"
+                                        type="text"                              
+                                        pInputText                                                 
+                                        placeholder="{{ 'main.generate-pqrs-order' | translate  }}"                                                                    
+                                        class="form-control"  
+                                        formControlName="purchaseOrderId"/>
+                                </div>
+
+                                <div class="col-12 col-md-3 mt-2">
+                                    <label>{{ 'main.generate-pqrs-invoice' | translate }}</label>
+                                    <input 
+                                        [readonly]="true"
+                                        type="text"                              
+                                        pInputText                                                 
+                                        placeholder="{{ 'main.generate-pqrs-invoice' | translate  }}"                                                                    
+                                        class="form-control"  
+                                        formControlName="billDocumentId"/>
+                                </div>                            
+                            </div>
+                        
+                            <div class="row ml-4 mr-4">
+                                <div class="col-12 mt-2">
+                                    <label>{{ 'main.generate-pqrs-description-request' | translate }}</label>                                
+                                    <textarea 
+                                        [readonly]="true"
+                                        type="text"                              
+                                        pInputText                                                 
+                                        placeholder="{{ 'main.generate-pqrs-description-request' | translate  }}"                                                                    
+                                        class="form-control notes"  
+                                        formControlName="notes">   
+                                    </textarea>                             
+                                </div>                            
+                            </div>
+
+                            <div class="row ml-4 mr-4 mb-3">
+                                <div class="col-12 mt-2">
+                                    <label>{{ 'main.generate-pqrs-evidence' | translate }}  <em class="fas fa-info-circle" style="
+                                        margin:-4px !important;" pTooltip="{{ 'main.generate-pqrs-dowload-evidence-toltip' | translate }}"></em></label>
+                                    <div class="evidence-box">
+                                        <a class="ml-2" target="_blank" id="fileRequest" (click)="Dowload()">{{pqrs.controls.fileName.value}}</a> 
+                                    </div>                                
+                                </div>                            
+                            </div>
+                        </td>                                                                                    
+                    </tr>
+                </div>
+            </div>
+        </p-table>
+    </div>
+
+    <!-- fail -->
+    <p-dialog 
+        [(visible)]="showConsultFail" 
+        [contentStyleClass]="'border-top'" 
+        [modal]="true" 
+        [baseZIndex]="10000"
+        [draggable]="false" 
+        [showHeader]="false" 
+        [resizable]="false" 
+        [style]="{ width: '500px' }">
+
+        <div class="row">
+            <div class="col-md-12 text-center font50">
+                <img _ngcontent-amv-c221="" width="60px" height="60px" src="../../../assets/images/Alert.svg"
+                    alt="shopping cart" class="simple-img" appImage />
+            </div>
+            
+            <div class="col-md-12 text-center mt-24">
+                <p class="font-weight-bold f-18 fail-title">{{ "main.consult-pqrs-fail-title" | translate }}</p>
+            </div>
+
+            <div class="col-md-12 text-center mt-24 f-14">      
+                <p class="fail-description">{{ "main.consult-pqrs-fail-description" | translate }}</p>
+            </div>
+        </div>
+
+        <ng-template pTemplate="footer">
+            <div class="col-md-12 text-center">
+                <p-button 
+                        (click)="showConsultFail = false" 
+                        label="{{ 'artWork.lblOk' | translate }}"
+                        styleClass="button button-primary text-center"></p-button>
+            </div>
+        </ng-template>
+    </p-dialog>
+
+</div>
+
+<p-toast></p-toast>
+

@@ -1,0 +1,68 @@
+        <div #container [ngStyle]="style" [class]="styleClass"
+            [ngClass]="{'p-datatable p-component': true,
+                'p-datatable-hoverable-rows': (rowHover||selectionMode),
+                'p-datatable-auto-layout': autoLayout,
+                'p-datatable-resizable': resizableColumns,
+                'p-datatable-resizable-fit': (resizableColumns && columnResizeMode === 'fit'),
+                'p-datatable-scrollable': scrollable,
+                'p-datatable-scrollable-vertical': scrollable && scrollDirection === 'vertical',
+                'p-datatable-scrollable-horizontal': scrollable && scrollDirection === 'horizontal',
+                'p-datatable-scrollable-both': scrollable && scrollDirection === 'both',
+                'p-datatable-flex-scrollable': (scrollable && scrollHeight === 'flex'),
+                'p-datatable-responsive-stack': responsiveLayout === 'stack',
+                'p-datatable-responsive-scroll': responsiveLayout === 'scroll',
+                'p-datatable-responsive': responsive,
+                'p-datatable-grouped-header': headerGroupedTemplate != null,
+                'p-datatable-grouped-footer': footerGroupedTemplate != null}" [attr.id]="id">
+            <div class="p-datatable-loading-overlay p-component-overlay" *ngIf="loading && showLoader">
+                <i [class]="'p-datatable-loading-icon pi-spin ' + loadingIcon"></i>
+            </div>
+            <div *ngIf="captionTemplate" class="p-datatable-header">
+                <ng-container *ngTemplateOutlet="captionTemplate"></ng-container>
+            </div>
+            <p-paginator [rows]="rows" [first]="first" [totalRecords]="totalRecords" [pageLinkSize]="pageLinks" styleClass="p-paginator-top" [alwaysShow]="alwaysShowPaginator"
+                (onPageChange)="onPageChange($event)" [rowsPerPageOptions]="rowsPerPageOptions" *ngIf="paginator && (paginatorPosition === 'top' || paginatorPosition =='both')"
+                [templateLeft]="paginatorLeftTemplate" [templateRight]="paginatorRightTemplate" [dropdownAppendTo]="paginatorDropdownAppendTo" [dropdownScrollHeight]="paginatorDropdownScrollHeight"
+                [currentPageReportTemplate]="currentPageReportTemplate" [showFirstLastIcon]="showFirstLastIcon" [dropdownItemTemplate]="paginatorDropdownItemTemplate" [showCurrentPageReport]="showCurrentPageReport" [showJumpToPageDropdown]="showJumpToPageDropdown" [showJumpToPageInput]="showJumpToPageInput" [showPageLinks]="showPageLinks"></p-paginator>
+
+            <div #wrapper class="p-datatable-wrapper" [ngStyle]="{height: scrollHeight}">
+                <table #table *ngIf="!virtualScroll" role="table" class="p-datatable-table" [ngClass]="tableStyleClass" [ngStyle]="tableStyle" [attr.id]="id+'-table'">
+                    <ng-container *ngTemplateOutlet="colGroupTemplate; context {$implicit: columns}"></ng-container>
+                    <thead class="p-datatable-thead">
+                        <ng-container *ngTemplateOutlet="headerGroupedTemplate||headerTemplate; context: {$implicit: columns}"></ng-container>
+                    </thead>
+                    <tbody class="p-datatable-tbody p-datatable-frozen-tbody" *ngIf="frozenValue||frozenBodyTemplate" [value]="frozenValue" [frozenRows]="true" [pTableBody]="columns" [pTableBodyTemplate]="frozenBodyTemplate" [frozen]="true"></tbody>
+                    <tbody class="p-datatable-tbody" [value]="dataToRender" [pTableBody]="columns" [pTableBodyTemplate]="bodyTemplate"></tbody>
+                    <tfoot *ngIf="footerGroupedTemplate||footerTemplate" class="p-datatable-tfoot">
+                        <ng-container *ngTemplateOutlet="footerGroupedTemplate||footerTemplate; context {$implicit: columns}"></ng-container>
+                    </tfoot>
+                </table>
+                <cdk-virtual-scroll-viewport *ngIf="virtualScroll" [itemSize]="virtualRowHeight" tabindex="0" [style.height]="scrollHeight !== 'flex' ? scrollHeight : undefined" [minBufferPx]="minBufferPx" [maxBufferPx]="maxBufferPx" (scrolledIndexChange)="onScrollIndexChange($event)" class="p-datatable-virtual-scrollable-body">
+                    <table #table role="table" class="p-datatable-table" [ngClass]="tableStyleClass" [ngStyle]="tableStyle" [attr.id]="id+'-table'">
+                        <ng-container *ngTemplateOutlet="colGroupTemplate; context {$implicit: columns}"></ng-container>
+                        <thead #tableHeader class="p-datatable-thead">
+                            <ng-container *ngTemplateOutlet="headerGroupedTemplate||headerTemplate; context: {$implicit: columns}"></ng-container>
+                        </thead>
+                        <tbody class="p-datatable-tbody p-datatable-frozen-tbody" *ngIf="frozenValue||frozenBodyTemplate" [value]="frozenValue" [frozenRows]="true" [pTableBody]="columns" [pTableBodyTemplate]="bodyTemplate" [frozen]="true"></tbody>
+                        <tbody class="p-datatable-tbody" [value]="dataToRender" [pTableBody]="columns" [pTableBodyTemplate]="bodyTemplate"></tbody>
+                        <tfoot *ngIf="footerGroupedTemplate||footerTemplate" class="p-datatable-tfoot">
+                            <ng-container *ngTemplateOutlet="footerGroupedTemplate||footerTemplate; context {$implicit: columns}"></ng-container>
+                        </tfoot>
+                    </table>
+                </cdk-virtual-scroll-viewport>
+            </div>
+
+            <p-paginator [rows]="rows" [first]="first" [totalRecords]="totalRecords" [pageLinkSize]="pageLinks" styleClass="p-paginator-bottom" [alwaysShow]="alwaysShowPaginator"
+                (onPageChange)="onPageChange($event)" [rowsPerPageOptions]="rowsPerPageOptions" *ngIf="paginator && (paginatorPosition === 'bottom' || paginatorPosition =='both')"
+                [templateLeft]="paginatorLeftTemplate" [templateRight]="paginatorRightTemplate" [dropdownAppendTo]="paginatorDropdownAppendTo" [dropdownScrollHeight]="paginatorDropdownScrollHeight"
+                [currentPageReportTemplate]="currentPageReportTemplate" [showFirstLastIcon]="showFirstLastIcon" [dropdownItemTemplate]="paginatorDropdownItemTemplate" [showCurrentPageReport]="showCurrentPageReport" [showJumpToPageDropdown]="showJumpToPageDropdown" [showJumpToPageInput]="showJumpToPageInput" [showPageLinks]="showPageLinks"></p-paginator>
+
+            <div *ngIf="summaryTemplate" class="p-datatable-footer">
+                <ng-container *ngTemplateOutlet="summaryTemplate"></ng-container>
+            </div>
+
+            <div #resizeHelper class="p-column-resizer-helper" style="display:none" *ngIf="resizableColumns"></div>
+            <span #reorderIndicatorUp class="pi pi-arrow-down p-datatable-reorder-indicator-up" style="display:none" *ngIf="reorderableColumns"></span>
+            <span #reorderIndicatorDown class="pi pi-arrow-up p-datatable-reorder-indicator-down" style="display:none" *ngIf="reorderableColumns"></span>
+        </div>
+    

@@ -1,0 +1,510 @@
+<p-breadcrumb
+  [model]="itemsBreadcrumb"
+  [tittle]="'product-brand-detail.titleMain'"
+  [description]="statusProductsByBrand" 
+></p-breadcrumb>
+
+<div class="container-serach">
+  <div class="row">
+    <div
+      *ngIf="showBrandCustomer || isCustomerContr"
+      class="col-12 col-sm-6 col-md-4 col-lg-3 mt-2"
+    >
+      <label for="txtElevadorMts">
+        {{ "product-brand-detail.lblBrandCustomer" | translate }}
+      </label>
+      <input
+        id="txtElevadorMts"
+        type="text"
+        class="inputs"
+        value="{{ product.brandCustomerName }}"
+        disabled
+      />
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-2">
+      <label for="txtElevadorMts">
+        {{ "product-brand-detail.lblCustomerCode" | translate }}
+      </label>
+      <input
+        id="txtElevadorMts"
+        type="text"
+        class="inputs"
+        value="{{ product.brandCatalogCode }}"
+        disabled
+      />
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-2">
+      <label for="txtElevadorMts">
+        {{ "product-brand-detail.lblLastestVersion" | translate }}
+      </label>
+      <input
+        id="txtElevadorMts"
+        type="text"
+        class="inputs"
+        value="{{ product.latestVersion | date: 'MMM/dd/yyyy' : 'en' }}"
+        disabled
+      />
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-2">
+      <label for="txtElevadorMts">
+        {{ "product-brand-detail.lblDescription" | translate }}
+      </label>
+      <input
+        id="txtElevadorMts"
+        type="text"
+        class="inputs"
+        value="{{ product.brandCatalogName }}"
+        disabled
+      />
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-2">
+      <label for="txtElevadorMts">
+        {{ "product-brand-detail.lblDimentions" | translate }}
+      </label>
+      <input
+        id="txtElevadorMts"
+        type="text"
+        class="inputs"
+        value="{{ product.dimension }}"
+        disabled
+      />
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-2">
+      <label for="txtElevadorMts">
+        {{ "product-brand-detail.lblFinalDimentions" | translate }}
+      </label>
+      <input
+        id="txtElevadorMts"
+        type="text"
+        class="inputs"
+        value="{{ product.finalDimension }}"
+        disabled
+      />
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-2">
+      <label for="txtElevadorMts">
+        {{ "product-brand-detail.lblProductionLine" | translate }}
+      </label>
+      <input
+        id="txtElevadorMts"
+        type="text"
+        class="inputs"
+        value="{{ product.productType }}"
+        disabled
+      />
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-2">
+      <label for="txtElevadorMts">
+        {{ "product-brand-detail.lblMoq" | translate }}
+        <em
+          class="fas fa-info-circle"
+          pTooltip="{{
+            'product-brand-detail.lblminimunOrderQuantity' | translate
+          }}"
+        ></em>
+      </label>
+      <input
+        id="txtElevadorMts"
+        type="text"
+        class="inputs"
+        value="{{ product.moq }}"
+        disabled
+      />
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-2">
+      <label for="txtElevadorMts" class="minimumSize-change">
+        {{ "product-brand-detail.lblMinumumPerSku" | translate }}
+      </label>
+      <input
+        id="txtElevadorMts"
+        type="text"
+        class="inputs"
+        value="{{ product.minimunPerChange }}"
+        disabled
+      />
+    </div>
+
+    <div
+      *ngIf="showBrandCustomer"
+      class="col-12 col-sm-6 col-md-4 col-lg-3 mt-2"
+    >
+      <label>
+        {{ "product-brand-detail.lblLeadTime" | translate }}
+      </label>
+      <input
+        id="txtElevadorMts"
+        type="text"
+        class="inputs"
+        value="{{ product.leadTime }}"
+        disabled
+      />
+    </div>
+
+    <div
+      *ngIf="showBrandCustomer"
+      class="col-12 col-sm-6 col-md-4 col-lg-3 mt-2"
+    >
+      <label>
+        {{ "product-brand-detail.lblDaysWeeks" | translate }}
+      </label>
+      <input
+        id="txtElevadorMts"
+        type="text"
+        class="inputs"
+        value="{{ product.timeUnitName }}"
+        disabled
+      />
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-2">
+      <label>
+        {{ "product-brand-detail.lblExFactoryLocation" | translate }}
+      </label>
+      <input
+        id="txtElevadorMts"
+        type="text"
+        class="inputs"
+        value="{{ product.factoryLocationName }}"
+        disabled
+      />
+    </div>
+
+    <div
+      *ngIf="showBrandCustomer"
+      class="col-12 col-sm-6 col-md-4 col-lg-3 mt-2"
+    >
+      <label for="txtElevadorMts">
+        {{ "product-brand-detail.lblProductionFacilites" | translate }}
+      </label>
+      <input
+        id="txtElevadorMts"
+        type="text"
+        class="inputs"
+        value="{{ product.localFacility }}"
+        disabled
+      />
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-2">
+      <label for="txtElevadorMts">
+        {{ "product-brand-detail.lblStatus" | translate }}
+      </label>
+      <input
+        id="txtElevadorMts"
+        type="text"
+        class="inputs"
+        value="{{ product.status }}"
+        disabled
+      />
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-2">
+      <label for="txtElevadorMts">
+        {{ "product-brand-detail.lblApprovedBy" | translate }}
+      </label>
+      <input
+        id="txtElevadorMts"
+        type="text"
+        class="inputs"
+        value="{{ product.approvedBy }}"
+        disabled
+      />
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-2">
+      <label for="txtElevadorMts">
+        {{ "product-brand-detail.lblApprovedDate" | translate }}
+      </label>
+      <input
+        id="txtElevadorMts"
+        type="text"
+        class="inputs"
+        value="{{ FormatD(product.approvedDate) }}"
+        disabled
+      />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-12 col-lg-6 mt-2">
+      <label for="txtElevadorMts">
+        {{ "product-brand-detail.lblConstructionDetail" | translate }}
+      </label>
+      <textarea
+        id="txtElevadorMts"
+        type="text"
+        class="inputs"
+        value="{{ product.constructionDetail }}"
+        disabled
+      ></textarea>
+    </div>
+
+    <div class="col-12 col-md-12 col-lg-6 mt-2">
+      <label for="txtElevadorMts">
+        {{ "product-brand-detail.lblComments" | translate }}
+      </label>
+      <textarea
+        id="txtElevadorMts"
+        type="text"
+        class="inputs"
+        value="{{ product.comments }}"
+        disabled
+      ></textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-3" *ngIf="product.imageUrl != null">
+      <label for="txtElevadorMts">
+        {{ "product-brand-detail.lblFilePreview" | translate }}
+      </label>
+      
+      <div class="imagen-media-detail text-right">
+        
+      <img src="{{ product.imageUrlTmp }}" alt="Card image cap" appImage />
+        
+        <div class="img-button-preview-datail">
+          <button
+            class="button-Preview button-primary img-button-preview-css"
+            type="button"
+            (click)="openPreviewFile(product.imageUrlTmp)"
+          >
+            <em class="fa fa-search"></em>
+          </button>
+        </div>
+
+
+      </div>
+
+      <label for="validationDefault01" class="mt-2">
+        {{ "product-brand-detail.lblInputAssociatedPDF" | translate }}
+      </label>
+
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="inputs cut form-control bc-w"
+          placeholder="{{
+            'product-brand-detail.lblInputAssociatedPDF' | translate
+          }}"
+          value="{{ product.adobeUrl }}"
+          readonly
+        />
+        <div class="input-group-append">
+          <button
+            id="btnAssociatePDF"
+            class="button button-secundary cut-b"
+            (click)="DownloadPdf()"
+          >
+            {{ "product-brand-detail.lblBtnAssociatedPDF" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-9">
+      <div>
+        <div class="w-100" id="accordion1">
+          <div class="card w-100">
+            <div class="card-header" id="headingOne">
+              <button
+                class="ttile-page w-100"
+                data-toggle="collapse"
+                data-target="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
+              >
+                {{ "product-brand-detail.lblPricingTable" | translate }}
+              </button>
+            </div>
+
+            <div
+              id="collapseOne"
+              class="collapse show w-100"
+              aria-labelledby="headingOne"
+              data-parent="#accordion1"
+            >
+              <div class="card-body row pt-0">
+                <div class="col-12">
+                  <p-table #table [data]="brandProductPricing">
+                    <tr theaderRecords>
+                      <th scope="col">
+                        {{ "product-brand-detail.lblTblQuantity" | translate }}
+                      </th>
+                      <th *ngIf="showBrandCustomer" scope="col">
+                        {{
+                          "product-brand-detail.lblTblSalesUnits" | translate
+                        }}
+                      </th>
+                      <th scope="col">
+                        {{ "product-brand-detail.lblTblSales" | translate }}
+                      </th>
+                      <th scope="col">
+                        {{ "product-brand-detail.lblTblFOB" | translate }}
+                      </th>
+                      <th *ngIf="showBrandCustomer" scope="col">
+                        {{
+                          "product-brand-detail.lblTblIntercompany" | translate
+                        }}
+                      </th>
+                    </tr>
+                    <tr
+                      tbodyRecords
+                      *ngFor="let productPricing of brandProductPricing"
+                    >
+                      <td>
+                        {{ productPricing.brandCatalogRangeFinal }}
+                      </td>
+                      <td *ngIf="showBrandCustomer">
+                        {{ productPricing.salesUnit }}
+                      </td>
+                      <td>{{ productPricing.salePrice }}</td>
+                      <td>{{ productPricing.fobprice }}</td>
+                      <td *ngIf="showBrandCustomer">
+                        {{ productPricing.intercompanyPrice }}
+                      </td>
+                    </tr>
+                  </p-table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-16">
+        <div class="w-100" id="accordion2">
+          <div class="card w-100">
+            <div class="card-header" id="headingSecond">
+              <button
+                class="ttile-page w-100"
+                data-toggle="collapse"
+                data-target="#collapseSecond"
+                aria-expanded="true"
+                aria-controls="collapseSecond"
+              >
+                {{ "product-brand-detail.lblDetailsTable" | translate }}
+              </button>
+            </div>
+
+            <div
+              id="collapseSecond"
+              class="collapse show"
+              aria-labelledby="headingSecond"
+              data-parent="#accordion2"
+            >
+              <div class="card-body row pt-0">
+                <div class="col-12">
+                  <p-table #table [data]="brandProductDetails">
+                    <tr theaderRecords>
+                      <th *ngIf="showBrandCustomer" scope="col">
+                        {{
+                          "product-brand-detail.lblTblItemReference" | translate
+                        }}
+                      </th>
+                      <th *ngIf="showBrandCustomer" scope="col">
+                        {{
+                          "product-brand-detail.lblTblInternalProductCode"
+                            | translate
+                        }}
+                      </th>
+                      <th scope="col">
+                        {{ "product-brand-detail.lblTblSize" | translate }}
+                      </th>
+                      <th scope="col">
+                        {{ "product-brand-detail.lblTblColor" | translate }}
+                      </th>
+                      <th *ngIf="showBrandCustomer" scope="col">
+                        {{ "product-brand-detail.lblTblCompany" | translate }}
+                      </th>
+                    </tr>
+                    <tr
+                      tbodyRecords
+                      *ngFor="let productDetail of brandProductDetails"
+                    >
+                      <td *ngIf="showBrandCustomer">
+                        {{ product.brandCatalogCode }}
+                      </td>
+                      <td *ngIf="showBrandCustomer">
+                        {{ productDetail.productId }}
+                      </td>
+                      <td>
+                        {{
+                          productDetail.size == null
+                            ? "N/A"
+                            : productDetail.size
+                        }}
+                      </td>
+                      <td>
+                        {{
+                          productDetail.color == null
+                            ? "N/A"
+                            : productDetail.color
+                        }}
+                      </td>
+                      <td *ngIf="showBrandCustomer">
+                        {{ productDetail.companyName }}
+                      </td>
+                    </tr>
+                  </p-table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 offset-md-8 text-right mt-16 pr-0">
+  <div class="row">
+    <div class="col-6">
+      <button
+        class="button button-secundary w-100"
+        pButton
+        pRipple
+        type="button"
+        (click)="showbrandProductsEdit(product)"
+        *ngIf="showBrandCustomer"
+      >
+        {{ "product-brand-detail.lblBtnEditDetails" | translate }}
+      </button>
+    </div>
+    <div class="col-6">
+      <button
+        rel="noopener noreferrer"
+        routerLink="/home/brandProducts"
+        class="button button-primary button-save w-100"
+      >
+        {{ "product-brand-detail.btnBack" | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<p-viewer
+  header="{{ 'products.preview_imagen' | translate }}"
+  [(visible)]="displayFilePreview"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <div class="image-viewer">
+    <img
+      src="{{ imageGaleryBrandDatail }}"
+      alt=""
+      appFallbackSrc
+    />
+  </div>
+  <ng-template pTemplate="footer"></ng-template>
+</p-viewer>

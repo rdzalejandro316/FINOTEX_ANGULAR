@@ -1,0 +1,40 @@
+.p-button-reset:focus {    
+    box-shadow: none !important;
+}
+
+.column-row
+{
+    width: 50px !important
+}
+
+.btn_index
+{
+    background: red !important;
+    z-index: 1 !important;    
+}
+
+.btn_row_column{
+    width: 50px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-search{
+    font: normal normal bold 18px/22px Montserrat;
+}
+
+.rowNoData
+{
+    border-top: solid 1px #d6001c;
+}
+
+.table-responsive
+{
+    overflow-x: clip !important;
+}
+
+.table_style{
+    table-layout: auto !important;
+}

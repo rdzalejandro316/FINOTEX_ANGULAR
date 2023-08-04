@@ -1,0 +1,563 @@
+<p-breadcrumb
+  [model]="itemsBreadcrumb"
+  [tittle]="'artWork.title_principal_new'"
+  [description]="'artWork.sub_title_principal'"
+></p-breadcrumb>
+
+<div class="container-serach mt-2" [formGroup]="artworkForm">
+  <div class="row">
+    <div *ngIf="roleProfileCustomer" class="col-12 col-md-3 mt-2">
+      <label for="validationDefault01" class="label-required">
+        {{ 'product-brand.lblCustomer' | translate }}
+      </label>
+      <p-dropdown
+        [filter]="true"
+        filterBy="customerName"
+        formControlName="CustomerId"
+        [options]="customers"
+        optionLabel="customerName"
+        optionValue="customerId"
+        placeholder="{{ ('artWork.selSelectOpcion' | translate) || ' ' }}"
+      ></p-dropdown>
+      <div class="invalid-feedback mb-2">
+        <div *ngIf="aw.CustomerId.errors?.required">
+          {{ 'formsGeneral.lblMandatoryField' | translate }}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 mt-2">
+      <label for="validationDefault01" class="label-required">
+        {{ 'artWork.lblItemDescription' | translate }}
+      </label>
+      <input
+        type="text"
+        formControlName="ItemDescription"
+        class="inputs"
+        pInputTextarea
+        placeholder="{{ 'artWork.plDescription' | translate }}"
+        [ngClass]="{ 'is-invalid': submitted && !IsValid('ItemDescription') }"
+      />
+      <div class="invalid-feedback mb-2">
+        <div *ngIf="aw.ItemDescription.errors?.required">
+          {{ 'formsGeneral.lblMandatoryField' | translate }}
+        </div>
+        <div *ngIf="aw.ItemDescription.errors?.minlength">
+          {{ 'formsGeneral.lblMinField' | translate }}
+          {{ aw.ItemDescription.errors.minlength.requiredLength }}
+          {{ 'formsGeneral.lblCaractField' | translate }}
+        </div>
+        <div *ngIf="aw.ItemDescription.errors?.maxlength">
+          {{ 'formsGeneral.lblMaxField' | translate }}
+          {{ aw.ItemDescription.errors.maxlength.requiredLength }}
+          {{ 'formsGeneral.lblCaractField' | translate }}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-xl-3 mt-2">
+      <label for="validationDefault01" class="label-required">
+        {{ 'artWork.lblProductType' | translate }}
+      </label>
+      <p-dropdown
+        [options]="productType"
+        optionLabel="groupLineName"
+        formControlName="GroupLine"
+        (onChange)="changeGroupLine($event)"
+        optionValue="groupLineId"
+        [ngClass]="{ 'is-invalid': submitted && !IsValid('Substrate') }"
+        [styleClass]="submitted && !IsValid('Substrate') ? 'is-invalid' : ''"
+        [ngClass]="{ 'is-invalid': submitted && !IsValid('GroupLine') }"
+        placeholder="{{ ('formsGeneral.selSelectOpcion' | translate) || ' ' }}"
+      ></p-dropdown>
+      <div class="invalid-feedback mb-2">
+        {{ 'formsGeneral.lblMandatoryField' | translate }}
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-xl-3 mt-2">
+      <label for="validationDefault01" class="label-required">
+        {{ 'artWork.lblDimensions' | translate }}
+      </label>
+      <em
+        class="fas fa-info-circle"
+        pTooltip="{{ 'artWork.ttDimensions' | translate }}"
+      ></em>
+      <input
+        type="text"
+        placeholder="{{ 'artWork.plDimentions' | translate }}"
+        [ngClass]="{ 'is-invalid': submitted && !IsValid('Dimentions') }"
+        formControlName="Dimentions"
+        pInputText
+        class="form-control"
+      />
+      <div class="invalid-feedback mb-2">
+        {{ 'formsGeneral.lblMandatoryField' | translate }}
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-xl-3 mt-2">
+      <label for="validationDefault01" class="label-required">
+        {{ 'artWork.lblColors' | translate }}
+      </label>
+      <em
+        class="fas fa-info-circle"
+        pTooltip="{{ 'artWork.ttColors' | translate }}"
+      ></em>
+      <input
+        type="text"
+        placeholder="{{ 'artWork.plColors' | translate }}"
+        class="inputs"
+        formControlName="Colors"
+        pInputTextarea
+        [ngClass]="{ 'is-invalid': submitted && !IsValid('Colors') }"
+      />
+      <div class="invalid-feedback mb-2">
+        <div *ngIf="aw.Colors.errors?.required">
+          {{ 'formsGeneral.lblMandatoryField' | translate }}
+        </div>
+        <div *ngIf="aw.Colors.errors?.minlength">
+          {{ 'formsGeneral.lblMinField' | translate }}
+          {{ aw.Colors.errors.minlength.requiredLength }}
+          {{ 'formsGeneral.lblCaractField' | translate }}
+        </div>
+        <div *ngIf="aw.Colors.errors?.maxlength">
+          {{ 'formsGeneral.lblMaxField' | translate }}
+          {{ aw.Colors.errors.maxlength.requiredLength }}
+          {{ 'formsGeneral.lblCaractField' | translate }}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-xl-3 mt-2">
+      <label for="validationDefault01" class="label-required">
+        {{ 'artWork.lblCutType' | translate }}
+      </label>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="CutType"
+          placeholder="{{ 'artWork.lblCutType' | translate }}"
+          aria-describedby="basic-addon2"
+          readonly
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary"
+            (click)="openModalCutType()"
+            type="button"
+          >
+            {{ 'artWork.btnSelect' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-xl-3 mt-2">
+      <label for="validationDefault01" class="label-required">
+        {{ 'artWork.lblSubstrateType' | translate }}
+      </label>
+      <p-dropdown
+        [options]="substractType"
+        optionLabel="substrateName"
+        optionValue="substrateId"
+        formControlName="Substrate"
+        [ngClass]="{ 'is-invalid': submitted && !IsValid('Substrate') }"
+        [styleClass]="submitted && !IsValid('Substrate') ? 'is-invalid' : ''"
+        placeholder="{{ ('artWork.selSelectOpcion' | translate) || ' ' }}"
+      ></p-dropdown>
+      <div class="invalid-feedback mb-2">
+        {{ 'formsGeneral.lblMandatoryField' | translate }}
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-xl-3 mt-2">
+      <label for="validationDefault01" class="label-required">
+        {{ 'artWork.lblFabricType' | translate }}
+      </label>
+      <input
+        type="text"
+        pInputText
+        class="form-control"
+        formControlName="FabricType"
+        [readonly]="!stateFabricType"
+        [ngClass]="{ 'is-invalid': submitted && !IsValid('FabricType') }"
+        placeholder="{{ 'artWork.plFabricType' | translate }}"
+      />
+      <div class="invalid-feedback mb-2">
+        {{ 'formsGeneral.lblMandatoryField' | translate }}
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 mt-2">
+      <label for="validationDefault01" class="label-required">
+        {{ 'artWork.lblObservations' | translate }}
+      </label>
+      <textarea
+        [rows]="6"
+        formControlName="Observations"
+        class="inputs"
+        placeholder="{{ 'artWork.plObservations' | translate }}"
+        pInputTextarea
+        [ngClass]="{ 'is-invalid': submitted && !IsValid('Observations') }"
+        autoResize="true"
+      ></textarea>
+      <div class="invalid-feedback mb-2">
+        {{ 'formsGeneral.lblMandatoryField' | translate }}
+      </div>
+    </div>
+
+    <div [hidden]="!roleProfileCustomer" class="col-12 col-md-6 col-xl-3 mt-2">
+      <label class="label-required">{{ 'artWork.designer' | translate }}</label>
+      <p-dropdown
+        [filter]="true"
+        filterBy="designerName"
+        formControlName="designerIdForm"
+        [options]="designers"
+        optionLabel="designerName"
+        optionValue="designerId"
+        placeholder="{{ ('artWork.selSelectOpcion' | translate) || ' ' }}"
+      ></p-dropdown>
+    </div>
+
+    <div class="col-12 col-md-6 col-xl-3 mt-2">
+      <div class="row">
+        <div class="col-12 pl-0 pr-0">
+          <label>
+            {{ 'artWork.lblUploadArtFile' | translate }}
+          </label>
+          <em
+            class="fas fa-info-circle ml-1"
+            pTooltip="{{ 'artWork.ttUploadArtFile' | translate }}"
+          ></em>
+        </div>
+        <div class="col-12 pl-0 pr-0">
+          <input
+            type="text"
+            id="txtUploadArtFile"
+            pInputText
+            formControlName="UploadArtFile"
+            class="form-control input-select-image"
+            placeholder="{{ 'artWork.plDropfilesheretoupload' | translate }}"
+            readonly
+          />
+        </div>
+        <div class="col-12 pl-0 pr-0 mt-1 text-right">
+          <button
+            pButton
+            (click)="resetFiles('file')"
+            type="button"
+            label="{{ 'artWork.btnReset' | translate }}"
+            class="button-select-image-reset mr-1"
+          ></button>
+          <input
+            type="file"
+            name="file1"
+            id="file1"
+            (change)="fileChanged($event)"
+          />
+          <button
+            pButton
+            type="button"
+            id="artFile"
+            label="{{ 'artWork.btnUpload' | translate }}"
+            class="button-select-image-update"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="col-12 col-md-6 {{ lineSpacing ? 'col-xl-3' : 'col-xl-6' }} mt-2"
+    >
+      <label for="validationDefault01">
+        {{ 'artWork.lblUploadAditional' | translate }}
+      </label>
+
+      <input
+        type="text"
+        id="txtUploadAditional"
+        pInputText
+        class="form-control input-select-image"
+        formControlName="UploadAditional"
+        placeholder="{{ 'artWork.plDropfilesheretoupload' | translate }}"
+        readonly
+      />
+      <div class="invalid-feedback mb-2">
+        {{ 'formsGeneral.lblMandatoryField' | translate }}
+      </div>
+      <div class="text-right mt-1">
+        <button
+          pButton
+          type="button"
+          (click)="resetFiles('addFile')"
+          label="{{ 'artWork.btnReset' | translate }}"
+          class="button-select-image-reset mr-1"
+        ></button>
+        <input
+          type="file"
+          name="file2"
+          id="file2"
+          (change)="fileChangedAditional($event)"
+        />
+        <button
+          pButton
+          type="button"
+          id="artFileAditional"
+          label="{{ 'artWork.btnUpload' | translate }}"
+          class="button-select-image-update"
+        ></button>
+      </div>
+    </div>
+
+    <div
+      [hidden]="validateRolBuilderSalesExecutive"
+      class="col-12 col-md-6 col-xl-3 mt-2"
+    >
+      <label for="validationDefault01">
+        {{ 'artWork.designerFile' | translate }}
+      </label>
+      <em
+        class="fas fa-info-circle ml-1"
+        pTooltip="{{ 'artWork.designerFile' | translate }}"
+      ></em>
+      <input
+        type="text"
+        id="txtdesigner_file"
+        pInputText
+        class="form-control input-select-image"
+        formControlName="designer_file"
+        placeholder="{{ 'artWork.plDropfilesheretoupload' | translate }}"
+        readonly
+      />
+
+      <div class="invalid-feedback mb-2">
+        {{ 'formsGeneral.lblMandatoryField' | translate }}
+      </div>
+      <div class="text-right mt-1">
+        <button
+          pButton
+          type="button"
+          (click)="resetFiles('designer')"
+          label="{{ 'artWork.btnReset' | translate }}"
+          class="button-select-image-reset mr-1"
+        ></button>
+        <input
+          type="file"
+          name="file2"
+          id="file2"
+          (change)="fileChangedDesigner($event)"
+        />
+        <button
+          pButton
+          type="button"
+          id="artFileDesigner"
+          label="{{ 'artWork.btnUpload' | translate }}"
+          class="button-select-image-update"
+        ></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="text-right mt-3">
+  <div class="row">
+    <div class="col-12 text-right">
+      <app-button-finotex
+        label="artWork.btnCancel"
+        type="button"
+        routerLink="/home/artworks_history"
+        typeButton="secondary"
+        [typeSize]="false"
+        class="mr-2"
+      ></app-button-finotex>
+
+      <app-button-finotex
+        label="artWork.btnSubmit"
+        type="submit"
+        typeButton="primary"
+        [typeSize]="false"
+        [disabled]="artworkForm.invalid || buttonState"
+        (click)="createSketch()"
+      ></app-button-finotex>
+    </div>
+  </div>
+
+</div>
+
+
+  <p-dialog
+    header="{{ 'artWork.lblCutype' | translate }}"
+    [(visible)]="display"
+    [modal]="true"
+    [baseZIndex]="10000"
+    [draggable]="false"
+    [resizable]="false"
+    [style]="{ width: '1140px' }"
+  >
+    <div class="row">
+      <div class="col-md-12">
+        <p class="text-muted tx-13 mb-3 mb-md-0 description-page">
+          {{ 'artWork.decriptionModal' | translate }}
+        </p>
+        <div class="table-responsive mt-16">
+          <table
+            id="datatableCutType"
+            class="custom table table-striped table-borderless"
+            style="width: 100%;"
+          >
+            <caption></caption>
+            <thead class="d-none">
+              <tr>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody class="row">
+              <tr
+                class="col-12 col-md-4 col-lg-3"
+                *ngFor="let item of cutTypes"
+              >
+                <td>
+                  <section class="card-title">
+                    <input
+                      type="radio"
+                      value="{{ item.cutId }}"
+                      class="inp-checkbox"
+                      name="rdCutType"
+                    />
+                    <label class="text-bold mt-0 text-preline">
+                      {{ item.cutName }}
+                    </label>
+                  </section>
+                  <hr class="hr-car" />
+                  <div class="card-body">
+                    <div>
+                      <img
+                        _ngcontent-syr-c209=""
+                        src="{{ item.absoluteImagePath }}"
+                        alt="cut type image"
+                        appImage
+                      />
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="row">
+        <div class="col-12 text-right">
+          <app-button-finotex
+            label="artWork.btnCancel"
+            type="button"
+            (click)="display = false"
+            typeButton="secondary"
+            [typeSize]="false"
+            class="mr-2"
+          ></app-button-finotex>
+
+          <app-button-finotex
+            label="artWork.btnSelectcut"
+            type="submit"
+            typeButton="primary"
+            [typeSize]="false"
+            (click)="selectCutType()"
+          ></app-button-finotex>
+        </div>
+      </div>
+
+    </ng-template>
+  </p-dialog>
+
+
+<p-dialog
+  [(visible)]="displayConfirmApproved"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '500px' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <em class="far fa-check-circle font50"></em>
+    </div>
+    <div class="col-md-12 text-center mt-24">
+      {{ 'artWork.msgArtWorkSuccessfully' | translate }}
+    </div>
+    <div class="col-md-12">
+      <p
+        class="text-muted tx-13 mb-3 mb-md-0 mt-3 text-center description-page"
+      >
+        {{ 'artWork.requestNumberIs' | translate }}
+        <b>{{ sketchId }}</b>
+        <br />
+        {{ 'artWork.itemDescription' | translate }}
+        <b>{{ sketchName }}</b>
+        <br />
+        {{ 'artWork.msgCheck2' | translate }}
+      </p>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button
+        (click)="confirmApproved()"
+        label="Ok"
+        styleClass="button button-primary text-center"
+      ></p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="displayInvalidateFileMessage"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '500px' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <em class="fas fa-info-circle font50"></em>
+    </div>
+    <div class="col-md-12 text-center mt-24">
+      {{ 'artWork.unsupportedFileTitle' | translate }}
+    </div>
+    <div class="col-md-12">
+      <p
+        [hidden]="this.hideErrorType"
+        class="text-muted tx-13 mb-3 mb-md-0 mt-3 text-center description-page"
+      >
+        {{ 'artWork.unsupportedFile' | translate }}.
+      </p>
+      <p
+        [hidden]="this.hideErrorSize"
+        class="text-muted tx-13 mb-3 mb-md-0 mt-3 text-center description-page"
+      >
+        {{ 'artWork.unsupportedFileLength' | translate }} {{ this.maxSize }}.
+      </p>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button
+        (click)="displayInvalidateFileMessage = false"
+        label="{{ 'artWork.lblOk' | translate }}"
+        styleClass="button button-primary text-center"
+      ></p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-toast></p-toast>

@@ -1,0 +1,13 @@
+.description{
+    height: 80px!important;
+    background-color: #e9ecef;
+    opacity: 1;
+}
+
+.evidence{
+    background-color: #ffffff!important;
+}
+
+.download{
+    justify-content: flex-end;
+}

@@ -1,0 +1,149 @@
+<div class="main-wrapper">
+    <div class="page-wrapper full-page mainScreen content-comp">
+                
+        <div class="d-flex align-items-center justify-content-center">
+            <div class="row mx-0 auth-page centerdiv">
+                
+                <div class="col-xl-8 col-lg-8 col-md-12 col-12 card-transparent p-2 mt-4">
+                    <div class="p-4">
+                        <div class="row">
+                            <span class="title-welcome">{{ "main.welcome-title" | translate }} </span>
+                        </div>
+
+                        <div class="line-horizontal"></div>
+
+                        <div class="row">
+                            <label class="description-welcome-light">
+                                {{ "main.welcome-description-p-1" | translate }}
+                                <span class="description-welcome-bold">{{ "main.welcome-description-p-2" | translate }}</span>
+                                {{ "main.welcome-description-p-3" | translate }}
+                                <span class="description-welcome-bold">{{ "main.welcome-description-p-4" | translate }}</span>
+                                {{ "main.welcome-description-p-5" | translate }}
+                            </label>
+                        </div>
+
+                        <div class="row">
+                            <label class="description-welcome-light">
+                                {{ "main.welcome-description-p-6" | translate }}
+                            </label>
+                            <label class="description-welcome-light">{{ "main.welcome-fops" | translate }}</label>
+                        </div>
+                        
+                        <div class="row">
+                            <label class="description-welcome-bold">{{ "main.welcome-team" | translate }}</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-12 col-12 card-btn p-2 mt-2 mb-2">
+                    
+                    <div class="row card-cont finotex-container_section finotex-container_section--shadow mt-2 p-0">
+                        <div class="w-100 card-button">   
+                            
+                            <div class="w-100 preview-card d-flex flex-column align-items-center">
+                                <div class="mt-2 mb-2 image-animation_request"></div>
+                                <span class="btn-title text-center">{{ "main.requests" | translate }}</span>
+                            </div>                         
+
+                            <div class="detail-card mt-2">
+                                <label class="detail-text">{{ "main.request-detail" | translate }}</label>                            
+                                <div class="text-center mt-2">
+                                    <p-button            
+                                        label="{{ 'main.btn-begin' | translate }}"
+                                        styleClass="button button-primary text-center"
+                                        (click)="openPqrs()">
+                                    </p-button>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+
+                    <div class="row card-cont finotex-container_section finotex-container_section--shadow mt-2 p-0">
+                        <div class="w-100 card-button">   
+                            
+                            <div class="w-100 preview-card d-flex flex-column align-items-center">
+                                <div class="mt-2 mb-2 image-animation_chatbot"></div>
+                                <span class="btn-title text-center">{{ "main.chatbot" | translate }}</span>
+                            </div>                         
+
+                            <div class="detail-card mt-2">
+                                <label class="detail-text">{{ "main.chatbot-detail" | translate }}</label>                            
+                                <div class="text-center mt-2">
+                                    <p-button            
+                                        label="{{ 'main.btn-begin' | translate }}"
+                                        styleClass="button button-primary text-center"
+                                        (click)="openPqrs()">
+                                    </p-button>
+                                </div>
+                            </div>
+                        </div>   
+                    </div>
+                </div>
+
+            </div>            
+        </div>
+
+        <div class="foter-main mt-2">
+            <div class="w-100 footer-main-description d-flex align-items-center justify-content-center">
+                <p class="text-center">{{ "main.footer-main-description" | translate }}</p>
+            </div>
+
+            <div class="row footer-second">                
+                <div class="footer-main-data">
+                    <div class="p-1 d-flex align-self-center">
+                        <img
+                            class="companyLogo simple-img m-3"
+                            data-tenant-branding-logo="true"
+                            src="../../../assets/images/Pin red.svg"
+                            alt="Company Logo"/>    
+
+
+                        <div class="d-flex flex-column align-self-center">
+                            <span class="fontFooter">6942 NW 50th STREET</span>
+                            <span class="fontFooter">Miami,FL 33166</span>
+                        </div>
+
+                    </div>
+
+                    <div class="p-1 d-flex align-self-center">
+                        <img
+                            class="companyLogo simple-img m-3"
+                            data-tenant-branding-logo="true"
+                            src="../../../assets/images/Phone red.svg"
+                            alt="Company Logo"/>    
+
+
+                        <div class="d-flex flex-column align-self-center">
+                            <span class="fontFooter">305.470.2400</span>
+                            <span class="fontFooter">305.594.5883</span>
+                        </div>
+
+                    </div>
+
+                    <div class="p-1 d-flex align-self-center">
+                        <img
+                            class="companyLogo simple-img m-3"
+                            data-tenant-branding-logo="true"
+                            src="../../../assets/images/Mail red.svg"
+                            alt="Company Logo"/>    
+
+
+                        <div class="d-flex flex-column align-self-center">
+                            <span class="fontFooter">infousa@finotex.com</span>
+                        </div>
+
+                    </div>
+
+                    <div class="pl-1 pr-2">
+                        <div class="d-flex align-self-center line-separator"></div>
+                    </div>
+
+                    <div class="p-1 d-flex align-self-center">                                                                        
+                        <span class="fontFooter">&copy; {{yearCurrent}} finotex All Rights Reserved</span>                        
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+    </div>
+</div>

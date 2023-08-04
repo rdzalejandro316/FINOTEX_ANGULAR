@@ -1,0 +1,39 @@
+.row-white
+{
+    background-color: white !important;
+}
+
+.rowtable{
+    display: contents;
+}
+
+.rowAbsoulte{
+    position: absolute;
+}
+
+.rowNoData
+{
+    border-top: solid 1px #d6001c;
+}
+
+.title-repeat-article{
+    font: normal normal bold 16px/28px Montserrat !important;
+}
+
+.description-repeat-article{
+    font: normal normal normal 16px/28px Montserrat !important;
+}
+
+.article-repeat{
+    font: normal normal bold 16px/28px Montserrat !important;
+}
+
+input[type='checkbox']:checked:after {
+    content: '\e909';
+    padding-left: 5px;
+  }
+  
+input.pi.p-checkbox {
+    font-size: 14px;
+}
+  

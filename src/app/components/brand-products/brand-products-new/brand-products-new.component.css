@@ -1,0 +1,69 @@
+.minimumSize-change {
+    white-space: nowrap;
+  }
+  
+  .img-media {
+    width: 100%;
+  }
+  
+  @media screen and (min-device-width: 300px) and (max-device-width: 426px) {
+    .minimumSize-change {
+      white-space: inherit
+    }
+  }
+  
+  .cut {
+    position: initial;
+  }
+  
+  .cut-b {
+    width: 30%;
+    border-radius: 0px 10px 10px 0px;
+  }
+  
+  .pnlUploadAssociatePDF {
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    padding: 10px;
+    width: 95%;
+  }
+  
+  #txtUploadAssociatedPDF {
+    width: 60%;
+    height: 75px;
+  }
+  
+  button.ttile-page {
+    font-size: 14px !important;
+    background-color: #fff;
+    border: none;
+  }
+  
+  button.ttile-page.collapsed {
+    color: #2B2A2A;
+  }
+  
+  .image{
+    margin: 0 auto;
+  }
+  
+  .datepicker {
+    right: 24px !important;
+}
+
+.label-required:after {
+    margin-right: 4px;
+}
+
+.input-select-image {
+  height: 80px !important;
+}
+
+.price-label {
+  margin-top: 15px;
+}
+
+.price-currency-label {
+  margin-top: 15px;
+  margin-left: 5px;
+}

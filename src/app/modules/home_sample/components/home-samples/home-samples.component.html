@@ -1,0 +1,166 @@
+<p-breadcrumb
+  [model]="itemsBreadcrumb"
+  [tittle]="'technical-sheets.general_sales'"
+  [description]="'technical-sheets.decription_sales'"
+></p-breadcrumb>
+
+<p-tabView [(activeIndex)]="activeIndex">
+  <p-tabPanel
+    header="{{ 'technical-sheets.data_of_sale_and_article' | translate }}"
+  >
+    <app-general-data-of-sample
+      paramCustomerId="{{ paramCustomerId }}"
+      paramSampleId="{{ paramSampleId }}"
+      (productId)="receiveproductId($event)"
+      (checkValueAutomatic)="automaticCode($event)"
+      (paramProductionPlanId)="receiveProductionPlanId($event)"
+      (paramZone)="getZoneName($event)"
+    ></app-general-data-of-sample>
+
+    <app-identification-data
+      paramCustomerId="{{ paramCustomerId }}"
+      [productId]="productId"
+      (paramLineId)="receiveLineId($event)"
+      (paramLongProduction)="receiveLargeProduction($event)"
+      (dataCompleteForm)="receiveDataIdentification($event)"
+    ></app-identification-data>
+
+    <app-image-settings
+      paramCustomerId="{{ paramCustomerId }}"
+    ></app-image-settings>
+
+    <app-inventory-tweaks></app-inventory-tweaks>
+
+    <app-customer-reference
+      paramCustomerId="{{ paramCustomerId }}"
+    ></app-customer-reference>
+
+    <app-additional-properties>
+      paramCustomerId="{{ paramCustomerId }}">
+    </app-additional-properties>
+  </p-tabPanel>
+
+  <p-tabPanel header="{{ 'technical-sheets.materials' | translate }}">
+    <app-technical-data
+      [line]="id"
+      [productId]="productId"
+      (paramLongProductionUpdate)="receiveLargeProductionUpdate($event)"
+    ></app-technical-data>
+    <app-troquel [line]="id"></app-troquel>
+    <app-materials
+      (paramTotalPickHilo)="receiveTotalPickHilo($event)"
+      (paramTotalPickcolor)="receiveTotalPickcolor($event)"
+    ></app-materials>
+  </p-tabPanel>
+
+  <p-tabPanel
+    header="{{ 'technical-sheets.quality_process_control' | translate }}"
+  >
+    <!-- <ng-template pTemplate="content">3</ng-template> -->
+
+    <app-quality-data></app-quality-data>
+  </p-tabPanel>
+  <div class="row">
+    <div class="col-6 text-left">
+      <button
+        pButton
+        type="button"
+        routerLink="/home/customers_list/"
+        label="{{ 'general.btnreturn' | translate }}"
+        class="button button-secundary filter mr-1"
+        style="margin-top: 20px"
+      ></button>
+    </div>
+    <div class="col-6 text-right">
+      <button
+        *ngIf="create"
+        pButton
+        type="button"
+        [disabled]="!validForm()"
+        (click)="createSample()"
+        label="{{ 'technical-sheets.btnSave' | translate }}"
+        class="button button-primary filter mr-1"
+        style="margin-top: 20px"
+      ></button>
+      <button
+        *ngIf="edit"
+        pButton
+        type="button"
+        [disabled]="!validEditForm()"
+        (click)="editSample()"
+        label="{{ 'technical-sheets.btnSave' | translate }}"
+        class="button button-primary filter mr-1"
+        style="margin-top: 20px"
+      ></button>
+    </div>
+  </div>
+</p-tabView>
+
+<p-dialog
+  [(visible)]="displayConfirmCreate"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '30vw' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <em class="far fa-check-circle font50"></em>
+    </div>
+    <div class="col-md-12 text-center mt-24 font16">
+      {{ "technical-sheets.sampleSuccessfully" | translate }}
+    </div>
+    <div class="col-md-12 text-center mt-16 description-page">
+      <p>
+        {{ "technical-sheets.yourSample" | translate }}
+        <b>{{ sampleNumber }}</b>
+      </p>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button
+        (click)="confirmSampleCreation()"
+        label="{{ 'checkOut.btnOk' | translate }}"
+        styleClass="button button-primary text-center"
+      ></p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="displayConfirmPartialCreate"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '30vw' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <em class="far fa-check-circle font50"></em>
+    </div>
+    <div class="col-md-12 text-center mt-24 font16">
+      {{ "technical-sheets.samplePartialSuccessfully" | translate }}
+    </div>
+    <div class="col-md-12 text-center mt-16 description-page">
+      <p>{{ "technical-sheets.msgSuccessfully" | translate }}</p>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button
+        (click)="displayConfirmPartialCreate = false"
+        label="{{ 'checkOut.btnOk' | translate }}"
+        styleClass="button button-primary text-center"
+      ></p-button>
+    </div>
+  </ng-template>
+</p-dialog>

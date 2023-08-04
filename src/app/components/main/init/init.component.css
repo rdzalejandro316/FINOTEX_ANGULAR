@@ -1,0 +1,213 @@
+.content-comp {
+    /* min-height: calc(100vh - 60px) !important; */
+    background: #f9fafb;
+    width: 100%;
+    margin-left: 0;
+    /* display: grid;
+    grid-auto-rows: 1fr 100px; */
+    -webkit-transition: margin 0.1s ease, width 0.1s ease;
+    transition: margin 0.1s ease, width 0.1s ease
+}
+
+.centerdiv {
+    width: 60% !important;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/* cards welcome */
+.card-transparent {
+    box-shadow: 0px 0px 8px 0px rgb(0 0 0 / 16%);
+    background-color: #ffffff96;
+    border-radius: 20px;
+}
+
+.title-welcome {
+    font: normal normal bold 24px/29px Montserrat;
+    color: #D6001C;
+}
+
+.line-horizontal {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--unnamed-color-d6001ccc);
+}
+
+.description-welcome-light {
+    color: #707070;
+    font: normal normal normal 14px/22px Montserrat;
+}
+
+.description-welcome-bold {
+    color: #707070;
+    font: normal normal bold 14px/22px Montserrat;
+}
+
+
+/* cards buttons */
+
+.card-cont {
+    width: 300px;
+    height: 200px;
+}
+
+.card-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.finotex-container_section:hover {
+    border: 2px solid #D6001C;
+}
+
+
+.finotex-container_section:hover .preview-card {
+    flex-direction: row !important;
+}
+
+
+.finotex-container_section:hover .image-animation_request {
+    background: url("../../../../assets/images/solicitudes red.svg") no-repeat center center;
+    background-size: contain;
+    height: 35px;
+    width: 35px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.finotex-container_section:hover .btn-title {
+    color: #D6001C;
+    font: normal normal bold 16px/19px Montserrat;
+    width: 150px;
+    text-align: left !important;
+    margin-left: 10px;
+}
+
+
+.image-animation_request {
+    background: url("../../../../assets/images/solicitudes.svg") no-repeat center center;
+    background-size: contain;
+    height: 50px;
+    width: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.image-animation_chatbot {
+    background: url("../../../../assets/images/Chatbot.svg") no-repeat center center;
+    background-size: contain;
+    height: 50px;
+    width: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.detail-card {
+    display: none;
+}
+
+.finotex-container_section:hover .detail-card {
+    transition-duration: 0.2s;
+    display: block;
+}
+
+.finotex-container_section:hover .detail-card .button {
+    text-align: center !important;
+}
+
+
+.detail-text {
+    font: normal normal normal 13px Montserrat;
+    color: #54585A;
+}
+
+
+@media (max-width:1000px) {
+    .card-btn {
+        flex-direction: row !important;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 0px !important;
+    }
+
+    .card-cont {
+        width: 100%;
+    }
+
+    .centerdiv {
+        width: 90% !important;
+    }
+
+    .foter-main{
+        position: relative !important;        
+    }
+}
+
+.card-btn {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+.btn-title {
+    font: normal normal bold 20px/24px Montserrat;
+    color: #54585A;
+}
+
+
+
+/* footer */
+
+.foter-main {
+    position: fixed !important;
+    bottom: 0;
+    width: 100%;    
+}
+
+.footer-main-description {
+    background: #EA7F8D 0% 0% no-repeat padding-box;
+    padding: 10px;
+}
+
+.footer-main-description p {
+    color: #FFFFFF;
+    font: normal normal bold 14px/18px Montserrat;
+}
+
+
+.footer-second{
+    background: transparent linear-gradient(180deg, #FFFFFF 0%, #FFFFFF4F 100%) 0% 0% no-repeat padding-box;
+    padding: 10px;
+}
+
+.footer-main-data {    
+    display: flex;    
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.footer-main-data div{
+    align-self: center !important;
+
+}
+
+.fontFooter {
+    font: normal normal normal 12px/15px Montserrat;
+    color: var(--unnamed-color-d6001ccc);
+}
+
+.line-separator {
+    border-left: 1px solid var(--unnamed-color-d6001ccc);
+    height: 30px;
+}

@@ -1,0 +1,716 @@
+
+<p-accordion>
+
+    <p-accordionTab
+        header="{{ 'pqrs.edit-pqrs-tab-information-addtional' | translate }}"
+        [selected]="true"
+        [formStatus]="true"
+        [imagenIcon]="formOneIconStatusOne"
+        statusFormText="{{ formOneStatusTextOne }}">
+
+        <ng-template pTemplate="content">
+            <form [formGroup]="registerFormAditional">
+                <div class="row">
+                    <div class="col-12 col-lg-3 mt-2">
+                        <label class="label-required">{{ 'pqrs.info-aditional-requested-by' | translate }}</label>
+                        <input
+                            [readonly]="isReadOnlyComponent"
+                            type="text"
+                            pInputText
+                            placeholder="{{ 'pqrs.info-aditional-requested-by' | translate }}"
+                            formControlName="requestBy"
+                            class="form-control"/>                        
+                    </div>
+
+                    <div class="col-12 col-lg-3 mt-2">
+                        <label class="label-required">{{ 'pqrs.info-aditional-authorized-by' | translate }}</label>
+                        <input
+                            type="text"
+                            pInputText
+                            placeholder="{{ 'pqrs.info-aditional-authorized-by' | translate }}"
+                            formControlName="authorizedBy"
+                            class="form-control"/>                        
+                    </div>
+
+                    <div class="col-12 col-lg-3 mt-2">
+                        <label>{{ 'pqrs.info-aditional-send-by' | translate }}</label>
+                        <p-dropdown                 
+                          [filter]="false" 
+                          [options]="sentBy" 
+                          optionValue="sentById"
+                          optionLabel="sentByName" 
+                          class="w-100" 
+                          placeholder="{{('pqrs.info-aditional-send-by' | translate) || ' '}}"
+                          formControlName="sentById">
+                        </p-dropdown>                        
+                    </div>
+
+                    <div class="col-12 col-lg-3 mt-2">
+                        <label  [ngClass]="requestTypeId == 3 ? '' : 'label-required'">
+                          {{ 'pqrs.info-aditional-provision' | translate }}
+                        </label>
+                        <p-dropdown                 
+                          [filter]="false" 
+                          [options]="provision" 
+                          optionValue="provisionId"
+                          optionLabel="provisionName" 
+                          class="w-100" 
+                          placeholder="{{('pqrs.info-aditional-provision' | translate) || ' '}}"
+                          formControlName="provisionId">
+                        </p-dropdown>                                               
+                    </div>
+
+                    <div class="col-12 col-lg-3 mt-2">
+                        <label [ngClass]="(requestTypeId == 3 || requestTypeId == 6) ? '' : 'label-required'">{{ 'pqrs.info-aditional-claim-quantity' | translate }}</label>
+                        <input
+                            type="number"
+                            pInputText
+                            placeholder="{{ 'pqrs.info-aditional-claim-quantity' | translate }}"
+                            formControlName="claimsQuantity"
+                            min="0" max="999999999"
+                            class="form-control"/>                        
+                    </div>
+
+                    <div class="col-12 col-lg-3 mt-2">
+                        <label>{{ 'pqrs.info-aditional-commercial-director' | translate }}</label>
+                        <input
+                            type="text"
+                            pInputText
+                            placeholder="{{ 'pqrs.info-aditional-commercial-director' | translate }}"
+                            formControlName="commercialDirector"
+                            class="form-control"/>                        
+                    </div>
+
+                    <div class="col-12 col-lg-3 mt-2">
+                        <label>{{ 'pqrs.info-aditional-cause' | translate }}</label>
+                        <p-dropdown                 
+                          [filter]="false" 
+                          [options]="cause" 
+                          optionValue="causeId"
+                          optionLabel="causeName" 
+                          class="w-100" 
+                          placeholder="{{('pqrs.info-aditional-cause' | translate) || ' '}}"
+                          formControlName="causeId">
+                        </p-dropdown> 
+                    </div>
+
+                    <div class="col-12 col-lg-3 mt-2">
+                        <label>{{ 'pqrs.info-aditional-responsible-compliance' | translate }}</label>
+                        <em class="fas fa-info-circle" pTooltip="{{ 'pqrs.info-aditional-responsible-compliance-toltip' | translate }}"></em>
+                        <input
+                            type="text"
+                            pInputText
+                            placeholder="{{ 'pqrs.info-aditional-responsible-compliance' | translate }}"
+                            formControlName="responsibleNonConformity"
+                            class="form-control"/>                        
+                    </div>
+
+                    <div class="col-12 col-lg-3 mt-2">
+                        <label>{{ 'pqrs.info-aditional-sales-executive' | translate }}</label>
+                        <input
+                            type="text"
+                            pInputText
+                            placeholder="{{ 'pqrs.info-aditional-sales-executive' | translate }}"
+                            formControlName="userId"
+                            class="form-control"/>                        
+                    </div>
+
+                    <div class="col-12 col-lg-3 mt-2">
+                        <app-datepicker 
+                          right="25"
+                          [config]="settingsReceptionDate"                        
+                          [submitted]="submitted"
+                          [form]="registerFormAditional"
+                          [formDirective]="ngForm">
+                        </app-datepicker>                                            
+                    </div>
+
+                    <div class="col-12 col-lg-3 mt-2">
+                        <label>{{ 'pqrs.info-aditional-replacement' | translate }}</label>
+                        <p-dropdown                 
+                          [filter]="false" 
+                          [options]="replacement" 
+                          optionValue="replacementId"
+                          optionLabel="replacementName" 
+                          class="w-100" 
+                          placeholder="{{('pqrs.info-aditional-replacement' | translate) || ' '}}"
+                          formControlName="replacementId">
+                        </p-dropdown>                        
+                    </div>
+
+                    <div class="col-12 col-lg-3 mt-2">
+                        <label >{{ 'pqrs.info-aditional-date-sent' | translate }}</label>
+                        <em class="fas fa-info-circle" pTooltip="{{ 'pqrs.info-aditional-date-sent-toltip' | translate }}"></em>
+                        <app-datepicker 
+                          right="25"
+                          [config]="settingsSendDate"                        
+                          [submitted]="submitted"
+                          [form]="registerFormAditional"
+                          [formDirective]="ngForm">
+                        </app-datepicker>                         
+                    </div>
+
+                    <div class="col-12 col-lg-3 mt-2">
+                        <label>{{ 'pqrs.info-aditional-invetory-transaction' | translate }}</label>
+                        <input
+                          type="number"
+                          pInputText
+                          placeholder="{{ 'pqrs.info-aditional-invetory-transaction' | translate }}"
+                          formControlName="inventoryTransactionNumber"
+                          min="0"
+                          class="form-control"/>
+                    </div>
+
+                    <div class="col-12 col-lg-3 mt-2">
+                        <label>{{ 'pqrs.info-aditional-document-type' | translate }}</label>
+                        <input
+                            type="text"
+                            pInputText
+                            placeholder="{{ 'pqrs.info-aditional-document-type' | translate }}"
+                            formControlName="documentType"
+                            class="form-control"/>                        
+                    </div>
+
+                    <div class="col-12 col-lg-3 mt-2">
+                        <label>{{ 'pqrs.info-aditional-stock-days' | translate }}</label>
+                        <input
+                            type="number"
+                            pInputText
+                            placeholder="{{ 'pqrs.info-aditional-stock-days' | translate }}"
+                            formControlName="stockDays"
+                            min="0"
+                            class="form-control"/>                                           
+                    </div>
+
+                    <div class="col-12 col-lg-3 mt-2">
+                        <label>{{ 'pqrs.info-aditional-time-stock' | translate }}</label>
+                        <input
+                            type="text"
+                            pInputText
+                            placeholder="{{ 'pqrs.info-aditional-time-stock' | translate }}"
+                            formControlName="stockTime"
+                            class="form-control"/> 
+                    </div>
+
+                    <div class="col-12 col-lg-3 mt-2">
+                        <label>{{ 'pqrs.info-aditional-end-order' | translate }}</label>
+                        <p-dropdown                 
+                          [filter]="false" 
+                          [options]="endOfTheOrder" 
+                          optionValue="endOfTheOrderId"
+                          optionLabel="endOfTheOrderName" 
+                          class="w-100" 
+                          placeholder="{{('pqrs.info-aditional-end-order' | translate) || ' '}}"
+                          formControlName="endOfTheOrderId">
+                        </p-dropdown> 
+                    </div>
+
+                </div>
+            </form>
+        </ng-template>
+    </p-accordionTab>
+    
+    <p-accordionTab
+        header="{{ 'pqrs.info-aditional-customer' | translate }}"
+        [selected]="true"            
+        class="mt-6">
+        
+        <ng-template pTemplate="content">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-sm-end">
+                    <app-button-icon-finotex       
+                        *ngIf="!isReadOnlyComponent"                 
+                        icon="fas fa-plus"
+                        label="{{ 'pqrs.detail-request-add-article' | translate }}"
+                        type="button"                        
+                        typeButton="primary"
+                        [typeSize]="false"
+                        (click)="openAddArticle(typeAddArticle.customer)">
+                    </app-button-icon-finotex>
+                </div>
+
+                <div class="w-100">
+                    <form class="mt-16" [formGroup]="technicalParameterDataForm">      
+                        <div class="row">
+                          <div class="table-responsive">
+                            <p-table-finotex                     
+                              #tablaFinotex
+                              [scrollable]="false"           
+                              [autoLayout]="false"                    
+                              [tableStyle]="{'table-layout': 'auto'}"
+                              class="f-table"
+                              [value]="technicalParameterFormCall.controls"
+                              dataKey="id"
+                              sortable-table           
+                              [expandedRowKeys]="expandedRows"          
+                              [lazy]="true">                              
+                                     
+                              <ng-template pTemplate="header">
+                                <tr>
+                                  <th style="width: 50px" class="column-row"></th>                                  
+                                  <th>
+                                    <label>{{ "pqrs.detail-request-column-code-article" | translate }}</label>
+                                  </th>
+                                  <th>
+                                    <label>{{ "pqrs.info-aditional-customer-temperature" | translate }}</label>
+                                  </th>
+                                  <th>
+                                    <label>{{ "pqrs.info-aditional-customer-pressure" | translate }}</label>
+                                  </th>
+                                  <th>
+                                    <label>{{ "pqrs.info-aditional-customer-time" | translate }}</label>
+                                  </th>
+                                  <th class="text-center" *ngIf="!isReadOnlyComponent">
+                                    <label>{{ 'product-brand.lblActions' | translate }}</label>
+                                  </th>
+                                </tr>
+                                <tr id="rowNoDataFolder" class="rowNoData" *ngIf="isNoDataCutomer">
+                                  <td colspan="50" class="text-center bg-white p-0">
+                                    <img  
+                                      class="simple-img img-not-data"
+                                      src="../../../../assets/images/folder-open.svg" 
+                                      alt="profile" />                  
+        
+                                    <div class="mb-16"><label class="text-no-data">{{ 'general.noData' | translate  }}</label></div>
+                                  </td>
+                                </tr>
+                              </ng-template>       
+                              
+                              <ng-template 
+                                pTemplate="body"
+                                formArrayName="header"
+                                let-rowIndex="rowIndex"
+                                let-technicalParameter
+                                let-expanded="expanded">
+                                          
+                                <tr [formGroupName]="rowIndex"  *ngIf="!technicalParameter.controls.isDelete.value"> 
+                                  <td class="text-center">
+                                    <span
+                                      #btn
+                                      id="Btnunfold{{rowIndex}} "
+                                      type="button"
+                                      pButton
+                                      pRipple
+                                      (click)="onItemClick(technicalParameter.value, tablaFinotex)"
+                                      class="p-button-text p-button-rounded p-button-plain"
+                                      [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">
+                                    </span>                      
+                                  </td>                                                                                                 
+
+                                  <td>
+                                    <input
+                                      [readonly]="true"
+                                      type="text"                                
+                                      pInputText
+                                      class="form-control"                                      
+                                      formControlName="productId"/>
+                                  </td> 
+
+                                  <td>
+                                    <input                                      
+                                      type="number"                                
+                                      pInputText
+                                      class="form-control"
+                                      min="0"
+                                      max="999999999"
+                                      (change)="changeValues(technicalParameter)"
+                                      formControlName="temperature"/>
+                                  </td> 
+
+                                  <td>
+                                    <input                                      
+                                      type="number"                                
+                                      pInputText
+                                      class="form-control"
+                                      min="0"
+                                      max="999999999"
+                                      (change)="changeValues(technicalParameter)"
+                                      formControlName="pressure"/>
+                                  </td> 
+
+                                  <td>
+                                    <input                                      
+                                      type="number"                                
+                                      pInputText
+                                      class="form-control"
+                                      min="0"
+                                      max="999999999"
+                                      (change)="changeValues(technicalParameter)"
+                                      formControlName="time"/>
+                                  </td> 
+                                                                                                                                                                                           
+                                  <td class="text-center" *ngIf="!isReadOnlyComponent">
+                                    <button                                                                                                                                          
+                                      pButton 
+                                      pRipple
+                                      type="button"                              
+                                      icon="fas fa-trash-alt"
+                                      aria-hidden="true"
+                                      class="p-button-rounded p-button-text p-button-reset"
+                                      pTooltip="{{ 'product-brand-purchase.lblDelete' | translate }}"
+                                      tooltipPosition="top"
+                                      (click)="deletetechnicalParameter(technicalParameter,rowIndex)">
+                                    </button>                                                                                   
+                                  </td>
+                                </tr>
+                              </ng-template>
+                              
+                              <ng-template 
+                                formArrayName="header"
+                                let-rowIndex="rowIndex"
+                                pTemplate="rowexpansion"
+                                let-data>
+                                          
+                                <tr [formGroupName]="rowIndex">
+                                  <td colspan="6">
+                                    <div class="row">
+                              
+                                      <div class="col-12 col-md-3 mt-2">
+                                        <label>{{ "pqrs.info-aditional-customer-peel" | translate }}</label>
+                                        <input                                                      
+                                          type="number"                                
+                                          pInputText
+                                          class="form-control"     
+                                          min="0"                           
+                                          max="999999999"
+                                          (change)="changeValues(data)"
+                                          formControlName="detachment"/>
+                                      </div>                                              
+        
+                                    </div>
+                                  </td>
+                                </tr>
+                              </ng-template>
+                            </p-table-finotex>
+                          </div>
+                        </div>      
+                    </form>
+                </div>
+            </div>
+        </ng-template>
+    </p-accordionTab>    
+
+    <p-accordionTab
+        header="{{ 'pqrs.info-aditional-involved' | translate }}"
+        [selected]="true"            
+        class="mt-6">
+            
+        <ng-template pTemplate="content">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-sm-end">
+                    <app-button-icon-finotex
+                        *ngIf="!isReadOnlyComponent"                 
+                        icon="fas fa-plus"
+                        label="{{ 'pqrs.info-aditional-involved-add' | translate }}"
+                        type="button"
+                        typeButton="primary"
+                        [typeSize]="false"
+                        (click)="addInvolved()">
+                    </app-button-icon-finotex>
+                </div>
+
+                <p-table                                    
+                    class="w-100 mt-3"            
+                    [data]="involvedFormCall.controls"                                      
+                    [columnsSeparate]="false"> 
+          
+                    <tr theaderRecords>                                                              
+                        <th class="text-center">{{ 'pqrs.info-aditional-involved-area' | translate }}</th>
+                        <th class="text-center">{{ 'pqrs.info-aditional-involved-col' | translate }}</th>
+                        <th class="text-center">{{ 'pqrs.info-aditional-involved-position' | translate }}</th>
+                        <th class="text-center" *ngIf="!isReadOnlyComponent">{{ 'product-brand.lblActions' | translate }}</th>
+                    </tr>
+                      
+                    <div tbodyRecords *ngFor="let involved of involvedFormCall.controls;let i = index" class="rowtable">
+                      <tr [formGroup]="involved" [ngClass]="getRowPar(involved.controls.id.value)" *ngIf="!involved.controls.isDelete.value"> 
+                        <td>                                
+                          <p-dropdown                                                                 
+                            appendTo="body"        
+                            [filter]="false" 
+                            [options]="area" 
+                            optionValue="areaId"
+                            optionLabel="areaName" 
+                            class="w-100" 
+                            placeholder="{{('formsGeneral.selSelectOpcion' | translate) || ' '}}"
+                            (onChange)="changeResponsibleCol(involved,false)"
+                            formControlName="areaId">
+                          </p-dropdown> 
+                        </td> 
+
+                        <td>               
+                          <p-dropdown                                     
+                            appendTo="body"        
+                            [filter]="false" 
+                            [options]="responsible" 
+                            optionValue="responsibleId"
+                            optionLabel="securityUserName" 
+                            class="w-100" 
+                            placeholder="{{('formsGeneral.selSelectOpcion' | translate) || ' '}}"
+                            (onChange)="changeResponsibleCol(involved,true)"
+                            formControlName="responsibleId">
+                          </p-dropdown> 
+                        </td>             
+
+                        <td>   
+                          <input
+                            [readonly]="true"
+                            type="text"                                
+                            pInputText
+                            class="form-control"                                      
+                            formControlName="jobName"/>                                              
+                        </td>
+
+                        <td class="text-center" *ngIf="!isReadOnlyComponent">
+                          <button                                                                                                                                          
+                            pButton 
+                            pRipple
+                            type="button"                              
+                            icon="fas fa-trash-alt"
+                            aria-hidden="true"
+                            class="p-button-rounded p-button-text p-button-reset"
+                            pTooltip="{{ 'product-brand-purchase.lblDelete' | translate }}"
+                            tooltipPosition="top"
+                            (click)="deleteInvolved(involved,i)">
+                          </button>                                                                                   
+                        </td>
+                      </tr>     
+                    </div>
+                </p-table>
+
+            </div>
+        </ng-template>
+    </p-accordionTab>
+    
+    <p-accordionTab
+        header="{{ 'pqrs.info-aditional-requirement' | translate }}"
+        [selected]="true"            
+        class="mt-6">
+    
+        <ng-template pTemplate="content">
+          <div class="row">
+            <div class="col-12 d-flex justify-content-sm-end">
+                <app-button-icon-finotex
+                    *ngIf="!isReadOnlyComponent"
+                    icon="fas fa-plus"
+                    label="{{ 'pqrs.info-aditional-requirement-add' | translate }}"
+                    type="button"
+                    typeButton="primary"
+                    [typeSize]="false"
+                    (click)="openAddArticle(typeAddArticle.requeriment)">
+                </app-button-icon-finotex>
+            </div>
+
+            <p-table                                    
+              class="w-100 mt-3"            
+              [data]="requirementFormCall.controls"                                      
+              [columnsSeparate]="false"> 
+  
+              <tr theaderRecords>                                                              
+                <th class="text-center">{{ 'pqrs.detail-request-column-code-article' | translate }}</th>
+                <th class="text-center">{{ 'pqrs.detail-request-column-description' | translate }}</th>
+                <th class="text-center">{{ 'pqrs.info-aditional-requirement' | translate }}</th>
+                <th class="text-center" *ngIf="!isReadOnlyComponent">{{ 'product-brand.lblActions' | translate }}</th>
+              </tr>
+              
+              <div tbodyRecords *ngFor="let requirement of requirementFormCall.controls;let i = index" class="rowtable">
+                  <tr [formGroup]="requirement" [ngClass]="getRowPar(requirement.controls.id.value)" *ngIf="!requirement.controls.isDelete.value"> 
+                      <td>                                
+                        <input
+                          [readonly]="true"
+                          type="text"                                
+                          pInputText
+                          class="form-control"                          
+                          formControlName="productId"/>
+                      </td> 
+
+                      <td>               
+                        <input
+                          [readonly]="true"
+                          type="text"                                
+                          pInputText
+                          class="form-control"                          
+                          formControlName="productName"/>    
+                      </td>             
+
+                      <td>                  
+                        <p-dropdown                 
+                          appendTo="body"        
+                          [filter]="false" 
+                          [options]="customerRequeriment" 
+                          optionValue="customerRequerimentId"
+                          optionLabel="customerRequerimentName" 
+                          class="w-100" 
+                          placeholder="{{('formsGeneral.selSelectOpcion' | translate) || ' '}}"
+                          (onChange)="changecustomerRequeriment(requirement)"
+                          formControlName="customerRequerimentId">
+                        </p-dropdown> 
+                      </td>                    
+                      
+                      <td class="text-center" *ngIf="!isReadOnlyComponent">
+                          <button                                                                                                                                          
+                            pButton 
+                            pRipple
+                            type="button"                              
+                            icon="fas fa-trash-alt"
+                            aria-hidden="true"
+                            class="p-button-rounded p-button-text p-button-reset"
+                            pTooltip="{{ 'product-brand-purchase.lblDelete' | translate }}"
+                            tooltipPosition="top"
+                            (click)="deleteCustomerRequerimentRequest(requirement,i)">
+                          </button>                                                                                   
+                        </td>
+                  </tr>     
+              </div>
+            </p-table>
+          </div>
+        </ng-template>
+    </p-accordionTab>
+
+</p-accordion>
+
+<!-- add article -->  
+<p-dialog 
+  header="{{ 'pqrs.detail-request-add-article-title' | translate }}" 
+  [(visible)]="showAddArticle"
+  [modal]="true" 
+  [baseZIndex]="10000"  
+  [draggable]="false" 
+  [resizable]="false" 
+  (onHide)="onCloseDialog(check)"
+  [style]="{ width: '80vw' }">
+
+
+  <div class="row m-3">
+      <div class="w-100 col-6">
+        <app-search-selector-principal 
+          #serchArticle
+          placeholder="pqrs.detail-request-add-search-article" 
+          icon="pi pi-search"           
+          inputId="searchRequest"
+          (clickEvent)="onSubmitFilterSearch($event)">
+        </app-search-selector-principal>
+      </div>
+
+      
+      <p-table                                    
+          class="w-100 mt-3"
+          [data]="allArticleOrder"          
+          [columnsSeparate]="false"          
+          sortable-table 
+          (sorted)="onSortedAllArticle($event)">                                    
+
+        <tr theaderRecords>                                      
+            <th>
+              <input 
+                #check
+                class="pi p-checkbox"
+                id="checkAll"
+                type="checkbox"
+                (change)="changeCheck($event)"/>
+            </th>
+            <th sortable-column="productId" scope="col">{{ 'pqrs.detail-request-column-code-article' | translate }}</th>
+            <th sortable-column="productName" scope="col">{{ 'pqrs.detail-request-column-description' | translate }}</th>            
+        </tr>
+            
+        <div tbodyRecords *ngFor="let allArticleOrder of allArticleOrderFormCall.controls;let i = index" class="rowtable">
+            <tr [formGroup]="allArticleOrder" [ngClass]="getRowPar(allArticleOrder.controls.id.value)">  
+              <td>
+                <input 
+                  class="pi p-checkbox"
+                  type="checkbox"
+                  formControlName="check"/>
+                </td> 
+              <td>{{ allArticleOrder.controls.productId.value }}</td> 
+              <td>{{ allArticleOrder.controls.productName.value }}</td>              
+            </tr>     
+        </div>
+      </p-table>
+      
+  </div>
+
+  <ng-template pTemplate="footer">
+      <div class="col-md-12 text-right">
+        <p-button 
+          (click)="cancelAddArticle()" 
+          label="{{ 'pqrs.detail-request-btn-cancel' | translate }}"
+          styleClass="button button-secundary text-center ml-1 mr-1">
+        </p-button>
+        
+        <p-button 
+          (click)="addArticle()" 
+          label="{{ 'pqrs.detail-request-btn-add' | translate }}"
+          styleClass="button button-primary text-center ml-1 mr-1">
+        </p-button>        
+      </div>
+  </ng-template>
+</p-dialog>
+
+<!-- article repeated -->
+<p-dialog 
+   [(visible)]="showAddArticleFail" 
+   [contentStyleClass]="'border-top'" 
+   [modal]="true" 
+   [baseZIndex]="10000"
+   [draggable]="false" 
+   [showHeader]="false" 
+   [resizable]="false" 
+   [style]="{ width: '500px' }">
+    <div class="row">
+        <div class="col-md-12 text-center font50">
+            <img _ngcontent-amv-c221="" width="60px" height="60px" src="../../../assets/images/Alert.svg"
+              alt="shopping cart" class="simple-img" appImage />
+        </div>
+      
+        <div class="col-md-12 text-center mt-24">
+            <p class="font-weight-bold title-repeat-article">{{ "pqrs.detail-request-article-repeated-title" | translate }}</p>
+        </div>
+    
+        <div class="col-md-12 text-center mt-24 f-14">      
+            <span class="description-repeat-article">{{ "pqrs.detail-request-article-repeated-description-1" | translate }}</span>
+            <span class="article-repeat" *ngFor="let article of articleRepeat;let i = index"> {{article}} </span>
+            <span class="description-repeat-article">{{ "pqrs.detail-request-article-repeated-description-2" | translate }}</span>
+        </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="col-md-12 text-center">
+          <p-button 
+              (click)="showAddArticleFail = false" 
+              label="{{ 'artWork.lblOk' | translate }}"
+              styleClass="button button-primary text-center"></p-button>
+      </div>
+    </ng-template>
+</p-dialog>    
+
+<!-- no found order  -->
+<p-dialog 
+[(visible)]="showOrderNotFound" 
+[contentStyleClass]="'border-top'" 
+[modal]="true" 
+[baseZIndex]="10000"
+[draggable]="false" 
+[showHeader]="false" 
+[resizable]="false" 
+[style]="{ width: '500px' }">
+ <div class="row">
+     <div class="col-md-12 text-center font50">
+         <img _ngcontent-amv-c221="" width="60px" height="60px" src="../../../assets/images/Alert.svg"
+           alt="shopping cart" class="simple-img" appImage />
+     </div>        
+ 
+     <div class="col-md-12 text-center mt-24 f-14">      
+         <span class="description-repeat-article">{{ "pqrs.detail-request-article-order-nofound" | translate }}</span>                  
+     </div>
+ </div>
+
+ <ng-template pTemplate="footer">
+   <div class="col-md-12 text-center">
+       <p-button 
+           (click)="showOrderNotFound = false" 
+           label="{{ 'artWork.lblOk' | translate }}"
+           styleClass="button button-primary text-center"></p-button>
+   </div>
+ </ng-template>
+</p-dialog>   
+
+<p-toast></p-toast>

@@ -1,0 +1,77 @@
+.minimumSize-change {
+  white-space: nowrap;
+}
+
+.img-media {
+  width: 100%;
+}
+
+@media screen and (min-device-width: 300px) and (max-device-width: 426px) {
+  .minimumSize-change {
+    white-space: inherit
+  }
+}
+
+.cut {
+  position: initial;
+}
+
+.cut-b {
+  width: 30%;
+  border-radius: 0px 10px 10px 0px;
+}
+
+.pnlUploadAssociatePDF {
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 10px;
+  width: 95%;
+}
+
+#txtUploadAssociatedPDF {
+  width: 60%;
+  height: 75px;
+}
+
+button.ttile-page {
+  font-size: 14px !important;
+  background-color: #fff;
+  border: none;
+}
+
+button.ttile-page.collapsed {
+  color: #2B2A2A;
+}
+
+.image {
+  margin: 0 auto;
+}
+
+.mt-70 {
+  margin-top: 70px;
+}
+
+.mt-30 {
+  margin-top: 30px;
+}
+
+.imagen-media-detai .img-button-preview-datail {
+  justify-content: flex-end;
+  display: flex;
+}
+
+.imagen-media-detail {
+  background: #e6e6e6 0% 0% no-repeat padding-box;
+  border-radius: 10px;
+  opacity: 1;
+  display: inline-block;
+  justify-content: space-between;
+  flex-direction: column;
+  display: flex;
+}
+
+.img-button-preview-css {
+  position: absolute;
+  right: 1em;
+  margin-top: -2.5em;
+}

@@ -1,0 +1,81 @@
+.conten-main{
+    padding: 25px;
+}
+
+.pqrs-options{
+    font: normal normal bold 20px/24px Montserrat;    
+}
+
+/* cards info */
+
+.card-info{
+    height: 110px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #7B7B7B1A;
+}
+.card-info-top{    
+    border-radius: 22px 22px 0px 0px;
+}
+
+.card-info-bottom{
+    border-radius: 0px 0px 22px 22px;
+}
+
+.border-bottom-shadow
+{
+    border-bottom: 1px solid #7B7B7B1A;
+}
+
+.circle-image{
+    border: 2px solid #D6001C;
+    border-radius: 20px;
+}
+
+.title-info{
+    font: normal normal bold 18px/23px Montserrat;    
+}
+
+.description-info{
+    font: normal normal normal 14px/17px Montserrat;    
+}
+
+
+/* buttons */
+
+.list-btn
+{
+    display: grid;    
+    grid-template-rows: 260px 260px;
+    grid-gap: 10px;
+}
+
+.card-button{
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.card-btn
+{
+    width: 100%;
+}
+
+.btn-title
+{
+    font: normal normal bold 20px/24px Montserrat;
+    color: #54585A;
+}
+
+
+@media (max-width: 991px) {
+    .box-order-1{
+        order: 1;
+    }    
+    .box-order-2{
+        order: 2;
+    }
+}

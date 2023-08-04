@@ -1,0 +1,52 @@
+
+      <div *ngIf="maskVisible" [class]="maskStyleClass"
+      [ngClass]="{'p-viewer-mask': true, 'p-component-overlay p-component-overlay-enter': this.modal, 'p-viewer-mask-scrollblocker': this.modal || this.blockScroll,
+          'p-viewer-left': position === 'left',
+          'p-viewer-right': position === 'right',
+          'p-viewer-top': position === 'top',
+          'p-viewer-top-left': position === 'topleft' || position === 'top-left',
+          'p-viewer-top-right': position === 'topright' || position === 'top-right',
+          'p-viewer-bottom': position === 'bottom',
+          'p-viewer-bottom-left': position === 'bottomleft' || position === 'bottom-left',
+          'p-viewer-bottom-right': position === 'bottomright' || position === 'bottom-right'}">
+      <div #container [ngClass]="{'p-viewer p-component':true, 'p-viewer-rtl':rtl,'p-viewer-draggable':draggable,'p-viewer-resizable':resizable, 'p-viewer-maximized': maximized}"
+          [ngStyle]="style" [class]="styleClass" *ngIf="visible" pFocusTrap [pFocusTrapDisabled]="focusTrap === false"
+          [@animation]="{value: 'visible', params: {transform: transformOptions, transition: transitionOptions}}" (@animation.start)="onAnimationStart($event)" (@animation.done)="onAnimationEnd($event)" role="viewer" [attr.aria-labelledby]="id + '-label'">
+          <div #titlebar class="p-viewer-header" (mousedown)="initDrag($event)" *ngIf="showHeader">
+              <span [attr.id]="id + '-label'" class="p-viewer-title f-18" *ngIf="!headerFacet && !headerTemplate">{{header}}</span>
+              <span [attr.id]="id + '-label'" class="p-viewer-title" *ngIf="headerFacet">
+                  <ng-content select="p-header"></ng-content>
+              </span>
+              <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+              <div class="p-viewer-header-icons">
+                  <button *ngIf="maximizable" type="button" [ngClass]="{'p-viewer-header-icon p-viewer-header-maximize p-link':true}" (click)="maximize()" (keydown.enter)="maximize()" tabindex="-1" pRipple>
+                      <span class="p-viewer-header-maximize-icon" [ngClass]="maximized ? minimizeIcon : maximizeIcon"></span>
+                  </button>
+                  <button *ngIf="closable" class="close" type="button" [ngClass]="{'p-viewer-header-icon p-viewer-header-close p-link':true}" [attr.aria-label]="closeAriaLabel" (click)="close($event)" (keydown.enter)="close($event)" [attr.tabindex]="closeTabindex" pRipple>
+                      <span class="p-viewer-header-close-icon" [ngClass]="closeIcon"></span>
+                  </button>
+              </div>
+          </div>
+          <div #content [ngClass]="'p-viewer-content'" [ngStyle]="contentStyle" [class]="contentStyleClass">
+              <ng-content></ng-content>
+              <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+          </div>
+          <div class="constrols-viewer">
+            <img src="../../../assets/images/Zoom in.svg"
+            alt="Zoom in" pTooltip="{{ 'viewer.zoomIn' | translate }}" (click)="zoomIn()" appImage />
+            <img src="../../../assets/images/Zoom out.svg"
+            alt="Zoom out" pTooltip="{{ 'viewer.zoomOut' | translate }}" (click)="zoomOut()" appImage />
+            <img class="full-screen" src="../../../assets/images/full screen.svg"
+            alt="full screen" pTooltip="{{ 'viewer.fullScreen' | translate }}" appImage (click)="fullImage()"/>
+            <img src="../../../assets/images/Turn left.svg"
+            alt="Turn left" pTooltip="{{ 'viewer.turnLeft' | translate }}" (click)="turnLeft()" appImage />
+            <img src="../../../assets/images/Turn Rigth.svg"
+            alt="Turn Right" pTooltip="{{ 'viewer.turnRight' | translate }}" (click)="turnRight()" appImage />
+          </div>
+          <div #footer class="p-viewer-footer" *ngIf="footerFacet || footerTemplate">
+              <ng-content select="p-footer"></ng-content>
+              <ng-container *ngTemplateOutlet="footerTemplate"></ng-container>
+          </div>
+          <div *ngIf="resizable" class="p-resizable-handle" style="z-index: 90;" (mousedown)="initResize($event)"></div>
+      </div>
+  </div>

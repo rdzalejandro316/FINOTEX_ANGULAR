@@ -1,0 +1,384 @@
+<div class="row mt-16">
+  <div class="col-12 text-right">
+    <app-button-finotex
+      label="materials.process_settings"
+      type="button"
+      typeButton="primary"
+      [typeSize]="false"
+      (click)="showPanelDialog()"
+      class="mr-1"
+      *ngIf="btnDisplaying"
+      [disabled]="details"
+    ></app-button-finotex>
+
+    <app-button-finotex
+      label="anilox.aniloxIr"
+      type="button"
+      typeButton="primary"
+      [typeSize]="false"
+      (click)="popUpContextMenuAnilox()"
+      class="mr-1"
+      *ngIf="validateLinePosition()"
+      [disabled]="details"
+    ></app-button-finotex>
+  </div>
+</div>
+
+<form class="mt-16" [formGroup]="materialsForm">
+  <p-accordion>
+    <p-accordionTab
+      header="{{ 'materials.title' | translate }}"
+      [selected]="false"
+      [formStatus]="true"
+      [imagenIcon]="formMaterialsIconStatus"
+      statusFormText="{{ formStatusText }}"
+    >
+      <div class="row">
+        <div class="col-12">
+          <div class="table-responsive">
+            <p-table-finotex
+              #tablaFinotex
+              class="f-table"
+              [value]="materialsFormCall.controls"
+              dataKey="id"
+              [expandedRowKeys]="expandedRows"
+            >
+              <ng-template pTemplate="header">
+                <tr>
+                  <th style="width: 3rem"></th>
+                  <th *ngIf="positionMaterial">
+                    <label>
+                      {{ "materials.position_item" | translate }}
+                    </label>
+                  </th>
+                  <th *ngIf="category">
+                    <label class="label-required">
+                      {{ "materials.category_code" | translate }}
+                    </label>
+                  </th>
+                  <th *ngIf="material">
+                    <label class="label-required">
+                      {{ "materials.material_code" | translate }}
+                    </label>
+                  </th>
+                  <th *ngIf="nameItem">
+                    <label>
+                      {{ "materials.name_item" | translate }}
+                    </label>
+                  </th>
+                  <th class="text-center">
+                    <label>
+                      {{ "samples.lblActions" | translate }}
+                    </label>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template
+                formArrayName="header"
+                let-rowIndex="rowIndex"
+                pTemplate="body"
+                let-materials
+                let-expanded="expanded"
+              >
+                <tr [formGroupName]="rowIndex">
+                  <td>
+                    <span
+                      type="button"
+                      pButton
+                      pRipple
+                      (click)="onItemClick(materials.value, tablaFinotex)"
+                      class="p-button-text p-button-rounded p-button-plain"
+                      [icon]="
+                        expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'
+                      "
+                    ></span>
+                  </td>
+                  <td *ngIf="positionMaterial">
+                    {{ materials.value.positionMaterial }}
+                  </td>
+                  <td *ngIf="category">
+                    <p-dropdown
+                      [filter]="true"
+                      filterBy=""
+                      appendTo="body"
+                      formControlName="category"
+                      [options]="listMaterialCategory"
+                      optionLabel="materialCategoryName"
+                      optionValue="materialCategoryId"
+                      placeholder="{{
+                        ('artWork.selSelectOpcion' | translate) || ' '
+                      }}"
+                      (onChange)="changeCategory($event, rowIndex)"
+                    ></p-dropdown>
+                  </td>
+                  <td *ngIf="material">
+                    <p-dropdown
+                      [filter]="true"
+                      filterBy=""
+                      appendTo="body"
+                      formControlName="material"
+                      [options]="materials.value.listMaterials"
+                      optionLabel="materialName"
+                      optionValue="materialId"
+                      placeholder="{{
+                        ('artWork.selSelectOpcion' | translate) || ' '
+                      }}"
+                      (onChange)="changeMaterialCode($event, rowIndex)"
+                    ></p-dropdown>
+                  </td>
+                  <td *ngIf="nameItem">
+                    <p class="text-truncate">
+                      <label>{{ materials.value.nameItem }}</label>
+                    </p>
+                  </td>
+                  <td class="text-center">
+                    <div class="dropdown">
+                      <i
+                        class="fas fa-ellipsis-h"
+                        style="cursor: pointer"
+                        (click)="popUpContextMenu(materials.value.id)"
+                      ></i>
+                      <div
+                        id="{{ materials.value.id }}"
+                        class="dropdown-content"
+                      >
+                        <!-- formula -->
+                        <a
+                          *ngIf="
+                            true &&
+                            materials.value.isPositionNumberOfColors == 'S'
+                          "
+                        >
+                          <span
+                            (click)="popUpContextMenuFormulaColor(rowIndex)"
+                            class="refFormulaColor"
+                          >
+                            {{ "formula-colors.btnFormulaColors" | translate }}
+                          </span>
+                        </a>
+                        <!-- Homologos -->
+                        <a>
+                          <span
+                            class="homologos"
+                            (click)="popUpHomologs(rowIndex)"
+                          >
+                            {{ "homologs.articleHomologs" | translate }}
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template
+                formArrayName="header"
+                let-rowIndex="rowIndex"
+                pTemplate="rowexpansion"
+                let-materials
+              >
+                <tr [formGroupName]="rowIndex">
+                  <td colspan="6">
+                    <div class="row">
+                      <div class="col-12 col-md-3 mt-2" *ngIf="pick_hilo">
+                        <label class="label-required">
+                          {{ "materials.pick_hilo_ensamble" | translate }}
+                        </label>
+                        <div>
+                          <p-inputNumber
+                            formControlName="pick_hilo"
+                            mode="decimal"
+                            [minFractionDigits]="2"
+                            [maxFractionDigits]="2"
+                            (keydown.enter)="getSumTotalPicks()"
+                            (focusout)="getSumTotalPicks()"
+                          >
+                          </p-inputNumber>
+                        </div>
+                      </div>
+
+                      <div class="col-12 col-md-3 mt-2" *ngIf="description">
+                        <p class="text-truncate">
+                          <label>
+                            {{ "materials.description" | translate }}
+                          </label>
+                        </p>
+                        
+                        <input
+                          type="text"
+                          formControlName="description"
+                          pInputText
+                          class="form-control"
+                          [maxlength]="100"
+                        />
+                      </div>
+
+                      <div class="col-12 col-md-3 mt-2" *ngIf="color">
+                        <label>
+                          {{ "materials.color_code" | translate }}
+                        </label>
+                        <input
+                          type="text"
+                          formControlName="color"
+                          pInputText
+                          class="form-control"
+                          [maxlength]="4"
+                        />
+                      </div>
+
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="print_run_by_color"
+                      >
+                        <label>
+                          {{ "materials.print_run_by_color" | translate }}
+                        </label>
+                        <input
+                          type="number"
+                          formControlName="print_run_by_color"
+                          (keypress)="validateLen($event)"
+                          pInputText
+                          class="form-control"
+                          (keydown.enter)="getSumTotalPicks()"
+                          (focusout)="getSumTotalPicks()"
+                        />
+                      </div>
+
+                      <div class="col-12 col-md-3 mt-2" *ngIf="print">
+                        <label>{{ "materials.printout" | translate }}</label>
+                        <br />
+                        <p-dropdown
+                          formControlName="print"
+                          appendTo="body"
+                          [options]="printout"
+                          optionLabel="printoutName"
+                          optionValue="printoutId"
+                          placeholder="{{
+                            ('artWork.selSelectOpcion' | translate) || ' '
+                          }}"
+                        ></p-dropdown>
+                      </div>
+
+                      <div class="col-12 col-md-3 mt-2" *ngIf="specialty">
+                        <label>
+                          {{ "materials.heat_transfer_specialty" | translate }}
+                        </label>
+                        <br />
+                        <p-dropdown
+                          appendTo="body"
+                          formControlName="specialty"
+                          [options]="listTransferSpecialty"
+                          optionLabel="transferSpecialtyName"
+                          optionValue="transferSpecialtyId"
+                          placeholder="{{
+                            ('artWork.selSelectOpcion' | translate) || ' '
+                          }}"
+                        ></p-dropdown>
+                      </div>
+
+                      <div class="col-12 col-md-3 mt-2" *ngIf="border">
+                        <label>{{ "materials.border" | translate }}</label>
+                        <br />
+                        <input
+                          type="checkbox"
+                          class="pi p-checkbox"
+                          formControlName="border"
+                        />
+                      </div>
+
+                      <div class="col-12 col-md-3 mt-2" *ngIf="base">
+                        <label>{{ "materials.base_type" | translate }}</label>
+                        <br />
+                        <p-dropdown
+                          [appendTo]="mydiv"
+                          formControlName="base"
+                          [options]="baseType"
+                          optionLabel="baseName"
+                          optionValue="baseId"
+                          placeholder="{{
+                            ('artWork.selSelectOpcion' | translate) || ' '
+                          }}"
+                        ></p-dropdown>
+                      </div>
+
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="standard_quantity"
+                      >
+                        <label>
+                          {{ "materials.standard_quantity" | translate }}
+                        </label>
+                        <br />
+                        <input
+                          type="text"
+                          formControlName="standard_quantity"
+                          pInputText
+                          class="form-control"
+                          [maxlength]="4"
+                        />
+                      </div>
+
+                      <div class="col-12 col-md-3 mt-2" *ngIf="real_quantity">
+                        <label>
+                          {{ "materials.real_quantity" | translate }}
+                        </label>
+                        <input
+                          type="text"
+                          formControlName="real_quantity"
+                          pInputText
+                          class="form-control"
+                          [maxlength]="4"
+                        />
+                      </div>
+
+                      <div class="col-12 col-md-3 mt-2" *ngIf="unit_code">
+                        <label>{{ "materials.unit_code" | translate }}</label>
+                        <input
+                          type="text"
+                          formControlName="unit_code"
+                          pInputText
+                          class="form-control"
+                          [maxlength]="4"
+                        />
+                      </div>
+                      <div class="col-12 col-md-3 mt-2" *ngIf="formula">
+                        <label>
+                          {{ "materials.standard_formula" | translate }}
+                        </label>
+                        <br />
+                        <input
+                          type="checkbox"
+                          class="pi p-checkbox"
+                          formControlName="formula"
+                        />
+                      </div>
+                      <div
+                        class="col-12 col-md-3 mt-2"
+                        *ngIf="formula_quantity"
+                      >
+                        <label>
+                          {{ "materials.formula_quantity" | translate }}
+                        </label>
+                        <input
+                          type="text"
+                          formControlName="formula_quantity"
+                          pInputText
+                          class="form-control"
+                          [maxlength]="4"
+                        />
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table-finotex>
+          </div>
+        </div>
+      </div>
+    </p-accordionTab>
+  </p-accordion>
+</form>
+<app-mallas></app-mallas>
+<app-anilox></app-anilox>
+<app-homologs></app-homologs>
+<app-formula-color></app-formula-color>
+<p-toast></p-toast>

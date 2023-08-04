@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="19" viewBox="0 0 18 19">
+  <defs>
+    <clipPath id="clip-PDF">
+      <rect width="18" height="19"/>
+    </clipPath>
+  </defs>
+  <g id="PDF" clip-path="url(#clip-PDF)">
+    <g id="Grupo_13184" data-name="Grupo 13184" transform="translate(-1824.533 -384.008)">
+      <path id="Trazado_4709" data-name="Trazado 4709" d="M16.463,0H6.978A.462.462,0,0,0,6.5.508v14c0,.091.214.264.478.264h13.1c.264,0,.478-.173.478-.264l.01-7.743,0-2.521c0-.184-.03-.243-.084-.286L16.667.068A.327.327,0,0,0,16.463,0Z" transform="translate(1820 386.123)" fill="none" stroke="#2b2a2a" stroke-width="2.5"/>
+      <path id="Trazado_4710" data-name="Trazado 4710" d="M37.5.151V5.3h5.153Z" transform="translate(1797.761 385.972)" fill="none" stroke="#2b2a2a" stroke-linejoin="round" stroke-width="2.3"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,75 @@
+<form class="mt-16" [formGroup]="customerReferenceForm">
+  <p-accordion>
+    <p-accordionTab
+      header="{{ 'technical-sheets.customer_reference_title' | translate }}"
+      [selected]="false"
+      [formStatus]="true"
+      [imagenIcon]="customerReferenceFormIconStatus"
+      statusFormText="{{ customerReferenceFormStatusText }}"
+    >
+      <ng-template pTemplate="content">
+        <div class="row">
+
+          <div class="col-12 col-md-6 col-lg-3 mt-2">
+            <label>
+              {{ 'technical-sheets.customer_reference_label' | translate }}
+            </label>
+            <input
+              formControlName="CustomerReference"
+              type="text"
+              [maxlength]="15"
+              pInputText
+              placeholder="{{ 'technical-sheets.customer_reference_label' | translate }}"
+              class="form-control"
+              (change)="onCustomerReferenceChange($event)"
+              (keyup)="onCustomerReferenceKeyUp($event)"
+            />
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-6 mt-2">
+            <label>
+              {{ 'technical-sheets.reference_descripcion_label' | translate }}
+            </label>
+            <input
+              formControlName="Description"
+              [maxlength]="60"
+              type="text"
+              pInputText
+              placeholder="{{ 'technical-sheets.reference_descripcion_label' | translate }}"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-3 mt-2">
+            <label>
+              {{ 'technical-sheets.reference_color_label' | translate }}
+            </label>
+            <input
+              formControlName="Color"
+              type="text"
+              [maxLength]="15"
+              pInputText
+              placeholder="{{ 'technical-sheets.reference_color_label' | translate }}"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-3 mt-2">
+            <label>
+              {{ 'technical-sheets.reference_SKU_label' | translate }}
+            </label>
+            <input
+              formControlName="SKU"
+              type="text"
+              pInputText
+              [maxlength]="15"
+              placeholder="{{ 'technical-sheets.reference_SKU_label' | translate }}"
+              class="form-control"
+            />
+          </div>
+        </div>
+      </ng-template>
+    </p-accordionTab>
+  </p-accordion>
+</form>
+<p-toast></p-toast>

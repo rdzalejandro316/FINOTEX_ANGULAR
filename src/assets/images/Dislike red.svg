@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="27" viewBox="0 0 25 27">
+  <defs>
+    <clipPath id="clip-Dislike_red">
+      <rect width="25" height="27"/>
+    </clipPath>
+  </defs>
+  <g id="Dislike_red" data-name="Dislike red" clip-path="url(#clip-Dislike_red)">
+    <g id="Group_13486" data-name="Group 13486">
+      <path id="Path_4766" data-name="Path 4766" d="M0,0H24V24H0Z" fill="none"/>
+      <path id="Path_4767" data-name="Path 4767" d="M9.4,16H3a2,2,0,0,1-2-2V11.9a2,2,0,0,1,.15-.762l3.1-7.514A1,1,0,0,1,5.17,3H22a1,1,0,0,1,1,1V14a1,1,0,0,1-1,1H18.518a1,1,0,0,0-.817.423l-5.453,7.726a.5.5,0,0,1-.632.159L9.8,22.4A2.5,2.5,0,0,1,8.5,19.547ZM17,13.412V5H5.84L3,11.9V14H9.4a2,2,0,0,1,1.938,2.493l-.9,3.548a.5.5,0,0,0,.261.571l.661.33,4.71-6.672A3.016,3.016,0,0,1,17,13.412ZM19,13h2V5H19Z" fill="#d6001c"/>
+    </g>
+  </g>
+</svg>

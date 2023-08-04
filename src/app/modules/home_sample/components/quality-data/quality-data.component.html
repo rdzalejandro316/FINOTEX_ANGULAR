@@ -1,0 +1,399 @@
+<form class="mt-16" [formGroup]="myForm">
+  <ng-container formArrayName="SESIONS">
+    <ng-container *ngFor="let sesiones of sesionsFormCall.controls; index as i">
+      <ng-container [formGroupName]="i">
+        <p-accordion>
+          <p-accordionTab
+            header="{{ sesiones.value.PropertieCategoryName }}"
+            [selected]="false"
+            [formStatus]="!sesiones.value.DisplayThisCategory"
+            [inputswitch]="sesiones.value.DisplayThisCategory"
+            [imagenIcon]="formMaterialsIconStatus[i]"
+            [indexS]="i"
+            (selectedInputswitch)="selectedInputswitch($event)"
+            statusFormText="{{ formStatusText[i] }}"
+          >
+            <ng-template pTemplate="content">
+              <div class="form-row" formArrayName="controlsFix">
+                <ng-container
+                  *ngFor="let control of getFormArrayJson(i)"
+                  [formGroupName]="0"
+                >
+                  <!-- label  -->
+                  <div
+                    *ngIf="control.type == ''"
+                    class="{{
+                      this.jsonService[i].propertyCategoryId == 2
+                        ? 'col-12'
+                        : 'col-12 col-md-6 col-lg-3 mt-2'
+                    }}"
+                  >
+                    <p
+                      class="labelText"
+                      [ngStyle]="{
+                        'padding-top': control.label.trim() ? '0px' : '6px'
+                      }"
+                    >
+                      <label>
+                        {{ control.label }}
+                        <em
+                          *ngIf="control.options.tooltip"
+                          class="fas fa-info-circle"
+                          pTooltip="{{ control.options.tooltiptext }}"
+                        ></em>
+                      </label>
+                    </p>
+                  </div>
+
+   
+                  <div
+                    *ngIf="control.type == 'text'"
+                    class="col-12 col-md-6 col-lg-3 col-sm-4 col-xs mt-2"
+                    [ngClass]="
+                      control.propertySequence == 12 ||
+                      sesiones.value.PropertyCategoryId == 5 ||
+                      sesiones.value.PropertyCategoryId == 7
+                        ? 'col-12 col-md-12 col-sm col-xs col-lg-12 mt-2'
+                        : control.propertySequence == 8 ||
+                          sesiones.value.PropertyCategoryId == 4
+                        ? 'col-12 col-md-6 col-sm col-xs col-lg-6 mt-2'
+                        : control.propertySequence == 5
+                        ? 'col-12 col-md-6 col-sm col-xs col-lg-6 mt-2'
+                        : control.propertySequence == 10 &&
+                          sesiones.value.PropertyCategoryId == 3
+                        ? 'col-12 col-md-6 col-sm col-xs col-lg-6 mt-2'
+                        : 'col-12 col-md col-sm col-xs col-lg-3 mt-2'
+                    "
+                  ><!--
+                <div *ngIf="control.type == 'text'" 
+                  ngClass="control.propertySequence == 4 ? col-12 col-md-6 col-lg-3 col-sm-4 col-xs :
+                           control.propertySequence == 2 ? col-12 col-md-6 col-lg-6 col-sm-6 col-xs  :
+                           control.propertySequence == 3 ? col-12 col-md-6 col-lg-4 col-sm-3 col-xs  :
+                           control.propertySequence == 1 ? col-12 col-md-12 col-lg-12 col-sm-12 col-xs  :
+                           control.propertySequence == 9 ? col-12 col-md-12 col-lg-12 col-sm-12 col-xs  :
+                           control.propertySequence == 8 ? col-12 col-md-12 col-lg-12 col-sm-12 col-xs  :
+ ">-->
+                    <p
+                      class="labelText"
+                      [ngStyle]="{
+                        'padding-top': control.label.trim() ? '0px' : '6px'
+                      }"
+                    >
+                      <label
+                        [ngClass]="{
+                          'label-required': control.validators.required
+                        }"
+                      >
+                        {{ control.label }}
+                        <em
+                          *ngIf="control.options.tooltip"
+                          class="fas fa-info-circle"
+                          pTooltip="{{ control.options.tooltiptext }}"
+                        ></em>
+                      </label>
+                    </p>
+
+                    <input
+                      [formControlName]="control.name"
+                      type="text"
+                      pInputText
+                      placeholder="{{ control.label }}"
+                      class="form-control"
+                      [maxLength]="control.validators.maxLength"
+                    />
+                  </div>
+
+                  <!-- input number -->
+                  <div
+                    *ngIf="control.type == 'number'"
+                    class="form-group col-12 col-md-6 col-lg-3 col-sm-4 col-xs mt-2"
+                  >
+                    <p
+                      class="labelText"
+                      [ngStyle]="{
+                        'padding-top': control.label.trim() ? '0px' : '6px'
+                      }"
+                    >
+                      <label
+                        [ngClass]="{
+                          'label-required': control.validators.required
+                        }"
+                      >
+                        {{ control.label }}
+                        <em
+                          *ngIf="control.options.tooltip"
+                          class="fas fa-info-circle"
+                          pTooltip="{{ control.options.tooltiptext }}"
+                        ></em>
+                      </label>
+                    </p>
+
+                    <input
+                      [formControlName]="control.name"
+                      type="text"
+                      (keypress)="onKeyPressNumber($event)"
+                      pInputText
+                      placeholder="{{ control.label }}"
+                      class="form-control"
+                      [maxLength]="control.validators.maxLength"
+                    />
+                  </div>
+
+                  <!-- input decimal -->
+                  <div
+                    *ngIf="control.type == 'decimal'"
+                    class="form-group col-12 col-md-6 col-lg-3 mt-2"
+                  >
+                    <p
+                      class="labelText"
+                      [ngStyle]="{
+                        'padding-top': control.label.trim() ? '0px' : '6px'
+                      }"
+                    >
+                      <label
+                        [ngClass]="{
+                          'label-required': control.validators.required
+                        }"
+                      >
+                        {{ control.label }}
+                        <em
+                          *ngIf="control.options.tooltip"
+                          class="fas fa-info-circle"
+                          pTooltip="{{ control.options.tooltiptext }}"
+                        ></em>
+                      </label>
+                    </p>
+
+                    <input
+                      [formControlName]="control.name"
+                      type="text"
+                      (keypress)="onKeyPressNumberDecimal($event)"
+                      pInputText
+                      placeholder="{{ control.label }}"
+                      class="form-control"
+                      [maxLength]="control.validators.maxLength"
+                    />
+                  </div>
+
+                  <!-- input list -->
+                  <div
+                    *ngIf="control.type == 'list'"
+                    class="form-group col-12 col-md-6 col-lg-3 mt-2"
+                    [ngClass]="
+                      control.propertySequence == 7 ||
+                      control.propertySequence == 9 ||
+                      control.propertySequence == 6
+                        ? 'col-12 col-md-6 col-sm col-xs col-lg-6 mt-2'
+                        : 'col-12 col-md col-sm col-xs col-lg-3 mt-2'
+                    "
+                  >
+                    <p
+                      class="labelText"
+                      [ngStyle]="{
+                        'padding-top': control.label.trim() ? '0px' : '6px'
+                      }"
+                    >
+                      <label
+                        [ngClass]="{
+                          'label-required': control.validators.required
+                        }"
+                      >
+                        {{ control.label }}
+                        <em
+                          *ngIf="control.options.tooltip"
+                          class="fas fa-info-circle"
+                          pTooltip="{{ control.options.tooltiptext }}"
+                        ></em>
+                      </label>
+                    </p>
+
+                    <p-dropdown
+                      [formControlName]="control.name"
+                      [options]="control.listDrop"
+                      optionLabel="name"
+                      optionValue="value"
+                      placeholder="{{
+                        'formsGeneral.selSelectOpcion' | translate
+                      }}"
+                      (onChange)="validateOnchange($event, sesiones)"
+                    ></p-dropdown>
+                  </div>
+
+                  <!-- input Multi select -->
+                  <div
+                    *ngIf="control.type == 'multiSelect'"
+                    class="form-group col-12 col-md-6 col-lg-3 mt-2"
+                  >
+                    <p
+                      class="labelText"
+                      [ngStyle]="{
+                        'padding-top': control.label.trim() ? '0px' : '6px'
+                      }"
+                    >
+                      <label
+                        [ngClass]="{
+                          'label-required': control.validators.required
+                        }"
+                      >
+                        {{ control.label }}
+                        <em
+                          *ngIf="control.options.tooltip"
+                          class="fas fa-info-circle"
+                          pTooltip="{{ control.options.tooltiptext }}"
+                        ></em>
+                      </label>
+                    </p>
+
+                    <p-multiSelect
+                      [showToggleAll]="false"
+                      [showHeader]="false"
+                      [filter]="false"
+                      [formControlName]="control.name"
+                      [options]="control.listDrop"
+                      defaultLabel="{{
+                        ('artWork.selSelectOpcion' | translate) || ' '
+                      }}"
+                      optionLabel="name"
+                      optionValue="value"
+                      selectedItemsLabel="{0} items selected"
+                      (onChange)="validateOnchange($event, sesiones)"
+                    ></p-multiSelect>
+                  </div>
+
+                  <!-- --input radioButton-- -->
+                  <div
+                    *ngIf="control.type == 'radioButton'"
+                    class="form-group col-12 col-md-6 col-lg-3 mt-2"
+                  >
+                    <p
+                      class="labelText"
+                      [ngStyle]="{
+                        'padding-top': control.label.trim() ? '0px' : '6px'
+                      }"
+                    >
+                      <label
+                        [ngClass]="{
+                          'label-required': control.validators.required
+                        }"
+                      >
+                        {{ control.label }}
+                        <em
+                          *ngIf="control.options.tooltip"
+                          class="fas fa-info-circle"
+                          pTooltip="{{ control.options.tooltiptext }}"
+                        ></em>
+                      </label>
+                    </p>
+
+                    <p>
+                      <input
+                        type="radio"
+                        value="Si"
+                        [formControlName]="control.name"
+                        class="inp-checkbox"
+                      />
+                      <label class="ml-4 mt-1">Si</label>
+                      <input
+                        type="radio"
+                        value="No"
+                        [formControlName]="control.name"
+                        class="ml-4 mt-1"
+                      />
+                      <label class="ml-4 mt-1">No</label>
+                    </p>
+                  </div>
+                </ng-container>
+              </div>
+            </ng-template>
+          </p-accordionTab>
+        </p-accordion>
+      </ng-container>
+
+      <div class="mt-16"></div>
+    </ng-container>
+  </ng-container>
+</form>
+
+<p-dialog
+  [(visible)]="showMessage"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '500px' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center font50">
+      <img
+        _ngcontent-amv-c221=""
+        width="60px"
+        height="60px"
+        src="../../../assets/images/icono cancelar.svg"
+        alt="shopping cart"
+        appImage
+        class="simple-img"
+      />
+    </div>
+    <div class="col-md-12 text-center mt-24 font16">
+      {{ "quantity.MessageHeaderSum" | translate }}
+    </div>
+    <div class="col-md-12 text-center mt-24 font14">
+      {{ "quantity.MessageSecondSum" | translate }}
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button
+        (click)="showMessage = false"
+        label="{{ 'checkOut.btnOk' | translate }}"
+        styleClass="button button-primary text-center"
+      ></p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="showMessageTwo"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '500px' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center font50">
+      <img
+        _ngcontent-amv-c221=""
+        width="60px"
+        height="60px"
+        src="../../../assets/images/icono cancelar.svg"
+        alt="shopping cart"
+        appImage
+        class="simple-img"
+      />
+    </div>
+    <div class="col-md-12 text-center mt-24 font16">
+      {{ "quantity.MessageHeaderSumTwo" | translate }}
+    </div>
+    <div class="col-md-12 text-center mt-24 font14">
+      {{ "quantity.MessageSecondSumTwo" | translate }}
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button
+        (click)="showMessageTwo = false"
+        label="{{ 'checkOut.btnOk' | translate }}"
+        styleClass="button button-primary text-center"
+      ></p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-toast></p-toast>

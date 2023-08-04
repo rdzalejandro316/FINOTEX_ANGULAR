@@ -1,0 +1,894 @@
+<p-breadcrumb
+  [model]="itemsBreadcrumb"
+  [tittle]="'Edit brand product'"
+  [description]="'product-brand-edit.decriptionMain'"
+></p-breadcrumb>
+
+<form #mydiv [formGroup]="brandProductEdit" (ngSubmit)="onSubmitEdit()">
+  <div
+    class="row finotex-container_section finotex-container_section--shadow mt-16"
+  >
+    <div class="flot-wrapper">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div
+              class="col-12 col-md-4 col-xl-3 mt-16"
+              *ngIf="showBrandCustomer"
+            >
+              <label for="txtBrandCustomer" class="label-required">
+                {{ "product-brand-edit.lblBrandCustomer" | translate }}
+              </label>
+              <p-dropdown
+                [options]="brandCustomers"
+                formControlName="BrandCustomer"
+                optionValue="masterCustomerId"
+                optionLabel="masterCustomerName"
+                class="w-100"
+                placeholder="{{
+                  ('formsGeneral.selSelectOpcion' | translate) || ' '
+                }}"
+              ></p-dropdown>
+            </div>
+            <div class="col-12 col-md-4 col-xl-3 mt-16">
+              <label for="txtCustomerCode" class="label-required">
+                {{ "product-brand-edit.lblCustomerCode" | translate }}
+              </label>
+              <input
+                id="txtCustomerCode"
+                type="text"
+                class="inputs"
+                formControlName="CustomerCode"
+                placeholder="{{
+                  'product-brand-edit.lblCustomerCode' | translate
+                }}"
+              />
+            </div>
+            <div class="col-12 col-md-4 col-xl-3 mt-16">
+              <app-datepicker
+                class="capitalize-finotex"
+                [config]="settingsLastestVersion"
+                [submitted]="submitted"
+                [form]="brandProductEdit"
+                [right]="24"
+                [formDirective]="ngForm"
+              ></app-datepicker>
+            </div>
+            <div class="col-12 col-md-4 col-xl-3 mt-16">
+              <label for="txtlblDescription" class="label-required">
+                {{ "product-brand-edit.lblDescription" | translate }}
+              </label>
+              <input
+                id="txtlblDescription"
+                type="text"
+                class="inputs"
+                formControlName="Description"
+                placeholder="{{
+                  'product-brand-edit.lblDescription' | translate
+                }}"
+              />
+            </div>
+            <div class="col-12 col-md-4 col-xl-3 mt-16">
+              <label for="txtDimentions" class="label-required">
+                {{ "product-brand-edit.lblDimentions" | translate }}
+              </label>
+              <input
+                id="txtDimentions"
+                type="text"
+                class="inputs"
+                formControlName="Dimentions"
+                placeholder="{{
+                  'product-brand-edit.lblDimentions' | translate
+                }}"
+              />
+            </div>
+            <div class="col-12 col-md-4 col-xl-3 mt-16">
+              <label for="txtFinalDimentions" class="label-required">
+                {{ "product-brand-edit.lblFinalDimentions" | translate }}
+              </label>
+              <input
+                id="txtFinalDimentions"
+                type="text"
+                class="inputs"
+                formControlName="FinalDimentions"
+                placeholder="{{
+                  'product-brand-edit.lblFinalDimentions' | translate
+                }}"
+              />
+            </div>
+            <div class="col-12 col-md-4 col-xl-3 mt-16">
+              <label for="txtProductionLine" class="label-required">
+                {{ "product-brand-edit.lblProductionLine" | translate }}
+              </label>
+              <p-dropdown
+                [options]="productLines"
+                formControlName="ProductionLine"
+                optionLabel="groupLineName"
+                optionValue="groupLineId"
+                placeholder="{{
+                  ('artWork.selSelectOpcion' | translate) || ' '
+                }}"
+              ></p-dropdown>
+            </div>
+            <div class="col-12 col-md-4 col-xl-3 mt-16">
+              <label for="txtMoq">
+                {{ "product-brand-edit.lblMoq" | translate }}
+                <em
+                  class="fas fa-info-circle"
+                  pTooltip="{{
+                    'product-brand-edit.lblminimunOrderQuantity' | translate
+                  }}"
+                ></em>
+              </label>
+              <input
+                id="txtMoq"
+                type="text"
+                class="inputs"
+                formControlName="MinimunOrderQuantity"
+                placeholder="{{ 'product-brand-edit.lblMoq' | translate }}"
+              />
+            </div>
+            <div class="col-12 col-md-4 col-xl-3 mt-16">
+              <label for="txtMinumumPerSku" class="minimumSize-change">
+                {{ "product-brand-edit.lblMinumumPerSku" | translate }}
+              </label>
+              <input
+                id="txtMinumumPerSku"
+                type="text"
+                class="inputs"
+                formControlName="MinumumPerSku"
+                placeholder="{{
+                  'product-brand-edit.lblMinumumPerSku' | translate
+                }}"
+              />
+            </div>
+            <div class="col-12 col-md-4 col-xl-3 mt-16">
+              <label for="txtLeadTime" class="label-required">
+                {{ "product-brand-edit.lblLeadTime" | translate }}
+              </label>
+              <input
+                id="txtLeadTime"
+                type="text"
+                class="inputs"
+                formControlName="LeadTime"
+                placeholder="{{ 'product-brand-edit.lblLeadTime' | translate }}"
+              />
+            </div>
+            <div class="col-12 col-md-4 col-xl-3 mt-16">
+              <label for="txtDaysWeeks" class="label-required">
+                {{ "product-brand-edit.lblDaysWeeks" | translate }}
+              </label>
+              <p-dropdown
+                formControlName="DaysWeeks"
+                [options]="DaysWeeks"
+                optionLabel="name"
+                optionValue="timeUnitId"
+                placeholder="{{
+                  ('formsGeneral.selSelectOpcion' | translate) || ' '
+                }}"
+              ></p-dropdown>
+            </div>
+            <div class="col-12 col-md-4 col-xl-3 mt-16">
+              <label for="txtExFactoryLocation" class="label-required">
+                {{ "product-brand-edit.lblExFactoryLocation" | translate }}
+              </label>
+              <p-dropdown
+                formControlName="ExFactoryLocation"
+                [options]="ExFactoryLocations"
+                optionLabel="factoryLocationName"
+                optionValue="factoryLocationId"
+                placeholder="{{
+                  ('formsGeneral.selSelectOpcion' | translate) || ' '
+                }}"
+              ></p-dropdown>
+            </div>
+            <div class="col-12 col-md-4 col-xl-3 mt-16">
+              <label for="txtProductionFacilites" class="label-required">
+                {{ "product-brand-edit.lblProductionFacilites" | translate }}
+              </label>
+              <input
+                id="txtProductionFacilites"
+                type="text"
+                class="inputs"
+                formControlName="ProductionFacilites"
+                placeholder="{{
+                  'product-brand-edit.lblProductionFacilites' | translate
+                }}"
+              />
+            </div>
+            <div class="col-12 col-md-4 col-xl-3 mt-16">
+              <label for="txtStatus" class="label-required">
+                {{ "product-brand-edit.lblStatus" | translate }}
+              </label>
+              <p-dropdown
+                formControlName="Status"
+                [options]="Status"
+                optionValue="brandCatalogStatusId"
+                optionLabel="brandCatalogStatusName"
+                (onChange)="onChangeStatus($event)"
+                placeholder="{{
+                  ('formsGeneral.selSelectOpcion' | translate) || ' '
+                }}"
+              ></p-dropdown>
+            </div>
+            <div class="col-12 col-md-4 col-xl-3 mt-16">
+              <label for="txtApprovedBy">
+                {{ "product-brand-edit.lblApprovedBy" | translate }}
+              </label>
+              <input
+                id="txtApprovedBy"
+                type="text"
+                class="inputs"
+                formControlName="ApprovedBy"
+                placeholder="{{
+                  'product-brand-edit.lblApprovedBy' | translate
+                }}"
+              />
+            </div>
+            <div class="col-12 col-md-4 col-xl-3 mt-16">
+              <app-datepicker
+                [config]="settingsApprovedDate"
+                [submitted]="submitted"
+                [form]="brandProductEdit"
+                [right]="24"
+                [formDirective]="ngForm"
+              ></app-datepicker>
+            </div>
+            <div class="col-12 mt-16 pl-0 pr-0 pb-0 pt-0">
+              <div class="row">
+                <div class="col-12 col-md-7">
+                  <label for="txtConstructionDetail" class="label-required">
+                    {{ "product-brand-edit.lblConstructionDetail" | translate }}
+                  </label>
+                  <textarea
+                    id="txtConstructionDetail"
+                    type="text"
+                    class="inputs"
+                    formControlName="ConstructionDetail"
+                    placeholder="{{
+                      'product-brand-edit.lblConstructionDetail' | translate
+                    }}"
+                  ></textarea>
+                </div>
+                <div class="col-12 col-md-5">
+                  <label for="txtComments">
+                    {{ "product-brand-edit.lblComments" | translate }}
+                  </label>
+                  <textarea
+                    id="txtComments"
+                    type="text"
+                    class="inputs"
+                    formControlName="Comments"
+                    placeholder="{{
+                      'product-brand-edit.lblComments' | translate
+                    }}"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-3 col-xl-3 mb-2">
+              <div class="row">
+                <div class="col-md-12 mt-16 pl-0 pr-0">
+                  <label for="validationDefault01">
+                    {{ "artWork.artFile" | translate }}
+                  </label>
+                  <em
+                    class="fas fa-info-circle ml-1"
+                    pTooltip="{{
+                      'product-brand-edit.ttUploadArtFile' | translate
+                    }}"
+                  ></em>
+                  <div
+                    class="img-media img"
+                    *ngIf="product.imageUrlTmp != null"
+                  >
+                    <img
+                      src="{{ product.imageUrlTmp }}"
+                      alt="Card image cap"
+                      appImage
+                    />
+
+                    <div class="img-button-preview-datail text-right">
+                      <button
+                        class="button-Preview button-primary img-button-preview-css"
+                        type="button"
+                        (click)="openPreviewFile(product.imageUrlTmp)"
+                      >
+                        <em class="fa fa-search"></em>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="input-group mb-3">
+                    <input
+                      id="txtUploadArtFile"
+                      pInputText
+                      type="text"
+                      class="inputs cut form-control bc-w"
+                      formControlName="UploadArtFile"
+                      placeholder="{{
+                        'product-brand-detail.lblInputArtJPGE' | translate
+                      }}"
+                      readonly
+                    />
+                    <div class="input-group-append">
+                      <input
+                        type="file"
+                        name="fileArtFile"
+                        id="fileArtFile"
+                        (change)="fileChanged($event)"
+                      />
+                      <button
+                        pButton
+                        type="button"
+                        id="artFile"
+                        (click)="clickArtFile()"
+                        label="{{ 'artWork.btnUpload' | translate }}"
+                        class="button button-primary cut-b"
+                      ></button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 mt-16 pl-0 pr-0">
+                  <label for="validationDefault01">
+                    {{
+                      "product-brand-edit.lblUploadAssociatedPDF" | translate
+                    }}
+                  </label>
+                  <em
+                    class="fas fa-info-circle ml-1"
+                    pTooltip="{{
+                      'product-brand-edit.ttUploadAditional' | translate
+                    }}"
+                  ></em>
+                  <input
+                    type="text"
+                    id="txtUploadAditional"
+                    pInputText
+                    class="form-control input-select-image bc-w"
+                    formControlName="UploadAditional"
+                    placeholder="{{
+                      'artWork.plDropfilesheretoupload' | translate
+                    }}"
+                    readonly
+                  />
+                  <div class="invalid-feedback mb-2">
+                    {{ "formsGeneral.lblMandatoryField" | translate }}
+                  </div>
+                  <div class="text-right mt-1">
+                    <button
+                      pButton
+                      type="button"
+                      label="{{ 'artWork.download' | translate }}"
+                      class="button button-secundary filter mr-1"
+                      (click)="DownloadPdf()"
+                    ></button>
+                    <input
+                      type="file"
+                      name="fileArtFileAditional"
+                      id="fileArtFileAditional"
+                      (change)="fileChangedAditional($event)"
+                    />
+                    <button
+                      pButton
+                      type="button"
+                      id="artFileAditional"
+                      label="{{ 'artWork.btnUpload' | translate }}"
+                      (click)="clickArtFileAditional()"
+                      class="button button-primary filter"
+                    ></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-9 pr-0">
+              <div class="row">
+                <div class="col-12 mt-16">
+                  <div style="max-width: calc(100vw - 30vw)">
+                    <p-accordion>
+                      <p-accordionTab
+                        class="card w-100"
+                        header="{{
+                          'product-brand-edit.lblPricingTable' | translate
+                        }}"
+                        [selected]="false"
+                      >
+                        <div class="row justify-content-end">
+                          <app-button-finotex
+                            label="product-brand-edit.btnAddNewEntry"
+                            type="button"
+                            typeButton="primary"
+                            [typeSize]="false"
+                            [disabled]="createEditEnabled"
+                            class="mb-3"
+                            (click)="addPreci()"
+                          ></app-button-finotex>
+                        </div>
+
+                        <ng-template pTemplate="content">
+                          <p-table-finotex
+                            #tablaFinotex
+                            class="f-table"
+                            [value]="preciFormCall.controls"
+                          >
+                            <ng-template pTemplate="header">
+                              <tr>
+                                <th>
+                                  {{
+                                    "product-brand-edit.lblTblQuantity"
+                                      | translate
+                                  }}
+                                </th>
+                                <th>
+                                  {{ "Sales Unit" | translate }}
+                                </th>
+                                <th>
+                                  {{
+                                    "product-brand-edit.lblTblSales" | translate
+                                  }}
+                                </th>
+                                <th>
+                                  {{
+                                    "product-brand-edit.lblTblFOB" | translate
+                                  }}
+                                </th>
+                                <th>
+                                  {{
+                                    "product-brand-edit.lblTblIntercompany"
+                                      | translate
+                                  }}
+                                </th>
+                                <th>
+                                  {{
+                                    "product-brand-edit.lblTblActions"
+                                      | translate
+                                  }}
+                                </th>
+                              </tr>
+                            </ng-template>
+                            <ng-template
+                              formArrayName="preci"
+                              let-rowIndex="rowIndex"
+                              pTemplate="body"
+                              let-itempreci
+                            >
+                              <tr [formGroupName]="rowIndex">
+                                <td>
+                                  <p-dropdown
+                                    appendTo="body"
+                                    [options]="listBrandProductRangePrice"
+                                    optionValue="brandCatalogRangeId"
+                                    optionLabel="brandCatalogRangeName"
+                                    formControlName="brandCatalogRangeId"
+                                    class="w-100"
+                                    (onChange)="onChangeRange($event, rowIndex)"
+                                    placeholder="{{
+                                      ('formsGeneral.selSelectOpcion'
+                                        | translate) || ' '
+                                    }}"
+                                  ></p-dropdown>
+                                </td>
+                                <td>
+                                  <p-dropdown
+                                    appendTo="body"
+                                    [options]="listPackageUnit"
+                                    optionValue="unitMeasureId"
+                                    optionLabel="unitMeasureName"
+                                    class="w-100"
+                                    formControlName="salesUnit"
+                                    placeholder="{{
+                                      ('formsGeneral.selSelectOpcion'
+                                        | translate) || ' '
+                                    }}"
+                                  ></p-dropdown>
+                                </td>
+                                <td>
+                                  <app-currency-input
+                                    locale="en-US"
+                                    mode="decimal"
+                                    format="true"
+                                    [minFractionDigits]="6"
+                                    formControlName="salePrice"
+                                    titleButton="{{ currencyCode }}"
+                                    (onBlur)="
+                                      onChangeSalesPrice($event, rowIndex)
+                                    "
+                                  ></app-currency-input>
+                                </td>
+                                <td>
+                                  <app-currency-input
+                                    locale="en-US"
+                                    mode="decimal"
+                                    format="true"
+                                    [minFractionDigits]="6"
+                                    formControlName="fobprice"
+                                    titleButton="{{ currencyCode }}"
+                                  ></app-currency-input>
+                                </td>
+                                <td>
+                                  <app-currency-input
+                                    locale="en-US"
+                                    mode="decimal"
+                                    format="true"
+                                    [minFractionDigits]="6"
+                                    formControlName="intercompanyPrice"
+                                    titleButton="{{ currencyCode }}"
+                                  ></app-currency-input>
+                                </td>
+                                <td>
+                                  <app-button-icon-cart-finotex
+                                    label=""
+                                    icon="fas fa-trash-alt"
+                                    type="button"
+                                    typeButton="secondary"
+                                    [typeSize]="false"
+                                    (click)="removePrice(rowIndex)"
+                                    [disabled]="createEditEnabled"
+                                    pTooltip="{{
+                                      'product-brand-purchase.lblDelete'
+                                        | translate
+                                    }}"
+                                  ></app-button-icon-cart-finotex>
+                                </td>
+                              </tr>
+                            </ng-template>
+                          </p-table-finotex>
+                        </ng-template>
+                      </p-accordionTab>
+                    </p-accordion>
+                  </div>
+                </div>
+
+                <div class="col-12 mt-16 mb-16 pr-75">
+                  <form class="mt-16">
+                    <div style="max-width: calc(100vw - 35vw)">
+                      <p-accordion>
+                        <p-accordionTab
+                          class="card w-100"
+                          header="{{
+                            'product-brand-new.lblDetailsTable' | translate
+                          }}"
+                          [selected]="false"
+                        >
+                          <div class="row justify-content-end">
+                            <app-button-finotex
+                              label="product-brand-new.btnAddNewEntry"
+                              type="button"
+                              typeButton="primary"
+                              [typeSize]="false"
+                              class="mb-3"
+                              (click)="showPanelDialog()"
+                            ></app-button-finotex>
+                          </div>
+
+                          <ng-template pTemplate="content">
+                            <p-table #table [data]="brandProductDetails">
+                              <tr theaderRecords>
+                                <th *ngIf="showBrandCustomer" scope="col">
+                                  {{
+                                    "product-brand-detail.lblTblItemReference"
+                                      | translate
+                                  }}
+                                </th>
+                                <th *ngIf="showBrandCustomer" scope="col">
+                                  {{
+                                    "product-brand-detail.lblTblInternalProductCode"
+                                      | translate
+                                  }}
+                                </th>
+                                <th scope="col">
+                                  {{
+                                    "product-brand-detail.lblTblSize"
+                                      | translate
+                                  }}
+                                </th>
+                                <th scope="col">
+                                  {{
+                                    "product-brand-detail.lblTblColor"
+                                      | translate
+                                  }}
+                                </th>
+                                <th *ngIf="showBrandCustomer" scope="col">
+                                  {{
+                                    "product-brand-detail.lblTblCompany"
+                                      | translate
+                                  }}
+                                </th>
+                                <th scope="col">
+                                  {{
+                                    "product-brand-new.lblTblActions"
+                                      | translate
+                                  }}
+                                </th>
+                              </tr>
+                              <tr
+                                tbodyRecords
+                                *ngFor="
+                                  let productDetail of brandProductDetails;
+                                  let i = index
+                                "
+                              >
+                                <td *ngIf="showBrandCustomer">
+                                  {{ product.brandCatalogCode }}
+                                </td>
+                                <td *ngIf="showBrandCustomer">
+                                  {{ productDetail.productId }}
+                                </td>
+                                <td>
+                                  {{
+                                    productDetail.size == null
+                                      ? "N/A"
+                                      : productDetail.size
+                                  }}
+                                </td>
+                                <td>
+                                  {{
+                                    productDetail.color == null
+                                      ? "N/A"
+                                      : productDetail.color
+                                  }}
+                                </td>
+                                <td *ngIf="showBrandCustomer">
+                                  {{ productDetail.companyName }}
+                                </td>
+                                <td>
+                                  <app-button-icon-cart-finotex
+                                    label=""
+                                    class="mr-1"
+                                    icon="fas fa-edit"
+                                    type="button"
+                                    typeButton="secondary"
+                                    [typeSize]="false"
+                                    (click)="showPanelDialogEdit(productDetail)"
+                                    pTooltip="{{
+                                      'product-brand.btnEditItem' | translate
+                                    }}"
+                                  ></app-button-icon-cart-finotex>
+
+                                  <app-button-icon-cart-finotex
+                                    label=""
+                                    icon="fas fa-trash-alt"
+                                    type="button"
+                                    typeButton="secondary"
+                                    [typeSize]="false"
+                                    (click)="remove(i)"
+                                    pTooltip="{{
+                                      'product-brand-purchase.lblDelete'
+                                        | translate
+                                    }}"
+                                  ></app-button-icon-cart-finotex>
+                                </td>
+                              </tr>
+                            </p-table>
+                          </ng-template>
+                        </p-accordionTab>
+                      </p-accordion>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 offset-md-8 text-right mt-16 pr-0">
+    <div class="row">
+      <div class="col-6">
+        <button
+          routerLink="/home/brandProducts"
+          class="button button-secundary w-100"
+        >
+          {{ "product-brand-edit.btnBack" | translate }}
+        </button>
+      </div>
+      <div class="col-6">
+        <button
+          rel="noopener noreferrer"
+          type="submit"
+          class="button button-primary button-save w-100"
+          [disabled]="
+            brandProductEdit.invalid ||
+            buttonState ||
+            preciFormCall.controls.length == 0
+          "
+        >
+          {{ "product-brand-edit.btnSave" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- row -->
+<p-dialog
+  [(visible)]="displayConfirmCreate"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '30vw' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <em class="far fa-check-circle font50"></em>
+    </div>
+    <div class="col-md-12 text-center mt-24 font16">
+      {{ "product-brand-edit.BrandSuccessfully" | translate }}
+    </div>
+    <div class="col-md-12 text-center mt-16 description-page">
+      <p>
+        {{ "product-brand-edit.YourCustomer" | translate }}
+        <b>{{ this.product.brandCatalogCode }}</b>
+      </p>
+      <p>{{ "product-brand-edit.msgSuccessfully" | translate }}</p>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button
+        (click)="accept()"
+        label="{{ 'checkOut.btnOk' | translate }}"
+        styleClass="button button-primary text-center"
+      ></p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-viewer
+  header="{{ 'products.preview_imagen' | translate }}"
+  [(visible)]="displayFilePreview"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <div class="image-viewer">
+    <img src="{{ imageGaleryBrandEdit }}" alt="" appFallbackSrc />
+  </div>
+  <ng-template pTemplate="footer"></ng-template>
+</p-viewer>
+
+<p-dialog
+  [(visible)]="showModalDelete"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '30vw' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <em class="far fa-check-circle font50"></em>
+    </div>
+    <div class="col-md-12 text-center mt-16 description-page">
+      <p>
+        {{ "product-brand-catalog-Detail.ConffirmDelete" | translate }}
+      </p>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button
+        (click)="showModalDelete = false"
+        label="{{ 'artWork.btnCancel' | translate }}"
+        styleClass="button button-secundary filter"
+      ></p-button>
+      <p-button
+        label="{{ 'checkOut.btnOk' | translate }}"
+        styleClass="button button-primary text-center"
+        (click)="acceptDeleteRow()"
+      ></p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<form [formGroup]="editBrandProductForm">
+  <p-dialog
+    header="{{
+      isEditDetails
+        ? ('product-brand-new.btnEditEntry' | translate)
+        : ('product-brand-new.btnAddNewEntry' | translate)
+    }}"
+    [(visible)]="displayComment"
+    [modal]="true"
+    [baseZIndex]="10000"
+    [draggable]="false"
+    [resizable]="false"
+    (onHide)="closePanelDialog()"
+  >
+    <div class="row mt-2">
+      <div class="col-12 col-md-3 col-lg-2 mt-2">
+        <label>
+          {{ "product-brand-detail.lblTblItemReference" | translate }}
+        </label>
+        <input
+          type="text"
+          formControlName="itemReference"
+          class="form-control"
+          pInputText
+        />
+      </div>
+      <div class="col-12 col-md-9 col-lg-3 mt-2">
+        <label class="label-required">
+          {{ "product-brand-detail.lblTblCompany" | translate }}
+        </label>
+        <p-dropdown
+          appendTo="body"
+          [options]="ListCompany"
+          optionValue="businessId"
+          optionLabel="name"
+          formControlName="Company"
+          class="w-100"
+          (onChange)="changeCompany()"
+          placeholder="{{
+            ('formsGeneral.selSelectOpcion' | translate) || ' '
+          }}"
+        ></p-dropdown>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 mt-2">
+        <label class="label-required">
+          {{ "product-brand-detail.lblTblInternalProductCode" | translate }}
+        </label>
+        <input
+          type="text"
+          formControlName="internalProductCode"
+          class="form-control"
+          (keydown.enter)="onFocusOutEvent($event)"
+          (focusout)="onFocusOutEvent($event)"
+          pInputText
+        />
+      </div>
+      <div class="col-12 col-md-3 col-lg-1 mt-2">
+        <label>
+          {{ "product-brand-detail.lblTblSize" | translate }}
+        </label>
+        <input
+          type="text"
+          formControlName="size"
+          class="form-control"
+          pInputText
+        />
+      </div>
+      <div class="col-12 col-md-3 col-lg-2 mt-2">
+        <label>
+          {{ "product-brand-detail.lblTblColor" | translate }}
+        </label>
+        <input
+          type="text"
+          formControlName="color"
+          class="form-control"
+          pInputText
+        />
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <app-button-finotex
+        label="artWork.btnCancel"
+        type="button"
+        typeButton="secondary"
+        [typeSize]="false"
+        (click)="closePanelDialog()"
+        class="mb-3 mr-1"
+      ></app-button-finotex>
+
+      <app-button-finotex
+        label="artWork.submit"
+        type="submit"
+        typeButton="primary"
+        [typeSize]="false"
+        class="mb-3"
+        (click)="updateDetailsBrandProduct()"
+        [disabled]="editBrandProductForm.invalid"
+      ></app-button-finotex>
+    </ng-template>
+  </p-dialog>
+</form>
+
+<p-toast [autoZIndex]="true" [baseZIndex]="20000"></p-toast>

@@ -1,0 +1,30 @@
+td {
+  padding: inherit;
+}
+
+@media (max-width: 575.98px) {
+  td {
+    padding: 5px
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  td {
+    padding: 5px
+  }
+}
+
+.text-ellipsis  {
+  white-space: nowrap;
+  width: 158px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
+.inputs:visited,
+.autocomplete-container input:visited,
+.p-dropdown-search__field:visited,
+input:not(:placeholder-shown) {
+  border: 1px solid #cacaca !important
+}

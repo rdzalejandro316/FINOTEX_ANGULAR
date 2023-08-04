@@ -1,0 +1,115 @@
+.search {
+  border-radius: 0px 10px 10px 0px !important;
+  width: 90%;
+  box-shadow: none;
+}
+
+.select2-container {
+  width: 32% !important;
+}
+
+@media screen and (max-width: 767px) {
+  .search {
+    width: 88%;
+  }
+}
+
+button span {
+  display: inline-block;
+}
+
+button span:last-child {
+  margin-left: 8px;
+}
+
+select,
+.select,
+.select2,
+.filter {
+  width: 100% !important;
+}
+button.search {
+  width: 10%;
+  border: 1px solid #989a9b !important;
+  border-left: none !important;
+}
+
+input[placeholder^='Product Search'] {
+  border-radius: 10px 0px 0px 10px !important;
+}
+.sizeClass {
+  width: 25px !important;
+  height: 25px !important;
+}
+.tooltiplf {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+.tooltiplf .tiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  padding: 6px 0;
+  position: absolute;
+  z-index: 1;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+.tooltiplf .tiptext::after {
+  content: "";
+  position: absolute;
+  border-width: 5px;
+  border-style: solid;
+}
+.tooltiplf:hover .tiptext {
+  visibility: visible;
+}
+.tooltip.top .tiptext{
+  margin-left: -60px;
+  bottom: 150%;
+  left: 50%;
+}
+.tooltip.top .tiptext::after{
+  margin-left: -5px;
+  top: 100%;
+  left: 50%;
+  border-color: #2E2E2E transparent transparent transparent;
+}
+
+.textarea-padding {
+  padding: 7px !important;
+}
+
+.p-field-checkbox,
+.p-field-radiobutton {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.p-field-checkbox > label,
+.p-field-radiobutton > label {
+  margin-left: 0.5rem;
+  line-height: 1;
+}
+
+.label-check {
+  font-weight: 600;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  margin-left: 20px;
+}
+
+@media screen and (max-width: 966px) {
+  .iphone-se {
+    text-align: center !important;
+  }
+}
+
+.prueba{
+  width: 34px !important;
+  font-size: 23px;
+}

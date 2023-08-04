@@ -1,0 +1,39 @@
+/* Imagenes */
+.imgForm > div{
+    width: 100%;
+    height: 10.69em;
+    background: #E5E6E6 0% 0% no-repeat padding-box;
+    border: 2px solid #989A9B;
+    border-radius: 15px;
+    opacity: 1;
+}
+/* Select 2 */
+.select2
+{
+    width:100% !important;
+}
+#ddlShipping
+{
+    width:100% !important;
+}
+/* Textos */
+.font50 {
+    font-size: 50px;
+}
+.fontred {
+    color: #C10019;
+}
+/* Botones */
+button.ttile-page {
+    font-size: 14px !important;
+    background-color: #fff;
+    border: none;
+}
+button.ttile-page.collapsed {
+    color: #2B2A2A;
+}
+/* Cards */
+.card .card-body {
+    margin: 0px;
+    padding: 24px;
+}

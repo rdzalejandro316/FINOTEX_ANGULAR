@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="61" height="60" viewBox="0 0 61 60">
+  <defs>
+    <clipPath id="clip-Atendemos_solicitudes">
+      <rect width="61" height="60"/>
+    </clipPath>
+  </defs>
+  <g id="Atendemos_solicitudes" data-name="Atendemos solicitudes" clip-path="url(#clip-Atendemos_solicitudes)">
+    <g id="Group_13482" data-name="Group 13482" transform="translate(0 0.167)">
+      <path id="Path_4746" data-name="Path 4746" d="M0,0H60V60H0Z" fill="none"/>
+      <path id="Path_4747" data-name="Path 4747" d="M50.309,2a2.792,2.792,0,0,1,2.783,2.8V15.32l-5.566,5.6V7.6H8.566V52.4h38.96V44.678l5.566-5.6V55.2A2.792,2.792,0,0,1,50.309,58H5.783A2.792,2.792,0,0,1,3,55.2V4.8A2.793,2.793,0,0,1,5.783,2Zm4.948,19.062,3.935,3.959L37.547,46.8l-3.941-.006.006-3.954L55.257,21.062ZM30.829,30v5.6H16.914V30Zm8.349-11.2v5.6H16.914V18.8Z" transform="translate(0)" fill="#54585a"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,364 @@
+<p-breadcrumb 
+    [model]="itemsBreadcrumb"
+    [tittle]="'pqrs.management-customer-title'"
+    [description]="'pqrs.management-customer-description'">
+</p-breadcrumb>
+
+<div class="row mb-2">
+    <div class="col-12 col-md-6 col-lg-3 mt-2">
+      <app-button-finotex
+            label="productList.msgFilerSearch"
+            type="button"
+            typeButton="secondary"
+            [typeSize]="true"
+            (click)="showPanelFilter()">
+        </app-button-finotex>
+    </div>
+  
+    <div class="col-12 col-md-6 col-lg-4 mt-2">
+        <app-search-selector-principal
+            placeholder="pqrs.management-find"
+            icon="pi pi-search"
+            inputId="searchRequest"
+            class="app-search-selector-principal"
+            [styleBtn]="{'z-index' : '1'}"
+            (keypress)="onKeyPressNumber($event)"
+            (clickEvent)="onSubmitFilterSearch($event)">
+        </app-search-selector-principal>
+    </div>
+  
+    <div class="col-12 col-md-12 col-lg-5 mt-2 text-right iphone-se">
+        <app-button-icon-finotex
+            icon="fas fa-download"
+            label="{{'artWork.download' | translate }}"
+            type="button"
+            typeButton="secondary"
+            [typeSize]="false"
+            class="mr-3"
+            (click)="download()">
+        </app-button-icon-finotex>
+  
+        <app-button-icon-finotex
+            icon="fas fa-plus"
+            label="{{ 'pqrs.management-new-request' | translate }}"
+            type="button"
+            typeButton="primary"
+            [typeSize]="false"
+            (click)="newRequest()">
+        </app-button-icon-finotex>
+    </div>
+</div>
+  
+<form class="mt-4" [formGroup]="registerFormFilter" (ngSubmit)="onSubmitFilter()">
+    <div class="row">      
+        <div class="w-100 container-serach" [hidden]="!showfiltersFinotex">
+
+          <div class="row">            
+            <label class="title-search w-100">{{ 'pqrs.management-filter' | translate }}</label>                        
+            <label class="description-page w-100">{{ 'pqrs.management-filter-description' | translate }}</label>            
+          </div>
+  
+          <div class="row">
+
+            <div class="col-12 col-sm-6 col-xl-3 mt-3">
+              <label>{{ 'pqrs.consult-pqrs-by-client' | translate }}</label>
+              <input
+                pInputText
+                type="text"
+                formControlName="documentId"
+                class="form-control"
+                placeholder="{{ 'pqrs.management-filter-number' | translate }}"
+                (keypress)="onKeyPressNumber($event)"/>
+            </div>
+
+            <div class="col-12 col-sm-6 col-xl-3 mt-3">
+              <label>{{ 'pqrs.management-filter-state' | translate }}</label>
+              <p-dropdown                 
+                [filter]="false" 
+                [options]="requestStatus" 
+                optionValue="requestStatusId"
+                optionLabel="requestStatusName" 
+                class="w-100" 
+                placeholder="{{('pqrs.management-filter-state' | translate) || ' '}}"
+                formControlName="status">
+              </p-dropdown>                 
+            </div>
+                       
+            <div class="col-12 col-sm-6 col-xl-3 mt-3">
+                <label>{{ 'pqrs.edit-pqrs-tab-information-general-requirement-type' | translate }}</label>
+                <p-dropdown                 
+                  [filter]="false" 
+                  [options]="requestType" 
+                  optionValue="requestTypeId"
+                  optionLabel="requestTypeName" 
+                  class="w-100" 
+                  placeholder="{{('pqrs.edit-pqrs-tab-information-general-requirement-type' | translate) || ' '}}"
+                  formControlName="requestTypeId">
+                </p-dropdown>   
+            </div>
+
+            <div class="col-12 col-sm-6 col-xl-3 mt-3">                
+                <app-datepicker 
+                  right="17"
+                  [config]="settingsDate" 
+                  [submitted]="submitted"
+                  [form]="registerFormFilter"
+                  [formDirective]="ngForm">
+                </app-datepicker>
+            </div>
+  
+            <div class="col-12 col-sm-6 col-xl-3 mt-3">
+                <label>{{ 'pqrs.management-filter-order' | translate }}</label>
+                <input
+                  type="text"
+                  formControlName="order"
+                  pInputText
+                  placeholder="{{ 'pqrs.management-filter-order' | translate }}"
+                  class="form-control"/>
+            </div>
+                  
+            <div class="col-12 col-sm-6 col-xl-3 mt-3">
+              <label>{{ 'pqrs.management-filter-invoice' | translate }}</label>
+              <input
+                type="text"
+                formControlName="invoice"
+                pInputText
+                placeholder="{{ 'pqrs.management-filter-invoice' | translate }}"
+                class="form-control"/>
+            </div>
+
+          </div>
+  
+          <div class="d-flex justify-content-sm-end mt-3">                                                
+              <button                
+                pButton
+                type="button"
+                label="{{ 'formsGeneral.btnResetFields' | translate }}"
+                class="button button-secundary filter mr-2"
+                (click)="clearFilter()">
+              </button>
+            
+              <button
+                pButton
+                type="submit"
+                label="{{ 'formsGeneral.btnSearch' | translate }}"                
+                class="button button-primary filter">
+              </button>
+          </div>
+
+        </div>      
+    </div>
+</form>
+
+<!-- table -->
+<form class="mt-16" #mydiv [formGroup]="requestDataForm">      
+  <div class="row">
+      <div class="table-responsive">
+        <p-table-finotex                     
+          #tablaFinotex
+          [scrollable]="false"           
+          [autoLayout]="false"                    
+          [tableStyle]="{'table-layout': 'auto'}"
+          class="f-table"
+          [value]="requestFormCall.controls"
+          dataKey="id"
+          sortable-table           
+          [expandedRowKeys]="expandedRows"          
+          [lazy]="true"
+          [paginator]="true"     
+          [rowsPerPageOptions]="[10, 20, 30]"
+          [rows]="10"   
+          (onPage)="paginate($event)"         
+          [totalRecords]="totalRecords"          
+          sortable-table (sorted)="onSorted($event)">
+
+       
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="width: 50px" class="column-row"></th>
+              <th>
+                <label sortable-column="documentId">{{ "pqrs.consult-pqrs-by-client" | translate }}</label>
+              </th>
+              <th>
+                <label sortable-column="requestTypeName">{{ "main.generate-pqrs-requirement-type" | translate }}</label>
+              </th>
+              <th>
+                <label sortable-column="requestDate">{{ "pqrs.edit-pqrs-tab-information-general-registration-date" | translate }}</label>
+              </th>
+              <th>
+                <label sortable-column="closingDate">{{ "main.consult-pqrs-col-asnwer-date" | translate }}</label>
+              </th>
+              <th>
+                <label sortable-column="requestStatusName">{{ "pqrs.edit-pqrs-tab-information-general-condition" | translate }}</label>
+              </th>
+              <th class="text-center">
+                <label>{{ 'product-brand.lblActions' | translate }}</label>
+              </th>
+            </tr>
+            <tr id="rowNoData" class="rowNoData">
+              <td colspan="50" class="text-center bg-white p-0" >
+                  <img  class="simple-img img-not-data"
+                      src="../../../../assets/images/folder-open.svg" 
+                      alt="profile" />                  
+                  <div class="mb-16"><label class="text-no-data">{{ 'general.noData' | translate  }}</label></div>
+              </td>
+            </tr>
+          </ng-template>       
+
+          <ng-template          
+            pTemplate="body"
+            formArrayName="header"
+            let-rowIndex="rowIndex"
+            let-request
+            let-expanded="expanded">
+            
+            <tr>
+              <td class="text-center">
+                <span
+                  #btn
+                  id="Btnunfold{{rowIndex}} "
+                  type="button"
+                  pButton
+                  pRipple
+                  (click)="onItemClick(request.value, tablaFinotex)"
+                  class="p-button-text p-button-rounded p-button-plain"
+                  [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">
+                </span>
+
+              </td>
+
+              <td>{{request.value.documentId}}</td>  
+              <td>{{request.value.requestTypeName}}</td>  
+              <td>{{request.value.requestDate | date: this.language == 'en' ? "MMM/dd/yyyy" : "dd/MMM/yyy"}}</td>  
+              <td>{{request.value.closingDate | date: this.language == 'en' ? "MMM/dd/yyyy" : "dd/MMM/yyy"}}</td>  
+              <td>{{request.value.requestStatusName}}</td>  
+                            
+              <td class="text-center">
+
+                <button                                                                                                                                          
+                  pButton 
+                  pRipple
+                  type="button"                              
+                  icon="fas fa-edit"  
+                  aria-hidden="true"
+                  class="p-button-rounded p-button-text p-button-reset"
+                  pTooltip="{{ 'artWork.edit' | translate }}"
+                  tooltipPosition="top"
+                  *ngIf="request.value.requestStatusId == 1 ? true : false"
+                  (click)="editRequest(request.value.documentId)">
+                </button>  
+
+                <button                                    
+                  pButton 
+                  pRipple
+                  type="button"                              
+                  icon="fas fa-eye"  
+                  aria-hidden="true"
+                  class="p-button-rounded p-button-text p-button-reset"
+                  pTooltip="{{ 'pqrs.management-view' | translate }}"
+                  tooltipPosition="top"
+                  (click)="viewRequest(request.value.documentId)">
+                </button>
+
+                <button                  
+                pButton 
+                pRipple
+                type="button"                              
+                icon="far fa-file"  
+                aria-hidden="true"
+                class="p-button-rounded p-button-text p-button-reset"
+                pTooltip="{{ 'artWork.download' | translate }}"
+                tooltipPosition="top"
+                (click)="getFileByDocument(request.value.documentId)">
+                </button>
+
+              </td>
+            </tr>
+          </ng-template>
+
+          <ng-template                          
+            pTemplate="rowexpansion"
+            formArrayName="header"
+            let-rowIndex="rowIndex"
+            let-data>
+            
+            <tr [formGroupName]="data.controls.id.value">
+              <td colspan="7">
+                <div class="row">
+
+                  <div class="col-12 col-md-3 mt-2">
+                    <label>{{ "pqrs.management-filter-order" | translate }}</label>
+                    <input
+                      [readonly]="true"
+                      type="text"                                
+                      pInputText
+                      class="form-control"                                
+                      formControlName="purchaseOrderId"/>
+                  </div>                  
+
+                  <div class="col-12 col-md-3 mt-2">
+                    <label>{{ "pqrs.management-filter-invoice" | translate }}</label>
+                    <input
+                      [readonly]="true"
+                      type="text"                                
+                      pInputText
+                      class="form-control"
+                      formControlName="billDocumentId"/>
+                  </div>
+                                 
+                  <div class="col-12 col-md-6 mt-2">
+                    <label>{{ "main.consult-pqrs-col-number-response" | translate }}</label>
+                    <input
+                      [readonly]="true"
+                      type="text"                                
+                      pInputText
+                      class="form-control"
+                      min="0"
+                      formControlName="email"/>
+                  </div>
+                                   
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table-finotex>
+      </div>
+  </div>      
+</form>
+
+<!-- not found file -->
+<p-dialog 
+   [(visible)]="showNotFoundFile" 
+   [contentStyleClass]="'border-top'" 
+   [modal]="true" 
+   [baseZIndex]="10000"
+   [draggable]="false" 
+   [showHeader]="false" 
+   [resizable]="false" 
+   [style]="{ width: '500px' }">
+  
+    <div class="row">
+      <div class="col-md-12 text-center font50">
+        <img _ngcontent-amv-c221="" width="60px" height="60px" src="../../../assets/images/Alert.svg"
+               alt="shopping cart" class="simple-img" appImage />
+      </div>
+       
+      <div class="col-md-12 text-center mt-24">
+        <p class="title-not-fount-file">{{ "pqrs.file-not-found-title" | translate }}</p>
+      </div>
+       
+      <div class="col-md-12 text-center mt-24 f-14">      
+        <span class="description-not-fount-file">{{ "pqrs.file-not-found-description" | translate }}</span>            
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="col-md-12 text-center">
+        <p-button 
+          (click)="showNotFoundFile = false" 
+          label="{{ 'artWork.lblOk' | translate }}"
+          styleClass="button button-primary text-center">
+        </p-button>
+      </div>
+    </ng-template>
+</p-dialog>   

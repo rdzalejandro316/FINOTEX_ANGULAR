@@ -1,0 +1,147 @@
+#btnCutType {
+  padding: 0 0.5vw;
+  font-size: 0.875em;
+}
+
+@media (min-width: 1200px) and (max-width: 1300px) {
+  #btnCutType {
+      padding: 0 0.5vw;
+      font-size: 0.75em;
+  }
+  .imgRewinding{
+    width: 43% !important;
+    max-width: 90%;
+    max-height: 100%;
+    margin-left: 30%;
+  }
+}
+
+@media (min-width:768px) and (max-width:1100px) { 
+  #btnCutType {
+      padding: 0 0.5vw;
+      font-size: 0.6em;
+      width: 30%;
+  }
+  .imgRewinding{
+    width: 43% !important;
+    max-width: 90%;
+    max-height: 100%;
+    margin-left: 30%;
+  }
+}
+
+@media (min-width:268px) and (max-width:653px) { 
+  #btnCutType {
+      padding: 0 0.5vw;
+      font-size: 0.6em;
+      width: 20%;
+  }
+  .imgRewinding{
+    width: 36% !important;
+    max-width: 90%;
+    max-height: 100%;
+    margin-left: 30%;
+  }
+  
+}
+
+
+@media (min-width: 1500px) and (max-width: 2100px) {
+  .imgRewinding{
+    width: 43% !important;
+    max-width: 90%;
+    max-height: 100%;
+    margin-left: 30%;
+  }
+  .imgCut {
+    width: 145px;
+    max-width: 90%;
+    max-height: 100%;
+   }
+}
+
+
+.image {
+  width: 85%;
+  margin-left:-3%;
+  height: 95%;
+  border-radius: 10px;
+  border: 1px solid #989a9b;
+}
+
+.input-select-image {
+  height: 80px !important;
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+  font: normal normal bold 14px/14px Montserrat;
+  border-radius: 30px;
+  padding: 12px 18px;
+  text-align: center;
+  -webkit-box-shadow: 0px 4px 4px 2px #00000016; 
+  box-shadow: 0px 4px 4px 2px #00000016;
+}
+
+.btn-file:hover {
+  color: #ffffff;
+  background: #b70018 0% 0% no-repeat padding-box;
+}
+
+.btn-file input[type=file] {
+  position: absolute;
+  border-radius: 30px;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: center;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+
+.input-cut {
+  height: 40px !important;
+  border: 1px solid #cacaca !important;
+  border-top-left-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+  width: 60%;
+}
+
+.btn-outline-secondary {
+    width: 100%;
+    border-radius: 10px 0px 0px 10px;
+    color: #ffffff !important;
+    font: normal normal bold 14px/16px Montserrat;
+    border-top-right-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+    background: #d6001c 0% 0% no-repeat padding-box !important;
+}
+
+.btn-outline-secondary:hover {
+  color: #ffffff !important;
+  background: #b70018 0% 0% no-repeat padding-box !important;
+}
+
+.picture-frame-finotex {
+  width: 100%;
+  height: 220px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: 1px solid #989A9B;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imgCut {
+  width: 120px;
+  max-width: 90%;
+  max-height: 100%;
+ }

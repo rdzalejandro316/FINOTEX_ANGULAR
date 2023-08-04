@@ -1,0 +1,74 @@
+.width-custom {
+    width: 100px !important;
+}
+
+.custom-spacing {
+    margin-left: 10px !important;
+}
+
+.cut {
+    width: 60%;
+    border-radius: 10px 0px 0px 10px;
+}
+
+.cut-b {
+    width: 40%;
+    border-radius: 0px 10px 10px 0px;
+}
+
+.input-select-image {
+    height: 80px !important;
+}
+
+
+.cut-downloader {
+    padding: 0 0.5vw;
+    font-size: 0.875em;
+}
+
+@media (min-width: 1200px) and (max-width: 1300px) {
+    .cut-downloader {
+        padding: 0 0.5vw;
+        font-size: 0.75em;
+    }
+}
+
+@media (min-width:768px) and (max-width:1100px) { 
+    .cut-downloader {
+        padding: 0 0.5vw;
+        font-size: 0.6em;
+        width: 50% !important;
+    }
+    .cut {
+        width: 40%;
+        border-radius: 10px 0px 0px 10px;
+    }
+    .button:not(.search) {
+        min-width: 80px !important;
+    }
+}
+
+@media (min-width:1101px) and (max-width:1452px) { 
+    .cut-downloader {
+        padding: 0 0.5vw;
+        font-size: 0.8em;
+        width: 50% !important;
+    }
+    .cut {
+        width: 40%;
+        border-radius: 10px 0px 0px 10px;
+    }
+    .button:not(.search) {
+        min-width: 80px !important;
+    }
+}
+
+.designer {
+    width: 60%;
+    border-radius: 10px 0px 0px 10px;
+}
+
+.capitalize-finotex {
+    text-transform: capitalize;
+  }
+

@@ -1,0 +1,13 @@
+.main-container{
+    display: grid;
+    grid-auto-rows: 60px 1fr;
+}
+
+.bar-component
+{
+    height:60px;
+}
+
+.content-main{
+    height: calc(100vh - 60px);    
+}

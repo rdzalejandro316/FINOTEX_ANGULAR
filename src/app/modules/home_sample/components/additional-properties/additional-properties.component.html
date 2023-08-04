@@ -1,0 +1,37 @@
+<form class="mt-16">
+  <p-accordion>
+    <p-accordionTab
+      header="{{ 'technical-sheets.additional_properties' | translate }}"
+      [selected]="false"
+      [formStatus]="true"
+      [imagenIcon]="propertyAditionalFormIconStatus"
+      statusFormText="{{ propertyAditionalFormStatusText }}"
+    >
+      <ng-template pTemplate="content">
+        <div class="row">
+          <div
+            class="col-6 col-md-4 col-xl-2 mt-2"
+            *ngFor="let Option of listOptionLine let position = index"
+          >
+            <label>{{ Option.optionName }}</label>
+            <div class="row">
+              <div class="mr-2">
+                <input
+                  type="checkbox"
+                  class="pi p-checkbox "
+                  name="{{ Option.optionName }}"
+                  id="{{ Option.optionName }}"
+                  value="{{ Option.optionId }}"
+                  (change)="checkValue($event, Option)"
+                  [checked]="Option.checked"
+                />
+              </div>
+
+              <div><label>Sí</label></div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-accordionTab>
+  </p-accordion>
+</form>

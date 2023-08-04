@@ -1,0 +1,1098 @@
+<p-breadcrumb
+  [model]="itemsBreadcrumb"
+  [tittle]="actionTraduction"
+  [description]="'samples.lblDecriptionMain'"
+></p-breadcrumb>
+
+<div class="row mt-12">
+  <div class="col-12 col-md-9 col-xl-8 mt-2">
+    <div class="row">
+      <div class="col-12 col-md-5 col-xl-4 pl-0">
+        <button
+          pButton
+          type="button"
+          (click)="showPanelFilter()"
+          label="{{ 'productList.msgFilerSearch' | translate }}"
+          class="button button-secundary filter"
+        ></button>
+      </div>
+      <div class="col-12 col-md-7 col-xl-8 mts-16">
+        <div class="input-group mb-2">
+          <ng-autocomplete
+            [itemTemplate]="itemTemplateSearch"
+            placeholder="{{ 'formsGeneral.SamplesSearch' | translate }}"
+            class="search"
+            id="search"
+            aria-describedby="basic-addon1"
+          ></ng-autocomplete>
+          <ng-template #itemTemplateSearch let-item>
+            <a [innerHTML]="item"></a>
+          </ng-template>
+          <button
+            pButton
+            type="button"
+            icon="fa fa-search"
+            label=""
+            class="button button-secundary search"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-3 offset-xl-2 col-xl-2 text-right pr-75s mt-2">
+    <app-button-icon-finotex
+      (click)="downloadFilterData()"
+      icon="fas fa-download"
+      type="submit"
+      typeButton="secondary"
+      label="{{ 'product-brand.download' | translate }}"
+    ></app-button-icon-finotex>
+  </div>
+</div>
+
+<!--Menu de busqueda-->
+<form [formGroup]="filterForm" (ngSubmit)="onSubmitFilter(pageLenght)">
+  <div class="row mt-10 mb-2" [hidden]="!showfilters">
+    <div class="col-md-12">
+      <div class="container-serach">
+        <div class="row">
+          <div class="col-md-12">
+            <label class="title-search">
+              {{ "productList.lblFilters" | translate }}
+            </label>
+
+            <p class="description-page">
+              {{ "product-brand.msgFilters" | translate }}
+            </p>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="action">
+          <div class="col-md-12 mt-2">
+            <label for="ddlSample">
+              {{ "samples.lblSearchBySampleType" | translate }}
+            </label>
+          </div>
+          <div class="col-12">
+            <label for="ddlSample">
+              {{ "samples.lblSampleList" | translate }}
+            </label>
+          </div>
+          <div class="col-12 col-md-4">
+            <p-dropdown
+              [options]="samples"
+              formControlName="samples_list"
+              optionLabel="name"
+              optionValue="code"
+              autoDisplayFirst="false"
+              placeholder="{{
+                ('formsGeneral.selSelectOpcion' | translate) || ' '
+              }}"
+            ></p-dropdown>
+          </div>
+        </div>
+
+        <div class="row mt-16" *ngIf="action">
+          <div class="col-12">
+            <label for="">{{ "samples.lblSearchByDetails" | translate }}</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-md-4 col-xl-3 mb-2">
+            <label>
+              {{ "samples.lblProgresStatus" | translate }}
+            </label>
+            <p-dropdown
+              formControlName="progress_status"
+              [options]="progressStatus"
+              optionLabel="name"
+              placeholder="{{ ('artWork.selSelectOpcion' | translate) || ' ' }}"
+            >
+              <ng-template pTemplate="selectedItem" let-progresStatus>
+                <div class="country-item country-item-value">
+                  <img
+                    alt=""
+                    appImage
+                    src="assets/images/progressStatus{{
+                      progresStatus.code
+                    }}1.svg"
+                    class="simple-img progressStatus{{ progresStatus.code }}"
+                    width="24px"
+                    height="24px"
+                  />
+                  <span class="item-img">{{ progresStatus.name }}</span>
+                </div>
+              </ng-template>
+              <ng-template let-progresStatus pTemplate="item">
+                <div class="progresStatus-item">
+                  <img
+                    alt=""
+                    appImage
+                    src="assets/images/progressStatus{{
+                      progresStatus.code
+                    }}1.svg"
+                    class="simple-img progressStatus{{ progresStatus.code }}"
+                    width="24px"
+                    height="24px"
+                  />
+                  <span class="item-img">{{ progresStatus.name }}</span>
+                </div>
+              </ng-template>
+            </p-dropdown>
+          </div>
+
+          <div class="col-12 col-md-4 col-xl-3 mb-2">
+            <label>
+              {{ "samples.lblSampleNumber" | translate }}
+            </label>
+            <input
+              type="text"
+              formControlName="sample_number"
+              pInputText
+              placeholder="{{ 'samples.lblSampleNumber' | translate }}"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-12 col-md-4 col-xl-3 mb-2">
+            <label>
+              {{ "samples.lblInternalProductCode" | translate }}
+            </label>
+            <input
+              type="text"
+              placeholder="{{ 'samples.lblInternalProductCode' | translate }}"
+              formControlName="internal_product_code"
+              pInputText
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-12 col-md-4 col-xl-3 mb-2">
+            <label>
+              {{ "samples.lblCustomerProductCode" | translate }}
+            </label>
+            <input
+              type="text"
+              placeholder="{{ 'samples.lblCustomerProductCode' | translate }}"
+              formControlName="customer_product_code"
+              pInputText
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-12 col-md-4 col-xl-6 mb-2">
+            <label>
+              {{ "samples.lblDescription" | translate }}
+            </label>
+            <input
+              type="text"
+              placeholder="{{ 'samples.lblDescription' | translate }}"
+              formControlName="description"
+              pInputText
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-12 col-md-4 col-xl-3 mb-2">
+            <label>
+              {{ "samples.lblProductLine" | translate }}
+            </label>
+            <p-dropdown
+              [options]="productLines"
+              formControlName="product_line"
+              optionValue="groupLineId"
+              optionLabel="groupLineName"
+              placeholder="{{
+                ('formsGeneral.selSelectOpcion' | translate) || ' '
+              }}"
+            ></p-dropdown>
+          </div>
+
+          <div class="col-12 col-md-4 col-xl-3 mb-2">
+            <label>{{ "samples.lblWidth" | translate }}</label>
+            <input
+              type="text"
+              placeholder="{{ 'samples.lblWidth' | translate }}"
+              formControlName="width"
+              pInputText
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-12 col-md-4 col-xl-3 mb-2">
+            <label for="txtSize">{{ "samples.lblLength" | translate }}</label>
+            <input
+              type="text"
+              placeholder="{{ 'samples.lblLength' | translate }}"
+              formControlName="length"
+              pInputText
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-12 col-md-4 col-xl-3 mb-2">
+            <label>{{ "samples.lblStatus" | translate }}</label>
+            <p-dropdown
+              [options]="status"
+              optionValue="sampleStatusId"
+              optionLabel="sampleStatusName"
+              formControlName="status"
+              placeholder="{{
+                ('formsGeneral.selSelectOpcion' | translate) || ' '
+              }}"
+            ></p-dropdown>
+          </div>
+
+          <div class="col-12 col-md-4 col-xl-3 mb-2">
+            <label>
+              {{ "samples.lblTypeOfDate" | translate }}
+            </label>
+            <p-dropdown
+              [options]="typeOfDate"
+              optionValue="code"
+              optionLabel="name"
+              formControlName="type_date"
+              placeholder="{{
+                ('formsGeneral.selSelectOpcion' | translate) || ' '
+              }}"
+            ></p-dropdown>
+          </div>
+
+          <div class="col-12 col-md-4 col-xl-3 mb-2">
+            <app-datepicker
+              [config]="settingsDates"
+              [submitted]="submitted"
+              [form]="filterForm"
+              [formDirective]="ngForm"
+            ></app-datepicker>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="offset-md-8 col-md-2 mt-2">
+            <button
+              class="button button-secundary w-100 mbs-16 mts-16"
+              type="button"
+              (click)="resetFilterForm()"
+            >
+              {{ "formsGeneral.btnResetFields" | translate }}
+            </button>
+          </div>
+          <div class="col-md-2 mt-2">
+            <button
+              pButton
+              type="submit"
+              class="button button-primary all-width"
+              [disabled]="filterForm.invalid || indicatorButton"
+            >
+              {{ "formsGeneral.btnSearch" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- all -->
+<div class="row mt-10" *ngIf="actionDescription == 'all'">
+  <div class="col-12">
+    <table id="allTable" class="table f-table" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-priority="2">
+            {{ "samples.lblProgresStatus" | translate }}
+          </th>
+          <th>{{ "samples.lblSampleNumber" | translate }}</th>
+          <th data-priority="3">
+            {{ "samples.lblInternalProductCode" | translate }}
+          </th>
+          <th>
+            {{ "samples.lblCustomerProductCode" | translate }}
+          </th>
+          <th>{{ "samples.lblDescription" | translate }}</th>
+          <th>{{ "samples.lblProductLine" | translate }}</th>
+          <th>{{ "samples.lblWidth" | translate }}</th>
+          <th>{{ "samples.lblLength" | translate }}</th>
+          <th>
+            {{ "samples.lblSampleDate" | translate }}
+          </th>
+          <th>{{ "samples.lblSampleRequestDate" | translate }}</th>
+          <th>
+            {{ "samples.lblPromisedDate" | translate }}
+          </th>
+
+          <th>
+            {{ "samples.lblCompletedDate" | translate }}
+          </th>
+          <th>
+            {{ "samples.lblApprovalRequiredBy" | translate }}
+          </th>
+
+          <th>
+            {{ "samples.lblStatus" | translate }}
+          </th>
+          <th class="text-center" data-priority="1">
+            {{ "samples.lblActions" | translate }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sample of samplesList">
+          <td>
+            <img
+              src="assets/images/progressStatus{{ sample.semaphoreId }}1.svg"
+              class="img-24"
+              alt="status image"
+              pTooltip="{{
+                'formsGeneral.progressStatus' + sample.semaphoreId | translate
+              }}"
+            />
+          </td>
+          <td>{{ sample.sampleNumber }}</td>
+          <td>{{ sample.internalProductCode }}</td>
+          <td>{{ sample.customerProductCode }}</td>
+          <td>{{ sample.description }}</td>
+          <td>{{ sample.groupLineName }}</td>
+          <td>{{ sample.width }}</td>
+          <td>{{ sample.lenght }}</td>
+          <td>
+            {{ sample.sampleDate | date: "MMM/dd/yyyy" }}
+          </td>
+          <td>{{ sample.sampleRequestDate | date: "MMM/dd/yyyy" }}</td>
+          <td>
+            {{ sample.promisedDate | date: "MMM/dd/yyyy" }}
+          </td>
+          <td>
+            {{ sample.completedDate | date: "MMM/dd/yyyy" }}
+          </td>
+          <td>
+            {{ sample.approvedRequeredBy | date: "MMM/dd/yyyy" }}
+          </td>
+          <td>
+            {{ sample.statusName }}
+          </td>
+          <td class="text-center">
+            <em
+              class="far fa-image mr-2"
+              pTooltip="<img src='{{ sample?.imageUrl }}' />"
+              [escape]="false"
+              tooltipPosition="top"
+              (click)="viewFileData(sample?.imageUrl)"
+            ></em>
+            <button
+              *ngIf="sample.statusId < 5"
+              (click)="showPanelCommentDialog(sample)"
+              pButton
+              pRipple
+              type="button"
+              icon="far fa-comment"
+              tooltipPosition="top"
+              class="p-button-rounded p-button-text mr-3"
+              pTooltip="{{ 'samples.lblAddComment' | translate }}"
+            ></button>
+
+            <button
+              *ngIf="sample.statusId == 5"
+              (click)="showPanelDialog(sample)"
+              pButton
+              pRipple
+              type="button"
+              icon="fas fa-clipboard-check"
+              class="p-button-rounded p-button-text"
+              pTooltip="{{ 'samples.toolTipApprove' | translate }}"
+            ></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-12">
+    <p-paginator
+      [rows]="10"
+      [columnsSeparate]="false"
+      [rowsPerPageOptions]="[10, 20, 30]"
+      (onPageChange)="paginate($event)"
+      [totalRecords]="totalRecords"
+    ></p-paginator>
+  </div>
+</div>
+
+<!-- Developing -->
+<div class="row mt-10" *ngIf="actionDescription == 'developing'">
+  <div class="col-12">
+    <table
+      id="developingTable"
+      class="table f-table table-bordered table-hover dt-responsive"
+      style="width: 100%"
+    >
+      <thead class="f-table-header">
+        <tr>
+          <th data-priority="2">
+            {{ "samples.lblProgresStatus" | translate }}
+          </th>
+          <th>{{ "samples.lblSampleNumber" | translate }}</th>
+          <th data-priority="3">
+            {{ "samples.lblInternalProductCode" | translate }}
+          </th>
+          <th>
+            {{ "samples.lblCustomerProductCode" | translate }}
+          </th>
+          <th>{{ "samples.lblDescription" | translate }}</th>
+          <th>{{ "samples.lblProductLine" | translate }}</th>
+          <th>{{ "samples.lblWidth" | translate }}</th>
+          <th>{{ "samples.lblLength" | translate }}</th>
+          <th>
+            {{ "samples.lblSampleDate" | translate }}
+          </th>
+          <th>{{ "samples.lblSampleRequestDate" | translate }}</th>
+          <th>
+            {{ "samples.lblPromisedDate" | translate }}
+          </th>
+          <th>
+            {{ "samples.lblStatus" | translate }}
+          </th>
+          <th data-priority="1">{{ "samples.lblActions" | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sample of samplesList">
+          <td>
+            <img
+              src="assets/images/progressStatus{{ sample.semaphoreId }}1.svg"
+              class="img-24"
+              alt="status image"
+              pTooltip="{{
+                'formsGeneral.progressStatus' + sample.semaphoreId | translate
+              }}"
+            />
+          </td>
+          <td>{{ sample.sampleNumber }}</td>
+          <td>{{ sample.internalProductCode }}</td>
+          <td>{{ sample.customerProductCode }}</td>
+          <td>{{ sample.description }}</td>
+          <td>{{ sample.groupLineName }}</td>
+          <td>{{ sample.width }}</td>
+          <td>{{ sample.lenght }}</td>
+          <td>
+            {{ sample.sampleDate | date: "MMM/dd/yyyy" }}
+          </td>
+          <td>{{ sample.sampleRequestDate | date: "MMM/dd/yyyy" }}</td>
+          <td>
+            {{ sample.promisedDate | date: "MMM/dd/yyyy" }}
+          </td>
+          <td>
+            {{ sample.statusName }}
+          </td>
+          <td>
+            <em
+              class="far fa-image mr-3"
+              pTooltip="<img src='{{ sample?.imageUrl }}' />"
+              [escape]="false"
+              tooltipPosition="top"
+              (click)="viewFileData(sample?.imageUrl)"
+            ></em>
+            <button
+              *ngIf="sample.statusId < 5"
+              (click)="showPanelCommentDialog(sample)"
+              pButton
+              pRipple
+              type="button"
+              icon="far fa-comment"
+              class="p-button-rounded p-button-text"
+              pTooltip="{{ 'samples.lblAddComment' | translate }}"
+            ></button>
+
+            <button
+              *ngIf="sample.statusId == 5"
+              (click)="showPanelDialog(sample)"
+              pButton
+              pRipple
+              type="button"
+              icon="fas fa-clipboard-check"
+              class="p-button-rounded p-button-text"
+              pTooltip="{{ 'samples.toolTipApprove' | translate }}"
+            ></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-12">
+    <p-paginator
+      [rows]="10"
+      [columnsSeparate]="false"
+      [rowsPerPageOptions]="[10, 20, 30]"
+      (onPageChange)="paginate($event)"
+      [totalRecords]="totalRecords"
+    ></p-paginator>
+  </div>
+</div>
+
+<!-- Pending -->
+<div class="row mt-10" *ngIf="actionDescription == 'pending'">
+  <div class="col-12">
+    <table
+      id="pendingTable"
+      class="table f-table table-bordered table-hover dt-responsive"
+      style="width: 100%"
+    >
+      <thead class="f-table-header">
+        <tr>
+          <th data-priority="2">
+            {{ "samples.lblProgresStatus" | translate }}
+          </th>
+          <th>{{ "samples.lblSampleNumber" | translate }}</th>
+          <th data-priority="3">
+            {{ "samples.lblInternalProductCode" | translate }}
+          </th>
+          <th>
+            {{ "samples.lblCustomerProductCode" | translate }}
+          </th>
+          <th>{{ "samples.lblDescription" | translate }}</th>
+          <th>{{ "samples.lblProductLine" | translate }}</th>
+          <th>{{ "samples.lblWidth" | translate }}</th>
+          <th>{{ "samples.lblLength" | translate }}</th>
+          <th>{{ "samples.lblSampleRequestDate" | translate }}</th>
+          <th>
+            {{ "samples.lblCompletedDate" | translate }}
+          </th>
+          <th>
+            {{ "samples.lblApprovalRequiredBy" | translate }}
+          </th>
+          <th data-priority="1">{{ "samples.lblActions" | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sample of samplesList">
+          <td>
+            <img
+              src="assets/images/progressStatus{{ sample.semaphoreId }}1.svg"
+              class="img-24"
+              alt="status image"
+              pTooltip="{{
+                'formsGeneral.progressStatus' + sample.semaphoreId | translate
+              }}"
+            />
+          </td>
+          <td>{{ sample.sampleNumber }}</td>
+          <td>{{ sample.internalProductCode }}</td>
+          <td>{{ sample.customerProductCode }}</td>
+          <td>{{ sample.description }}</td>
+          <td>{{ sample.groupLineName }}</td>
+          <td>{{ sample.width }}</td>
+          <td>{{ sample.lenght }}</td>
+          <td>{{ sample.sampleRequestDate | date: "MMM/dd/yyyy" }}</td>
+          <td>
+            {{ sample.completedDate | date: "MMM/dd/yyyy" }}
+          </td>
+          <td>
+            {{ sample.approvedRequeredBy | date: "MMM/dd/yyyy" }}
+          </td>
+          <td>
+            <em
+              class="far fa-image mr-3"
+              pTooltip="<img src='{{ sample?.imageUrl }}' />"
+              [escape]="false"
+              tooltipPosition="top"
+              (click)="viewFileData(sample?.imageUrl)"
+            ></em>
+            <button
+              *ngIf="sample.statusId < 5"
+              (click)="showPanelCommentDialog(sample)"
+              pButton
+              pRipple
+              type="button"
+              icon="far fa-comment"
+              class="p-button-rounded p-button-text"
+              pTooltip="{{ 'samples.lblAddComment' | translate }}"
+            ></button>
+
+            <button
+              *ngIf="sample.statusId == 5"
+              (click)="showPanelDialog(sample)"
+              pButton
+              pRipple
+              type="button"
+              icon="fas fa-clipboard-check"
+              class="p-button-rounded p-button-text"
+              pTooltip="{{ 'samples.toolTipApprove' | translate }}"
+            ></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-12">
+    <p-paginator
+      [rows]="10"
+      [columnsSeparate]="false"
+      [rowsPerPageOptions]="[10, 20, 30]"
+      (onPageChange)="paginate($event)"
+      [totalRecords]="totalRecords"
+    ></p-paginator>
+  </div>
+</div>
+
+<form [formGroup]="registerFormComment" (ngSubmit)="onSubmitCommet()">
+  <p-dialog
+    header="{{ 'samples.lblApprovalStatus' | translate }}"
+    [(visible)]="display"
+    [modal]="true"
+    [draggable]="false"
+    [resizable]="false"
+    [style]="{ width: '1140px' }"
+  >
+    <div class="row">
+      <div class="col-12 col-xl-12 p-dialog-desc">
+        {{ "samples.lblDescriptionApproval" | translate }}
+      </div>
+
+      <div class="col-12 col-md-3 mb-3 mt-2">
+        <label for="validationDefault01">
+          {{ "samples.lblSampleNumber" | translate }}
+        </label>
+        <input
+          type="text"
+          formControlName="sample_number"
+          pInputText
+          class="form-control"
+          readonly
+        />
+      </div>
+
+      <div class="col-12 col-md-3 mb-3 mt-2">
+        <label for="validationDefault01">
+          {{ "samples.lblInternalProductCode" | translate }}
+        </label>
+        <input
+          type="text"
+          formControlName="internal_product_code"
+          pInputText
+          class="form-control"
+          readonly
+        />
+      </div>
+
+      <div class="col-12 col-md-6 mb-3 mt-2">
+        <label for="validationDefault01">
+          {{ "samples.lblDescription" | translate }}
+        </label>
+        <input
+          type="text"
+          formControlName="description"
+          pInputText
+          class="form-control"
+          readonly
+        />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-3 mb-3 mt-2">
+        <label for="validationDefault01">
+          {{ "samples.lblCustomerProductCode" | translate }}
+        </label>
+        <input
+          type="text"
+          formControlName="customer_product_code"
+          pInputText
+          class="form-control"
+          readonly
+        />
+      </div>
+
+      <div class="col-12 col-md-3 mb-3 mt-2">
+        <label for="validationDefault01">
+          {{ "samples.lblProductLine" | translate }}
+        </label>
+        <input
+          type="text"
+          formControlName="product_line"
+          pInputText
+          class="form-control"
+          readonly
+        />
+      </div>
+
+      <div class="col-12 col-md-3 mb-3 mt-2">
+        <label for="validationDefault01">
+          {{ "samples.lblWidth" | translate }}
+        </label>
+        <input
+          type="text"
+          formControlName="width"
+          pInputText
+          class="form-control"
+          readonly
+        />
+      </div>
+
+      <div class="col-12 col-md-3 mb-3 mt-2">
+        <label for="validationDefault01">
+          {{ "samples.lblLength" | translate }}
+        </label>
+        <input
+          type="text"
+          formControlName="length"
+          pInputText
+          class="form-control"
+          readonly
+        />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-xl-12">
+        <label>
+          {{ "samples.lblComment" | translate }}
+        </label>
+        <textarea
+          placeholder="{{ 'samples.lblComment' | translate }}"
+          formControlName="comments"
+          [rows]="6"
+          class="inputs"
+          pInputTextarea
+          autoResize="true"
+        ></textarea>
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="row">
+        <div class="col-12 text-right mt-12">
+          <app-button-finotex
+            label="samples.lblDecline"
+            type="button"
+            typeButton="secondary"
+            [typeSize]="false"
+            (click)="showDecline()"
+            [disabled]="registerFormComment.invalid"
+            class="mr-2"
+          ></app-button-finotex>
+
+          <app-button-finotex
+            label="samples.lblApprove"
+            type="button"
+            typeButton="primary"
+            [typeSize]="false"
+            (click)="showConfirmApproved()"
+            [disabled]="registerFormComment.invalid"
+            class="mr-2"
+          ></app-button-finotex>
+
+          <app-button-finotex
+            label="samples.lblApproveOrder"
+            type="button"
+            typeButton="primary"
+            [typeSize]="false"
+            [disabled]="registerFormComment.invalid"
+            routerLink="/home/puchase_order"
+          ></app-button-finotex>
+        </div>
+      </div>
+    </ng-template>
+  </p-dialog>
+</form>
+
+<form [formGroup]="registerFormDecline">
+  <p-dialog
+    [(visible)]="displayDecline"
+    [contentStyleClass]="'border-top'"
+    [modal]="true"
+    [draggable]="false"
+    [showHeader]="false"
+    [resizable]="false"
+    [style]="{ width: '800px' }"
+  >
+    <div class="row">
+      <div class="col-md-12 text-center font50">
+        <img
+          _ngcontent-amv-c221=""
+          width="60px"
+          height="60px"
+          src="../../../assets/images/icono cancelar.svg"
+          alt="shopping cart"
+          class="simple-img"
+        />
+      </div>
+
+      <div class="col-md-12 text-center mt-24 font16">
+        {{ "samples.lblDescriptionDecline" | translate }}
+      </div>
+
+      <div class="col-md-12 text-center mt-16 description-page">
+        <p>{{ "samples.lblConfirmDecline" | translate }}</p>
+      </div>
+
+      <div class="col-12 mt-2">
+        <label for="ddlSample">
+          {{ "samples.lblDecliningReason" | translate }}
+        </label>
+      </div>
+
+      <div class="col-12">
+        <p-dropdown
+          appendTo="body"
+          formControlName="declining_reason"
+          [options]="decliningReasons"
+          optionLabel="sampleRejectionName"
+          optionValue="sampleRejectionId"
+          autoDisplayFirst="false"
+          placeholder="{{
+            ('formsGeneral.selSelectOpcion' | translate) || ' '
+          }}"
+        ></p-dropdown>
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="row">
+        <div class="col-12 text-right mt-12">
+          <app-button-finotex
+            label="samples.lblGoBackSample"
+            type="button"
+            typeButton="secondary"
+            [typeSize]="false"
+            class="mr-3"
+            (click)="displayDecline = false"
+          ></app-button-finotex>
+
+          <app-button-finotex
+            label="samples.lblDecline"
+            type="submit"
+            typeButton="primary"
+            [typeSize]="false"
+            class="mr-3"
+            (click)="showConfirmDecline()"
+            [disabled]="registerFormDecline.invalid || indicatorButton"
+          ></app-button-finotex>
+        </div>
+      </div>
+    </ng-template>
+  </p-dialog>
+</form>
+
+<p-dialog
+  [(visible)]="displayConfirmDecline"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '500px' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center font50">
+      <img
+        _ngcontent-amv-c221=""
+        width="60px"
+        height="60px"
+        src="../../../assets/images/Eliminated.svg"
+        alt="shopping cart"
+        class="simple-img"
+      />
+    </div>
+    <div class="col-md-12 text-center mt-24 font16">
+      <p>{{ "samples.lblSampleDeclined" | translate }}</p>
+    </div>
+    <div class="col-md-12 text-center mt-16 description-page">
+      <p>{{ "samples.lblSampleDeclinedConfirm" | translate }}</p>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button
+        (click)="finalizeDecline()"
+        label="{{ 'samples.lblOk' | translate }}"
+        styleClass="button button-primary text-center"
+      ></p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="displayConfirmApproved"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '500px' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <em class="far fa-check-circle font50"></em>
+    </div>
+    <div class="col-md-12 text-center mt-24 font16">
+      {{ "samples.lblApproved" | translate }}
+    </div>
+    <div class="col-md-12 text-center mt-16 description-page">
+      <p>
+        {{ "samples.lblSampleNumberDesc" | translate }}
+        <b>{{ sample?.sampleNumber }}</b>
+      </p>
+      <p>{{ "samples.lblCheckEmail" | translate }}</p>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button
+        (click)="finalizeConfirmApproved()"
+        label="Ok"
+        styleClass="button button-primary text-center"
+      ></p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<form [formGroup]="registerFormSimpleComment" (ngSubmit)="onSubmitCommet()">
+  <p-dialog
+    header="{{ 'artWork.AddComment' | translate }}"
+    [(visible)]="displayComment"
+    [modal]="true"
+    [draggable]="false"
+    [resizable]="false"
+    [style]="{ width: '60vw' }"
+  >
+    <div class="row mt-2">
+      <div class="col-12 col-xl-12">
+        {{ "samples.AddCommentDescription" | translate }}
+      </div>
+
+      <div class="col-12 col-md-4 mb-3 mt-2">
+        <label for="validationDefault01">
+          {{ "artWork.requestNumber" | translate }}
+        </label>
+        <input
+          type="text"
+          formControlName="sample_number"
+          pInputText
+          class="form-control"
+          readonly
+        />
+      </div>
+
+      <div class="col-12 col-md-8 mb-3 mt-2">
+        <label for="validationDefault01">
+          {{ "artWork.Description" | translate }}
+        </label>
+        <input
+          type="text"
+          formControlName="description"
+          pInputText
+          class="form-control"
+          readonly
+        />
+      </div>
+
+      <div class="col-12 col-xl-12">
+        <label for="validationDefault01">
+          {{ "artWork.Comment" | translate }}
+        </label>
+        <textarea
+          [rows]="6"
+          formControlName="comments"
+          class="inputs"
+          placeholder="{{ 'samples.lblComment' | translate }}"
+          pInputTextarea
+          autoResize="true"
+        ></textarea>
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="col-12 text-right mt-12">
+        <app-button-finotex
+          label="artWork.btnCancel"
+          type="button"
+          typeButton="secondary"
+          [typeSize]="false"
+          class="mr-2"
+          (click)="displayComment = false"
+        ></app-button-finotex>
+
+        <app-button-finotex
+          label="artWork.submit"
+          type="submit"
+          typeButton="primary"
+          [typeSize]="false"
+          class="mr-2"
+          [disabled]="registerFormSimpleComment.invalid"
+        ></app-button-finotex>
+      </div>
+    </ng-template>
+  </p-dialog>
+</form>
+
+<p-dialog
+  [(visible)]="displayConfirmComment"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '450px' }"
+>
+  <div class="row">
+    <div class="col-md-12 text-center font50">
+      <img
+        _ngcontent-amv-c221=""
+        width="60px"
+        height="60px"
+        src="../../../assets/images/success.svg"
+        alt="shopping cart"
+        class="simple-img"
+        appImage
+      />
+    </div>
+    <div class="col-md-12 text-center mt-24">
+      <p>{{ "artWork.commentSubmitted" | translate }}</p>
+    </div>
+    <div class="col-md-12 text-center mt-16 description-page">
+      <p>
+        {{ "artWork.requestNumberIs" | translate }}
+        <b>{{ commentResponse.sampleId }}</b>
+        {{ "artWork.itemDescription" | translate }}
+        <b>{{ commentDialog }}</b>
+        {{ "artWork.msgCheck2" | translate }}
+      </p>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button
+        (click)="displayConfirmComment = false"
+        label="{{ 'artWork.lblOk' | translate }}"
+        styleClass="button button-primary text-center"
+      ></p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-viewer
+header="{{ 'products.preview_imagen' | translate }}"
+  [(visible)]="displayFilePreview"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <div class="image-viewer">
+    <img
+      src="{{ this.urlImage }}"
+      alt=""
+      appFallbackSrc
+    />
+  </div>
+  <ng-template pTemplate="footer"></ng-template>
+</p-viewer>
+
+<p-toast></p-toast>

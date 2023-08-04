@@ -1,0 +1,174 @@
+table.dataTable tbody tr {
+  background-color: transparent;
+}
+
+table {
+  border: none !important;
+  background-color: transparent;
+  font: normal normal normal 12px/14px Montserrat;
+}
+
+table.dataTable {
+  clear: both;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.button-terciary.font-middle.more-details {
+  margin-top: 19px;
+}
+
+.button-terciary.font-middle.more-details {
+  margin-top: 19px;
+}
+
+tr {
+  margin-bottom: 24px;
+}
+
+.input-group-append,
+.input-group-prepend {
+  width: 103%;
+}
+
+.filter {
+  width: 100%;
+}
+
+.txt-search {
+  margin-right: 0px;
+  padding-right: 0px;
+}
+
+.btn-search {
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+.search {
+  border-radius: 0px 10px 10px 0px !important;
+  width: 90%;
+  box-shadow: none;
+}
+
+@media screen and (max-width: 767px) {
+  .search {
+    width: 88%;
+  }
+}
+
+button.search {
+  width: 10%;
+  border: 1px solid #989a9b !important;
+  border-left: none !important;
+}
+
+.dataTables_scrollHead,
+.table-responsive {
+  border: none;
+}
+
+.addCart {
+  width: 240px;
+  margin-left: -152%;
+}
+@media screen and (max-width: 767px) {
+  .addCart {
+    margin-left: 0%;
+  }
+}
+
+.shopping-img {
+  color: #fff !important;
+}
+
+.hr-card {
+  border: 1px solid #54585a1d;
+  opacity: 1;
+}
+
+.card-title {
+  padding: 16px !important;
+  margin-bottom: 24px !important;
+}
+
+.card-body-product {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.card-route-product {
+  padding: 16px !important;  
+}
+
+tr.col-12.col-sm-6.col-md-4.col-lg-4 {
+  padding: 0px;
+}
+
+@media screen and (max-width: 767px) {
+  tr.col-12.col-sm-6.col-md-4.col-lg-4 {
+    padding: 0px;
+  }
+}
+
+.sorting_1 {
+  background: #ffffff;
+  margin: 7px;
+  border: 1px solid #54585a26;
+  border-radius: 25px;
+}
+
+.title_card {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 13px;
+  color: #000;
+}
+
+.margin-title {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.title label {
+  white-space: pre-wrap;
+}
+
+.content {
+  width: 65%;
+  display: inline-block;
+}
+.ml {
+  white-space: pre-wrap;
+}
+
+input[type='checkbox']:checked:after,
+input[type='radio']:checked:after {
+  padding-top: 0px;
+}
+
+input[type='checkbox']:after,
+input[type='radio']:after {
+  padding-left: 3.2px;
+}
+
+a:not([href]) {
+  text-decoration: underline;
+}
+
+.en-padding{
+  padding-top: 4px;
+}
+
+
+@media screen and (min-width: 360px) and (max-width: 576px) {
+  .iphone-se {
+    text-align: center !important;
+  }
+}
+
+

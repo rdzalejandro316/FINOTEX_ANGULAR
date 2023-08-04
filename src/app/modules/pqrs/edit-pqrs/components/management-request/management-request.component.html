@@ -1,0 +1,349 @@
+<div class="mt-4">
+  <p-accordion>
+    <p-accordionTab 
+      header="{{ 'pqrs.management-tracking-title' | translate }}" 
+      [selected]="true">    
+      <ng-template pTemplate="content">
+        <div class="row">
+          <div class="col-12 d-flex justify-content-sm-end">
+            <app-button-icon-finotex
+              *ngIf="!isReadOnlyComponent"
+              [disabled]="stateRequest == stateIngress"
+              icon="fas fa-plus"
+              label="{{ 'pqrs.management-tracking-new-management' | translate }}"
+              type="button"
+              typeButton="primary"
+              [typeSize]="false"                    
+              (click)="openModalManagement()">
+            </app-button-icon-finotex>
+          </div>    
+          <div class="w-100">
+            <form class="mt-16" [formGroup]="routeRequestDataForm">      
+              <div class="row">
+                <div class="table-responsive">
+                  <p-table-finotex                     
+                    #tablaFinotex
+                    [scrollable]="false"           
+                    [autoLayout]="false"                    
+                    [tableStyle]="{'table-layout': 'auto'}"
+                    class="f-table"
+                    [value]="routeRequestFormCall.controls"
+                    dataKey="id"
+                    sortable-table           
+                    [expandedRowKeys]="expandedRows"          
+                    [lazy]="true"
+                    [paginator]="true"     
+                    [rowsPerPageOptions]="[10, 20, 30]"
+                    [rows]="10"   
+                    (onPage)="paginate($event)"         
+                    [totalRecords]="totalRecords"          
+                    sortable-table 
+                    (sorted)="onSorted($event)">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th style="width: 50px" class="column-row"></th>
+                        <!--th style="width: 10px" class="column-row"></th-->
+                        <th>
+                          <label sortable-column="state">{{ "pqrs.management-tracking-application-status" | translate }}</label>
+                        </th>
+                        <th>
+                          <label sortable-column="datetime">{{ "pqrs.management-tracking-date" | translate }}</label>
+                        </th>
+                        <th>
+                          <label sortable-column="areaName">{{ "pqrs.info-aditional-involved-area" | translate }}</label>
+                        </th>
+                        <th>
+                          <label sortable-column="userResponsible">{{ "pqrs.management-tracking-responsible-user" | translate }}</label>
+                        </th>
+                        <th>
+                          <label sortable-column="reviewedBy">{{ "pqrs.management-tracking-review-by" | translate }}</label>
+                        </th>
+                        <th class="text-center">
+                          <label sortable-column="nameAttachment">{{ 'pqrs.management-tracking-attach' | translate }}</label>
+                        </th>
+                      </tr>
+                      <tr id="rowNoDataFolder" class="rowNoData" *ngIf="isNoData">
+                        <td colspan="50" class="text-center bg-white p-0" >
+                          <img  
+                            class="simple-img img-not-data"
+                            src="../../../../assets/images/folder-open.svg" 
+                            alt="profile" />      
+                          <div class="mb-16"><label class="text-no-data">{{ 'general.noData' | translate  }}</label></div>
+                        </td>
+                      </tr>
+                    </ng-template>       
+                    <ng-template 
+                      pTemplate="body"
+                      formArrayName="header"
+                      let-rowIndex="rowIndex"
+                      let-routeRequest
+                      let-expanded="expanded">                                      
+                      <tr>
+                        <td class="text-center">
+                          <span
+                            #btn
+                            id="Btnunfold{{rowIndex}} "
+                            type="button"
+                            pButton
+                            pRipple
+                            (click)="onItemClick(routeRequest.value, tablaFinotex)"
+                            class="p-button-text p-button-rounded p-button-plain"
+                            [icon]="expanded ? 'pi pi-chevron-up' : 'pi pi-chevron-down'">
+                          </span>                      
+                        </td>
+                        <!--td 
+                          [class]="routeRequest.value.isDone ? 'readMessage' : 'newMessage'"
+                          tooltipPosition="top"
+                          pTooltip="{{routeRequest.value.isDone ? ('pqrs.management-message-read' | translate) : ('pqrs.management-message-new' | translate)}}"
+                        ></td-->                                                      
+                        <td>{{routeRequest.value.state}}</td>
+                        <td>{{routeRequest.value.datetime}}</td>  
+                        <td>{{routeRequest.value.areaName}}</td>  
+                        <td>{{routeRequest.value.userResponsible}}</td>
+                        <td>{{routeRequest.value.reviewedBy}}</td>
+                        <td class="text-center">                    
+                          <button
+                            (click)="getFile(routeRequest.value.nameAttachment)"
+                            pButton
+                            pRipple
+                            type="button"
+                            icon="far fa-file"
+                            class="p-button-rounded p-button-text p-button-reset" 
+                            [class]="routeRequest.value.nameAttachment == '' ? 'p-disabled' : ''"
+                            tooltipPosition="top" tooltipStyleClass="popover"
+                            pTooltip="{{routeRequest.value.nameAttachment == '' ? ('pqrs.management-attachment-not-found' | translate) : ('pqrs.management-attachment-found' | translate)}}">
+                          </button>                                                                                                                  
+                        </td>
+                      </tr>
+                    </ng-template>                          
+                    <ng-template 
+                      formArrayName="header"
+                      let-rowIndex="rowIndex"
+                      pTemplate="rowexpansion"
+                      let-data>                                      
+                      <tr [formGroupName]="rowIndex">
+                        <td colspan="8">
+                          <div class="row">                          
+                            <div class="col-12 mt-2">
+                              <label>{{ "pqrs.management-tracking-comment" | translate }}</label>
+                              <input
+                                [readonly]="true"
+                                type="text"                                
+                                pInputText
+                                class="form-control"                                
+                                formControlName="observation"/>
+                            </div>                                     
+                          </div>
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table-finotex>
+                </div>
+              </div>      
+            </form>
+          </div>    
+        </div>
+      </ng-template>
+    </p-accordionTab>
+  </p-accordion>
+</div>
+
+<!-- add management -->  
+<p-dialog 
+header="{{ 'pqrs.management-tracking-new-management' | translate }}" 
+[(visible)]="showAddManagement"
+[modal]="true" 
+[baseZIndex]="10000"  
+[draggable]="false" 
+[resizable]="false" 
+[style]="{ width: '80vw' }">
+
+<form [formGroup]="managementForm" class="m-2">
+  <div class="row">
+      <div class="col-12 col-sm-6 col-xl-4">
+          <label class="label-required">{{ 'pqrs.info-aditional-involved-area' | translate }}</label>
+          <p-dropdown                 
+              [filter]="false" 
+              [options]="area" 
+              optionValue="areaId"
+              optionLabel="areaName" 
+              class="w-100" 
+              placeholder="{{('formsGeneral.selSelectOpcion' | translate) || ' '}}"
+              formControlName="areaId"
+              (onChange)="getResponsible($event)">
+          </p-dropdown> 
+      </div>
+      <div class="col-12 col-sm-6 col-xl-4">
+          <label class="label-required">{{ 'pqrs.management-tracking-responsible' | translate }}</label>
+          <p-dropdown                 
+              [filter]="false" 
+              [options]="implicated" 
+              optionValue="responsibleId"
+              optionLabel="securityUserName" 
+              class="w-100" 
+              placeholder="{{('formsGeneral.selSelectOpcion' | translate) || ' '}}"
+              formControlName="responsibleId">
+          </p-dropdown> 
+      </div>        
+      <div class="col-12 mt-3">
+          <label class="label-required">{{ 'pqrs.management-tracking-comments' | translate }}</label>
+          <textarea                 
+              type="text"                              
+              pInputText                                                 
+              placeholder="{{ 'pqrs.edit-pqrs-tab-information-request-description' | translate  }}"                                                                    
+              class="form-control description"  
+              formControlName="description">   
+          </textarea> 
+      </div>
+      <div class="col-12 mt-3">
+          <label>{{ 'pqrs.management-tracking-attached-document' | translate }}</label>
+          <em class="fas fa-info-circle" pTooltip="{{ 'main.generate-pqrs-evidence-toltip' | translate }}"></em>
+          <textarea
+              type="text"
+              id="txtUploadAditional"
+              pInputText
+              class="form-control input-select-image"
+              formControlName="uploadEvidence"                                
+              readonly>  
+          </textarea>
+          <div class="text-right mt-1">
+              <button
+                  pButton
+                  type="button"
+                  (click)="resetFiles()"
+                  label="{{ 'artWork.btnReset' | translate }}"
+                  class="button-select-image-reset mr-1">
+              </button>                
+              <span class="btn btn-primary btn-file">
+                  {{ 'artWork.btnUpload' | translate }}
+                  <input #inputFile (change)="fileChanged($event,inputFile)" type="file"/>
+              </span>                                    
+          </div>                        
+      </div>
+              
+  </div>
+</form>
+<ng-template pTemplate="footer">
+    <div class="col-md-12 text-right p-0">                
+      <p-button 
+        [disabled]="managementForm.invalid"
+        (click)="addManagement()" 
+        label="{{ 'pqrs.management-tracking-save' | translate }}"
+        styleClass="button button-primary text-center ml-1 mr-1">
+      </p-button>        
+    </div>
+</ng-template>
+</p-dialog>
+
+<!--Invalidate file-->
+<p-dialog
+  [(visible)]="displayInvalidateFileMessage"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '500px' }">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <em class="fas fa-info-circle font50"></em>
+    </div>
+    <div class="col-md-12 text-center mt-24">
+      {{ 'artWork.unsupportedFileTitle' | translate }}
+    </div>
+    <div class="col-md-12">
+      <p  [hidden]="this.hideErrorType"
+        class="text-muted tx-13 mb-3 mb-md-0 mt-3 text-center description-page">
+        {{ 'artWork.unsupportedFile' | translate }}.
+      </p>
+      <p [hidden]="this.hideErrorSize"
+        class="text-muted tx-13 mb-3 mb-md-0 mt-3 text-center description-page">
+        {{ 'artWork.unsupportedFileLength' | translate }} {{ this.maxSize }}.
+      </p>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button
+        (click)="displayInvalidateFileMessage = false"
+        label="{{ 'artWork.lblOk' | translate }}"
+        styleClass="button button-primary text-center">
+      </p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<!--sucess management-->
+<p-dialog 
+  [(visible)]="showSuccessManagement" 
+  [contentStyleClass]="'border-top'" 
+  [modal]="true" 
+  [baseZIndex]="10000"
+  [draggable]="false" 
+  [showHeader]="false" 
+  [resizable]="false" 
+  [style]="{ width: '500px' }">
+  <div class="row">
+    <div class="col-md-12 text-center font50">
+      <img 
+        _ngcontent-amv-c221="" 
+        width="60px" 
+        height="60px" 
+        src="../../../assets/images/success.svg"
+        alt="shopping cart" 
+        class="simple-img" 
+        appImage />
+    </div>
+    <div class="col-md-12 text-center mt-24">
+        <p class="font-weight-bold title-susessful">{{ "pqrs.management-succesfull-title" | translate }}</p>
+    </div>
+    <div class="col-md-12 text-center mt-24 f-14">      
+      <p class="description-susessful">
+        {{ "pqrs.management-succesfull-description" | translate }}
+        <b class="font-weight-bold">{{documentId}}</b>
+      </p>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button 
+        (click)="successManagement()" 
+        label="{{ 'artWork.lblOk' | translate }}"
+        styleClass="button button-primary text-center">
+      </p-button>
+    </div>
+  </ng-template>  
+</p-dialog>
+
+<!--menssage new management-->
+<p-dialog
+  [(visible)]="displayNewManagement"
+  [contentStyleClass]="'border-top'"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [showHeader]="false"
+  [resizable]="false"
+  [style]="{ width: '500px' }">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <em class="fas fa-info-circle font50"></em>
+    </div>
+    <div class="col-md-12">
+      <p
+        class="text-muted tx-13 mb-3 mb-md-0 mt-3 text-center description-page">
+        {{ 'pqrs.management-new-management' | translate }}
+      </p>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button
+        (click)="onCloseNewManagement()"
+        label="{{ 'artWork.lblOk' | translate }}"
+        styleClass="button button-primary text-center">
+      </p-button>
+    </div>
+  </ng-template>
+</p-dialog>

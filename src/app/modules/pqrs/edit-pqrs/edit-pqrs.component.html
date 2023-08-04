@@ -1,0 +1,159 @@
+<p-breadcrumb 
+    [model]="itemsBreadcrumb"
+    [tittle]="title_component"
+    [description]="description_component">
+</p-breadcrumb>
+
+<div class="row mt-4 mb-4">
+    <p-table                                    
+        class="w-100"      
+        [columnsSeparate]="false"          
+        [data]="generalDataRequestFromCall.controls">
+        <tr theaderRecords>                                      
+            <th>{{ 'pqrs.edit-pqrs-tab-information-general-application-number' | translate }}</th>
+            <th>{{ 'pqrs.edit-pqrs-tab-information-general-name-customer' | translate }}</th>
+            <th>{{ 'pqrs.edit-pqrs-tab-information-general-purchase-order' | translate }}</th>
+            <th>{{ 'pqrs.edit-pqrs-tab-information-general-invoice' | translate }}</th>
+            <th>{{ 'pqrs.edit-pqrs-tab-information-general-requirement-type' | translate }}</th>
+            <th>{{ 'pqrs.edit-pqrs-tab-information-general-registration-date' | translate }}</th>
+            <th>{{ 'pqrs.edit-pqrs-tab-information-general-condition' | translate }}</th>
+        </tr>           
+        <div tbodyRecords *ngFor="let request of generalDataRequestFromCall.controls" class="rowtable">
+            <tr [formGroup]="request">  
+                <td>{{ request.controls.documentId.value }}</td>
+                <td>{{ request.controls.customerName.value }}</td>
+                <td>{{ request.controls.purchaseOrderId.value }}</td>   
+                <td>{{ request.controls.billDocumentId.value }}</td>   
+                <td>{{ request.controls.requestTypeName.value }}</td>   
+                <td>{{ request.controls.requestDate.value }}</td>
+                <td>                    
+                    <p-dropdown                 
+                        [filter]="false" 
+                        [options]="status" 
+                        optionValue="requestStatusId"
+                        optionLabel="requestStatusName" 
+                        class="w-100"
+                        (onChange)="changeCondition($event)"
+                        formControlName="requestStatusId"
+                        appendTo="body">                 
+                    </p-dropdown>
+                </td>                                
+            </tr>     
+        </div>
+    </p-table>      
+</div>
+
+<p-tabView [(activeIndex)]="activeIndex" styleTab='tabContent'>    
+    <p-tabPanel header="{{ 'pqrs.edit-pqrs-tab-information-request' | translate }}">
+        <app-information-request></app-information-request>
+    </p-tabPanel>
+
+    <p-tabPanel header="{{ 'pqrs.edit-pqrs-tab-detail-request' | translate }}" *ngIf="requestTypeId != 6 ? true : false">
+        <app-detail-request [isReadOnlyComponent]="isReadOnlyComponent" [documentId]="documentId" [purchaseOrderId]="purchaseOrderId" [billDocumentId]="billDocumentId" [requestTypeId]="requestTypeId"></app-detail-request>
+    </p-tabPanel>
+    
+    <p-tabPanel header="{{ 'pqrs.edit-pqrs-tab-information-addtional' | translate }}" *ngIf="requestTypeId != 6 ? true : false">
+        <app-information-additional [isReadOnlyComponent]="isReadOnlyComponent" [documentId]="documentId" [purchaseOrderId]="purchaseOrderId" [billDocumentId]="billDocumentId" [requestTypeId]="requestTypeId"></app-information-additional>
+    </p-tabPanel>
+
+    <p-tabPanel header="{{ 'pqrs.edit-pqrs-tab-action-plan' | translate }}">
+        <app-action-plan [isReadOnlyComponent]="isReadOnlyComponent" [documentId]="documentId"></app-action-plan>
+    </p-tabPanel>
+
+    <p-tabPanel header="{{ 'pqrs.edit-pqrs-tab-customer-response' | translate }}">
+        <app-customer-response [isReadOnlyComponent]="isReadOnlyComponent" [documentId]="documentId" [requestTypeId]="requestTypeId" [stateRequest]="stateRequest"></app-customer-response>
+    </p-tabPanel>
+</p-tabView>
+
+<app-management-request  [isReadOnlyComponent]="isReadOnlyComponent" [documentId]="documentId" [stateRequest]="stateRequest"></app-management-request>
+
+<div class="row mt-3">
+    <div class="col-6 d-flex justify-content-sm-start p-0">
+        <app-button-icon-finotex          
+            label="{{ 'general.btnreturn' | translate }}"
+            type="button"
+            typeButton="secondary"
+            [typeSize]="false"
+            (click)="return()">
+        </app-button-icon-finotex>
+    </div>
+    <div class="col-6 d-flex justify-content-sm-end p-0">
+        <app-button-icon-finotex      
+            *ngIf="!isReadOnlyComponent"
+            label="{{ 'pqrs.management-tracking-save' | translate }}"
+            type="button"
+            typeButton="primary"
+            [typeSize]="false"
+            (click)="save()">
+        </app-button-icon-finotex>
+    </div>
+</div>
+
+<!-- validations -->
+<p-dialog 
+    [(visible)]="showAllValidations" 
+    [contentStyleClass]="'border-top'" 
+    [modal]="true" 
+    [baseZIndex]="10000"
+    [draggable]="false" 
+    [showHeader]="false" 
+    [resizable]="false" 
+    [style]="{ width: '500px' }">
+    <div class="row">
+        <div class="col-md-12 text-center font50">
+            <img _ngcontent-amv-c221="" width="60px" height="60px" src="../../../assets/images/Alert.svg"
+                alt="shopping cart" class="simple-img" appImage />
+        </div>    
+        <div class="col-md-12 text-center mt-24">
+            <p class="title-validate">{{ "pqrs.validate-title" | translate }}</p>
+        </div>  
+        <div class="col-md-12 text-center mt-24 f-14">      
+            <span class="description-validate">{{"pqrs.validate-descripcion" | translate}}</span>            
+            <span *ngFor="let message of messageComponentValid" class="description-validate"> {{message | translate}}</span>            
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <div class="col-md-12 text-center">
+            <p-button 
+                (click)="showAllValidations = false" 
+                label="{{ 'artWork.lblOk' | translate }}"
+                styleClass="button button-primary text-center">
+            </p-button>
+        </div>
+    </ng-template>
+</p-dialog>  
+
+<!-- add susessfull -->
+<p-dialog 
+  [(visible)]="showaddSuccessful" 
+  [contentStyleClass]="'border-top'" 
+  [modal]="true" 
+  [baseZIndex]="10000"
+  [draggable]="false" 
+  [showHeader]="false" 
+  [resizable]="false" 
+  [style]="{ width: '500px' }"
+  (onHide)="closeSuccessful()">
+    
+  <div class="row">
+    <div class="col-md-12 text-center font50">
+      <img _ngcontent-amv-c221="" width="60px" height="60px" src="../../../assets/images/success.svg"
+            alt="shopping cart" class="simple-img" appImage />
+    </div>
+          
+    <div class="col-md-12 text-center mt-24 f-14">      
+      <p class="description-validate">{{ "pqrs.validate-susessfull-description" | translate }}</p>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="col-md-12 text-center">
+      <p-button 
+          (click)="showaddSuccessful = false" 
+          label="{{ 'artWork.lblOk' | translate }}"
+          styleClass="button button-primary text-center">
+      </p-button>
+    </div>
+  </ng-template>
+    
+</p-dialog>
